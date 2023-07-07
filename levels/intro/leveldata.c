@@ -7484,3 +7484,4 @@ Gfx mirror_co_mirror_001_mesh[] = {
 };
 
 #include "levels/menu/rovert_logo/model.inc.c"
+#include "levels/intro/tl_logo/model.inc.c"

@@ -295,11 +295,12 @@ u8 sBackgroundMusicDefaultVolume[] = {
     120,
     120,
     120,
+    127,
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
               "change this array if you are adding sequences");
-
+    127,
 */
 
 u8 sCurrentBackgroundMusicSeqId = SEQUENCE_NONE;

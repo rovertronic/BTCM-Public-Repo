@@ -628,6 +628,7 @@ void update_objects(UNUSED s32 unused) {
     gNumRoomedObjectsNotInMarioRoom = 0;
     gCollisionFlags &= ~COLLISION_FLAG_CAMERA;
 
+    scroll_textures();
     reset_debug_objectinfo();
     stub_debug_control();
 

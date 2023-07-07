@@ -6095,3 +6095,74 @@ void bhv_postgame_hint() {
 
     o->oInteractStatus = 0;
 }
+
+void bhv_troll_lab_logo_loop(void) {
+    struct Object *elem;
+
+    o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_TROLL_LOGO];
+
+    switch(o->oTimer) {
+        case 5:
+            elem = spawn_object(o,MODEL_TROLL_ELEMENT,bhvTrollLabElement);
+            elem->oPosY += 200.0f;
+        break;
+        case 12:
+            elem = spawn_object(o,MODEL_TROLL_ELEMENT,bhvTrollLabElement);
+            elem->oPosY += 200.0f;
+            elem->oPosX -= 230.0f;
+        break;
+        case 20:
+            elem = spawn_object(o,MODEL_TROLL_ELEMENT,bhvTrollLabElement);
+            elem->oPosY += 200.0f;
+            elem->oPosX -= 230.0f*2;
+        break;
+        case 28:
+            elem = spawn_object(o,MODEL_TROLL_ELEMENT,bhvTrollLabElement);
+            elem->oPosY += 200.0f;
+            elem->oPosX -= 230.0f*3;
+        break;
+        case 80:
+            for (u8 i = 0; i<4; i++) {
+                elem = spawn_object(o,MODEL_TROLL_ELEMENT,bhvTrollLabElement);
+                elem->oPosY += 200.0f;
+                elem->oPosX -= 230.0f*i;
+                elem->oBehParams2ndByte = 1;
+            }
+        break;
+    }
+}
+
+void bhv_troll_lab_element_loop(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oHomeY = 1.0f; // scale
+            o->oHomeX = 0.0f;
+            o->oOpacity = 255;
+            o->oAction = 1;
+        break;
+        case 1:
+            o->oPosY += 2.5f;
+
+            if (o->oTimer > 5) {
+                if (o->oBehParams2ndByte == 0) {
+                    o->oOpacity -= 5;
+                    if (o->oOpacity == 0) {
+                        mark_obj_for_deletion(o);
+                    }
+                } else {
+                    cur_obj_scale(o->oHomeY);
+                    o->oHomeY += o->oHomeX;
+                    if (o->oHomeX > -.1f) {
+                        o->oHomeX -= 0.005f;
+                    }
+                    if (o->oHomeY < 0.5f) {
+                        o->oOpacity *= .8f;
+                    }
+                    if (o->oHomeY < 0.1f) {
+                        mark_obj_for_deletion(o);
+                    }
+                }
+            }
+        break;
+    }
+}

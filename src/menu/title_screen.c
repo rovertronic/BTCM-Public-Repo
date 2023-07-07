@@ -263,7 +263,7 @@ s32 intro_game_over(void) {
  */
 s32 intro_play_its_a_me_mario(void) {
     set_background_music(0, SEQ_SOUND_PLAYER, 0);
-    play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_COSMIC_SEED_COLLECT), 0);
+    play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_STREAMED_TROLL_LAB_INTRO), 0);
     return LEVEL_NONE + 1;
 }
 

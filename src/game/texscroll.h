@@ -26,6 +26,8 @@
 #include "src/game/texscroll/thi_texscroll.inc.h"
 #include "src/game/texscroll/bits_texscroll.inc.h"
 #include "src/game/texscroll/ttc_texscroll.inc.h"
+#include "src/game/texscroll/intro_texscroll.inc.h"
+#include "src/game/texscroll/common0_texscroll.inc.h"
 extern void scroll_textures();
 
 #endif

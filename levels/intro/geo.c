@@ -53,10 +53,8 @@ const GeoLayout intro_geo_splash_screen[] = {
             GEO_CAMERA(CAMERA_MODE_NONE, 0, 0, 3200, 0, 0, 0, 0x00000000),
             GEO_OPEN_NODE(),
             
-               GEO_ASM(0, geo_intro_super_mario_64_logo),
-               GEO_ASM(0, geo_title_screen3),
-               GEO_ASM(0, geo_title_screen2),
                GEO_ASM(0, geo_rovert_logo),
+               GEO_RENDER_OBJ(),
 
             GEO_CLOSE_NODE(),
          GEO_CLOSE_NODE(),
@@ -157,3 +155,5 @@ const GeoLayout intro_geo_debug_level_select[] = {
    GEO_END(),
 };
 
+
+#include "levels/intro/tl_logo/geo.inc.c"

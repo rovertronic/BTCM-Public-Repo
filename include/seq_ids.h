@@ -68,6 +68,7 @@ enum SeqId {
     SEQ_SHOWRUNNER_BOSS,              // 0x34
     SEQ_BIG_HOUSE,                    // 0x35
 
+    SEQ_STREAMED_TROLL_LAB_INTRO,
     SEQ_COUNT
 };
 

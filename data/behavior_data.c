@@ -9285,3 +9285,21 @@ const BehaviorScript bhvPostGameHint[] = {
         CALL_NATIVE(bhv_postgame_hint),
     END_LOOP(),
 };
+
+extern void bhv_troll_lab_logo_loop(void);
+const BehaviorScript bhvTrollLabLogo[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_troll_lab_logo_loop),
+    END_LOOP(),
+};
+
+extern void bhv_troll_lab_element_loop(void);
+const BehaviorScript bhvTrollLabElement[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_troll_lab_element_loop),
+    END_LOOP(),
+};

@@ -790,5 +790,7 @@
 #define MODEL_TV_CORPSE 0x120//fuck you, corpse!
 #define MODEL_QUEST 0x121
 #define MODEL_COSMIC_SPIKE 0x122
+#define MODEL_TROLL_LOGO 0x123
+#define MODEL_TROLL_ELEMENT 0x124
 
 #endif // MODEL_IDS_H
