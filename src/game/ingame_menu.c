@@ -3354,9 +3354,9 @@ s32 render_menus_and_dialogs(void) {
     render_pre_credits();
 
     if (gMarioState->Options & (1<<OPT_MUSIC)) {
-        fade_volume_scale(SEQ_PLAYER_LEVEL,100,1);
+        //fade_volume_scale(SEQ_PLAYER_LEVEL,100,1);
         }else{
-        fade_volume_scale(SEQ_PLAYER_LEVEL,0,1);
+        //fade_volume_scale(SEQ_PLAYER_LEVEL,0,1);
         }
 
     //screen tint

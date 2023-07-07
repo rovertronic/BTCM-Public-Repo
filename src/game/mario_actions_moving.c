@@ -432,7 +432,7 @@ void update_walking_speed(struct MarioState *m) {
     f32 maxTargetSpeed;
     f32 targetSpeed;
     f32 walkadd = 1.1f;
-    u32 haveBadge = (save_file_get_badge_equip() & (1<<BADGE_FEET));
+    u32 haveBadge =  (m->Avatar == AVATAR_FAST);  //(save_file_get_badge_equip() & (1<<BADGE_FEET));
 
     if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
         maxTargetSpeed = 24.0f;

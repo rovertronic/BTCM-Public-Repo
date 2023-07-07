@@ -4036,6 +4036,7 @@ const BehaviorScript bhvMario[] = {
     OR_LONG(oFlags, (OBJ_FLAG_PLAYER | OBJ_FLAG_SILHOUETTE)),
     OR_INT(oUnk94, 0x0001),
     SET_HITBOX(/*Radius*/ 37, /*Height*/ 160),
+    SET_FLOAT(oGraphYOffset, 50),
     BEGIN_LOOP(),
 #ifdef VANILLA_DEBUG
         CALL_NATIVE(try_print_debug_mario_level_info),

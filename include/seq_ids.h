@@ -69,6 +69,7 @@ enum SeqId {
     SEQ_BIG_HOUSE,                    // 0x35
 
     SEQ_STREAMED_TROLL_LAB_INTRO,
+    SEQ_STREAMED_KEYGEN,
     SEQ_COUNT
 };
 

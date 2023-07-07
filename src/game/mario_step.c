@@ -255,6 +255,7 @@ void stop_and_set_height_to_floor(struct MarioState *m) {
     m->pos[1] = m->floorHeight;
 
     vec3f_copy(marioObj->header.gfx.pos, m->pos);
+    m->marioObj->header.gfx.pos[1] += m->AvatarHeightOffset;
     vec3s_set(marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
 }
 
@@ -288,6 +289,7 @@ s32 stationary_ground_step(struct MarioState *m) {
         m->pos[1] = m->floorHeight;
 
         vec3f_copy(marioObj->header.gfx.pos, m->pos);
+        m->marioObj->header.gfx.pos[1] += m->AvatarHeightOffset;
         vec3s_set(marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
     }
 
@@ -392,6 +394,7 @@ s32 perform_ground_step(struct MarioState *m) {
 
     m->terrainSoundAddend = mario_get_terrain_sound_addend(m);
     vec3f_copy(m->marioObj->header.gfx.pos, m->pos);
+    m->marioObj->header.gfx.pos[1] += m->AvatarHeightOffset;
     vec3s_set(m->marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
 
     if (stepResult == GROUND_STEP_HIT_WALL_CONTINUE_QSTEPS) {
@@ -780,6 +783,7 @@ s32 perform_air_step(struct MarioState *m, u32 stepArg) {
     apply_vertical_wind(m);
 
     vec3f_copy(m->marioObj->header.gfx.pos, m->pos);
+    m->marioObj->header.gfx.pos[1] += m->AvatarHeightOffset;
     vec3s_set(m->marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
 
     return stepResult;

@@ -137,3 +137,6 @@
 #include "tvcorpse/model.inc.c"
 #include "cosmic_spike/model.inc.c"
 #include "crowbar2/model.inc.c"
+#include "a_fast/model.inc.c"
+#include "mario/anims/data.inc.c"
+#include "mario/anims/table.inc.c"

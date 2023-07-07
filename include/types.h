@@ -611,6 +611,9 @@ struct MarioState {
              s16 moveYaw;
              s16 ceilYaw;
              s16 wallYaw;
+
+             f32 AvatarHeightOffset;
+             u8 Avatar;
     // -- HackerSM64 MarioState fields end --
 };
 

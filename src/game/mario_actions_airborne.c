@@ -1327,7 +1327,7 @@ s32 check_wall_kick(struct MarioState *m) {
         m->faceAngle[1] += 0x8000;
         return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
     } else {
-        if ((save_file_get_badge_equip() & (1<<BADGE_STICKY))&&(m->wallKickTimer != 0 && m->prevAction == ACT_AIR_HIT_WALL)&&(gMarioState->gCurrMinigame != 6)) {
+        if (/*(save_file_get_badge_equip() & (1<<BADGE_STICKY))*/(m->Avatar == AVATAR_FAST)&&(m->wallKickTimer != 0 && m->prevAction == ACT_AIR_HIT_WALL)&&(gMarioState->gCurrMinigame != 6)) {
             m->faceAngle[1] += 0x8000;
             return set_mario_action(m, ACT_WALL_STICK, 0);
         }

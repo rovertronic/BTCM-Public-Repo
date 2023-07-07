@@ -57,4 +57,9 @@ void clear_costmic_phantasms(void);
 
 extern u8 near_music_box;
 
+enum avatar {
+    AVATAR_MARIO,
+    AVATAR_FAST,
+};
+
 #endif // MARIO_H

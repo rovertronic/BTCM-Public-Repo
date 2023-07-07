@@ -15,7 +15,6 @@
 #include "actors/executive_loom_/texscroll.inc.c"
 #include "actors/tvhead/texscroll.inc.c"
 #include "actors/ocean_ttc/texscroll.inc.c"
-#include "actors/mario/texscroll.inc.c"
 void scroll_textures_group0() {
 	
 	
@@ -45,5 +44,4 @@ void scroll_textures_group0() {
 	scroll_actor_dl_executive_();
 	scroll_actor_dl_executive_loom_();
 	scroll_actor_geo_tvhead();
-	scroll_actor_geo_mario();
-}
+	}

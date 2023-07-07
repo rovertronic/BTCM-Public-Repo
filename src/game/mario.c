@@ -1860,10 +1860,10 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     u8 CostumeId = gMarioState->CostumeID;
     struct Object *sp1C;
     struct SpawnParticlesInfo D_8032F270 = { 2, 20, MODEL_MIST, 0, 40, 5, 30, 20, 252, 30, 10.0f, 10.0f };
-    u8 *Hatcol = segmented_to_virtual(&mario_hat_v4_lights);
-    u8 *Pantcol = segmented_to_virtual(&mario_button_v4_lights);
-    u8 *Shoecol = segmented_to_virtual(&mario_shoes_v4_lights);
-    u8 *Tokencol = segmented_to_virtual(&token_token_lights);
+    //u8 *Hatcol = segmented_to_virtual(&mario_hat_v4_lights);
+    //u8 *Pantcol = segmented_to_virtual(&mario_button_v4_lights);
+    //u8 *Shoecol = segmented_to_virtual(&mario_shoes_v4_lights);
+    //u8 *Tokencol = segmented_to_virtual(&token_token_lights);
     u16 *walltex = segmented_to_virtual(&ccm_dl_Screen_ia8);
     u8 timerdelay = 0;
     u16 i;
@@ -2180,6 +2180,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     RainbowMario[5] = (sins(ColorShift - 21845)+1)*127;
 
     //HAT
+    /*
     Hatcol[8] = CostumeData[CostumeId][0];//Diffuse
     Hatcol[9] = CostumeData[CostumeId][1];
     Hatcol[10] = CostumeData[CostumeId][2];
@@ -2238,6 +2239,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     Shoecol[4] = CostumeData[CostumeId][6]/2;
     Shoecol[5] = CostumeData[CostumeId][7]/2;
     Shoecol[6] = CostumeData[CostumeId][8]/2;
+    */
 
     timerdelay = 30;
 
@@ -2415,6 +2417,9 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 void init_mario(void) {
     s16 currenthp = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
+    gMarioState->AvatarHeightOffset = 50.0f;
+    gMarioState->Avatar = AVATAR_FAST;
+
     struct Object *capObject;
 
     struct Object *holdTransferObject;
@@ -2449,7 +2454,7 @@ void init_mario(void) {
     stop_event();
     if ((gCurrLevelNum == LEVEL_CASTLE_GROUNDS)&&(save_file_get_progression() == PROG_LETTER_INIT)) {
         save_file_set_progression(PROG_START);
-        run_event(EVENT_LETTER);
+        //run_event(EVENT_LETTER);
     }
     if ((gCurrAreaIndex == 0)&&(gCurrLevelNum == LEVEL_RR)) {
         run_event(EVENT_AG_INTRO);

@@ -23,9 +23,15 @@
             "release_rate": 10,
             "envelope": "envelope",
             "sound": "36_custom_troll_lab_intro"
+        },
+        "inst1": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "37_custom_keygen"
         }
     },
     "instrument_list": [
-        "inst0"
+        "inst0",
+        "inst1"
     ]
 }
