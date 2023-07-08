@@ -320,10 +320,12 @@
 
 #define CTM_EFF_12 _("Invulnerable to sqash damage")
 
-#define BADGE1  _("Lava Boost Badge")
-#define BADGE2  _("Fall Damage Badge")
-#define BADGE3  _("Defense Badge")
-#define BADGE4  _("Double Damage Badge")
+//avatar names
+#define BADGE1  _("MARIO")
+#define BADGE2  _("ROBOTNIK")
+#define BADGE3  _("ARTHUR FORD")
+#define BADGE4  _("FAST")
+
 #define BADGE5  _("Gills Badge")
 #define BADGE6  _("Fins Badge")
 #define BADGE7  _("HP Regen Badge")
@@ -349,10 +351,12 @@
 #define SHOP2 _("2 Mana Points")
 #define SHOP3 _("1 Badge Capacity")
 
-#define BADGE1D  _("Reduces lava damage by 2 at the cost of 1 Mana")
-#define BADGE2D  _("Fall Damage is negated at the cost of 1 Mana")
-#define BADGE3D  _("Damage to you is absorbed by Mana")
-#define BADGE4D  _("Enemies take 2x damage from you")
+//avatar descriptions
+#define BADGE1D  _("Classic Mario movement.")
+#define BADGE2D  _("Stunted jumps, but increased constitution and strength.")
+#define BADGE3D  _("Hold [R] to slow down time. You are unaffected.")
+#define BADGE4D  _("Runs super fast and can stick to walls!")
+
 #define BADGE5D  _("Lets you breathe underwater")
 #define BADGE6D  _("Lets you swim faster underwater")
 #define BADGE7D  _("Slowly regenerates HP at cost of Mana")

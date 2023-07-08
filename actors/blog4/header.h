@@ -1,0 +1,11 @@
+extern u8 blog4_bodylog_fast_rgba16[];
+extern Vtx blog4_Plane_002_mesh_vtx_cull[8];
+extern Vtx blog4_Plane_002_mesh_vtx_0[14];
+extern Gfx blog4_Plane_002_mesh_tri_0[];
+extern Vtx blog4_Plane_002_mesh_vtx_1[41];
+extern Gfx blog4_Plane_002_mesh_tri_1[];
+extern Gfx mat_blog4_f3dlite_material[];
+extern Gfx mat_revert_blog4_f3dlite_material[];
+extern Gfx mat_blog4_fast[];
+extern Gfx mat_revert_blog4_fast[];
+extern Gfx blog4_Plane_002_mesh[];

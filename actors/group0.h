@@ -568,4 +568,14 @@ extern const struct Animation *const Hammerbro_anims[];
 
 
 #include "mario/anim_header.h"
+#include "blog1/header.h"
+
+#include "blog4/header.h"
+
+#include "blog2/header.h"
+
+#include "blog3/header.h"
+
+#include "bodylog_ball/header.h"
+
 #endif

@@ -50,7 +50,6 @@ void bhv_motos_wait(void) {
     cur_obj_init_animation_with_sound(MOTOS_ANIM_WAIT);
     
     if (o->oDistanceToMario < 500.f) {
-        cur_obj_play_sound_2(SOUND_MOTOS);
         o->oAction = MOTOS_ACT_PLAYER_SEARCH;
     }
 }

@@ -1410,7 +1410,7 @@ void update_mario_inputs(struct MarioState *m) {
     }
 #endif
 
-    if (!revent_active) {
+    if ((!revent_active)&&(!using_bodylog)) {
         update_mario_button_inputs(m);
         update_mario_joystick_inputs(m);
     }
@@ -1841,7 +1841,7 @@ u8 waveamount[] = {5,8,8,10,12,12,15,15,10,15,20};
 /**
  * Main function for executing Mario's behavior. Returns particleFlags.
  */
-u8 costumechange;
+u8 costumechange = AVATAR_MARIO;
 u8 entry_timer;
 u8 entry_index = 1;
 
@@ -1855,6 +1855,8 @@ f32 bad_apple_par = 0.0f;
 #include "memory.h"
 
 u16 mario_decay;
+u8 using_bodylog = FALSE;
+
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
     u8 CostumeId = gMarioState->CostumeID;
@@ -1872,14 +1874,6 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     u8 *sus = segmented_to_virtual(&castle_courtyard_dl_output_0_custom_i8_ia8);
     u8 coinrepeats = 1;
     u16 *walltex2 = segmented_to_virtual(&shrnling1_Static_i8);
-
-    if ((gCurrLevelNum == LEVEL_CASTLE_GROUNDS)&&(gCurrAreaIndex == 3)) {
-        //I hope the models are loaded before these variables change.
-        //Otherwise. Memory leak!
-        for (i = 0; i<2048; i++) {
-            walltex2[i] = random_u16();
-            }
-    }
 
     //manage global coins
     if (gMarioState->gGlobalCoinGain > 0) {
@@ -1964,11 +1958,6 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     vec3f_copy(gMarioState->posDelay, posRecord[posRecordIndex%60]);
     vec3f_copy(posRecord[posRecordIndex%60], gMarioState->pos);
 
-    //toggle minimap
-    if (gPlayer1Controller->buttonPressed & L_TRIG) {
-        gMarioState->Options ^= (1<<OPT_MINIMAP);
-    }
-
     //cheats
     if (gMarioState->Cheats & (1 << 2)) {//moon jump with A
         if (gPlayer1Controller->buttonDown & A_BUTTON) {
@@ -1995,9 +1984,9 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     
     //print_text_fmt_int(110, 56, "MEM %d", sPoolFreeSpace);
 
-    if (gMarioState->CostumeID != costumechange) {
+    if (gMarioState->Avatar != costumechange) {
             cur_obj_spawn_particles(&D_8032F270);
-            costumechange = gMarioState->CostumeID;
+            costumechange = gMarioState->Avatar;
         }
 
 
@@ -2323,6 +2312,15 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 
         gMarioState->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
         mario_reset_bodystate(gMarioState);
+
+        //toggle bodylog
+        using_bodylog = FALSE;
+        if ((gPlayer1Controller->buttonDown & L_TRIG)&&((gMarioState->action & ACT_GROUP_MASK) != ACT_GROUP_CUTSCENE)&&(!revent_active)) {
+            using_bodylog = TRUE;
+            if (gPlayer1Controller->buttonPressed & L_TRIG) {
+                play_sound(SOUND_BLOG_2, gGlobalSoundSource);
+            }
+        }
         update_mario_inputs(gMarioState);
 
 #ifdef PUPPYCAM
@@ -2417,8 +2415,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 void init_mario(void) {
     s16 currenthp = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
-    gMarioState->AvatarHeightOffset = 50.0f;
-    gMarioState->Avatar = AVATAR_FAST;
+    gMarioState->Avatar = AVATAR_MARIO;
 
     struct Object *capObject;
 

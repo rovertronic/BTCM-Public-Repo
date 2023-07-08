@@ -1,0 +1,11 @@
+extern u8 blog2_bodylog_robotnik_rgba16[];
+extern Vtx blog2_Plane_003_mesh_vtx_cull[8];
+extern Vtx blog2_Plane_003_mesh_vtx_0[12];
+extern Gfx blog2_Plane_003_mesh_tri_0[];
+extern Vtx blog2_Plane_003_mesh_vtx_1[40];
+extern Gfx blog2_Plane_003_mesh_tri_1[];
+extern Gfx mat_blog2_f3dlite_material[];
+extern Gfx mat_revert_blog2_f3dlite_material[];
+extern Gfx mat_blog2_robotnik[];
+extern Gfx mat_revert_blog2_robotnik[];
+extern Gfx blog2_Plane_003_mesh[];

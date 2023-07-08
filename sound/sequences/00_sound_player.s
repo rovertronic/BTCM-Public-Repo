@@ -2039,6 +2039,9 @@ sound_ref .sound_peach_something_special
 sound_ref .sound_peach_bake_a_cake
 sound_ref .sound_peach_for_mario
 sound_ref .sound_peach_mario2
+sound_ref .sound_vo_fast
+sound_ref .sound_vo_pingas
+sound_ref .sound_vo_ford
 
 .sound_mario_jump_hoo:
 chan_setbank 8
@@ -2649,8 +2652,36 @@ chan_call .set_reverb
 chan_setlayer 0, .layer_F8A
 chan_end
 
+.sound_vo_fast:
+chan_setbank 10
+chan_setinstr 24
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_F8A
+chan_end
+
+.sound_vo_pingas:
+chan_setbank 10
+chan_setinstr 25
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_F8A
+chan_end
+
+.sound_vo_ford:
+chan_setbank 10
+chan_setinstr 26
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_ford
+chan_end
+
 .layer_F8A:
 layer_note1 39, 0x50, 127
+layer_end
+
+.layer_ford:
+layer_note1 39, 0x80, 127
 layer_end
 
 #if defined(VERSION_EU) || defined(VERSION_SH)
@@ -2785,6 +2816,9 @@ sound_ref .sound_general_grand_star
 sound_ref .sound_general_grand_star_jump
 sound_ref .sound_general_boat_rock
 sound_ref .sound_general_vanish_sfx
+sound_ref .sound_general_blog_1
+sound_ref .sound_general_blog_2
+sound_ref .sound_general_blog_3
 sound_ref .sound_menu_enter_hole
 sound_ref .sound_peach_something_special
 sound_ref .sound_general_birds_fly_away
@@ -4271,6 +4305,28 @@ chan_setlayer 0, .layer_1A35
 chan_end
 
 .layer_1A35:
+layer_note1 39, 0x32, 127
+layer_end
+
+.sound_general_blog_1:
+chan_setbank 0
+chan_setinstr 6
+chan_setlayer 0, .layer_blog_1
+chan_end
+
+.sound_general_blog_2:
+chan_setbank 0
+chan_setinstr 7
+chan_setlayer 0, .layer_blog_1
+chan_end
+
+.sound_general_blog_3:
+chan_setbank 0
+chan_setinstr 8
+chan_setlayer 0, .layer_blog_1
+chan_end
+
+.layer_blog_1:
 layer_note1 39, 0x32, 127
 layer_end
 

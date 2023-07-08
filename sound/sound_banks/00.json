@@ -39,6 +39,21 @@
             "release_rate": 208,
             "envelope": "envelope0",
             "sound": "05_heavy_landing"
+        },
+        "inst6": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "blog_tick"
+        },
+        "inst7": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "blog_activate"
+        },
+        "inst8": {
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "blog_end"
         }
     },
     "instrument_list": [
@@ -47,6 +62,9 @@
         "inst2",
         "inst3",
         "inst4",
-        "inst5"
+        "inst5",
+        "inst6",
+        "inst7",
+        "inst8"
     ]
 }

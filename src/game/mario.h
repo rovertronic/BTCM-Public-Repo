@@ -56,9 +56,12 @@ void init_mario_from_save_file(void);
 void clear_costmic_phantasms(void);
 
 extern u8 near_music_box;
+extern u8 using_bodylog;
 
 enum avatar {
     AVATAR_MARIO,
+    AVATAR_PINGAS,
+    AVATAR_FORD,
     AVATAR_FAST,
 };
 

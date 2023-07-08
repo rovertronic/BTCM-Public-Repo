@@ -140,3 +140,8 @@
 #include "a_fast/model.inc.c"
 #include "mario/anims/data.inc.c"
 #include "mario/anims/table.inc.c"
+#include "blog1/model.inc.c"
+#include "blog4/model.inc.c"
+#include "blog2/model.inc.c"
+#include "blog3/model.inc.c"
+#include "bodylog_ball/model.inc.c"

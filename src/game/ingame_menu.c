@@ -32,6 +32,7 @@
 #include "rovent.h"
 #include "level_update.h"
 #include "hud.h"
+#include "mario.h"
 
 u8 letgo = FALSE;
 
@@ -2346,7 +2347,7 @@ s8 tab_index = 0;
 u16 menu_sintimer = 0;
 s8 mindex = 0;
 
-#define btxoff 50
+#define btxoff 85
 
 void add_tab(u8 tab_to_add) {
     if (tablist_count < 5) {
@@ -3344,6 +3345,31 @@ void render_pre_credits() {
     return;
 }
 
+Gfx *bodylog_dl_array[] = {
+    blog1_Plane_001_mesh,
+    blog2_Plane_003_mesh,
+    blog3_Plane_mesh,
+    blog4_Plane_002_mesh
+};
+
+f32 bodylog_dl_sizes[] = {
+    1.0f,
+    1.0f,
+    1.0f,
+    1.0f,
+};
+
+u16 avatar_model_ids[] = {
+    MODEL_MARIO,
+    MODEL_MARIO,
+    MODEL_MARIO,
+    MODEL_FAST,
+};
+
+u8 last_selected_avatar = 0;
+u8 bodylog_was_used = FALSE;
+u8 play_init_bodylog = TRUE;
+
 s32 render_menus_and_dialogs(void) {
     s32 mode = MENU_OPT_NONE;
     // s16 camangle;
@@ -3444,6 +3470,94 @@ s32 render_menus_and_dialogs(void) {
         print_hud_lut_string(HUD_LUT_GLOBAL, 84, 60, costume_text[gMarioState->CostumeID]);
         gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
     }   
+
+    if (using_bodylog) {
+        shade_screen();
+
+        struct Controller *controller = gMarioState->controller;
+        u16 bodylog_yaw = atan2s(-controller->stickY, -controller->stickX)+0x8000;
+        f32 bodylog_mag = ((controller->stickMag / 64.0f) * (controller->stickMag / 64.0f)) * 64.0f;
+
+        s8 selected_avatar = -1;
+        if (bodylog_mag > 10.0f) {
+            selected_avatar = ((bodylog_yaw+0x2000)/0x4000)%4;
+        } else {
+            play_init_bodylog = TRUE;
+        }
+
+        //shitty ass printing code
+        if (selected_avatar != -1) {
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+            gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+            print_generic_string(get_str_x_pos_from_center(160,badgenames[selected_avatar],0.0f)-1, 125-1-btxoff, badgenames[selected_avatar]);
+            print_generic_string(get_str_x_pos_from_center(160,badgedescs[selected_avatar],0.0f)-1, 108-1-btxoff, badgedescs[selected_avatar]);
+            gDPSetEnvColor(gDisplayListHead++, badgecolors[selected_avatar][0], badgecolors[selected_avatar][1], badgecolors[selected_avatar][2], 255);
+            print_generic_string(get_str_x_pos_from_center(160,badgenames[selected_avatar],0.0f), 125-btxoff, badgenames[selected_avatar]);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            print_generic_string(get_str_x_pos_from_center(160,badgedescs[selected_avatar],0.0f), 108-btxoff, badgedescs[selected_avatar]);
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+            if ((selected_avatar != last_selected_avatar)||(play_init_bodylog)) {
+                play_init_bodylog = FALSE;
+                play_sound(SOUND_BLOG_1, gGlobalSoundSource);
+            }
+            last_selected_avatar = selected_avatar;
+        }
+
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        create_dl_translation_matrix(MENU_MTX_PUSH, 160, 120, 0);
+
+        for (u8 i = 0; i<4; i++) {
+            create_dl_scale_matrix(MENU_MTX_PUSH, bodylog_dl_sizes[i], bodylog_dl_sizes[i], 0.0f);
+            if (selected_avatar == i) {
+                bodylog_dl_sizes[i] = lerp(bodylog_dl_sizes[i],1.2f,0.2f);
+                gDPSetEnvColor(gDisplayListHead++, 100, 100, 100, 255);
+                gSPDisplayList(gDisplayListHead++, bodylog_dl_array[i]);
+            } else {
+                bodylog_dl_sizes[i] = lerp(bodylog_dl_sizes[i],1.0f,0.1f);
+                gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+                gSPDisplayList(gDisplayListHead++, bodylog_dl_array[i]);
+            }
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        }
+        
+        //render bodylog ball
+        create_dl_translation_matrix(MENU_MTX_PUSH, sins(bodylog_yaw)*bodylog_mag*0.5f , coss(bodylog_yaw)*bodylog_mag*0.5f, 0);
+            gSPDisplayList(gDisplayListHead++, bodylog_ball_ball_mesh);
+        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+
+        bodylog_was_used = TRUE;
+    } else {
+        //exit body log, set avatar
+        if (bodylog_was_used) {
+            bodylog_was_used = FALSE;
+            play_sound(SOUND_BLOG_3, gGlobalSoundSource);
+            gMarioState->Avatar = last_selected_avatar;
+            gMarioState->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[avatar_model_ids[gMarioState->Avatar]];
+
+            switch(gMarioState->Avatar) {
+                case AVATAR_MARIO:
+                    gMarioState->AvatarHeightOffset = 0.0f;
+                    play_sound(SOUND_MARIO_HERE_WE_GO, gGlobalSoundSource);
+                break;
+                case AVATAR_PINGAS:
+                    gMarioState->AvatarHeightOffset = 0.0f;
+                    play_sound(SOUND_VO_PINGAS, gGlobalSoundSource);
+                break;
+                case AVATAR_FORD:
+                    gMarioState->AvatarHeightOffset = 0.0f;
+                    play_sound(SOUND_VO_FORD, gGlobalSoundSource);
+                break;
+                case AVATAR_FAST:
+                    gMarioState->AvatarHeightOffset = 50.0f;
+                    play_sound(SOUND_VO_FAST, gGlobalSoundSource);
+                break;
+            }
+        }
+    }
 
 
     gMarioState->GlobalPaused = TRUE;
