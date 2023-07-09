@@ -184,6 +184,8 @@ void render_hud_cannon_reticle(void);
 void reset_red_coins_collected(void);
 s32 render_menus_and_dialogs(void);
 
+void display_song_text(u8 song_text_id);
+
 void int_to_str_time(s32 num, s32 num2, s32 num3, u8 *dst);
 
 enum costume_enum {

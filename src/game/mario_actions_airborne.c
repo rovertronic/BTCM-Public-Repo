@@ -104,10 +104,10 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
     f32 damageHeight = FALL_DAMAGE_HEIGHT_SMALL;
 
     //If have fall damage badge, remove bp, otherwise hurt
-    if ((save_file_get_badge_equip() & (1<<1))&&(gMarioState->numBadgePoints > 0)) {
-        if (fallHeight > damageHeight) {
-            gMarioState->numBadgePoints --;
-        }
+    if (1) {
+        //if (fallHeight > damageHeight) {
+        //    gMarioState->numBadgePoints --;
+        //}
     }
     else
     {

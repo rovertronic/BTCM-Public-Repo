@@ -1391,11 +1391,11 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
             geo_process_node_and_siblings(node->node.children);
         }
         gCurGraphNodeRoot = NULL;
-#ifdef VANILLA_DEBUG
+//#ifdef VANILLA_DEBUG
         if (1) {
-            print_text_fmt_int(180, 36, "MEM %d", gDisplayListHeap->totalSpace - gDisplayListHeap->usedSpace);
+            //print_text_fmt_int(180, 36, "MEM %d", gDisplayListHeap->totalSpace - gDisplayListHeap->usedSpace);
         }
-#endif
+//#endif
         main_pool_free(gDisplayListHeap);
     }
 }

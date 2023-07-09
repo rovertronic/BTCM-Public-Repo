@@ -1806,7 +1806,7 @@ ALIGNED8 static const Texture texture_font_char_us_slash[] = {
 };
 
 ALIGNED8 static const u8 texture_font_char_us_actual_slash[] = {
-#include "textures/segment2/custom_font_graphics_slash.ia4.inc.c"
+#include "textures/segment2/custom_font_graphics_percent.ia4.inc.c"
 };
 
 ALIGNED8 static const u8 texture_font_char_us_percentile[] = {

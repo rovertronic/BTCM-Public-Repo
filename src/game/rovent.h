@@ -174,3 +174,6 @@ extern void event_main(void);
 extern void run_event(u8 event_tdo);
 extern void end_minigame(void);
 extern void minigame_transition_func(void);
+
+
+extern u8 *musicmenu_titles[];

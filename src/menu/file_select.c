@@ -1868,37 +1868,38 @@ Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, UNUSED struct Grap
  */
 s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
 
-    sSelectedButtonID = MENU_BUTTON_NONE;
-    sCurrentMenuLevel = MENU_LAYER_MAIN;
-    sTextBaseAlpha = 0;
-    // Place the cursor over the save file that was being played.
-    // gCurrSaveFileNum is 1 by default when the game boots, as such
-    // the cursor will point on Mario A save file.
-    switch (gCurrSaveFileNum) {
-        case SAVE_FILE_NUM_A: 
-            sCursorPos[0] = -94.0f; 
-            sCursorPos[1] = 46.0f;
-            if (!ShowAllFiles) {
-                sCursorPos[1] = 26.0f;
-            }
-            break;
-        case SAVE_FILE_NUM_B: sCursorPos[0] =  24.0f; sCursorPos[1] = 46.0f; break;
-        case SAVE_FILE_NUM_C: sCursorPos[0] = -94.0f; sCursorPos[1] =  5.0f; break;
-        case SAVE_FILE_NUM_D: sCursorPos[0] =  24.0f; sCursorPos[1] =  5.0f; break;
-    }
-
-    sClickPos[0] = -10000;
-    sClickPos[1] = -10000;
-    sCursorClickingTimer = 0;
-    sSelectedFileNum = 0;
-    sSelectedFileIndex = MENU_BUTTON_NONE;
-    sFadeOutText = FALSE;
-    sStatusMessageID = 0;
-    sTextFadeAlpha = 0;
-    sMainMenuTimer = 0;
-    sEraseYesNoHoverState = MENU_ERASE_HOVER_NONE;
-    sSoundMode = 0;
-    gCurrLevelNum = LEVEL_UNKNOWN_1;
+    display_song_text(0);
+    //sSelectedButtonID = MENU_BUTTON_NONE;
+    //sCurrentMenuLevel = MENU_LAYER_MAIN;
+    //sTextBaseAlpha = 0;
+    //// Place the cursor over the save file that was being played.
+    //// gCurrSaveFileNum is 1 by default when the game boots, as such
+    //// the cursor will point on Mario A save file.
+    //switch (gCurrSaveFileNum) {
+    //    case SAVE_FILE_NUM_A: 
+    //        sCursorPos[0] = -94.0f; 
+    //        sCursorPos[1] = 46.0f;
+    //        if (!ShowAllFiles) {
+    //            sCursorPos[1] = 26.0f;
+    //        }
+    //        break;
+    //    case SAVE_FILE_NUM_B: sCursorPos[0] =  24.0f; sCursorPos[1] = 46.0f; break;
+    //    case SAVE_FILE_NUM_C: sCursorPos[0] = -94.0f; sCursorPos[1] =  5.0f; break;
+    //    case SAVE_FILE_NUM_D: sCursorPos[0] =  24.0f; sCursorPos[1] =  5.0f; break;
+    //}
+//
+    //sClickPos[0] = -10000;
+    //sClickPos[1] = -10000;
+    //sCursorClickingTimer = 0;
+    //sSelectedFileNum = 0;
+    //sSelectedFileIndex = MENU_BUTTON_NONE;
+    //sFadeOutText = FALSE;
+    //sStatusMessageID = 0;
+    //sTextFadeAlpha = 0;
+    //sMainMenuTimer = 0;
+    //sEraseYesNoHoverState = MENU_ERASE_HOVER_NONE;
+    //sSoundMode = 0;
+    //gCurrLevelNum = LEVEL_UNKNOWN_1;
     return 0;
 }
 

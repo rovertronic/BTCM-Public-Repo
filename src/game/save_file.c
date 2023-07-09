@@ -849,6 +849,8 @@ u8 get_evil_badge_bonus(void) {
 void save_file_get_stats() {
     struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
 
+    gMarioState->numMaxHP = 3;
+
     if (save_file_exists(gCurrSaveFileNum - 1)) {
         gMarioState->CostumeID = saveFile->SavedCostume;
         gMarioState->Level = saveFile->UpgradeLevel;
@@ -861,7 +863,7 @@ void save_file_get_stats() {
         gMarioState->numMaxGlobalCoins = 100+(50*count_u16_bits(saveFile->WalletCollected));
         gMarioState->numGlobalCoins = saveFile->GlobalCoins;
         gMarioState->numEquippedBadges = count_u32_bits(saveFile->EquippedBadges);
-        gMarioState->numMaxHP = UPGRADE_TABLE[gMarioState->Level][2];
+        //gMarioState->numMaxHP = UPGRADE_TABLE[gMarioState->Level][2];
         gMarioState->numMaxFP = UPGRADE_TABLE[gMarioState->Level][2];
         gMarioState->numMaxBP = UPGRADE_TABLE[gMarioState->Level][3] + get_evil_badge_bonus();
         gMarioState->Options = saveFile->OptionFlags;
@@ -869,7 +871,7 @@ void save_file_get_stats() {
         //FIRST TRY STATS
         gMarioState->numMaxGlobalCoins = 100;
         gMarioState->numGlobalCoins = 0;
-        gMarioState->numMaxHP = 5;
+        //gMarioState->numMaxHP = 5;
         gMarioState->numMaxFP = 5;
         gMarioState->numMaxBP = 0;
         gMarioState->CostumeID = 0;

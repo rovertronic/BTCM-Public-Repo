@@ -39,31 +39,31 @@ u8 letgo = FALSE;
 f32 _spread;
 
 u32 bicon_table[] = {
-    &b0_Plane_001_mesh,
-    &b1_Plane_001_mesh,
-    &b2_Plane_001_mesh,
-    &b3_Plane_001_mesh,
-    &b4_Plane_001_mesh,
-    &b5_Plane_001_mesh,
-    &b6_Plane_001_mesh,
-    &b7_Plane_001_mesh,
-    &b8_Plane_001_mesh,
-    &b9_Plane_001_mesh,
-    &b10_Plane_001_mesh,
-    &b11_Plane_001_mesh,
-
-    &b12_Plane_mesh,
-    &b13_Plane_mesh,
-    &b14_Plane_mesh,
-    &b15_Plane_mesh,
-    &b16_Plane_mesh,
-    &b17_Plane_mesh,
-    &b18_Plane_mesh,
-    &b19_Plane_mesh,
-    &b20_Plane_mesh,
-    &b21_Plane_mesh,
-    &b22_Plane_mesh,
-    &b23_Plane_mesh
+    //&b0_Plane_001_mesh,
+    //&b1_Plane_001_mesh,
+    //&b2_Plane_001_mesh,
+    //&b3_Plane_001_mesh,
+    //&b4_Plane_001_mesh,
+    //&b5_Plane_001_mesh,
+    //&b6_Plane_001_mesh,
+    //&b7_Plane_001_mesh,
+    //&b8_Plane_001_mesh,
+    //&b9_Plane_001_mesh,
+    //&b10_Plane_001_mesh,
+    //&b11_Plane_001_mesh,
+//
+    //&b12_Plane_mesh,
+    //&b13_Plane_mesh,
+    //&b14_Plane_mesh,
+    //&b15_Plane_mesh,
+    //&b16_Plane_mesh,
+    //&b17_Plane_mesh,
+    //&b18_Plane_mesh,
+    //&b19_Plane_mesh,
+    //&b20_Plane_mesh,
+    //&b21_Plane_mesh,
+    //&b22_Plane_mesh,
+    //&b23_Plane_mesh
 };
 
 
@@ -2384,9 +2384,9 @@ void build_tabs(void) {
             add_tab(2);
         }
 
-        if (save_file_check_progression(PROG_POSTPOST_GAME)) {
+        //if (save_file_check_progression(PROG_POSTPOST_GAME)) {
             add_tab(5);//cheats
-        }
+        //}
     }
 
     add_tab(3);
@@ -3361,7 +3361,7 @@ f32 bodylog_dl_sizes[] = {
 
 u16 avatar_model_ids[] = {
     MODEL_MARIO,
-    MODEL_MARIO,
+    MODEL_PINGAS,
     MODEL_MARIO,
     MODEL_FAST,
 };
@@ -3369,6 +3369,23 @@ u16 avatar_model_ids[] = {
 u8 last_selected_avatar = 0;
 u8 bodylog_was_used = FALSE;
 u8 play_init_bodylog = TRUE;
+
+u8 display_song_timer = 0;
+u8 display_song_index = 0;
+f32 display_song_x = -160.0f;
+
+u16 display_song_flags = 0;
+void display_song_text(u8 song_text_id) {
+    u16 bit = 1 << display_song_flags;
+
+    if (!(display_song_flags &= bit)) {
+        display_song_timer = 180;
+        display_song_index = song_text_id;
+        display_song_x = -get_string_width(musicmenu_titles[display_song_index]);
+
+        display_song_flags |= bit;
+    }
+}
 
 s32 render_menus_and_dialogs(void) {
     s32 mode = MENU_OPT_NONE;
@@ -3537,27 +3554,27 @@ s32 render_menus_and_dialogs(void) {
             play_sound(SOUND_BLOG_3, gGlobalSoundSource);
             gMarioState->Avatar = last_selected_avatar;
             gMarioState->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[avatar_model_ids[gMarioState->Avatar]];
-
-            switch(gMarioState->Avatar) {
-                case AVATAR_MARIO:
-                    gMarioState->AvatarHeightOffset = 0.0f;
-                    play_sound(SOUND_MARIO_HERE_WE_GO, gGlobalSoundSource);
-                break;
-                case AVATAR_PINGAS:
-                    gMarioState->AvatarHeightOffset = 0.0f;
-                    play_sound(SOUND_VO_PINGAS, gGlobalSoundSource);
-                break;
-                case AVATAR_FORD:
-                    gMarioState->AvatarHeightOffset = 0.0f;
-                    play_sound(SOUND_VO_FORD, gGlobalSoundSource);
-                break;
-                case AVATAR_FAST:
-                    gMarioState->AvatarHeightOffset = 50.0f;
-                    play_sound(SOUND_VO_FAST, gGlobalSoundSource);
-                break;
-            }
         }
-    }
+    }//end bodylog
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+        if (display_song_timer < 1) {
+            display_song_x = lerp(display_song_x,-get_string_width(musicmenu_titles[display_song_index]),0.2f);
+        }
+        if (display_song_timer > 150) {
+            display_song_x =lerp(display_song_x,10.0f,0.2f);
+        }
+        if (display_song_timer > 0) {
+            display_song_timer--;
+        }
+
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+        print_generic_string(display_song_x, 220, musicmenu_titles[display_song_index]);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        print_generic_string(display_song_x+1, 220+1, musicmenu_titles[display_song_index]);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    
 
 
     gMarioState->GlobalPaused = TRUE;

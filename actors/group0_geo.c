@@ -46,3 +46,7 @@
 #include "cosmic_spike/geo.inc.c"
 #include "crowbar2/geo.inc.c"
 #include "a_fast/geo.inc.c"
+#include "a_pingas/geo.inc.c"
+
+#include "tl_logo2/geo.inc.c"
+#include "troll_element/geo.inc.c"

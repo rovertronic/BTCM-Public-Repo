@@ -1,3 +1,4 @@
+#include "actors/tl_logo2/texscroll.inc.h"
 #include "actors/ocean_ttc/texscroll.inc.h"
 #include "actors/tvhead/texscroll.inc.h"
 #include "actors/executive_loom_/texscroll.inc.h"

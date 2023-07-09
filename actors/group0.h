@@ -470,8 +470,6 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "bE/header.h"
 
-//#include "title/header.h"
-
 #include "Rex/geo_header.h"
 
 
@@ -566,7 +564,6 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "a_fast/geo_header.h"
 
-
 #include "mario/anim_header.h"
 #include "blog1/header.h"
 
@@ -577,5 +574,10 @@ extern const struct Animation *const Hammerbro_anims[];
 #include "blog3/header.h"
 
 #include "bodylog_ball/header.h"
+
+#include "a_pingas/geo_header.h"
+
+#include "tl_logo2/geo_header.h"
+#include "troll_element/geo_header.h"
 
 #endif

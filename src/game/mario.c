@@ -1873,7 +1873,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     u32 tempAddr = _bad_appleSegmentRomStart;
     u8 *sus = segmented_to_virtual(&castle_courtyard_dl_output_0_custom_i8_ia8);
     u8 coinrepeats = 1;
-    u16 *walltex2 = segmented_to_virtual(&shrnling1_Static_i8);
+    //u16 *walltex2 = segmented_to_virtual(&shrnling1_Static_i8);
 
     //manage global coins
     if (gMarioState->gGlobalCoinGain > 0) {
@@ -1987,6 +1987,27 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     if (gMarioState->Avatar != costumechange) {
             cur_obj_spawn_particles(&D_8032F270);
             costumechange = gMarioState->Avatar;
+            gMarioState->numMaxHP = 3;
+
+            switch(gMarioState->Avatar) {
+                case AVATAR_MARIO:
+                    gMarioState->AvatarHeightOffset = 0.0f;
+                    play_sound(SOUND_MARIO_HERE_WE_GO, gGlobalSoundSource);
+                break;
+                case AVATAR_PINGAS:
+                    gMarioState->numMaxHP = 6;
+                    gMarioState->AvatarHeightOffset = 0.0f;
+                    play_sound(SOUND_VO_PINGAS, gGlobalSoundSource);
+                break;
+                case AVATAR_FORD:
+                    gMarioState->AvatarHeightOffset = 0.0f;
+                    play_sound(SOUND_VO_FORD, gGlobalSoundSource);
+                break;
+                case AVATAR_FAST:
+                    gMarioState->AvatarHeightOffset = 50.0f;
+                    play_sound(SOUND_VO_FAST, gGlobalSoundSource);
+                break;
+            }
         }
 
 

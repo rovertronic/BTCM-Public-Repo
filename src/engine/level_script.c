@@ -305,6 +305,8 @@ void level_cmd_fileselect_condition(void) {
     if (save_file_get_progression() == PROG_ON_AGAMEMNON) {
         sRegister = LEVEL_BITS;
     }
+
+    sRegister = LEVEL_CCM;
     sCurrentCmd = CMD_NEXT;
 }
 

@@ -88,8 +88,8 @@
 #define TEXT_SPK _("SpK")
 #define TEXT_NOMICO _("ZUN, nomico") //bad apple
 
-#define TEXT_SONG1 _("Cosmic Castle")
-#define TEXT_SONG2 _("The Showrunner")
+#define TEXT_SONG1 _("/ Keygen (BONELAB OST)")
+#define TEXT_SONG2 _("/ ytpmv elf")
 #define TEXT_SONG3 _("Red Hot")
 #define TEXT_SONG4 _("Floating Farm")
 #define TEXT_SONG5 _("Jungle Temple")
@@ -735,8 +735,8 @@
 #define TEXT_MENU_STARS_DE _("   GEHEIME STERNE")
 #endif // VERSION_EU
 
-#define PRE_CREDITS_1 _("Created By:")
-#define PRE_CREDITS_2 _("Rovert")
+#define PRE_CREDITS_1 _("Wrath of the Verdant Exile")
+#define PRE_CREDITS_2 _("Punished Elf")
 
 #define PRE_CREDITS_3 _("Written By:")
 #define PRE_CREDITS_4 _("RationaLess")
