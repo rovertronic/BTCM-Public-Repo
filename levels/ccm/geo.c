@@ -47,3 +47,5 @@
 #include "levels/ccm/cosmic_missile/geo.inc.c"
 #include "levels/ccm/conv1ccm/geo.inc.c"
 #include "levels/ccm/conv2ccm/geo.inc.c"
+#include "levels/ccm/escalator/geo.inc.c"
+#include "levels/ccm/trap_trainceil/geo.inc.c"

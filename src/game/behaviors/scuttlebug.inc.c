@@ -28,7 +28,7 @@ struct ObjectHitbox sScuttlebugHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
-    /* health:            */ 3,
+    /* health:            */ 2,
     /* numLootCoins:      */ 4,
     /* radius:            */ 130,
     /* height:            */ 70,
@@ -221,7 +221,7 @@ void bhv_scuttlebug_loop(void) {
 
             o->oVelY = 0.0f;
             //o->oMoveAngleYaw = gMarioState->faceAngle[1];
-            if (o->oTimer > 20) {
+            if (o->oTimer > 30) {
                 gMarioState->hurtCounter ++;
                 if (gMarioState->CostumeID != 7) {
                     gMarioState->hurtCounter ++;

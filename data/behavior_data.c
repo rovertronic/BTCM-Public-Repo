@@ -7194,6 +7194,36 @@ const BehaviorScript bhvBoneTrain[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvTrainCeil[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_FLOAT(oCollisionDistance, 6000),
+    SET_FLOAT(oDrawingDistance, 32000),
+    LOAD_COLLISION_DATA(trainceil_collision),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern bhv_quicksand_escalator(void);
+const BehaviorScript bhvQuicksandEscalator[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_FLOAT(oCollisionDistance, 10000),
+    LOAD_COLLISION_DATA(quicksand_escalator_collision),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_quicksand_escalator),
+    END_LOOP(),
+};
+
+extern bhv_troll_trigger(void);
+const BehaviorScript bhvTrollTrigger[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_troll_trigger),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvC5BRIDGE[] = {
     BEGIN(OBJ_LIST_SURFACE),
     SET_FLOAT(oCollisionDistance, 3000),
@@ -9302,5 +9332,26 @@ const BehaviorScript bhvTrollLabElement[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_troll_lab_element_loop),
+    END_LOOP(),
+};
+
+
+extern void bhv_escalator();
+extern void bhv_escalator_spawner();
+const BehaviorScript bhvEscalatorSpawner[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    CALL_NATIVE(bhv_escalator_spawner),
+    BEGIN_LOOP(),
+    END_LOOP(),
+};
+const BehaviorScript bhvEscalator[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(escalator_collision),
+    SET_FLOAT(oCollisionDistance, 400),
+    SET_FLOAT(oDrawingDistance, 30000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_escalator),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

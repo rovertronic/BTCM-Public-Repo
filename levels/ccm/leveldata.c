@@ -84,3 +84,8 @@
 #include "levels/ccm/cosmic_missile/model.inc.c"
 #include "levels/ccm/conv1ccm/model.inc.c"
 #include "levels/ccm/conv2ccm/model.inc.c"
+#include "levels/ccm/escalator/model.inc.c"
+#include "levels/ccm/escalator/collision.inc.c"
+#include "levels/ccm/trap_trainceil/model.inc.c"
+#include "levels/ccm/trainceil/collision.inc.c"
+#include "levels/ccm/quicksand_escalator/collision.inc.c"

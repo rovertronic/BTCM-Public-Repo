@@ -28,10 +28,16 @@
             "release_rate": 10,
             "envelope": "envelope",
             "sound": "37_custom_keygen"
+        },
+        "inst2": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "38_custom_runoff"
         }
     },
     "instrument_list": [
         "inst0",
-        "inst1"
+        "inst1",
+        "inst2"
     ]
 }

@@ -184,5 +184,8 @@
     ],
     "37_custom_keygen": [
         "streamed_audio"
+    ],
+    "38_custom_runoff": [
+        "streamed_audio"
     ]
 }

@@ -1866,7 +1866,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     //u8 *Pantcol = segmented_to_virtual(&mario_button_v4_lights);
     //u8 *Shoecol = segmented_to_virtual(&mario_shoes_v4_lights);
     //u8 *Tokencol = segmented_to_virtual(&token_token_lights);
-    u16 *walltex = segmented_to_virtual(&ccm_dl_Screen_ia8);
+    //u16 *walltex = segmented_to_virtual(&ccm_dl_Screen_ia8);
     u8 timerdelay = 0;
     u16 i;
     u8 x, y;
@@ -2018,7 +2018,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             if (gMarioState->BossHealth < 3) {
                 //static texture
                 for (i = 0; i<512; i++) {
-                    walltex[i] = random_u16();
+                    //walltex[i] = random_u16();
                     }
                 }
             if (gMarioState->BossHealth < 1) {
@@ -2437,6 +2437,7 @@ void init_mario(void) {
     s16 currenthp = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
     gMarioState->Avatar = AVATAR_MARIO;
+    gMarioState->TrollTrigger = TTRIG_NONE;
 
     struct Object *capObject;
 

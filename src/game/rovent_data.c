@@ -1411,6 +1411,10 @@ s32 event_lvup[] = {
     E_END,
 };
 
+f32 event_train_trap[] = {
+    E_ACT, ACT_IDLE,
+};
+
 //LIST DO NOT RENAME
 s32 *event_list[] = {
     &event_test,

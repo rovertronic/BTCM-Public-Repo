@@ -970,6 +970,12 @@ enum oActionsStarDoor {
     #define JS_RING_SPAWNER_ACT_ACTIVE                      0x0
     #define JS_RING_SPAWNER_ACT_INACTIVE                    0x1
 
+enum troll_trigger {
+    TTRIG_NONE,
+    TTRIG_ESCALATOR_1,
+    TTRIG_ESCALATOR_2,
+};
+
 /* Star General */
 enum oBehParam1stByteStarAct { // BPARAM1
     STAR_BP_ACT_1,

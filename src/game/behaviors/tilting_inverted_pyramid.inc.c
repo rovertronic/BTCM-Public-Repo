@@ -736,61 +736,23 @@ void loop_VRset(void) {
     }
 
 void loop_bone_train(void) {
+    struct Object *trainceil;
+        switch(o->oAction) {
+        case 0:
+        trainceil = cur_obj_nearest_object_with_behavior(bhvTrainCeil);
 
-    cur_obj_move_using_fvel_and_gravity();
-
-    if (o->oAction == 0) {
-
-        if (o->oForwardVel < 90.0f) {
-            o->oForwardVel += 1.0f;
-            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
-
-            }
-        if (o->oPosX < o->oHomeX-((f32)(o->oBehParams2ndByte)*3200.0f)) {
-            o->oAction = 1;
-            o->oTimer = 0;
+        if (gMarioObject->platform == o) {
+            o->oAction++;
+            if (trainceil) {
+                mark_obj_for_deletion(trainceil);
             }
         }
-
-    if (o->oAction == 1) {
-        if (o->oForwardVel > 0.0f) {
-            o->oForwardVel -= 2.0f;
-            }
-            else
-            {
-            if (o->oTimer > 200) {
-                o->oTimer = 0;
-                o->oAction = 2;
-                }
-            }
-        }
-
-    if (o->oAction == 2) {
-
-        if (o->oForwardVel > -90.0f) {
-            o->oForwardVel -= 1.0f;
-            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
-            }
-        if (o->oPosX > o->oHomeX) {
-            o->oAction = 3;
-            o->oTimer = 0;
-            }
-        }
-
-    if (o->oAction == 3) {
-        if (o->oForwardVel < 0.0f) {
-            o->oForwardVel += 2.0f;
-            }
-            else
-            {
-            if (o->oTimer > 200) {
-                o->oTimer = 0;
-                o->oAction = 0;
-                }
-            }
-        }
-
+        break;
+        case 1:
+            o->oPosY += 30.0f;
+        break;
     }
+}
 
 void loop_bone_gate(void) {
     switch (o->oAction) {
@@ -6164,5 +6126,77 @@ void bhv_troll_lab_element_loop(void) {
                 }
             }
         break;
+    }
+}
+
+void bhv_escalator() {
+    o->oPosX += o->oVelX;
+
+    if (o->oPosX > o->oHomeX) {
+        o->oPosX -= 2600.0f;
+    }
+    if (o->oPosX < o->oHomeX-2600.0f) {
+        o->oPosX += 2600.0f;
+    }
+
+    if (o->oPosX < o->oHomeX-600.0f) {
+        o->oPosY = o->oHomeY+(o->oHomeX-o->oPosX-600.0f);
+    } else {
+        o->oPosY = o->oHomeY;
+    }
+    if (o->oPosX < o->oHomeX-2200.0f) {
+        o->oPosY = o->oHomeY+1600.0f;
+    }
+
+    //troll triggers
+    if (gMarioState->TrollTrigger == TTRIG_ESCALATOR_1) {
+        o->oVelX = 35.0f;
+    }
+    if (gMarioState->TrollTrigger == TTRIG_ESCALATOR_2) {
+        o->oVelX = -40.0f;
+    }
+}
+void bhv_escalator_spawner() {
+    struct Object *esc;
+    for (u8 i=0;i<14;i++){
+        esc = spawn_object(o,MODEL_ESCALATOR,bhvEscalator);
+        esc->oHomeX = o->oPosX;
+        esc->oHomeY = o->oPosY;
+        esc->oPosX = o->oPosX-(200.0f*i);
+
+        if (o->oBehParams2ndByte == 0) {
+            esc->oVelX = 10.0f;
+        } else {
+            esc->oVelX = -10.0f;
+        }
+    }
+}
+
+void bhv_troll_trigger() {
+    u8 size = GET_BPARAM1(o->oBehParams);
+    u8 trigger = GET_BPARAM2(o->oBehParams);
+    f32 cube_radius = 100.0f*size;//+100 and -100 for a total of 200 : >
+
+    if (gMarioState->TrollTrigger == trigger) {
+        mark_obj_for_deletion(o);
+    }
+
+    if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
+    if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
+    if (gMarioState->pos[1]>o->oPosY+cube_radius) {return;}
+    if (gMarioState->pos[1]<o->oPosY-cube_radius) {return;}
+    if (gMarioState->pos[2]>o->oPosZ+cube_radius) {return;}
+    if (gMarioState->pos[2]<o->oPosZ-cube_radius) {return;}
+
+    gMarioState->TrollTrigger = trigger;
+    mark_obj_for_deletion(o);
+}
+
+void bhv_quicksand_escalator(void) {
+    if(o->oAction>0){return;}
+
+    if (gMarioState->TrollTrigger == TTRIG_ESCALATOR_2) {
+        load_object_static_model();
+        o->oAction++;
     }
 }

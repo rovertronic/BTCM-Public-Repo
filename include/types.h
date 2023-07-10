@@ -614,6 +614,7 @@ struct MarioState {
 
              f32 AvatarHeightOffset;
              u8 Avatar;
+             u8 TrollTrigger;
     // -- HackerSM64 MarioState fields end --
 };
 

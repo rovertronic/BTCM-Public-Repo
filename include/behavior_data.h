@@ -510,6 +510,7 @@ extern const BehaviorScript bhvSparkleSpawn[];
 extern const BehaviorScript bhvSparkleParticleSpawner[];
 extern const BehaviorScript bhvSomeGfx[];
 extern const BehaviorScript bhvScuttlebug[];
+#define bhvCrablet bhvScuttlebug
 extern const BehaviorScript bhvScuttlebugSpawn[];
 extern const BehaviorScript bhvWhompKingBoss[];
 extern const BehaviorScript bhvSmallWhomp[];
@@ -798,5 +799,10 @@ extern const BehaviorScript bhvSamplePlatform1[];
 extern const BehaviorScript bhvSamplePlatform2[];
 extern const BehaviorScript bhvTvshop[];
 extern const BehaviorScript bhvPostGameHint[];
+extern const BehaviorScript bhvEscalator[];
+extern const BehaviorScript bhvEscalatorSpawner[];
+extern const BehaviorScript bhvTrainCeil[];
+extern const BehaviorScript bhvTrollTrigger[];
+extern const BehaviorScript bhvQuicksandEscalator[];
 
 #endif // BEHAVIOR_DATA_H

@@ -297,6 +297,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     120,
     127,
     127,
+    127,
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
