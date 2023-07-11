@@ -125,3 +125,4 @@
 #include "a_fast/model.inc.c"
 #include "tl_logo2/model.inc.c"
 #include "troll_element/model.inc.c"
+#include "killerspikes/model.inc.c"

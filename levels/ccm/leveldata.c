@@ -89,3 +89,7 @@
 #include "levels/ccm/trap_trainceil/model.inc.c"
 #include "levels/ccm/trainceil/collision.inc.c"
 #include "levels/ccm/quicksand_escalator/collision.inc.c"
+#include "levels/ccm/connex1/model.inc.c"
+#include "levels/ccm/connex2/model.inc.c"
+#include "levels/ccm/connex1/collision.inc.c"
+#include "levels/ccm/connex2/collision.inc.c"

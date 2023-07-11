@@ -49,3 +49,5 @@
 #include "levels/ccm/conv2ccm/geo.inc.c"
 #include "levels/ccm/escalator/geo.inc.c"
 #include "levels/ccm/trap_trainceil/geo.inc.c"
+#include "levels/ccm/connex1/geo.inc.c"
+#include "levels/ccm/connex2/geo.inc.c"

@@ -9349,9 +9349,32 @@ const BehaviorScript bhvEscalator[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(escalator_collision),
     SET_FLOAT(oCollisionDistance, 400),
-    SET_FLOAT(oDrawingDistance, 30000),
+    SET_FLOAT(oDrawingDistance, 32000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_escalator),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_falling_connex();
+const BehaviorScript bhvFallingConnex[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oCollisionDistance, 5000),
+    SET_FLOAT(oDrawingDistance, 32000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_falling_connex),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_killer_spike();
+const BehaviorScript bhvKillerSpikes[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 2000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+    CALL_NATIVE(bhv_killer_spike),
     END_LOOP(),
 };

@@ -5,6 +5,7 @@
 #include "levels/wdw/header.h"
 #include "levels/bitfs/header.h"
 #include "levels/rr/header.h"
+#include "levels/ccm/header.h"
 
 u8 aghealth = 3;
 u8 agstate = 0;
@@ -6198,5 +6199,79 @@ void bhv_quicksand_escalator(void) {
     if (gMarioState->TrollTrigger == TTRIG_ESCALATOR_2) {
         load_object_static_model();
         o->oAction++;
+    }
+}
+
+void bhv_falling_connex(void) {
+    s16 fall = 0x666;
+    u8 cond = FALSE;
+
+    if (o->oBehParams2ndByte == 0) {
+        o->collisionData = segmented_to_virtual(connex1_collision);
+        cond = (gMarioState->TrollTrigger == TTRIG_CONNEX_FALL_1);
+    } else {
+        fall = -fall;
+        o->collisionData = segmented_to_virtual(connex2_collision);
+        cond = (gMarioState->TrollTrigger == TTRIG_CONNEX_FALL_2);
+    }
+
+    switch(o->oAction) {
+        case 0:
+            if (cond) {
+                o->oAction++;
+            }
+        break;
+        case 1:
+            if (o->oTimer < 10) {
+                o->oFaceAngleRoll += fall;
+            }
+            if (o->oTimer == 10) {
+                cur_obj_shake_screen(SHAKE_POS_LARGE);
+                cur_obj_play_sound_2(SOUND_GENERAL_TOX_BOX_MOVE);
+                gMarioState->health = 0;
+            }
+        break;
+    }
+}
+
+void bhv_killer_spike() {
+    f32 cube_radius_2 = 50.0f;
+    f32 cube_radius = 150.0f;
+
+    switch (o->oAction) {
+        case 0:
+            if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
+            if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
+            if (gMarioState->pos[1]>o->oPosY+cube_radius_2) {return;}
+            if (gMarioState->pos[1]<o->oPosY-cube_radius_2) {return;}
+            if (gMarioState->pos[2]>o->oPosZ+cube_radius) {return;}
+            if (gMarioState->pos[2]<o->oPosZ-cube_radius) {return;}
+
+            o->oAction++;
+            gMarioState->health = 0;
+            o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_KILLER_SPIKE];
+            cur_obj_play_sound_2(SOUND_GENERAL_POUND_WOOD_POST);
+            o->oPosY = o->oHomeY - 20.0f*2.0f;
+            o->oTimer = 0; //redundant?
+        break;
+        case 1:
+            switch(o->oTimer) {
+                case 0:
+                    o->oPosY = o->oHomeY - 20.0f*2.0f;
+                break;
+                case 1:
+                    o->oPosY = o->oHomeY - 15.0f*2.0f;
+                break;
+                case 2:
+                    o->oPosY = o->oHomeY - 9.0f*2.0f;
+                break;
+                case 3:
+                    o->oPosY = o->oHomeY - 4.0f*2.0f;
+                break;
+                case 4:
+                    o->oPosY = o->oHomeY;
+                break;
+            }
+        break;
     }
 }

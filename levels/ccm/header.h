@@ -143,4 +143,12 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/quicksand_escalator/collision_header.h"
 
+#include "levels/ccm/connex1/geo_header.h"
+
+#include "levels/ccm/connex2/geo_header.h"
+
+#include "levels/ccm/connex1/collision_header.h"
+
+#include "levels/ccm/connex2/collision_header.h"
+
 #endif

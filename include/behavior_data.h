@@ -804,5 +804,7 @@ extern const BehaviorScript bhvEscalatorSpawner[];
 extern const BehaviorScript bhvTrainCeil[];
 extern const BehaviorScript bhvTrollTrigger[];
 extern const BehaviorScript bhvQuicksandEscalator[];
+extern const BehaviorScript bhvFallingConnex[];
+extern const BehaviorScript bhvKillerSpikes[];
 
 #endif // BEHAVIOR_DATA_H

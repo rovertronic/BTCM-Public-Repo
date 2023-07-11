@@ -580,4 +580,6 @@ extern const struct Animation *const Hammerbro_anims[];
 #include "tl_logo2/geo_header.h"
 #include "troll_element/geo_header.h"
 
+#include "killerspikes/geo_header.h"
+
 #endif

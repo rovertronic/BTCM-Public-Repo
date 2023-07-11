@@ -1,0 +1,13 @@
+extern const GeoLayout connex2_geo[];
+extern u8 connex2_connex_door_i4[];
+extern u8 connex2_connex_i4[];
+extern Vtx connex2_viscol_003_mesh_layer_1_vtx_0[8];
+extern Gfx connex2_viscol_003_mesh_layer_1_tri_0[];
+extern Vtx connex2_viscol_003_mesh_layer_1_vtx_1[16];
+extern Gfx connex2_viscol_003_mesh_layer_1_tri_1[];
+extern Gfx mat_connex2_connex_door_orange_layer1[];
+extern Gfx mat_revert_connex2_connex_door_orange_layer1[];
+extern Gfx mat_connex2_connex_orange_layer1[];
+extern Gfx mat_revert_connex2_connex_orange_layer1[];
+extern Gfx connex2_viscol_003_mesh_layer_1[];
+extern Gfx connex2_material_revert_render_settings[];

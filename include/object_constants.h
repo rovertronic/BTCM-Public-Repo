@@ -974,6 +974,9 @@ enum troll_trigger {
     TTRIG_NONE,
     TTRIG_ESCALATOR_1,
     TTRIG_ESCALATOR_2,
+    TTRIG_CONNEX_FALL_1,
+    TTRIG_CONNEX_FALL_2,
+    TTRIG_PUSHOUT,
 };
 
 /* Star General */
