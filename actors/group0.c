@@ -126,3 +126,4 @@
 #include "tl_logo2/model.inc.c"
 #include "troll_element/model.inc.c"
 #include "killerspikes/model.inc.c"
+#include "global_cone/model.inc.c"

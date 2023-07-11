@@ -151,4 +151,12 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/connex2/collision_header.h"
 
+#include "levels/ccm/trollgate/geo_header.h"
+
+#include "levels/ccm/trollstair/geo_header.h"
+
+#include "levels/ccm/trollstair/collision_header.h"
+
+#include "levels/ccm/trollstair_s/collision_header.h"
+
 #endif

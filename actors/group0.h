@@ -582,4 +582,6 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "killerspikes/geo_header.h"
 
+#include "global_cone/geo_header.h"
+
 #endif

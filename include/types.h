@@ -343,6 +343,7 @@ struct Object {
     /*0x218*/ void *collisionData;
     /*0x21C*/ Mat4 transform;
     /*0x25C*/ void *respawnInfo;
+              f32 oTimeScaleTimer;
 #ifdef PUPPYLIGHTS
     struct PuppyLight puppylight;
 #endif
@@ -615,6 +616,9 @@ struct MarioState {
              f32 AvatarHeightOffset;
              u8 Avatar;
              u8 TrollTrigger;
+             u8 ExitTroll;
+             u8 slowMoActive;
+             f32 timeScale;
     // -- HackerSM64 MarioState fields end --
 };
 

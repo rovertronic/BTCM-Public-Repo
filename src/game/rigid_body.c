@@ -774,6 +774,7 @@ void apply_impulses(void) {
 /// Perform one step for the rigid body physics system.
 void do_rigid_body_step(void) {
     gNumCollisions = 0;
+    dt = gMarioState->timeScale/NUM_RIGID_BODY_STEPS;
 
     // Update velocity and gravity
     for (u32 i = 0; i < MAX_RIGID_BODIES; i++) {

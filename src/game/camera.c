@@ -1169,7 +1169,7 @@ void mode_8_directions_camera(struct Camera *c) {
             s8DirModeYawOffset += DEGREES(2);
         }
     }
-    if (gPlayer1Controller->buttonPressed & R_TRIG) {
+    if (gPlayer1Controller->buttonPressed & D_JPAD) {
         s8DirModeYawOffset = 8192*((u16)(s8DirModeYawOffset/8192));
     }
 

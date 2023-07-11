@@ -7,6 +7,8 @@
 #include "load.h"
 #include "seqplayer.h"
 
+#include "src/game/level_update.h"
+
 #ifdef VERSION_SH
 void seq_channel_layer_process_script_part1(struct SequenceChannelLayer *layer);
 s32 seq_channel_layer_process_script_part2(struct SequenceChannelLayer *layer);
@@ -2281,7 +2283,7 @@ void sequence_player_process_sequence(struct SequencePlayer *seqPlayer) {
     }
 
     // Check if we surpass the number of ticks needed for a tatum, else stop.
-    seqPlayer->tempoAcc += seqPlayer->tempo;
+    seqPlayer->tempoAcc += seqPlayer->tempo * gMarioState->timeScale;
 #ifdef VERSION_SH
     seqPlayer->tempoAcc += seqPlayer->tempoAdd;
 #endif

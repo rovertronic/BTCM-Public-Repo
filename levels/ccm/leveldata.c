@@ -93,3 +93,7 @@
 #include "levels/ccm/connex2/model.inc.c"
 #include "levels/ccm/connex1/collision.inc.c"
 #include "levels/ccm/connex2/collision.inc.c"
+#include "levels/ccm/trollgate/model.inc.c"
+#include "levels/ccm/trollstair/model.inc.c"
+#include "levels/ccm/trollstair/collision.inc.c"
+#include "levels/ccm/trollstair_s/collision.inc.c"

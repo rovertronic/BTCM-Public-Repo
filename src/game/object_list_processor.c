@@ -22,6 +22,7 @@
 #include "puppyprint.h"
 #include "puppylights.h"
 #include "profiling.h"
+#include "game_init.h"
 
 
 /**
@@ -547,6 +548,10 @@ void clear_objects(void) {
  * Update spawner and surface objects.
  */
 void update_terrain_objects(void) {
+    //if ((gMarioState->slowMoActive==TRUE)&&(gGlobalTimer%2==0)) {
+    //    return;
+    //}
+
     gObjectCounter = update_objects_in_list(&gObjectLists[OBJ_LIST_SPAWNER]);
     profiler_update(PROFILER_TIME_SPAWNER);
 
@@ -566,6 +571,8 @@ void update_non_terrain_objects(void) {
 
     s32 i = 2;
     while ((listIndex = sObjectListUpdateOrder[i]) != -1) {
+        if ((gMarioState->slowMoActive==TRUE)&&(gGlobalTimer%2==0)&&(listIndex != OBJ_LIST_PLAYER)) {i++;continue;}
+
         if (listIndex == OBJ_LIST_PLAYER) {
             profiler_update(PROFILER_TIME_BEHAVIOR_BEFORE_MARIO);
         }
@@ -621,7 +628,6 @@ UNUSED static u16 unused_get_elapsed_time(u64 *cycleCounts, s32 index) {
  * and object surface management.
  */
 void update_objects(UNUSED s32 unused) {
-
     gTimeStopState &= ~TIME_STOP_MARIO_OPENED_DOOR;
 
     gNumRoomedObjectsInMarioRoom = 0;
@@ -635,7 +641,9 @@ void update_objects(UNUSED s32 unused) {
     gObjectLists = gObjectListArray;
 
     // If time stop is not active, unload object surfaces
-    clear_dynamic_surfaces();
+    //if ((gMarioState->slowMoActive==FALSE)||(gGlobalTimer%2==1)) {
+        clear_dynamic_surfaces();
+    //}
 
     for (u32 i = 0; i < NUM_RIGID_BODY_STEPS; i++) {
         do_rigid_body_step();
@@ -648,7 +656,9 @@ void update_objects(UNUSED s32 unused) {
     // displacement now
     //! If the platform object unloaded and a different object took its place,
     //  displacement could be applied incorrectly
-    apply_mario_platform_displacement();
+    //if ((gMarioState->slowMoActive==FALSE)||(gGlobalTimer%2==0)) {
+        apply_mario_platform_displacement();
+    //}
 
     // Detect which objects are intersecting
     detect_object_collisions();

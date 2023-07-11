@@ -745,6 +745,10 @@ Gfx *geo_switch_mario_cap_effect(s32 callContext, struct GraphNode *node, UNUSED
         switchCase->selectedCase = MODEL_STATE_METAL >> 8;
     }
 
+    if (gMarioState->action == ACT_TROLLDEATH) {
+        switchCase->selectedCase = 1;
+    }
+
     return NULL;
 }
 

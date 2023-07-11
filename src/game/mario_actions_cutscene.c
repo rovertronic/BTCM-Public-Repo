@@ -2712,6 +2712,28 @@ static s32 act_credits_cutscene(struct MarioState *m) {
     return FALSE;
 }
 
+f32 death_y = 0.0f;
+s32 act_trolldeath(struct MarioState *m) {
+    set_mario_animation(m, MARIO_ANIM_A_POSE);
+
+    switch(m->actionState) {
+        case 0:
+            death_y = m->pos[1];
+            m->vel[1] = 30.0f;
+            m->actionState++;
+        break;
+        case 1:
+            death_y += m->vel[1];
+            m->vel[1] -= 1.5f;
+        break;
+    }
+
+    m->faceAngle[1] = m->area->camera->yaw;
+    m->marioObj->header.gfx.angle[1] = m->faceAngle[1];
+    m->marioObj->header.gfx.pos[1] = death_y;
+    return FALSE;
+}
+
 static s32 act_end_waving_cutscene(struct MarioState *m) {
     if (m->actionState == ACT_STATE_END_WAVING_CUTSCENE_INIT) {
         m->statusForCamera->cameraEvent = CAM_EVENT_START_END_WAVING;
@@ -2820,6 +2842,7 @@ s32 mario_execute_cutscene_action(struct MarioState *m) {
         case ACT_FEET_STUCK_IN_GROUND:       cancel = act_feet_stuck_in_ground(m);       break;
         case ACT_PUTTING_ON_CAP:             cancel = act_putting_on_cap(m);             break;
         case ACT_LVUP_DANCE:                 cancel = act_lvup_dance(m);                 break;
+        case ACT_TROLLDEATH:                 cancel = act_trolldeath(m);                 break;
     }
     /* clang-format on */
 

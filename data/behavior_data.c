@@ -9378,3 +9378,26 @@ const BehaviorScript bhvKillerSpikes[] = {
     CALL_NATIVE(bhv_killer_spike),
     END_LOOP(),
 };
+
+extern void bhv_trollgate();
+const BehaviorScript bhvTrollgate[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_FLOAT(oDrawingDistance, 5000),
+    BEGIN_LOOP(),
+    CALL_NATIVE(bhv_trollgate),
+    END_LOOP(),
+};
+
+extern void bhv_trollstair(void);
+const BehaviorScript bhvTrollstair[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oCollisionDistance, 3000),
+    SET_FLOAT(oDrawingDistance, 20000),
+    LOAD_COLLISION_DATA(trollstair_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_trollstair),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

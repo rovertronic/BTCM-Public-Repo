@@ -70,6 +70,7 @@ enum RenderLayers {
     LAYER_CIRCLE_SHADOW,
     LAYER_CIRCLE_SHADOW_TRANSPARENT,
     LAYER_COIN,
+    LAYER_INFRONT,
     LAYER_COUNT
 };
 
@@ -525,6 +526,7 @@ enum MarioActionFlags {
 #define ACT_WAITING_FOR_DIALOG         0x0000130A // (0x10A | ACT_FLAG_STATIONARY | ACT_FLAG_INTANGIBLE)
 #define ACT_UNUSED_10B                 0x0000010B // (0x10B)
 #define ACT_LVUP_DANCE                 0x0000110B
+#define ACT_TROLLDEATH                 0x0000130C
 #define ACT_UNUSED_10C                 0x0000010C // (0x10C)
 #define ACT_UNUSED_10D                 0x0000010D // (0x10D)
 #define ACT_UNUSED_10E                 0x0000010E // (0x10E)

@@ -104,6 +104,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF,                      // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_TEX_EDGE,                   // LAYER_COIN
+        G_RM_AA_ZB_OPA_SURF2,           //LAYER_INFRONT
     } },
     { {
         /* z-buffered */
@@ -119,6 +120,7 @@ struct RenderModeContainer renderModeTable_1Cycle[2] = { { {
         G_RM_AA_ZB_XLU_DECAL,              // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF,              // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_TEX_EDGE,                // LAYER_COIN
+        G_RM_AA_ZB_OPA_SURF2,           //LAYER_INFRONT
     } } };
 
 /* Rendermode settings for cycle 2 for all 13 layers. */
@@ -135,6 +137,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW
         G_RM_CLD_SURF2,                  // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_TEX_EDGE2,              // LAYER_COIN
+        G_RM_AA_ZB_OPA_SURF2,           //LAYER_INFRONT
     } },
     { {
         /* z-buffered */
@@ -150,6 +153,7 @@ struct RenderModeContainer renderModeTable_2Cycle[2] = { { {
         G_RM_AA_ZB_XLU_DECAL2,              // LAYER_CIRCLE_SHADOW
         G_RM_ZB_CLD_SURF2,              // LAYER_CIRCLE_SHADOW_TRANSPARENT
         G_RM_AA_ZB_TEX_EDGE2,          // LAYER_COIN
+        G_RM_AA_ZB_OPA_SURF2,           //LAYER_INFRONT
     } } };
 
 ALIGNED16 struct GraphNodeRoot *gCurGraphNodeRoot = NULL;
@@ -320,8 +324,6 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
             if (currLayer == LAYER_CIRCLE_SHADOW) {
                 gSPDisplayList(gDisplayListHead++, dl_shadow_circle);
             }
-
-
             //mr beast: batching coins breaks the game!
             if (currLayer == LAYER_COIN) {
                 switch((gGlobalTimer/2)%4) {
@@ -339,7 +341,12 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
                     break;
                 }
             }
-            
+            if (currLayer == LAYER_INFRONT) {
+                //clear zbuffer
+                init_rcp(KEEP_ZBUFFER);
+                gDPPipeSync(gDisplayListHead++);
+                gSPSetGeometryMode(gDisplayListHead++, G_ZBUFFER);
+            }
 
             // Iterate through all the displaylists on the current layer.
             while (currList != NULL) {

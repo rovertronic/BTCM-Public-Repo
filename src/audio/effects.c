@@ -7,6 +7,7 @@
 #include "game/main.h"
 #include "engine/math_util.h"
 #include "src/game/rovent.h"
+#include "src/game/level_update.h"
 
 #if defined(VERSION_EU) || defined(VERSION_SH)
 void sequence_channel_process_sound(struct SequenceChannel *seqChannel, s32 recalculateVolume) {
@@ -67,7 +68,7 @@ static void sequence_channel_process_sound(struct SequenceChannel *seqChannel) {
     for (i = 0; i < 4; i++) {
         struct SequenceChannelLayer *layer = seqChannel->layers[i];
         if (layer != NULL && layer->enabled && layer->note != NULL) {
-            layer->noteFreqScale = layer->freqScale * seqChannel->freqScale * gConfig.audioFrequency;
+            layer->noteFreqScale = layer->freqScale * seqChannel->freqScale * gConfig.audioFrequency * gMarioState->timeScale;
             layer->noteVelocity = layer->velocitySquare * channelVolume;
             layer->notePan = (layer->pan * panLayerWeight) + panFromChannel;
         }

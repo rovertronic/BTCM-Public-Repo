@@ -1,0 +1,10 @@
+extern const GeoLayout global_cone_geo[];
+extern Lights1 global_cone_f3d_material_001_lights;
+extern u8 global_cone_EdwardCone_ci8[];
+extern u8 global_cone_EdwardCone_pal_rgba16[];
+extern Vtx global_cone_Cylinder_mesh_layer_1_vtx_0[68];
+extern Gfx global_cone_Cylinder_mesh_layer_1_tri_0[];
+extern Gfx mat_global_cone_f3d_material_001[];
+extern Gfx mat_revert_global_cone_f3d_material_001[];
+extern Gfx global_cone_Cylinder_mesh_layer_1[];
+extern Gfx global_cone_material_revert_render_settings[];

@@ -2010,6 +2010,13 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             }
         }
 
+    gMarioState->slowMoActive = ((gPlayer1Controller->buttonDown & R_TRIG)&&(gMarioState->Avatar == AVATAR_FORD));
+    if (gMarioState->slowMoActive) {
+        gMarioState->timeScale = lerp(gMarioState->timeScale,0.5f,0.1f);
+    } else {
+        gMarioState->timeScale = lerp(gMarioState->timeScale,1.0f,0.1f);
+    }
+
 
     // clock boss code
     //its dogshit but im just trying to get thru this lol
@@ -2438,6 +2445,9 @@ void init_mario(void) {
 
     gMarioState->Avatar = AVATAR_MARIO;
     gMarioState->TrollTrigger = TTRIG_NONE;
+    gMarioState->ExitTroll = TRUE;
+    gMarioState->slowMoActive = FALSE;
+    gMarioState->timeScale = 1.0f;
 
     struct Object *capObject;
 

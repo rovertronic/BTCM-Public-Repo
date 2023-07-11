@@ -51,3 +51,5 @@
 #include "levels/ccm/trap_trainceil/geo.inc.c"
 #include "levels/ccm/connex1/geo.inc.c"
 #include "levels/ccm/connex2/geo.inc.c"
+#include "levels/ccm/trollgate/geo.inc.c"
+#include "levels/ccm/trollstair/geo.inc.c"

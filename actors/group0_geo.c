@@ -51,3 +51,4 @@
 #include "tl_logo2/geo.inc.c"
 #include "troll_element/geo.inc.c"
 #include "killerspikes/geo.inc.c"
+#include "global_cone/geo.inc.c"

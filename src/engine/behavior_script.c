@@ -863,11 +863,14 @@ void cur_obj_update(void) {
         o->oTimer++;
     }
 
+    o->oTimeScaleTimer += gMarioState->timeScale;
+
     // If the object's action has changed, reset the action timer.
     if (o->oAction != o->oPrevAction) {
         o->oTimer = 0;
         o->oSubAction = 0;
         o->oPrevAction = o->oAction;
+        o->oTimeScaleTimer = 0;
     }
 
     // Execute various code based on object flags.

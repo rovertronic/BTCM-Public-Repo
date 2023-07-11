@@ -1411,8 +1411,16 @@ s32 event_lvup[] = {
     E_END,
 };
 
-f32 event_train_trap[] = {
+s32 event_train_trap[] = {
     E_ACT, ACT_IDLE,
+    E_END,
+};
+
+s32 event_death[] = {
+    E_CAM_TOGGLE,
+    E_ACT, ACT_TROLLDEATH,
+    E_WAIT, 90,
+    E_END,
 };
 
 //LIST DO NOT RENAME
@@ -1459,6 +1467,8 @@ s32 *event_list[] = {
     &event_ship_intro,
     &event_costume_select_ag,
     &event_lvup,
+    &event_train_trap,
+    &event_death,
 };
 
 f32 *spline_list[] = {

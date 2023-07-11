@@ -750,7 +750,8 @@ void loop_bone_train(void) {
         }
         break;
         case 1:
-            o->oPosY += 30.0f;
+            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            o->oPosY += 35.0f*gMarioState->timeScale;
         break;
     }
 }
@@ -4114,6 +4115,8 @@ void bhv_cone_init(void) {
 void bhv_cone(void) {
     struct RigidBody *body = o->rigidBody;
 
+    f32 slowmo_force = 1.0f + ((1.0f-gMarioState->timeScale)*2.0f);
+
     switch(o->oAction) {
         case 0:
             o->oAction = 1;
@@ -4148,9 +4151,9 @@ void bhv_cone(void) {
                 drop_and_set_mario_action(gMarioState, ACT_JUMP_KICK, 0);
 
                 Vec3f force;
-                force[0] = gMarioState->vel[0];
-                force[2] = gMarioState->vel[2];
-                force[1] = 50.0f;
+                force[0] = gMarioState->vel[0]*2.0f*slowmo_force;
+                force[2] = gMarioState->vel[2]*2.0f*slowmo_force;
+                force[1] = 50.0f*2.0f*slowmo_force;
                 rigid_body_add_force(body, &gMarioState->pos, force, TRUE);
             }
         break;
@@ -6062,6 +6065,8 @@ void bhv_postgame_hint() {
 void bhv_troll_lab_logo_loop(void) {
     struct Object *elem;
 
+    gMarioState->slowMoActive = FALSE;
+    gMarioState->timeScale = 1.0f;
     o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_TROLL_LOGO];
 
     switch(o->oTimer) {
@@ -6131,7 +6136,7 @@ void bhv_troll_lab_element_loop(void) {
 }
 
 void bhv_escalator() {
-    o->oPosX += o->oVelX;
+    o->oPosX += o->oVelX*gMarioState->timeScale;
 
     if (o->oPosX > o->oHomeX) {
         o->oPosX -= 2600.0f;
@@ -6177,20 +6182,41 @@ void bhv_troll_trigger() {
     u8 size = GET_BPARAM1(o->oBehParams);
     u8 trigger = GET_BPARAM2(o->oBehParams);
     f32 cube_radius = 100.0f*size;//+100 and -100 for a total of 200 : >
+    u8 outside = FALSE;
 
-    if (gMarioState->TrollTrigger == trigger) {
-        mark_obj_for_deletion(o);
+    switch(o->oAction) {
+        case 0: //wait for mario to enter
+            if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
+            if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
+            if (gMarioState->pos[1]>o->oPosY+cube_radius) {return;}
+            if (gMarioState->pos[1]<o->oPosY-cube_radius) {return;}
+            if (gMarioState->pos[2]>o->oPosZ+cube_radius) {return;}
+            if (gMarioState->pos[2]<o->oPosZ-cube_radius) {return;}
+            gMarioState->ExitTroll = FALSE;
+            gMarioState->TrollTrigger = trigger;
+            o->oAction++;
+        break;
+        case 1: //mario inside box
+            if (gMarioState->pos[0]>o->oPosX+cube_radius) {outside=TRUE;}
+            if (gMarioState->pos[0]<o->oPosX-cube_radius) {outside=TRUE;}
+            if (gMarioState->pos[1]>o->oPosY+cube_radius) {outside=TRUE;}
+            if (gMarioState->pos[1]<o->oPosY-cube_radius) {outside=TRUE;}
+            if (gMarioState->pos[2]>o->oPosZ+cube_radius) {outside=TRUE;}
+            if (gMarioState->pos[2]<o->oPosZ-cube_radius) {outside=TRUE;}
+
+            if (outside) {
+                gMarioState->ExitTroll = TRUE;
+                o->oAction = 0;
+
+                //which troll trigger to remove?
+                switch(o->oBehParams2ndByte) {
+                    case TTRIG_ESCALATOR_1:
+                        mark_obj_for_deletion(o);
+                    break;
+                }
+            }
+        break;
     }
-
-    if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
-    if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
-    if (gMarioState->pos[1]>o->oPosY+cube_radius) {return;}
-    if (gMarioState->pos[1]<o->oPosY-cube_radius) {return;}
-    if (gMarioState->pos[2]>o->oPosZ+cube_radius) {return;}
-    if (gMarioState->pos[2]<o->oPosZ-cube_radius) {return;}
-
-    gMarioState->TrollTrigger = trigger;
-    mark_obj_for_deletion(o);
 }
 
 void bhv_quicksand_escalator(void) {
@@ -6204,6 +6230,7 @@ void bhv_quicksand_escalator(void) {
 
 void bhv_falling_connex(void) {
     s16 fall = 0x666;
+    s16 fall_no_slowmo;
     u8 cond = FALSE;
 
     if (o->oBehParams2ndByte == 0) {
@@ -6214,6 +6241,8 @@ void bhv_falling_connex(void) {
         o->collisionData = segmented_to_virtual(connex2_collision);
         cond = (gMarioState->TrollTrigger == TTRIG_CONNEX_FALL_2);
     }
+    fall_no_slowmo = fall;
+    fall *= gMarioState->timeScale;
 
     switch(o->oAction) {
         case 0:
@@ -6222,13 +6251,31 @@ void bhv_falling_connex(void) {
             }
         break;
         case 1:
-            if (o->oTimer < 10) {
+            if (o->oTimeScaleTimer < 9.0) {
                 o->oFaceAngleRoll += fall;
             }
-            if (o->oTimer == 10) {
+            if (o->oTimeScaleTimer >= 9.0) {
                 cur_obj_shake_screen(SHAKE_POS_LARGE);
                 cur_obj_play_sound_2(SOUND_GENERAL_TOX_BOX_MOVE);
-                gMarioState->health = 0;
+                o->oFaceAngleRoll = fall_no_slowmo*10;
+
+                if (gMarioState->ExitTroll == FALSE) {
+                    gMarioState->health = 0;
+                    run_event(EVENT_DEATH);
+                    o->oAction = 3;
+                } else {
+                    o->oAction = 2; //re arm myself...
+                    gMarioState->TrollTrigger = TTRIG_NONE;
+                }
+            }
+        break;
+        case 2:
+            if (o->oTimeScaleTimer < 10) {
+                o->oFaceAngleRoll -= fall;
+            }
+            if (o->oTimeScaleTimer >= 10) {
+                o->oAction = 0;
+                o->oFaceAngleRoll = 0;
             }
         break;
     }
@@ -6249,6 +6296,7 @@ void bhv_killer_spike() {
 
             o->oAction++;
             gMarioState->health = 0;
+            run_event(EVENT_DEATH);
             o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_KILLER_SPIKE];
             cur_obj_play_sound_2(SOUND_GENERAL_POUND_WOOD_POST);
             o->oPosY = o->oHomeY - 20.0f*2.0f;
@@ -6273,5 +6321,76 @@ void bhv_killer_spike() {
                 break;
             }
         break;
+    }
+}
+
+void bhv_trollgate(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oFaceAngleYaw += 0x2000;
+            o->oAction++;
+        break;
+        case 1:
+            if (o->oDistanceToMario < 600.0f) {
+                o->oAction++;
+            }
+        break;
+        case 2:
+            if (o->oTimer < 5) {
+                o->oFaceAngleYaw += 0x666;
+            }
+            if (o->oTimer == 5) {
+                cur_obj_play_sound_2(SOUND_OBJ_BULLY_METAL);
+                o->oAction++;
+            }
+        break;
+    }
+}
+
+u8 zound_played = FALSE;
+void bhv_trollstair(void) {
+    switch(o->oAction) {
+        case 0:
+            o->collisionData = segmented_to_virtual(trollstair_collision);
+            if (gMarioState->TrollTrigger == TTRIG_TROLL_STAIR) {
+                o->oAction++;
+
+                if (!zound_played) {
+                    zound_played = TRUE;
+                    cur_obj_play_sound_2(SOUND_GENERAL_STAR_DOOR_OPEN);
+                }
+            }
+        break;
+        case 1:
+            o->collisionData = segmented_to_virtual(trollstair_s_collision);
+            if (o->oTimeScaleTimer < 9.0f) {
+                o->oFaceAnglePitch+=0x333*gMarioState->timeScale;
+            } else {
+                o->oAction++;
+                o->oFaceAnglePitch=0x2000;
+                zound_played = FALSE;
+            }
+        break;
+        case 2:
+            if (o->oTimeScaleTimer > 60) {
+                o->oAction++;
+
+                if (!zound_played) {
+                    cur_obj_play_sound_2(SOUND_GENERAL_STAR_DOOR_CLOSE);
+                    zound_played = TRUE;
+                }
+            }
+        break;
+        case 3:
+            if (o->oTimeScaleTimer < 10.0f) {
+                o->oFaceAnglePitch-=0x333*gMarioState->timeScale;
+            } else {
+                gMarioState->TrollTrigger = TTRIG_NONE;
+                o->oAction=0;
+                zound_played = FALSE;
+                o->oFaceAnglePitch=0;
+            }
+        break;
+
     }
 }
