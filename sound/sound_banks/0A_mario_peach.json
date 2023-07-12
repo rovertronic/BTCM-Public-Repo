@@ -151,6 +151,12 @@
             "release_rate": 208,
             "envelope": "envelope0",
             "sound": "vo_ford"
+        },
+        "inst26": {
+            "ifdef": ["VERSION_US", "VERSION_EU", "VERSION_SH"],
+            "release_rate": 208,
+            "envelope": "envelope0",
+            "sound": "die"
         }
     },
     "instrument_list": [
@@ -180,6 +186,7 @@
         "inst22",
         "inst23",
         "inst24",
-        "inst25"
+        "inst25",
+        "inst26"
     ]
 }

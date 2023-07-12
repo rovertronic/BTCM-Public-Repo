@@ -1,11 +1,11 @@
-void scroll_ccm_dl_viscol_mesh_layer_1_vtx_15() {
+void scroll_ccm_dl_viscol_mesh_layer_1_vtx_17() {
 	int i = 0;
 	int count = 35;
 	int width = 32 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
-	Vtx *vertices = segmented_to_virtual(ccm_dl_viscol_mesh_layer_1_vtx_15);
+	Vtx *vertices = segmented_to_virtual(ccm_dl_viscol_mesh_layer_1_vtx_17);
 
 	deltaX = (int)(1.0 * 0x20) % width;
 
@@ -19,14 +19,14 @@ void scroll_ccm_dl_viscol_mesh_layer_1_vtx_15() {
 	currentX += deltaX;
 }
 
-void scroll_ccm_dl_viscol_mesh_layer_1_vtx_19() {
+void scroll_ccm_dl_viscol_mesh_layer_1_vtx_21() {
 	int i = 0;
 	int count = 64;
 	int width = 64 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
-	Vtx *vertices = segmented_to_virtual(ccm_dl_viscol_mesh_layer_1_vtx_19);
+	Vtx *vertices = segmented_to_virtual(ccm_dl_viscol_mesh_layer_1_vtx_21);
 
 	deltaX = (int)(0.10000000149011612 * 0x20) % width;
 
@@ -49,7 +49,7 @@ void scroll_gfx_mat_ccm_dl_lavagang_layer1() {
 };
 
 void scroll_ccm() {
-	scroll_ccm_dl_viscol_mesh_layer_1_vtx_15();
-	scroll_ccm_dl_viscol_mesh_layer_1_vtx_19();
+	scroll_ccm_dl_viscol_mesh_layer_1_vtx_17();
+	scroll_ccm_dl_viscol_mesh_layer_1_vtx_21();
 	scroll_gfx_mat_ccm_dl_lavagang_layer1();
 };

@@ -1145,6 +1145,11 @@ void event_main(void) {
                 sSourceWarpNodeId = arg1;
                 revent_halt = TRUE;
             break;
+            case E_TROLL_DEATH:
+                level_trigger_warp(gMarioState, WARP_OP_LOOK_UP);
+                sSourceWarpNodeId = 0x0A+gMarioState->troll_checkpoint;
+                revent_halt = TRUE;
+            break;
             case E_PROGRESS_SET:
                 save_file_set_progression(arg1);
                 revent_index += 2;

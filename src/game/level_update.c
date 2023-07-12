@@ -586,21 +586,25 @@ s16 music_unchanged_through_warp(s16 arg) {
  * Set the current warp type and destination level/area/node.
  */
 void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags) {
-    if (destWarpNode >= WARP_NODE_CREDITS_MIN) {
-        sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
-    } else if (destLevel != gCurrLevelNum) {
-        sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
-    } else if (destArea != gCurrentArea->index) {
-        sWarpDest.type = WARP_TYPE_CHANGE_AREA;
-    } else {
-        sWarpDest.type = WARP_TYPE_SAME_AREA;
-    }
+    //if (destWarpNode >= WARP_NODE_CREDITS_MIN) {
+    //    sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
+    //} else if (destLevel != gCurrLevelNum) {
+    //    sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
+    //} else if (destArea != gCurrentArea->index) {
+    //    sWarpDest.type = WARP_TYPE_CHANGE_AREA;
+    //} else {
+    //    sWarpDest.type = WARP_TYPE_SAME_AREA;
+    //}
+//
+    //if (gCurrLevelNum == LEVEL_BITS) {
+    //    sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
+    //    //ensure that every time mario visits this level, it gets reset
+    //    //so that mario doesn't become invisible in the light beam
+    //}
 
-    if (gCurrLevelNum == LEVEL_BITS) {
-        sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
-        //ensure that every time mario visits this level, it gets reset
-        //so that mario doesn't become invisible in the light beam
-    }
+    sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
+    gMarioState->health = 255 + (255*gMarioState->numMaxHP);
+    //always reset the area in this hack
 
     sWarpDest.levelNum = destLevel;
     sWarpDest.areaIdx = destArea;
@@ -739,6 +743,10 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
 
             case WARP_OP_DEATH:
+                sDelayedWarpTimer = 30;
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x14, 0, 0, 0);
+                sSourceWarpNodeId = 0x0A+gMarioState->troll_checkpoint;
+            /*
                 if (minigame_real) {
                     end_minigame();
                 } else {
@@ -758,6 +766,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                     m->isDead = TRUE;
 #endif
                 }
+                */
                 break;
 
             case WARP_OP_WARP_FLOOR:

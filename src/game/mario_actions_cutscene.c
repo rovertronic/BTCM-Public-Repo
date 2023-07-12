@@ -785,6 +785,9 @@ s32 common_death_handler(struct MarioState *m, s32 animation, s32 frameToDeathWa
 }
 
 s32 act_standing_death(struct MarioState *m) {
+    run_event(EVENT_DEATH);
+    return FALSE;
+
     if (m->input & INPUT_IN_POISON_GAS) {
         return set_mario_action(m, ACT_SUFFOCATION, 0);
     }
@@ -2714,13 +2717,16 @@ static s32 act_credits_cutscene(struct MarioState *m) {
 
 f32 death_y = 0.0f;
 s32 act_trolldeath(struct MarioState *m) {
-    set_mario_animation(m, MARIO_ANIM_A_POSE);
+    set_custom_mario_animation(m,12);
 
     switch(m->actionState) {
         case 0:
+            m->faceAngle[1] = m->area->camera->yaw+0x4000;
             death_y = m->pos[1];
             m->vel[1] = 30.0f;
             m->actionState++;
+            
+            play_sound(SOUND_DIE, m->marioObj->header.gfx.cameraToObject);
         break;
         case 1:
             death_y += m->vel[1];
@@ -2728,8 +2734,9 @@ s32 act_trolldeath(struct MarioState *m) {
         break;
     }
 
-    m->faceAngle[1] = m->area->camera->yaw;
     m->marioObj->header.gfx.angle[1] = m->faceAngle[1];
+    m->marioObj->header.gfx.angle[0] = 0;
+    m->marioObj->header.gfx.angle[2] = 0;
     m->marioObj->header.gfx.pos[1] = death_y;
     return FALSE;
 }

@@ -104,6 +104,7 @@ enum revent_command_h {
     E_TARGET_OBJECT_SPOTLIGHT,
 
     E_WARP,//warp id
+    E_TROLL_DEATH,
 
     E_START_PRECREDITS,
     E_HUNDO,

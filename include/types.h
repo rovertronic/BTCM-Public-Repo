@@ -619,6 +619,7 @@ struct MarioState {
              u8 ExitTroll;
              u8 slowMoActive;
              f32 timeScale;
+             u8 troll_checkpoint;
     // -- HackerSM64 MarioState fields end --
 };
 

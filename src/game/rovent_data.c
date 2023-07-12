@@ -1413,14 +1413,14 @@ s32 event_lvup[] = {
 
 s32 event_train_trap[] = {
     E_ACT, ACT_IDLE,
-    E_END,
+    E_TROLL_DEATH,
 };
 
 s32 event_death[] = {
     E_CAM_TOGGLE,
     E_ACT, ACT_TROLLDEATH,
-    E_WAIT, 90,
-    E_END,
+    E_WAIT, 60,
+    E_TROLL_DEATH,
 };
 
 //LIST DO NOT RENAME

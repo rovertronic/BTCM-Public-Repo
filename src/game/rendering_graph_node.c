@@ -10,7 +10,6 @@
 #include "rendering_graph_node.h"
 #include "shadow.h"
 #include "sm64.h"
-#include "game_init.h"
 #include "puppyprint.h"
 #include "debug_box.h"
 #include "level_update.h"
@@ -275,6 +274,7 @@ void switch_ucode(s32 ucode) {
  * 3. It does this, because layers 5-7 are non zbuffered, and just doing 0-7 of ZEX, then 0-7 of REJ
  * would make the ZEX 0-4 render on top of Rej's 5-7.
  */
+
 void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
     struct RenderPhase *renderPhase;
     struct DisplayListNode *currList;
@@ -343,9 +343,23 @@ void geo_process_master_list_sub(struct GraphNodeMasterList *node) {
             }
             if (currLayer == LAYER_INFRONT) {
                 //clear zbuffer
-                init_rcp(KEEP_ZBUFFER);
                 gDPPipeSync(gDisplayListHead++);
-                gSPSetGeometryMode(gDisplayListHead++, G_ZBUFFER);
+                //gDPSetRenderMode(gDisplayListHead++, G_RM_NOOP, G_RM_NOOP2);
+                //gDPSetCycleType(gDisplayListHead++, G_CYC_FILL);
+                //gDPSetDepthSource(gDisplayListHead++, G_ZS_PIXEL);
+                //gDPSetDepthImage(gDisplayListHead++, gPhysicalZBuffer);
+                //gDPSetColorImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, gPhysicalZBuffer);
+                //gDPSetFillColor(gDisplayListHead++,
+                //                GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0));
+                //gDPFillRectangle(gDisplayListHead++, 0, gBorderHeight, SCREEN_WIDTH - 1,
+                //                SCREEN_HEIGHT - 1 - gBorderHeight);
+                //gDPPipeSync(gDisplayListHead++);
+                //gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+                //gDPSetColorImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                //                gPhysicalFramebuffers[sRenderingFramebuffer]);
+                //gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                //        SCREEN_HEIGHT - gBorderHeight);
+                gSPClearGeometryMode(gDisplayListHead++, G_ZBUFFER);
             }
 
             // Iterate through all the displaylists on the current layer.

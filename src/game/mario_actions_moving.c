@@ -16,6 +16,7 @@
 #include "rumble_init.h"
 #include "ingame_menu.h"
 #include "save_file.h"
+#include "rovent.h"
 
 #include "config.h"
 
@@ -1459,7 +1460,7 @@ s32 act_burning_ground(struct MarioState *m) {
         m->health -= 10;
     }
     if (m->health < 0x100) {
-        set_mario_action(m, ACT_STANDING_DEATH, 0);
+        run_event(EVENT_DEATH);
     }
 
     m->marioBodyState->eyeState = MARIO_EYES_DEAD;
@@ -1727,7 +1728,7 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 chec
         }
     } else if (is_anim_at_end(m)) {
         if (m->health < 0x100) {
-            set_mario_action(m, ACT_STANDING_DEATH, 0);
+            run_event(EVENT_DEATH);
         } else {
             if (actionArg > 0) {
                 m->invincTimer = 30;
@@ -2065,7 +2066,8 @@ s32 check_common_moving_cancels(struct MarioState *m) {
 
     if (!(m->action & ACT_FLAG_INVULNERABLE)) {
         if (m->health < 0x100) {
-            return drop_and_set_mario_action(m, ACT_STANDING_DEATH, 0);
+            run_event(EVENT_DEATH);
+            return FALSE;
         }
     }
 

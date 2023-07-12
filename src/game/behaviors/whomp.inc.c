@@ -132,6 +132,7 @@ void whomp_prepare_jump(void) {
     cur_obj_init_animation_with_accel_and_sound(1, 1.0f);
     if (cur_obj_check_if_near_animation_end()) {
         o->oAction = 4;
+        cur_obj_play_sound_2(SOUND_OBJ_KING_BOBOMB_JUMP);
     }
 }
 
@@ -139,29 +140,53 @@ void whomp_jump(void) {
     if (o->oTimer == 0) {
         o->oVelY = 40.0f;
     }
+//
+    //if (o->oTimer >= 8) {
+    //    o->oAngleVelPitch += 0x100;
+    //    o->oFaceAnglePitch += o->oAngleVelPitch;
+    //    if (o->oFaceAnglePitch > 0x4000) {
+    //        o->oAngleVelPitch = 0;
+    //        o->oFaceAnglePitch = 0x4000;
+    //        o->oAction = 5;
+    //    }
+    //}
 
-    if (o->oTimer >= 8) {
-        o->oAngleVelPitch += 0x100;
-        o->oFaceAnglePitch += o->oAngleVelPitch;
-        if (o->oFaceAnglePitch > 0x4000) {
-            o->oAngleVelPitch = 0;
-            o->oFaceAnglePitch = 0x4000;
-            o->oAction = 5;
-        }
+    o->oVelY = 40.0f+o->oTimer;
+    if (o->oTimer > 60) {
+        o->oAction = 5;
     }
 }
 
 void whomp_land(void) {
-    if (o->oSubAction == 0 && o->oMoveFlags & OBJ_MOVE_LANDED) {
-        cur_obj_play_sound_2(SOUND_OBJ_WHOMP);
-        cur_obj_shake_screen(SHAKE_POS_SMALL);
-        o->oVelY = 0.0f;
-        o->oSubAction++;
-    }
+    //if (o->oSubAction == 0 && o->oMoveFlags & OBJ_MOVE_LANDED) {
+    //    cur_obj_play_sound_2(SOUND_OBJ_WHOMP);
+    //    cur_obj_shake_screen(SHAKE_POS_SMALL);
+    //    o->oVelY = 0.0f;
+    //    o->oSubAction++;
+    //}
+//
+    //if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+    //    o->oAction = 6;
+    //}
 
-    if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+    o->oPosX = gMarioState->pos[0];
+    o->oPosZ = gMarioState->pos[2];
+    if (o->oTimer < 450) {
+        o->oPosY = gMarioState->pos[1]+6000.0f;
+    }
+    if (o->oTimer >= 450) {
+        o->oPosY = gMarioState->pos[1]+2000.0f-((o->oTimer-450)*100.0f);
+        o->oFaceAnglePitch = 0x4000;
+    }
+    if (o->oTimer == 469) {
+        cur_obj_play_sound_2(SOUND_GENERAL2_PYRAMID_TOP_EXPLOSION);
+        spawn_mist_particles_variable(0, 0, 200.0f);
+        spawn_triangle_break_particles(20, MODEL_DIRT_ANIMATION, 3.0f, 4);
+        cur_obj_shake_screen(SHAKE_POS_LARGE);
+        run_event(EVENT_DEATH);
         o->oAction = 6;
     }
+    o->oVelY = 0.0f;
 }
 
 void king_whomp_on_ground(void) {

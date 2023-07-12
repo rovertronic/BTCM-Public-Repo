@@ -2449,6 +2449,7 @@ void init_mario(void) {
     gMarioState->slowMoActive = FALSE;
     gMarioState->timeScale = 1.0f;
 
+
     struct Object *capObject;
 
     struct Object *holdTransferObject;
@@ -2673,6 +2674,7 @@ void init_mario(void) {
 void init_mario_from_save_file(void) {
     save_file_get_stats();
     
+    gMarioState->troll_checkpoint = 0;
     sSelectedFileNum = FALSE;
     fs_ms = 0;
 

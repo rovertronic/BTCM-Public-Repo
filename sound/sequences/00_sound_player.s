@@ -2042,6 +2042,7 @@ sound_ref .sound_peach_mario2
 sound_ref .sound_vo_fast
 sound_ref .sound_vo_pingas
 sound_ref .sound_vo_ford
+sound_ref .sound_die
 
 .sound_mario_jump_hoo:
 chan_setbank 8
@@ -2674,6 +2675,14 @@ chan_setinstr 26
 chan_setval 20
 chan_call .set_reverb
 chan_setlayer 0, .layer_ford
+chan_end
+
+.sound_die:
+chan_setbank 10
+chan_setinstr 27
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_F8A
 chan_end
 
 .layer_F8A:
