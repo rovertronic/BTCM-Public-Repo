@@ -1,0 +1,13 @@
+extern const GeoLayout cratetrap_geo[];
+extern u8 cratetrap_connex_door_i4[];
+extern u8 cratetrap_connex_i4[];
+extern Vtx cratetrap_viscol_004_mesh_layer_1_vtx_0[4];
+extern Gfx cratetrap_viscol_004_mesh_layer_1_tri_0[];
+extern Vtx cratetrap_viscol_004_mesh_layer_1_vtx_1[66];
+extern Gfx cratetrap_viscol_004_mesh_layer_1_tri_1[];
+extern Gfx mat_cratetrap_connex_door_orange_layer1[];
+extern Gfx mat_revert_cratetrap_connex_door_orange_layer1[];
+extern Gfx mat_cratetrap_connex_orange_layer1[];
+extern Gfx mat_revert_cratetrap_connex_orange_layer1[];
+extern Gfx cratetrap_viscol_004_mesh_layer_1[];
+extern Gfx cratetrap_material_revert_render_settings[];

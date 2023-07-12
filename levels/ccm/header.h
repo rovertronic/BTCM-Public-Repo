@@ -163,4 +163,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/springtrap/geo_header.h"
 
+#include "levels/ccm/cratetrap/collision_header.h"
+
+#include "levels/ccm/cratetrap/geo_header.h"
+
 #endif

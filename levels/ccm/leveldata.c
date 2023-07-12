@@ -99,3 +99,5 @@
 #include "levels/ccm/trollstair_s/collision.inc.c"
 #include "levels/ccm/springtrap/collision.inc.c"
 #include "levels/ccm/springtrap/model.inc.c"
+#include "levels/ccm/cratetrap/collision.inc.c"
+#include "levels/ccm/cratetrap/model.inc.c"

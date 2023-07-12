@@ -6464,3 +6464,22 @@ void bhv_springtrap(void) {
         break;
     }
 }
+
+void bhv_cratetrap(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oPosZ = o->oHomeZ - 1000.0f;
+            if (gMarioState->TrollTrigger == TTRIG_PUSHOUT) {
+                o->oAction = 1;
+            }
+        break;
+        case 1:
+            o->oPosZ += 50.0f * gMarioState->timeScale;
+            if (o->oPosZ > o->oHomeZ) {
+                o->oPosZ = o->oHomeZ;
+            } else {
+                 cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
+            }
+        break;
+    }
+}

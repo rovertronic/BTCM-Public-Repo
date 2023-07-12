@@ -54,3 +54,4 @@
 #include "levels/ccm/trollgate/geo.inc.c"
 #include "levels/ccm/trollstair/geo.inc.c"
 #include "levels/ccm/springtrap/geo.inc.c"
+#include "levels/ccm/cratetrap/geo.inc.c"

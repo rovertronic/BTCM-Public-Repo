@@ -9413,3 +9413,17 @@ const BehaviorScript bhvSpringtrap[] = {
         CALL_NATIVE(bhv_springtrap),
     END_LOOP(),
 };
+
+extern void bhv_cratetrap(void);
+const BehaviorScript bhvCratetrap[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oCollisionDistance, 4000),
+    SET_FLOAT(oDrawingDistance, 15000),
+    LOAD_COLLISION_DATA(cratetrap_collision),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cratetrap),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

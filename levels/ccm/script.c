@@ -69,6 +69,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TROLLSTAIR, trollstair_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GLOBAL_CONE, global_cone_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SPRINGTRAP, springtrap_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CRATETRAP, cratetrap_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -93,6 +94,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_CRABLET, 6103, 1244, -5096, 0, -8, 0, 0x00000000, bhvCrablet),
 		OBJECT(MODEL_CRABLET, -5736, 2844, -4829, 0, 68, 0, 0x00000000, bhvCrablet),
 		OBJECT(MODEL_CRABLET, 5872, 640, 8, 0, -50, 0, 0x00000000, bhvCrablet),
+		OBJECT(MODEL_CRATETRAP, 2086, -108, -3037, 0, 0, 0, 0x00000000, bhvCratetrap),
 		OBJECT(MODEL_NONE, -360, 1244, -4238, 0, 0, 0, 0x00000000, bhvEscalatorSpawner),
 		OBJECT(MODEL_NONE, -360, 1244, -5132, 0, 0, 0, (1 << 16), bhvEscalatorSpawner),
 		OBJECT(MODEL_EXCLAMATION_BOX, -1819, -104, 3167, 0, 0, 0, (4 << 16), bhvExclamationBox),
@@ -193,7 +195,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -5092, 3094, -8062, 0, 0, 0, (1 << 24) | (TTRIG_ESCALATOR_2 << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, 4668, -896, -3705, 0, 0, 0, (6 << 24) | (TTRIG_CONNEX_FALL_1 << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, 6870, 243, -3053, 0, 0, 0, (7 << 24) | (TTRIG_CONNEX_FALL_2 << 16), bhvTrollTrigger),
-		OBJECT(MODEL_NONE, 1865, -258, -3637, 0, 0, 0, (6 << 24) | (TTRIG_PUSHOUT << 16), bhvTrollTrigger),
+		OBJECT(MODEL_NONE, 1865, -278, -3637, 0, 0, 0, (6 << 24) | (TTRIG_PUSHOUT << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, -4955, -1874, 2733, 0, 0, 0, (2 << 24) | (TTRIG_TROLL_STAIR << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, -4955, -1300, 2138, 0, 0, 0, (2 << 24) | (TTRIG_TROLL_STAIR << 16), bhvTrollTrigger),
 		OBJECT(MODEL_TROLLGATE, -8073, -2762, 4481, 0, 0, 0, 0x00000000, bhvTrollgate),
