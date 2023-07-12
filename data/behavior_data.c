@@ -3064,7 +3064,7 @@ const BehaviorScript bhvBub[] = {
 
 const BehaviorScript bhvExclamationBox[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(exclamation_box_outline_seg8_collision_08025F78),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_FLOAT(oCollisionDistance, 300),
@@ -9399,5 +9399,17 @@ const BehaviorScript bhvTrollstair[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_trollstair),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_springtrap(void);
+const BehaviorScript bhvSpringtrap[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oCollisionDistance, 500),
+    SET_FLOAT(oDrawingDistance, 15000),
+    LOAD_COLLISION_DATA(springtrap_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_springtrap),
     END_LOOP(),
 };

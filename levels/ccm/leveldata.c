@@ -97,3 +97,5 @@
 #include "levels/ccm/trollstair/model.inc.c"
 #include "levels/ccm/trollstair/collision.inc.c"
 #include "levels/ccm/trollstair_s/collision.inc.c"
+#include "levels/ccm/springtrap/collision.inc.c"
+#include "levels/ccm/springtrap/model.inc.c"

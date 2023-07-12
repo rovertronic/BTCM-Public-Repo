@@ -620,6 +620,7 @@ struct MarioState {
              u8 slowMoActive;
              f32 timeScale;
              u8 troll_checkpoint;
+             u8 spring_boredom;
     // -- HackerSM64 MarioState fields end --
 };
 

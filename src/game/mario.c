@@ -2448,6 +2448,7 @@ void init_mario(void) {
     gMarioState->ExitTroll = TRUE;
     gMarioState->slowMoActive = FALSE;
     gMarioState->timeScale = 1.0f;
+    gMarioState->spring_boredom = 0; // too many spring traps = unfun stream
 
 
     struct Object *capObject;

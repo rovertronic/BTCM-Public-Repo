@@ -1,0 +1,14 @@
+extern const GeoLayout springtrap_geo[];
+extern u8 springtrap_ConcreteTileClean_i8[];
+extern u8 springtrap_copper_ci8[];
+extern u8 springtrap_copper_pal_rgba16[];
+extern Vtx springtrap_Cube_mesh_layer_1_vtx_0[27];
+extern Gfx springtrap_Cube_mesh_layer_1_tri_0[];
+extern Vtx springtrap_Cube_mesh_layer_1_vtx_1[384];
+extern Gfx springtrap_Cube_mesh_layer_1_tri_1[];
+extern Gfx mat_springtrap_CleanConcreteGrid[];
+extern Gfx mat_revert_springtrap_CleanConcreteGrid[];
+extern Gfx mat_springtrap_copper[];
+extern Gfx mat_revert_springtrap_copper[];
+extern Gfx springtrap_Cube_mesh_layer_1[];
+extern Gfx springtrap_material_revert_render_settings[];

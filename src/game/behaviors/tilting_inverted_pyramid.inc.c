@@ -6394,3 +6394,68 @@ void bhv_trollstair(void) {
 
     }
 }
+
+void bhv_springtrap(void) {
+    f32 cube_radius_2 = 50.0f;
+    f32 cube_radius = 150.0f;
+    struct Object *nearest_cone;
+    Vec3f force;
+
+    switch(o->oAction) {
+        case 0:
+            o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_NONE];
+
+            nearest_cone = cur_obj_nearest_object_with_behavior(bhvCone);
+            if (nearest_cone && dist_between_objects(o,nearest_cone)<195.0f) {
+                //trap triggered by cone!
+                o->oAction++;
+                cur_obj_play_sound_2(SOUND_GENERAL_CRAZY_BOX_BOING_FAST);
+                o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_SPRINGTRAP];
+                o->header.gfx.scale[1] = 0.1f;
+
+                force[0] = 10.0f;
+                force[2] = 10.0f;
+                force[1] = 300.0f;
+                rigid_body_add_force(nearest_cone->rigidBody, &o->oPosVec, force, TRUE);
+            }
+
+            if (gMarioState->spring_boredom > 5) {return;}
+            if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
+            if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
+            if (gMarioState->pos[1]>o->oPosY+cube_radius_2) {return;}
+            if (gMarioState->pos[1]<o->oPosY-cube_radius_2) {return;}
+            if (gMarioState->pos[2]>o->oPosZ+cube_radius) {return;}
+            if (gMarioState->pos[2]<o->oPosZ-cube_radius) {return;}
+
+            o->oAction++;
+            cur_obj_play_sound_2(SOUND_GENERAL_CRAZY_BOX_BOING_FAST);
+            o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_SPRINGTRAP];
+            o->header.gfx.scale[1] = 0.1f;
+
+            set_mario_action(gMarioState,ACT_THROWN_BACKWARD,0);
+            gMarioState->faceAngle[1] = o->oFaceAngleYaw+0x8000;
+            gMarioState->forwardVel = -150.0f;
+            gMarioState->vel[1] = 120.0f;
+            gMarioState->spring_boredom++;
+        break;
+        case 1:
+            o->header.gfx.scale[1] += .2f*gMarioState->timeScale;
+            if (o->header.gfx.scale[1] >= 1.0f) {
+                o->oVelY = 1.0f;
+                o->oAction = 2;
+            }
+        break;
+        case 2:
+            o->header.gfx.scale[1] = o->oVelY + sins(o->oTimer*0x300*gMarioState->timeScale)*0.2f;
+            o->oFaceAnglePitch = sins(o->oTimer*0x120*gMarioState->timeScale)*500.0f;
+
+            if (gMarioObject->platform == o) {
+                o->oVelY = lerp(o->oVelY, 0.6f, 0.1f);
+            } else {
+                o->oVelY = lerp(o->oVelY, 1.0f, 0.1f);
+            }
+
+            load_object_collision_model();
+        break;
+    }
+}

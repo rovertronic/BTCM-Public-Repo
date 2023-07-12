@@ -35,7 +35,7 @@ void whomp_init(void) {
             DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_114)) {
             o->oAction = 2;
         }
-    } else if (o->oDistanceToMario < 500.0f) {
+    } else if (o->oDistanceToMario < 2000.0f) {
         o->oAction = 1;
     }
 
@@ -64,11 +64,7 @@ void whomp_turn(void) {
 void whomp_patrol(void) {
     s16 marioAngle = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
     f32 distWalked = cur_obj_lateral_dist_to_home();
-#ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS // Make this a behavior param?
-    f32 patrolDist = gCurrLevelNum == LEVEL_BITS ? 200.0f : 700.0f;
-#else
     f32 patrolDist = 700.0f;
-#endif
 
     cur_obj_init_animation_with_accel_and_sound(0, 1.0f);
     o->oForwardVel = 3.0f;
@@ -168,6 +164,9 @@ void whomp_land(void) {
     //if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
     //    o->oAction = 6;
     //}
+    if (gMarioState->action == ACT_TROLLDEATH) {
+        return;
+    }
 
     o->oPosX = gMarioState->pos[0];
     o->oPosZ = gMarioState->pos[2];
@@ -351,15 +350,17 @@ ObjActionFunc sWhompActions[] = {
 void bhv_whomp_loop(void) {
     f32 latdist;
 
+    if ((gGlobalTimer%2==1)&&(gMarioState->slowMoActive)) {o->oTimer--;return;}
+
     cur_obj_update_floor_and_walls();
     cur_obj_call_action_function(sWhompActions);
     cur_obj_move_standard(-20);
     if (o->oAction != 9) {
-        if (o->oBehParams2ndByte != 0) {
+        //if (o->oBehParams2ndByte != 0) {
             cur_obj_hide_if_mario_far_away_y(2000.0f);
-        } else {
-            cur_obj_hide_if_mario_far_away_y(1000.0f);
-        }
+        //} else {
+            //cur_obj_hide_if_mario_far_away_y(1000.0f);
+        //}
         load_object_collision_model();
     }
 

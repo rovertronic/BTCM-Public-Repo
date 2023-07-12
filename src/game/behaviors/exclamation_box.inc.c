@@ -113,6 +113,13 @@ void exclamation_box_act_outline(void) {
 
 void exclamation_box_act_active(void) {
     obj_set_hitbox(o, &sExclamationBoxHitbox);
+    if (o->oBehParams2ndByte == 4) {
+        if ((gMarioState->pos[1] + 200.0f > o->oPosY)&&(lateral_dist_between_objects(o,gMarioObject) < 100.0f)) {
+            o->oPosY = gMarioState->pos[1] + 200.0f;
+        }
+        return;
+    }
+
     if (o->oTimer == 0) {
         cur_obj_unhide();
         cur_obj_become_tangible();
@@ -121,15 +128,12 @@ void exclamation_box_act_active(void) {
         o->oGraphYOffset = 0.0f;
     }
     if (cur_obj_was_attacked_or_ground_pounded()) {
-        cur_obj_become_intangible();
-        o->oExclamationBoxScaleAngle = 0x4000;
-        o->oVelY = 30.0f;
-        o->oGravity = -8.0f;
-        o->oFloorHeight = o->oPosY;
-        o->oAction = EXCLAMATION_BOX_ACT_SCALING;
-#if ENABLE_RUMBLE
-        queue_rumble_data(5, 80);
-#endif
+            cur_obj_become_intangible();
+            o->oExclamationBoxScaleAngle = 0x4000;
+            o->oVelY = 30.0f;
+            o->oGravity = -8.0f;
+            o->oFloorHeight = o->oPosY;
+            o->oAction = EXCLAMATION_BOX_ACT_SCALING;
     }
     load_object_collision_model();
 }
