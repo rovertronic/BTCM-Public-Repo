@@ -297,16 +297,20 @@ static void level_cmd_load_yay0(void) {
 }
 
 void level_cmd_fileselect_condition(void) {
-    if (save_file_check_progression(PROG_TRUE_START)) {
+    //if (save_file_check_progression(PROG_TRUE_START)) {
+    //    sRegister = LEVEL_CASTLE;
+    //} else {
+    //    sRegister = LEVEL_CASTLE_GROUNDS;
+    //}
+    //if (save_file_get_progression() == PROG_ON_AGAMEMNON) {
+    //    sRegister = LEVEL_BITS;
+    //}
+
+    if (save_file_exists(gCurrSaveFileNum - 1)) {
         sRegister = LEVEL_CASTLE;
     } else {
-        sRegister = LEVEL_CASTLE_GROUNDS;
+        sRegister = LEVEL_CCM;
     }
-    if (save_file_get_progression() == PROG_ON_AGAMEMNON) {
-        sRegister = LEVEL_BITS;
-    }
-
-    sRegister = LEVEL_CCM;
     sCurrentCmd = CMD_NEXT;
 }
 

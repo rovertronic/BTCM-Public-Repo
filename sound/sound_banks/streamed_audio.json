@@ -33,11 +33,17 @@
             "release_rate": 10,
             "envelope": "envelope",
             "sound": "38_custom_runoff"
+        },
+        "inst3": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "39_custom_sciences"
         }
     },
     "instrument_list": [
         "inst0",
         "inst1",
-        "inst2"
+        "inst2",
+        "inst3"
     ]
 }

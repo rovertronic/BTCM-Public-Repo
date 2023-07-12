@@ -3087,9 +3087,9 @@ const BehaviorScript bhvRotatingExclamationMark[] = {
 const BehaviorScript bhvSoundSpawner[] = {
     BEGIN(OBJ_LIST_UNIMPORTANT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    DELAY(3),
+    DELAY(1),
     CALL_NATIVE(bhv_sound_spawner_init),
-    DELAY(30),
+    DELAY(90),
     DEACTIVATE(),
 };
 
@@ -8919,13 +8919,13 @@ const BehaviorScript bhvAgportal[] = {
 
 void bhv_agcrack(void);
 const BehaviorScript bhvAgcrack[] = {
-    BEGIN(OBJ_LIST_SURFACE),
+    BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
-    LOAD_COLLISION_DATA(agcrack_collision),
+    //LOAD_COLLISION_DATA(agcrack_collision),
     SET_FLOAT(oCollisionDistance, 1000),
     SET_FLOAT(oDrawingDistance, 8000),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
+        //CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_agcrack),
     END_LOOP(),
 };

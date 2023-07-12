@@ -2043,6 +2043,9 @@ sound_ref .sound_vo_fast
 sound_ref .sound_vo_pingas
 sound_ref .sound_vo_ford
 sound_ref .sound_die
+sound_ref .sound_nbody1
+sound_ref .sound_nbody2
+sound_ref .sound_xscream
 
 .sound_mario_jump_hoo:
 chan_setbank 8
@@ -2685,12 +2688,40 @@ chan_call .set_reverb
 chan_setlayer 0, .layer_F8A
 chan_end
 
+.sound_nbody1:
+chan_setbank 10
+chan_setinstr 28
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_F8A
+chan_end
+
+.sound_nbody2:
+chan_setbank 10
+chan_setinstr 29
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_scream
+chan_end
+
+.sound_xscream:
+chan_setbank 10
+chan_setinstr 30
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_scream
+chan_end
+
 .layer_F8A:
 layer_note1 39, 0x50, 127
 layer_end
 
 .layer_ford:
 layer_note1 39, 0x80, 127
+layer_end
+
+.layer_scream:
+layer_note1 39, 0x100, 127
 layer_end
 
 #if defined(VERSION_EU) || defined(VERSION_SH)

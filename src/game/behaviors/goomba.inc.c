@@ -194,6 +194,7 @@ static void goomba_act_walk(void) {
 
                 if (o->oGoombaRelativeSpeed <= 2.0f) {
                     goomba_begin_jump();
+                    cur_obj_play_sound_2(SOUND_NBODY1);
                 }
 
                 o->oGoombaTargetYaw = o->oAngleToMario;
@@ -408,7 +409,8 @@ void bhv_goomba_update(void) {
         if (obj_handle_attacks(&sGoombaHitbox, GOOMBA_ACT_ATTACKED_MARIO,
                                sGoombaAttackHandlers[o->oGoombaSize & 0x1])
                                && (o->oAction != GOOMBA_ACT_ATTACKED_MARIO)) {
-            mark_goomba_as_dead();
+            create_sound_spawner(SOUND_NBODY2);
+            //mark_goomba_as_dead();
         }
         if (gMarioState->_2D) {
             o->oPosZ = 0.0f;

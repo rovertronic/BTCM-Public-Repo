@@ -117,3 +117,4 @@
 #include "levels/castle_inside/dementor/model.inc.c"
 #include "levels/castle_inside/showrunner_tv_angry/model.inc.c"
 #include "levels/castle_inside/phonograph/model.inc.c"
+#include "levels/castle_inside/jumpscare/model.inc.c"

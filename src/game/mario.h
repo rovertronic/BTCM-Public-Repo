@@ -57,6 +57,7 @@ void clear_costmic_phantasms(void);
 
 extern u8 near_music_box;
 extern u8 using_bodylog;
+extern u8 jumpscared;
 
 enum avatar {
     AVATAR_MARIO,

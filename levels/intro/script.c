@@ -73,7 +73,7 @@ const LevelScript level_intro_splash_screen[] = {
     CALL(/*arg*/ 0, /*func*/ load_mario_area),
     
     TRANSITION(/*transType*/ WARP_TRANSITION_FADE_FROM_COLOR, /*time*/ 16, /*color*/ 0x00, 0x00, 0x00),
-    JUMP_LINK_PUSH_ARG(120),
+    JUMP_LINK_PUSH_ARG(100),
         UPDATE_OBJECTS(),
         SLEEP(/*frames*/ 1),
     JUMP_N_TIMES(),

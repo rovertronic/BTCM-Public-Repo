@@ -4,7 +4,19 @@
 #include "make_const_nonconst.h"
 
 
+ALIGNED8 const u8 dma_jumpscares[] = {
+
+};
+
 ALIGNED8 const u8 port_ai_1[] = {
+    #include "actors/amp/custom_jumpscare_mario.rgba16.inc.c"
+    ,
+    #include "actors/amp/custom_jumpscare_pingas.rgba16.inc.c"
+    ,
+    #include "actors/amp/custom_jumpscare_ford.rgba16.inc.c"
+    ,
+    #include "actors/amp/custom_jumpscare_fast.rgba16.inc.c"
+    ,
 #include "actors/amp/output-0_custom.i8.inc.c"
 ,
 #include "actors/amp/output-1_custom.i8.inc.c"

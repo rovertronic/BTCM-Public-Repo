@@ -187,5 +187,8 @@
     ],
     "38_custom_runoff": [
         "streamed_audio"
+    ],
+    "39_custom_sciences": [
+        "streamed_audio"
     ]
 }

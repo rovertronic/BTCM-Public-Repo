@@ -33,6 +33,7 @@
 #include "level_update.h"
 #include "hud.h"
 #include "mario.h"
+#include "levels/castle_inside/header.h"
 
 u8 letgo = FALSE;
 
@@ -3573,6 +3574,15 @@ s32 render_menus_and_dialogs(void) {
         print_generic_string(display_song_x, 220, musicmenu_titles[display_song_index]);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
         print_generic_string(display_song_x+1, 220+1, musicmenu_titles[display_song_index]);
+
+
+        //jumpscare code
+        if (jumpscared) {
+            create_dl_translation_matrix(MENU_MTX_PUSH, random_float()*10.0f , random_float()*10.0f, 0);
+            gSPDisplayList(gDisplayListHead++, &jumpscare_Plane_001_mesh);
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        }
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     
 

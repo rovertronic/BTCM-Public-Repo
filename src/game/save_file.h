@@ -97,6 +97,15 @@ extern u8 gSpecialTripleJump;
 extern s8 gLevelToCourseNumTable[];
 
 enum Progression {
+    PROG_TL_NEWGAME,
+    PROG_TL_LEVEL1,
+    PROG_TL_LEVEL1_BEAT,
+    PROG_TL_LEVEL2,
+    PROG_TL_LEVEL2_BEAT,
+    PROG_TL_LEVEL3,
+    PROG_TL_LEVEL3_BEAT,
+
+    //btcm progression
     PROG_LETTER_INIT,
     PROG_START,
     PROG_MIRROR,//set when the mirror shatters

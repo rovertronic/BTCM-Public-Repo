@@ -517,6 +517,37 @@ static Gfx *make_gfx_mario_alpha(struct GraphNodeGenerated *node, s16 alpha) {
     return gfxHead;
 }
 
+#include "game_init.h"
+
+Gfx *geo_zbuffer_clear(s32 callContext, UNUSED struct GraphNode *node, UNUSED Mat4 *mtx) {
+    Gfx *dl = NULL;
+        if (callContext == GEO_CONTEXT_RENDER) {
+            struct GraphNodeGenerated *asGenerated = (struct GraphNodeGenerated *) node;
+            Gfx *dlHead = NULL;
+            dl = alloc_display_list(13 * sizeof(*dl));
+            dlHead = dl;
+            gDPPipeSync(dlHead++);
+            gDPSetRenderMode(dlHead++, G_RM_NOOP, G_RM_NOOP2);
+            gDPSetCycleType(dlHead++, G_CYC_FILL);
+            gDPSetDepthSource(dlHead++, G_ZS_PIXEL);
+            gDPSetDepthImage(dlHead++, gPhysicalZBuffer);
+            gDPSetColorImage(dlHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, gPhysicalZBuffer);
+            gDPSetFillColor(dlHead++,
+                            GPACK_ZDZ(G_MAXFBZ, 0) << 16 | GPACK_ZDZ(G_MAXFBZ, 0));
+            gDPFillRectangle(dlHead++, 0, gBorderHeight, SCREEN_WIDTH - 1,
+                            SCREEN_HEIGHT - 1 - gBorderHeight);
+            gDPPipeSync(dlHead++);
+            gDPSetCycleType(dlHead++, G_CYC_1CYCLE);
+            gDPSetColorImage(dlHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                            gPhysicalFramebuffers[sRenderingFramebuffer]);
+            gDPSetScissor(dlHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                    SCREEN_HEIGHT - gBorderHeight);
+            gSPEndDisplayList(dlHead++);
+            SET_GRAPH_NODE_LAYER(asGenerated->fnNode.node.flags, LAYER_OPAQUE);
+    }
+    return dl;
+}
+
 /**
  * Sets the correct blend mode and color for mirror Mario.
  */
@@ -891,7 +922,6 @@ Gfx *geo_render_mirror_mario(s32 callContext, struct GraphNode *node, UNUSED Mat
     f32 mirroredX;
     struct Object *mario = gMarioStates[0].marioObj;
 
-
     switch (callContext) {
         case GEO_CONTEXT_CREATE:
             init_graph_node_object(NULL, &gMirrorMario, NULL, gVec3fZero, gVec3sZero, gVec3fOne);
@@ -904,7 +934,7 @@ Gfx *geo_render_mirror_mario(s32 callContext, struct GraphNode *node, UNUSED Mat
             break;
         case GEO_CONTEXT_RENDER:
                 // TODO: Is this a geo layout copy or a graph node copy?
-            if (MetalAppear == FALSE) {
+            if (gMarioState->ExitTroll == FALSE) {
                 gMirrorMario.sharedChild = mario->header.gfx.sharedChild;
                 gMirrorMario.areaIndex = mario->header.gfx.areaIndex;
                 vec3s_copy(gMirrorMario.angle, mario->header.gfx.angle);

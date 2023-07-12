@@ -5185,7 +5185,7 @@ void bhv_agportal(void) {
 }
 
 s32 check_mario_cracking(void) {
-    if (lateral_dist_between_objects(gMarioObject,o)<300.0f) {
+    if (lateral_dist_between_objects(gMarioObject,o)<500.0f) {
         /*
         if (abs_angle_diff(o->oFaceAngleYaw, gMarioObject->oMoveAngleYaw) > 0x6000) {
             if (gMarioStates[0].action == ACT_SLIDE_KICK      ) return TRUE;
@@ -5208,22 +5208,27 @@ s32 check_mario_cracking(void) {
     return FALSE;
 }
 
+#include "levels/castle_inside/header.h"
+
 void bhv_agcrack(void) {
     switch(o->oAction) {
         case 0:
             if (check_mario_cracking()) {
+                wall_slapped = FALSE;
                 if (o->oAnimState < 2) {
                         create_sound_spawner(SOUND_GENERAL_POUND_WOOD_POST);
                         o->oAnimState ++;
                         o->oAction ++;
                     } else {
-                        create_sound_spawner(SOUND_CUSTOM_PEACH_BAKE_A_CAKE);
+                        jumpscared = TRUE;
+
+                        u8 *tex = segmented_to_virtual(&jumpscare_jumpscare_mario_rgba16);
+                        dma_read(tex,(gMarioState->Avatar*38400)+_bad_appleSegmentRomStart,(gMarioState->Avatar*38400)+_bad_appleSegmentRomStart+38400);
+
+                        run_event(EVENT_DEATH);
+                        create_sound_spawner(SOUND_XSCREAM);
                         spawn_triangle_break_particles(20, MODEL_DIRT_ANIMATION, 3.0f, 4);
-                        if (aghealth > 0) {
-                            spawn_object(o,MODEL_AGPORTAL,bhvAgportal);
-                        } else {
-                            spawn_default_star(o->oPosX,o->oPosY,o->oPosZ);
-                        }
+
                         obj_mark_for_deletion(o);
                     }
             }

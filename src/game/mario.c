@@ -50,6 +50,7 @@
 #include "src/audio/synthesis.h"
 
 u8 near_music_box = FALSE;
+u8 jumpscared = FALSE;
 
 //COSTUME TABLE
 u8 VanillaMario[] = {0xFE, 0x0, 0x0, 0x0, 0x0, 0xFE,0x72, 0x1B, 0xE};
@@ -2450,6 +2451,7 @@ void init_mario(void) {
     gMarioState->timeScale = 1.0f;
     gMarioState->spring_boredom = 0; // too many spring traps = unfun stream
 
+    jumpscared = FALSE;
 
     struct Object *capObject;
 
@@ -2483,16 +2485,32 @@ void init_mario(void) {
     }
 
     stop_event();
-    if ((gCurrLevelNum == LEVEL_CASTLE_GROUNDS)&&(save_file_get_progression() == PROG_LETTER_INIT)) {
-        save_file_set_progression(PROG_START);
-        //run_event(EVENT_LETTER);
-    }
-    if ((gCurrAreaIndex == 0)&&(gCurrLevelNum == LEVEL_RR)) {
-        run_event(EVENT_AG_INTRO);
-    }
+    //if ((gCurrLevelNum == LEVEL_CASTLE_GROUNDS)&&(save_file_get_progression() == PROG_LETTER_INIT)) {
+    //    save_file_set_progression(PROG_START);
+    //    //run_event(EVENT_LETTER);
+    //}
+    //if ((gCurrAreaIndex == 0)&&(gCurrLevelNum == LEVEL_RR)) {
+    //    run_event(EVENT_AG_INTRO);
+    //}
+//
+    //if (gCurrLevelNum == LEVEL_BITS) {
+    //    save_file_set_progression(PROG_ON_AGAMEMNON);
+    //}
 
-    if (gCurrLevelNum == LEVEL_BITS) {
-        save_file_set_progression(PROG_ON_AGAMEMNON);
+    //trolllab level start stuff
+    switch(gCurrLevelNum) {
+        case LEVEL_CCM:
+            if (save_file_get_progression() == PROG_TL_NEWGAME) {
+                //just started
+            } else {
+                //not noob
+
+            }
+            display_song_text(2);
+        break;
+        case LEVEL_CASTLE:
+            display_song_text(3);
+        break;
     }
 
     if (minigame_transition) {
