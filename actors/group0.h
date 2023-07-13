@@ -584,4 +584,8 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "global_cone/geo_header.h"
 
+#include "btime1/header.h"
+
+#include "btime2/header.h"
+
 #endif

@@ -190,5 +190,8 @@
     ],
     "39_custom_sciences": [
         "streamed_audio"
+    ],
+    "3A_custom_turnaround": [
+        "streamed_audio"
     ]
 }

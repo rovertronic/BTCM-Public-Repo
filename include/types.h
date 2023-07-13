@@ -621,6 +621,8 @@ struct MarioState {
              f32 timeScale;
              u8 troll_checkpoint;
              u8 spring_boredom;
+             u8 boning_time;
+             u8 boning_timer;
     // -- HackerSM64 MarioState fields end --
 };
 

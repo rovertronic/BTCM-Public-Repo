@@ -101,3 +101,7 @@
 #include "levels/ccm/springtrap/model.inc.c"
 #include "levels/ccm/cratetrap/collision.inc.c"
 #include "levels/ccm/cratetrap/model.inc.c"
+#include "levels/ccm/quarantine/model.inc.c"
+#include "levels/ccm/quarantine/collision.inc.c"
+#include "levels/ccm/axetrap/model.inc.c"
+#include "levels/ccm/pillar_troll/model.inc.c"

@@ -2694,6 +2694,8 @@ void init_mario_from_save_file(void) {
     save_file_get_stats();
     
     gMarioState->troll_checkpoint = 0;
+    gMarioState->boning_time = FALSE;
+    gMarioState->boning_timer = 0;
     sSelectedFileNum = FALSE;
     fs_ms = 0;
 

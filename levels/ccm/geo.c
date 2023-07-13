@@ -55,3 +55,6 @@
 #include "levels/ccm/trollstair/geo.inc.c"
 #include "levels/ccm/springtrap/geo.inc.c"
 #include "levels/ccm/cratetrap/geo.inc.c"
+#include "levels/ccm/quarantine/geo.inc.c"
+#include "levels/ccm/axetrap/geo.inc.c"
+#include "levels/ccm/pillar_troll/geo.inc.c"

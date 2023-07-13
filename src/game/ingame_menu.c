@@ -707,6 +707,47 @@ void print_hud_lut_string(s8 hudLUT, s16 x, s16 y, const u8 *str) {
     }
 }
 
+void print_hud_lut_string_big(s8 hudLUT, s16 x, s16 y, const u8 *str) {
+    s32 strPos = 0;
+    void **hudLUT1 = segmented_to_virtual(menu_hud_lut); // Japanese Menu HUD Color font
+    void **hudLUT2 = segmented_to_virtual(main_hud_lut); // 0-9 A-Z HUD Color Font
+    u32 curX = x;
+    u32 curY = y;
+
+    u32 xStride; // X separation
+
+    if (hudLUT == HUD_LUT_JPMENU) {
+        xStride = 16;
+    } else { // HUD_LUT_GLOBAL
+        xStride = 12; //? Shindou uses this.
+    }
+
+    while (str[strPos] != GLOBAR_CHAR_TERMINATOR) {
+        switch (str[strPos]) {
+            case GLOBAL_CHAR_SPACE:
+                curX += 16;
+                break;
+            default:
+                gDPPipeSync(gDisplayListHead++);
+
+                if (hudLUT == HUD_LUT_JPMENU) {
+                    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, hudLUT1[str[strPos]]);
+                }
+
+                if (hudLUT == HUD_LUT_GLOBAL) {
+                    gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, hudLUT2[str[strPos]]);
+                }
+
+                gSPDisplayList(gDisplayListHead++, dl_rgba16_load_tex_block);
+                gSPTextureRectangle(gDisplayListHead++, curX << 2, curY << 2, (curX + 32) << 2,
+                                    (curY + 32) << 2, G_TX_RENDERTILE, 0, 0, 1 << 9, 1 << 9);
+
+                curX += xStride*2;
+        }
+        strPos++;
+    }
+}
+
 
 void print_menu_generic_string(s16 x, s16 y, const u8 *str) {
     UNUSED s8 mark = DIALOG_MARK_NONE; // unused in EU
@@ -3377,7 +3418,7 @@ f32 display_song_x = -160.0f;
 
 u16 display_song_flags = 0;
 void display_song_text(u8 song_text_id) {
-    u16 bit = 1 << display_song_flags;
+    u16 bit = 1 << song_text_id;
 
     if (!(display_song_flags &= bit)) {
         display_song_timer = 180;
@@ -3388,7 +3429,20 @@ void display_song_text(u8 song_text_id) {
     }
 }
 
+s16 pizza_time_offset = -240;
+f32 pizza_timer_alpha = 0.0f;
+
+u8 pizza_timer_bounce_array[] = {
+    4,
+    0,
+    2,
+    1,
+    0,
+};
+pizza_timer_bounce_index = 4;
+
 s32 render_menus_and_dialogs(void) {
+    u8 timer_number_str[6];
     s32 mode = MENU_OPT_NONE;
     // s16 camangle;
     // struct Camera *camcam;
@@ -3581,6 +3635,50 @@ s32 render_menus_and_dialogs(void) {
             create_dl_translation_matrix(MENU_MTX_PUSH, random_float()*10.0f , random_float()*10.0f, 0);
             gSPDisplayList(gDisplayListHead++, &jumpscare_Plane_001_mesh);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        }
+
+        //pizza time code
+        if (gMarioState->boning_time == FALSE) {
+            pizza_time_offset = -200;
+            pizza_timer_alpha = 0.0f;
+        } else {
+            create_dl_translation_matrix(MENU_MTX_PUSH, 0, pizza_time_offset, 0);
+            if ((gGlobalTimer/2)%2==0) {
+                gSPDisplayList(gDisplayListHead++, &btime1_Plane_002_mesh);
+            } else {
+                gSPDisplayList(gDisplayListHead++, &btime2_Plane_002_mesh);
+            }
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+            if (pizza_time_offset < 240) {
+                pizza_time_offset += 5;
+            } else {
+                //pizza time left, show timer
+                pizza_timer_alpha = lerp(pizza_timer_alpha,255.0f,0.1f);
+            }
+
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_end);//fucked up
+
+            if (pizza_timer_bounce_index < 5) {
+                pizza_timer_bounce_index++;
+            }
+
+            if (gGlobalTimer%30==0) {
+                gMarioState->boning_timer--;
+                pizza_timer_bounce_index =0;
+            }
+
+            gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, pizza_timer_alpha);
+                //make string
+                timer_number_str[0] = 19;
+                timer_number_str[1] = GLOBAL_CHAR_SPACE;
+                int_to_str(gMarioState->boning_timer,&timer_number_str[2]);
+                print_hud_lut_string_big(HUD_LUT_GLOBAL, 10, 200-pizza_timer_bounce_array[pizza_timer_bounce_index], timer_number_str);
+
+            gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);//fucked up
         }
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);

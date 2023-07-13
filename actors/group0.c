@@ -127,3 +127,5 @@
 #include "troll_element/model.inc.c"
 #include "killerspikes/model.inc.c"
 #include "global_cone/model.inc.c"
+#include "btime1/model.inc.c"
+#include "btime2/model.inc.c"

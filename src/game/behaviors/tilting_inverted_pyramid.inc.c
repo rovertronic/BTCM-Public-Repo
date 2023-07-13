@@ -6483,3 +6483,120 @@ void bhv_cratetrap(void) {
         break;
     }
 }
+
+void bhv_quarantine(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oPosY = o->oHomeY + 1000.0f;
+            if ((gMarioState->TrollTrigger == TTRIG_QUARANTINE)&&(gMarioState->ExitTroll == FALSE)) {
+                o->oAction = 1;
+            }
+        break;
+        case 1: //kil mario
+            o->oPosY -= 60.0f*gMarioState->timeScale;
+            if ((gMarioState->ExitTroll == FALSE)&&(gMarioState->pos[1] > o->oPosY)) {
+                gMarioState->pos[1] = o->oPosY;
+                gMarioState->vel[1] = 0.0f;
+            }
+
+            if (o->oPosY < o->oHomeY) {
+                o->oPosY = o->oHomeY;
+                cur_obj_shake_screen(SHAKE_POS_LARGE);
+                cur_obj_play_sound_2(SOUND_GENERAL_TOX_BOX_MOVE);
+
+
+                if ((gMarioState->ExitTroll == FALSE)&&(gMarioState->Avatar==AVATAR_MARIO)) {
+                    //prevent simplecheeze
+                    run_event(EVENT_DEATH);
+                    o->oAction = 3;
+                } else {
+                    o->oAction = 2;
+                }
+            }
+        break;
+        case 2:
+            if (gMarioState->action == ACT_SQUISHED) {
+                run_event(EVENT_DEATH);
+            } else {
+                o->oAction = 3; //rearm
+            }
+        break;
+        case 3:
+            o->oPosY += 30.0f*gMarioState->timeScale;
+            if (o->oPosY > o->oHomeY+1000.0f) {
+                o->oPosY = o->oHomeY + 1000.0f;
+                o->oAction = 0;
+            }
+        break;
+    }
+}
+
+void bhv_axe_trap(void) {
+    f32 axe_radius = 40.0f;//SIDE
+
+    o->oMoveAnglePitch += o->oVelX*gMarioState->timeScale*0x500;
+
+    if (o->oBehParams2ndByte == 1) {
+        o->oFaceAnglePitch = sins(o->oMoveAnglePitch) * -0x1500;
+    } else {
+        o->oFaceAnglePitch = sins(o->oMoveAnglePitch) * 0x1500;
+    }
+    o->oPosZ = o->oHomeZ - sins(o->oFaceAnglePitch)*1000.0f;
+    o->oPosY = (o->oHomeY+1000.0f) - coss(o->oFaceAnglePitch)*1000.0f;
+
+    switch(o->oAction) {
+        case 0:
+            o->oVelX = 1.0f;
+            o->oMoveAnglePitch = 0;
+            o->oAction++;
+        break;
+        case 1:
+            if ((lateral_dist_between_objects(o,gMarioObject) < 250.0f)&&(gMarioState->pos[0]>o->oPosX-axe_radius)&&(gMarioState->pos[0]<o->oPosX+axe_radius)) {
+                o->oAction++;
+                run_event(EVENT_DEATH);
+            }
+            if (gMarioState->TrollTrigger == TTRIG_AXE) {
+                o->oVelX = 2.5f;
+            }
+        break;
+    }
+}
+
+#define TROLL_OFFSET 38400*4
+void bhv_troll_pillar(void) {
+    u8 frame = o->oTimer%87;
+    if (frame > 43) {
+        frame = 43 - (frame - 44);
+    }
+
+    switch(o->oAction) {
+        case 0: //wait to be hit
+            if (lateral_dist_between_objects(o,gMarioObject) < 400.0) {
+                o->oAction++;
+                cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
+                gMarioState->boning_time = TRUE;
+                gMarioState->boning_timer = 90;
+                o->oVelY = 30.0f;
+
+                display_song_text(4);
+                play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_TURNAROUND), 0);
+
+                drop_and_set_mario_action(gMarioState, ACT_JUMP_KICK, 0);
+            }
+        break;
+        case 1:
+            frame = 44;
+            o->oVelY -= 3.0f;
+            o->oPosY += o->oVelY;
+            o->oFaceAnglePitch -= 0x300;
+
+            if (o->oTimer > 60) {
+                mark_obj_for_deletion(o);
+            }
+        break;
+    }
+
+
+    u8 *tex = segmented_to_virtual(&pillar_troll_trollge_i8);
+    dma_read(tex,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart+4096);
+};

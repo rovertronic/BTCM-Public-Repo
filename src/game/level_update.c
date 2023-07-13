@@ -711,6 +711,10 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
         dmg_amount = 0x80;
     }
 
+    if (gMarioState->boning_time) {
+        fadeMusic = FALSE;
+    }
+
     if (sDelayedWarpOp == WARP_OP_NONE) {
         m->invincTimer = -1;
         sDelayedWarpArg = WARP_FLAGS_NONE;

@@ -810,5 +810,8 @@ extern const BehaviorScript bhvTrollgate[];
 extern const BehaviorScript bhvTrollstair[];
 extern const BehaviorScript bhvSpringtrap[];
 extern const BehaviorScript bhvCratetrap[];
+extern const BehaviorScript bhvQuarantine[];
+extern const BehaviorScript bhvAxeTrap[];
+extern const BehaviorScript bhvPillarTroll[];
 
 #endif // BEHAVIOR_DATA_H

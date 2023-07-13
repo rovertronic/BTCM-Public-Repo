@@ -167,4 +167,12 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/cratetrap/geo_header.h"
 
+#include "levels/ccm/quarantine/geo_header.h"
+
+#include "levels/ccm/quarantine/collision_header.h"
+
+#include "levels/ccm/axetrap/geo_header.h"
+
+#include "levels/ccm/pillar_troll/geo_header.h"
+
 #endif
