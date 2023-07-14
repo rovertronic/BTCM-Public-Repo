@@ -54,12 +54,12 @@ static u8 sGoombaAttackHandlers[][6] = {
     },
     // huge
     {
-        /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_SPECIAL_HUGE_GOOMBA_WEAKLY_ATTACKED,
-        /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_SPECIAL_HUGE_GOOMBA_WEAKLY_ATTACKED,
-        /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SQUISHED,
-        /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_SQUISHED_WITH_BLUE_COIN,
-        /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_SPECIAL_HUGE_GOOMBA_WEAKLY_ATTACKED,
-        /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_SPECIAL_HUGE_GOOMBA_WEAKLY_ATTACKED,
+        ATTACK_HANDLER_KNOCKBACK,
+        ATTACK_HANDLER_KNOCKBACK,
+        ATTACK_HANDLER_KNOCKBACK,
+        ATTACK_HANDLER_KNOCKBACK,
+        ATTACK_HANDLER_KNOCKBACK,
+        ATTACK_HANDLER_KNOCKBACK,
     },
 };
 
@@ -383,31 +383,20 @@ void bhv_goomba_update(void) {
             }
 
         if (bparam1 == 1) {
-
-            o->oAnimState = 1;
-            o->oNumLootCoins = -1;
-
-            o->oForwardVel = 0;
-
-
-            
-
-            if (o->oDistanceToMario < 4500.0f) {
-                o->oGoombaTargetYaw = o->oAngleToMario;
-                if (o->oTimer > 100) {
-                    flame = spawn_object(o,MODEL_RED_FLAME,bhvThwompFlame);
-                    flame->oPosY += 70.0f;
-                    flame->oForwardVel = 20.0f;
-
-                    cur_obj_play_sound_2(SOUND_OBJ_FLAME_BLOWN);
-                    o->oTimer = RandomMinMaxU16(0,60);
+            if (o->oDistanceToMario < 700.0f) {
+                if (o->oDamageOrCoinValue == 1) {
+                    o->oDamageOrCoinValue = 3;
+                    cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                 }
-
+                o->oHealth = 10;
+                o->header.gfx.scale[0] += 0.7f;
+                o->header.gfx.scale[1] += 0.7f;
+                o->header.gfx.scale[2] += 0.7f;
             }
         }
 
         if (obj_handle_attacks(&sGoombaHitbox, GOOMBA_ACT_ATTACKED_MARIO,
-                               sGoombaAttackHandlers[o->oGoombaSize & 0x1])
+                               sGoombaAttackHandlers[bparam1])
                                && (o->oAction != GOOMBA_ACT_ATTACKED_MARIO)) {
             create_sound_spawner(SOUND_NBODY2);
             //mark_goomba_as_dead();

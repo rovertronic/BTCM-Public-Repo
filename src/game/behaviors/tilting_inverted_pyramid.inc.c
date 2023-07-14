@@ -745,6 +745,7 @@ void loop_bone_train(void) {
         if (gMarioObject->platform == o) {
             o->oAction++;
             if (trainceil) {
+                run_event(EVENT_TRAINDEATH);
                 mark_obj_for_deletion(trainceil);
             }
         }
@@ -4178,6 +4179,26 @@ void bhv_cone(void) {
         o->rigidBody->allocated = FALSE;
         mark_obj_for_deletion(o);
     }
+}
+
+void bhv_badcone(void) {
+
+    switch(o->oAction) {
+        case 0:
+            o->oAction = 1;
+            o->oPosY += 30.0f;
+        break;
+        case 1:
+            if (o->oDistanceToMario < 100.0f) {
+                run_event(EVENT_DEATH);
+                o->oAction = 2;
+            }
+        break;
+        case 2:
+            o->oFaceAngleYaw += 0x200;
+        break;
+    }
+
 }
 
 void bhv_balloon(void) {

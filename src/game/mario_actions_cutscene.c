@@ -813,6 +813,9 @@ s32 act_suffocation(struct MarioState *m) {
 }
 
 s32 act_death_on_back(struct MarioState *m) {
+    run_event(EVENT_DEATH);
+    return FALSE;
+
     play_sound_if_no_flag(m, SOUND_MARIO_DYING, MARIO_ACTION_SOUND_PLAYED);
     if (common_death_handler(m, MARIO_ANIM_DYING_ON_BACK, 54) == 40) {
         play_mario_heavy_landing_sound(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);
@@ -821,6 +824,9 @@ s32 act_death_on_back(struct MarioState *m) {
 }
 
 s32 act_death_on_stomach(struct MarioState *m) {
+    run_event(EVENT_DEATH);
+    return FALSE;
+
     play_sound_if_no_flag(m, SOUND_MARIO_DYING, MARIO_ACTION_SOUND_PLAYED);
     if (common_death_handler(m, MARIO_ANIM_DYING_ON_STOMACH, 37) == 37) {
         play_mario_heavy_landing_sound(m, SOUND_ACTION_TERRAIN_BODY_HIT_GROUND);

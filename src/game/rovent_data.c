@@ -1412,7 +1412,14 @@ s32 event_lvup[] = {
 };
 
 s32 event_train_trap[] = {
+    E_CAM_TOGGLE,
+    E_TARGET_MARIO,
+    E_CAM_POS_XYZ, -8685, 3217, -3523,
+    E_CAM_MANUAL_ECM, ECM_TRACK_TARGET,
     E_ACT, ACT_IDLE,
+    E_WAIT, 60,
+    E_ZOUND, SOUND_MARIO_DYING,
+    E_WAIT, 10,
     E_TROLL_DEATH,
 };
 

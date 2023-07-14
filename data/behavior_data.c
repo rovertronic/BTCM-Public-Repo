@@ -8355,6 +8355,16 @@ const BehaviorScript bhvCone[] = {
     END_LOOP(),
 };
 
+void bhv_badcone(void);
+const BehaviorScript bhvBadCone[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE|OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_INT(oNumLootCoins, 3),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_badcone),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvBalloon[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE|OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
