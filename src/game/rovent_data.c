@@ -1430,6 +1430,18 @@ s32 event_death[] = {
     E_TROLL_DEATH,
 };
 
+s32 event_felegg[] = {
+    E_WAIT, 50,
+    E_DIALOG_AND_PRESSA, DIALOG_FELEGG_1,
+    E_DIALOG_AND_PRESSA, DIALOG_FELEGG_2,
+    E_DIALOG_AND_PRESSA, DIALOG_FELEGG_3,
+    E_DIALOG_AND_PRESSA, DIALOG_FELEGG_4,
+    E_TARGET_OBJECT, bhvPoleGrabbing,
+    E_TARGET_OBJECT_ACTION, 3,
+    E_DIALOG_AND_PRESSA, DIALOG_FELEGG_5,
+    E_END,
+};
+
 //LIST DO NOT RENAME
 s32 *event_list[] = {
     &event_test,
@@ -1476,6 +1488,7 @@ s32 *event_list[] = {
     &event_lvup,
     &event_train_trap,
     &event_death,
+    &event_felegg,
 };
 
 f32 *spline_list[] = {

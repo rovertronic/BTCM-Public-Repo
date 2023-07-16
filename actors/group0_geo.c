@@ -52,3 +52,4 @@
 #include "troll_element/geo.inc.c"
 #include "killerspikes/geo.inc.c"
 #include "global_cone/geo.inc.c"
+#include "aford/geo.inc.c"

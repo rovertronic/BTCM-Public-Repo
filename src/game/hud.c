@@ -573,6 +573,8 @@ void handle_power_meter_actions(s16 numHealthWedges) {
  */
 //
 
+//horse shit hud metter code
+//fuck you 2020 rovert.
 void render_hud_power_meter(void) {
     s16 loop;
     s16 loop2;

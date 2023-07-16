@@ -18,7 +18,7 @@ void bhv_pole_init(void) {
      * `spawn_objects_from_info`.
      */
     // This treats bparam1 and bparam2 as a single value
-    o->hitboxHeight = GET_BPARAM12(o->oBehParams) * 10;
+    o->hitboxHeight = GET_BPARAM2(o->oBehParams) * 10;
 }
 
 /**

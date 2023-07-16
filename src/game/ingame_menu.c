@@ -3404,7 +3404,7 @@ f32 bodylog_dl_sizes[] = {
 u16 avatar_model_ids[] = {
     MODEL_MARIO,
     MODEL_PINGAS,
-    MODEL_MARIO,
+    MODEL_FORD,
     MODEL_FAST,
 };
 
@@ -3611,6 +3611,29 @@ s32 render_menus_and_dialogs(void) {
             gMarioState->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[avatar_model_ids[gMarioState->Avatar]];
         }
     }//end bodylog
+
+    //render hp
+    if ((!revent_active)&&(!using_bodylog)) {
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        u8 hp = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
+        u8 maxhp = gMarioState->numMaxHP;
+        f32 heartscale = 0.9f+(sins(gGlobalTimer*0x300)*0.1f);
+        for (u8 i=0;i<maxhp;i++) {
+            create_dl_translation_matrix(MENU_MTX_PUSH, 310-(maxhp*25)+(i*25) , 20, 0);
+            if (i+1 == hp) {
+                create_dl_scale_matrix(MENU_MTX_NOPUSH, heartscale,heartscale,1.0f);
+            }
+
+            if (i+1 > hp) {
+                gSPDisplayList(gDisplayListHead++, alyxheart2_h2_mesh);
+            } else {
+                gSPDisplayList(gDisplayListHead++, alyxheart1_h_mesh);
+            }
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        }
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    }
+    //end render hp
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 

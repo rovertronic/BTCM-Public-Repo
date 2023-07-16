@@ -3725,3 +3725,19 @@ boost.\n\
 Combined with the greed\n\
 badge, your net income\n\
 will be quadrupled."))
+
+DEFINE_DIALOG(DIALOG_FELEGG_1, 1, 4, 95, 180, _("\
+wait"))
+
+DEFINE_DIALOG(DIALOG_FELEGG_2, 1, 4, 95, 180, _("\
+didn't felegg do this troll already in 2019"))
+
+DEFINE_DIALOG(DIALOG_FELEGG_3, 1, 4, 95, 180, _("\
+way to be original rovert"))
+
+DEFINE_DIALOG(DIALOG_FELEGG_4, 1, 4, 95, 180, _("\
+what a lameass. copying other people's trolls.\n\
+as if they were your own."))
+
+DEFINE_DIALOG(DIALOG_FELEGG_5, 1, 4, 95, 180, _("\
+screw this"))

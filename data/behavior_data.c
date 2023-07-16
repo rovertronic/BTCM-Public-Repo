@@ -489,6 +489,7 @@ const BehaviorScript bhvPoleGrabbing[] = {
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 1500),
     CALL_NATIVE(bhv_pole_init),
     SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_pole_base_loop),
     END_LOOP(),
@@ -9441,7 +9442,7 @@ const BehaviorScript bhvCratetrap[] = {
 extern void bhv_quarantine(void);
 const BehaviorScript bhvQuarantine[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     SET_FLOAT(oCollisionDistance, 6000),
     SET_FLOAT(oDrawingDistance, 15000),
     LOAD_COLLISION_DATA(quarantine_collision),
@@ -9471,5 +9472,34 @@ const BehaviorScript bhvPillarTroll[] = {
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_troll_pillar),
+    END_LOOP(),
+};
+
+extern void bhv_plant_trap();
+const BehaviorScript bhvPlantTrap[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, piranha_plant_seg6_anims_0601C31C),
+    ANIMATE(PIRANHA_PLANT_ANIM_BITE),
+    SET_INTERACT_TYPE(INTERACT_DAMAGE),
+    SET_HITBOX(/*Radius*/ 100, /*Height*/ 200),
+    SET_HURTBOX(/*Radius*/ 50, /*Height*/ 200),
+    SET_INT(oIntangibleTimer,   0),
+    SET_INT(oDamageOrCoinValue, 3),
+    SET_INT(oNumLootCoins,      5),
+    SET_FLOAT(oDrawingDistance, 2000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_plant_trap),
+    END_LOOP(),
+};
+
+extern void bhv_ghost_floor(void);
+const BehaviorScript bhvGhostFloor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 30000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_ghost_floor),
     END_LOOP(),
 };

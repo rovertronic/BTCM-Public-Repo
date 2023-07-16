@@ -981,6 +981,8 @@ enum troll_trigger {
     TTRIG_MIRROR,
     TTRIG_QUARANTINE,
     TTRIG_AXE,
+    TTRIG_PLANT,
+    TTRIG_GHOSTFLOOR,
 };
 
 /* Star General */

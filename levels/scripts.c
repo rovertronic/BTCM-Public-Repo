@@ -69,6 +69,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_FAST,                    a_fast_geo),
     LOAD_MODEL_FROM_GEO(MODEL_PINGAS,                  a_pingas_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SMOKE,                   smoke_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_FORD,                    aford_geo),
 
     LOAD_MODEL_FROM_GEO(0xF0,                   crowbar2_geo),
     LOAD_MODEL_FROM_GEO(0xEF,                   green_coin_geo),

@@ -16,6 +16,7 @@
 #include "camera.h"
 #include "level_table.h"
 #include "rumble_init.h"
+#include "rovent.h"
 
 #include "config.h"
 
@@ -96,6 +97,10 @@ s32 set_pole_position(struct MarioState *m, f32 offsetY) {
 
 s32 act_holding_pole(struct MarioState *m) {
     struct Object *marioObj = m->marioObj;
+
+    if (revent_active) {
+        m->controller->stickY = 0;
+    }
 
     if ((m->input & INPUT_Z_PRESSED) || m->health < 0x100) {
         add_tree_leaf_particles(m);

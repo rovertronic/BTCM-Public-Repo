@@ -588,4 +588,10 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "btime2/header.h"
 
+#include "alyxheart1/header.h"
+
+#include "alyxheart2/header.h"
+
+#include "aford/geo_header.h"
+
 #endif

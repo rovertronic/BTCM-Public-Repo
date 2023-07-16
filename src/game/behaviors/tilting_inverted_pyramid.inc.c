@@ -6506,6 +6506,8 @@ void bhv_cratetrap(void) {
 }
 
 void bhv_quarantine(void) {
+    if (o->oBehParams2ndByte ==1) {return;}
+
     switch(o->oAction) {
         case 0:
             o->oPosY = o->oHomeY + 1000.0f;
@@ -6543,10 +6545,12 @@ void bhv_quarantine(void) {
             }
         break;
         case 3:
-            o->oPosY += 30.0f*gMarioState->timeScale;
-            if (o->oPosY > o->oHomeY+1000.0f) {
-                o->oPosY = o->oHomeY + 1000.0f;
-                o->oAction = 0;
+            if (o->oDistanceToMario > 4000.0f) {
+                o->oPosY += 30.0f*gMarioState->timeScale;
+                if (o->oPosY > o->oHomeY+1000.0f) {
+                    o->oPosY = o->oHomeY + 1000.0f;
+                    o->oAction = 0;
+                }
             }
         break;
     }
@@ -6621,3 +6625,39 @@ void bhv_troll_pillar(void) {
     u8 *tex = segmented_to_virtual(&pillar_troll_trollge_i8);
     dma_read(tex,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart+4096);
 };
+
+void bhv_plant_trap(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oPosY = o->oHomeY - 300.0f;
+            if (gMarioState->TrollTrigger == TTRIG_PLANT) {
+                o->oAction++;
+                run_event(EVENT_DEATH);
+            }
+        break;
+        case 1:
+            o->oPosX = gMarioState->pos[0];
+            o->oPosY = lerp(o->oPosY,o->oHomeY,.2f);
+            o->oPosZ = gMarioState->pos[2];
+        break;
+    }
+}
+
+void bhv_ghost_floor(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oOpacity = 255;
+            o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_GHOSTFLOOR2];
+            if (gMarioState->TrollTrigger == TTRIG_GHOSTFLOOR) {
+                o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_GHOSTFLOOR];
+                cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
+                o->oAction++;
+            }
+        break;
+        case 1:
+            if (o->oOpacity > 0) {
+                o->oOpacity *= .8f;
+            }
+        break;
+    }
+}

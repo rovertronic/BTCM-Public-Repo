@@ -137,7 +137,7 @@ s32 act_idle(struct MarioState *m) {
 
     if (revent_head_move) {
         set_mario_animation(m, MARIO_ANIM_FIRST_PERSON);
-    } else if (m->Avatar == AVATAR_FAST) {
+    } else if (m->Avatar == AVATAR_FAST || m->Avatar == AVATAR_FORD) {
         set_custom_mario_animation(m,11);
     } else {
         if (m->actionArg & 1) {

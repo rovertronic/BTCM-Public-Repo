@@ -129,3 +129,6 @@
 #include "global_cone/model.inc.c"
 #include "btime1/model.inc.c"
 #include "btime2/model.inc.c"
+#include "alyxheart1/model.inc.c"
+#include "alyxheart2/model.inc.c"
+#include "aford/model.inc.c"

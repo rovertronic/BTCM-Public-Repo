@@ -2001,7 +2001,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                     play_sound(SOUND_VO_PINGAS, gGlobalSoundSource);
                 break;
                 case AVATAR_FORD:
-                    gMarioState->AvatarHeightOffset = 0.0f;
+                    gMarioState->AvatarHeightOffset = 12.0f;
                     play_sound(SOUND_VO_FORD, gGlobalSoundSource);
                 break;
                 case AVATAR_FAST:

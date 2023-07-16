@@ -394,6 +394,11 @@ void bhv_goomba_update(void) {
                 o->header.gfx.scale[2] += 0.7f;
             }
         }
+        if (bparam1 == 2) {
+            if (o->oDistanceToMario < 200.0f) {
+                mark_obj_for_deletion(o);
+            }
+        }
 
         if (obj_handle_attacks(&sGoombaHitbox, GOOMBA_ACT_ATTACKED_MARIO,
                                sGoombaAttackHandlers[bparam1])

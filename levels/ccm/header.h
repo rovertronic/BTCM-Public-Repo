@@ -175,4 +175,10 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/pillar_troll/geo_header.h"
 
+#include "levels/ccm/barope/geo_header.h"
+
+#include "levels/ccm/ghostfloor/geo_header.h"
+
+#include "levels/ccm/ghostfloor2/geo_header.h"
+
 #endif

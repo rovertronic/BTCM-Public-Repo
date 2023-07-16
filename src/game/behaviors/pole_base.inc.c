@@ -9,6 +9,43 @@ void bhv_pole_base_loop(void) {
     ) {
         cur_obj_push_mario_away(70.0f);
     }
+
+    u8 b1 = GET_BPARAM1(o->oBehParams);
+    if (b1==1) {
+        switch(o->oAction) {
+            case 0:
+                if (lateral_dist_between_objects(o,gMarioObject) < 10.0f) {
+                    if (gMarioState->action == ACT_HOLDING_POLE) {
+                        o->oAction++;
+                        cur_obj_play_sound_2(SOUND_GENERAL_OPEN_CHEST);
+                        o->oVelY = 0.0f;
+                        o->oHomeY = o->oPosY;
+                        run_event(EVENT_FELEGG);
+                    }
+                }
+            break;
+            case 1:
+                o->oPosY += o->oVelY;
+                o->oVelY -= 2.0f;
+
+                if (o->oTimer > 50) {
+                    o->oAction++;
+                }
+            break;
+            case 2:
+                //wait for event to change action
+            break;
+            case 3:
+                o->oPosY -= o->oVelY;
+                o->oVelY += 2.0f;
+
+                if (o->oTimer > 49) {
+                    o->oPosY = o->oHomeY;
+                    o->oAction++;
+                }
+            break;
+        }
+    }
 }
 
 //Oscilation

@@ -58,3 +58,6 @@
 #include "levels/ccm/quarantine/geo.inc.c"
 #include "levels/ccm/axetrap/geo.inc.c"
 #include "levels/ccm/pillar_troll/geo.inc.c"
+#include "levels/ccm/barope/geo.inc.c"
+#include "levels/ccm/ghostfloor/geo.inc.c"
+#include "levels/ccm/ghostfloor2/geo.inc.c"

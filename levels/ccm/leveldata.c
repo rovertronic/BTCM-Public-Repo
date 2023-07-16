@@ -105,3 +105,6 @@
 #include "levels/ccm/quarantine/collision.inc.c"
 #include "levels/ccm/axetrap/model.inc.c"
 #include "levels/ccm/pillar_troll/model.inc.c"
+#include "levels/ccm/barope/model.inc.c"
+#include "levels/ccm/ghostfloor/model.inc.c"
+#include "levels/ccm/ghostfloor2/model.inc.c"

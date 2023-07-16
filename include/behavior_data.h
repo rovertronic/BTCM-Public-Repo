@@ -814,5 +814,7 @@ extern const BehaviorScript bhvQuarantine[];
 extern const BehaviorScript bhvAxeTrap[];
 extern const BehaviorScript bhvPillarTroll[];
 extern const BehaviorScript bhvBadCone[];
+extern const BehaviorScript bhvPlantTrap[];
+extern const BehaviorScript bhvGhostFloor[];
 
 #endif // BEHAVIOR_DATA_H

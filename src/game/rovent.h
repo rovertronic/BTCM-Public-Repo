@@ -165,6 +165,7 @@ enum revent_events {
     EVENT_LVUP,
     EVENT_TRAINDEATH,
     EVENT_DEATH,
+    EVENT_FELEGG,
 };
 
 enum revent_spline_list {
