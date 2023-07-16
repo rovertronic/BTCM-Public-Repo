@@ -36,11 +36,10 @@ void bhv_pole_base_loop(void) {
                 //wait for event to change action
             break;
             case 3:
-                o->oPosY -= o->oVelY;
                 o->oVelY += 2.0f;
+                o->oPosY -= o->oVelY;
 
-                if (o->oTimer > 49) {
-                    o->oPosY = o->oHomeY;
+                if (o->oTimer > 50) {
                     o->oAction++;
                 }
             break;

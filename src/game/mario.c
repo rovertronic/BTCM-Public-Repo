@@ -1876,6 +1876,14 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     u8 coinrepeats = 1;
     //u16 *walltex2 = segmented_to_virtual(&shrnling1_Static_i8);
 
+    //penis shooting cum all over the screen
+    //translation: this is an unecessary level of abstraction, however i am reusing
+    //exising btcm code in the most convenient and fast way possible
+    gMarioState->StarRadarLocation[0] = gMarioState->pos[0];
+    gMarioState->StarRadarLocation[1] = gMarioState->pos[1];
+    gMarioState->StarRadarLocation[2] = gMarioState->pos[2];
+    gMarioState->StarRadarExist = TRUE;
+
     //manage global coins
     if (gMarioState->gGlobalCoinGain > 0) {
         if (gMarioState->numGlobalCoins < gMarioState->numMaxGlobalCoins) {

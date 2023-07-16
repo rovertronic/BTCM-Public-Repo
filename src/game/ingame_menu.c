@@ -3635,6 +3635,10 @@ s32 render_menus_and_dialogs(void) {
     }
     //end render hp
 
+
+    //render slowmo bar
+    print_text_fmt_int(gMarioState->ScreenPosX,gMarioState->ScreenPosY,"^",0);
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
         if (display_song_timer < 1) {
