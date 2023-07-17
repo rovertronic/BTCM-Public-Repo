@@ -9513,3 +9513,15 @@ const BehaviorScript bhvVoidLeak[] = {
         CALL_NATIVE(bhv_void_leak),
     END_LOOP(),
 };
+
+extern void bhv_checkpoint_flag(void);
+const BehaviorScript bhvCheckpointFlag[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, checkpoint_flag_anims),
+    SCALE(/*Unused*/ 0, /*Field*/ 140),
+    ANIMATE(0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_checkpoint_flag),
+    END_LOOP(),
+};

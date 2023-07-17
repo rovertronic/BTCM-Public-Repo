@@ -54,3 +54,4 @@
 #include "global_cone/geo.inc.c"
 #include "aford/geo.inc.c"
 #include "voidleak/geo.inc.c"
+#include "checkpoint_flag/geo.inc.c"

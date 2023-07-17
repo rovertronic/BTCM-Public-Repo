@@ -134,3 +134,6 @@
 #include "aford/model.inc.c"
 #include "slowmobar/model.inc.c"
 #include "voidleak/model.inc.c"
+#include "checkpoint_flag/model.inc.c"
+#include "checkpoint_flag/anims/data.inc.c"
+#include "checkpoint_flag/anims/table.inc.c"

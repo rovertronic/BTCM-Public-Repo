@@ -93,8 +93,8 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
 
     f32 fallHeight = m->peakHeight - m->pos[1];
 
-    if (gMarioState->floor->object != NULL) {
-        ignorefalldamage = gMarioState->floor->object->oDontFallDamage;
+    if (m->floor->object != NULL) {
+        ignorefalldamage = m->floor->object->oDontFallDamage;
     }
 
     if (ignorefalldamage == TRUE) {
@@ -106,7 +106,7 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
     //If have fall damage badge, remove bp, otherwise hurt
     if (1) {
         //if (fallHeight > damageHeight) {
-        //    gMarioState->numBadgePoints --;
+        //    m->numBadgePoints --;
         //}
     }
     else
@@ -396,17 +396,17 @@ void update_flying(struct MarioState *m) {
     m->slideVelX = m->vel[0];
     m->slideVelZ = m->vel[2];
 
-    gMarioState->SFuel ++;
+    m->SFuel ++;
 
-    if ((gMarioState->SFuel > 12)&&(gMarioState->RFuel > 0)) {
-        gMarioState->RFuel --;
-        gMarioState->SFuel = 0;
+    if ((m->SFuel > 12)&&(m->RFuel > 0)) {
+        m->RFuel --;
+        m->SFuel = 0;
         }
 
     //FUEL
     if (gPlayer1Controller->buttonDown & B_BUTTON) {
 
-        gMarioState->SFuel += 4;
+        m->SFuel += 4;
 
         if (m->forwardVel < 70.0f) {
             m->forwardVel += 3.5f;
@@ -414,7 +414,7 @@ void update_flying(struct MarioState *m) {
         spawn_object(m->marioObj, MODEL_RED_FLAME, bhvKoopaShellFlame);
         play_sound(SOUND_GENERAL2_BOBOMB_EXPLOSION, m->marioObj->header.gfx.cameraToObject);
 
-        if (gMarioState->Options & (1<<OPT_CAMWOB)) {
+        if (m->Options & (1<<OPT_CAMWOB)) {
             cur_obj_shake_screen(SHAKE_POS_SMALL);
         }
     }
@@ -735,7 +735,7 @@ s32 act_wall_stick(struct MarioState *m) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     } else {
         if (surf->object != NULL) {
-            apply_platform_displacement(&sMarioDisplacementInfo, gMarioState->pos, &gMarioState->faceAngle[1], surf->object);
+            apply_platform_displacement(&sMarioDisplacementInfo, m->pos, &m->faceAngle[1], surf->object);
             }
     }
 
@@ -1327,7 +1327,7 @@ s32 check_wall_kick(struct MarioState *m) {
         m->faceAngle[1] += 0x8000;
         return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
     } else {
-        if (/*(save_file_get_badge_equip() & (1<<BADGE_STICKY))*/(m->Avatar == AVATAR_FAST)&&(m->wallKickTimer != 0 && m->prevAction == ACT_AIR_HIT_WALL)&&(gMarioState->gCurrMinigame != 6)) {
+        if (/*(save_file_get_badge_equip() & (1<<BADGE_STICKY))*/(m->Avatar == AVATAR_FAST)&&(m->wallKickTimer != 0 && m->prevAction == ACT_AIR_HIT_WALL)&&(m->gCurrMinigame != 6)) {
             m->faceAngle[1] += 0x8000;
             return set_mario_action(m, ACT_WALL_STICK, 0);
         }
@@ -1337,6 +1337,11 @@ s32 check_wall_kick(struct MarioState *m) {
 }
 
 s32 act_backward_air_kb(struct MarioState *m) {
+    if (m->health < 0x100) {
+        run_event(EVENT_DEATH);
+        return FALSE;
+    }
+
     if (check_wall_kick(m)) {
         return TRUE;
     }
@@ -1347,6 +1352,11 @@ s32 act_backward_air_kb(struct MarioState *m) {
 }
 
 s32 act_forward_air_kb(struct MarioState *m) {
+    if (m->health < 0x100) {
+        run_event(EVENT_DEATH);
+        return FALSE;
+    }
+
     if (check_wall_kick(m)) {
         return TRUE;
     }
@@ -1357,12 +1367,22 @@ s32 act_forward_air_kb(struct MarioState *m) {
 }
 
 s32 act_hard_backward_air_kb(struct MarioState *m) {
+    if (m->health < 0x100) {
+        run_event(EVENT_DEATH);
+        return FALSE;
+    }
+
     play_knockback_sound(m);
     common_air_knockback_step(m, ACT_HARD_BACKWARD_GROUND_KB, ACT_HARD_BACKWARD_GROUND_KB, MARIO_ANIM_BACKWARD_AIR_KB, -16.0f);
     return FALSE;
 }
 
 s32 act_hard_forward_air_kb(struct MarioState *m) {
+    if (m->health < 0x100) {
+        run_event(EVENT_DEATH);
+        return FALSE;
+    }
+
     play_knockback_sound(m);
     common_air_knockback_step(m, ACT_HARD_FORWARD_GROUND_KB, ACT_HARD_FORWARD_GROUND_KB, MARIO_ANIM_AIR_FORWARD_KB, 16.0f);
     return FALSE;
@@ -1680,13 +1700,13 @@ s32 act_lava_boost(struct MarioState *m) {
             if (m->floor->type == SURFACE_BURNING) {
                 m->actionState = ACT_STATE_LAVA_BOOST_HIT_LAVA;
                 if (!(m->flags & MARIO_METAL_CAP)) {
-                    if ((save_file_get_badge_equip() & (1<<0))&&(gMarioState->numBadgePoints > 0)) {
-                        gMarioState->numBadgePoints --;
-                        m->hurtCounter += (gMarioState->LavaHeat-2)*4;
+                    if ((save_file_get_badge_equip() & (1<<0))&&(m->numBadgePoints > 0)) {
+                        m->numBadgePoints --;
+                        m->hurtCounter += (m->LavaHeat-2)*4;
                     }
                     else
                     {
-                        m->hurtCounter += gMarioState->LavaHeat*4;
+                        m->hurtCounter += m->LavaHeat*4;
                     }
                 }
                 m->vel[1] = 84.0f;

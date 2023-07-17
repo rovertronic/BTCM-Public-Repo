@@ -1741,6 +1741,11 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 chec
 }
 
 s32 act_hard_backward_ground_kb(struct MarioState *m) {
+    if (m->health < 0x100) {
+        run_event(EVENT_DEATH);
+        return FALSE;
+    }
+
     s32 animFrame =
         common_ground_knockback_action(m, MARIO_ANIM_FALL_OVER_BACKWARDS, 43, TRUE, m->actionArg);
     if (animFrame == 43 && m->health < 0x100) {
@@ -1759,6 +1764,11 @@ s32 act_hard_backward_ground_kb(struct MarioState *m) {
 }
 
 s32 act_hard_forward_ground_kb(struct MarioState *m) {
+    if (m->health < 0x100) {
+        run_event(EVENT_DEATH);
+        return FALSE;
+    }
+
     s32 animFrame =
         common_ground_knockback_action(m, MARIO_ANIM_LAND_ON_STOMACH, 21, TRUE, m->actionArg);
     if (animFrame == 23 && m->health < 0x100) {

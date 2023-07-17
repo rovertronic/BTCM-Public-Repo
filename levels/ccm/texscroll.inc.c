@@ -42,7 +42,7 @@ void scroll_ccm_dl_viscol_mesh_layer_1_vtx_32() {
 
 void scroll_ccm_dl_viscol_mesh_layer_1_vtx_42() {
 	int i = 0;
-	int count = 15;
+	int count = 26;
 	int width = 64 * 0x20;
 
 	static int currentX = 0;

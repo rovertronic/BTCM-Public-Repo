@@ -598,4 +598,8 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "voidleak/geo_header.h"
 
+#include "checkpoint_flag/geo_header.h"
+
+
+#include "checkpoint_flag/anim_header.h"
 #endif
