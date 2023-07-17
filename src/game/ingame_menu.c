@@ -3635,12 +3635,19 @@ s32 render_menus_and_dialogs(void) {
     }
     //end render hp
 
-
     //render slowmo bar
-    print_text_fmt_int(gMarioState->ScreenPosX,gMarioState->ScreenPosY,"^",0);
+    if ((gMarioState->Avatar == AVATAR_FORD)&&(!revent_active)&&(!using_bodylog)) {
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        create_dl_translation_matrix(MENU_MTX_PUSH, gMarioState->ScreenPosX , gMarioState->ScreenPosY-20.0f, 0);
+        create_dl_scale_matrix(MENU_MTX_NOPUSH, gMarioState->slowmobar,1.0f,1.0f);
+        gSPDisplayList(gDisplayListHead++, slowmobar_bar_mesh);
+        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    }
+    //end slowmo bar
+
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-
         if (display_song_timer < 1) {
             display_song_x = lerp(display_song_x,-get_string_width(musicmenu_titles[display_song_index]),0.2f);
         }

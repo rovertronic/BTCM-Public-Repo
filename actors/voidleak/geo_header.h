@@ -1,0 +1,15 @@
+extern const GeoLayout voidleak_geo[];
+extern u8 voidleak_void__rgba16[];
+extern u8 voidleak_voidleak_ci4[];
+extern u8 voidleak_voidleak_pal_rgba16[];
+extern Vtx voidleak_Cube_006_mesh_layer_1_vtx_0[68];
+extern Gfx voidleak_Cube_006_mesh_layer_1_tri_0[];
+extern Vtx voidleak_Cube_006_mesh_layer_5_vtx_0[38];
+extern Gfx voidleak_Cube_006_mesh_layer_5_tri_0[];
+extern Gfx mat_voidleak_void_layer1[];
+extern Gfx mat_revert_voidleak_void_layer1[];
+extern Gfx mat_voidleak_voidleak[];
+extern Gfx mat_revert_voidleak_voidleak[];
+extern Gfx voidleak_Cube_006_mesh_layer_1[];
+extern Gfx voidleak_Cube_006_mesh_layer_5[];
+extern Gfx voidleak_material_revert_render_settings[];

@@ -594,4 +594,8 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "aford/geo_header.h"
 
+#include "slowmobar/header.h"
+
+#include "voidleak/geo_header.h"
+
 #endif

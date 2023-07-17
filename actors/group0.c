@@ -132,3 +132,5 @@
 #include "alyxheart1/model.inc.c"
 #include "alyxheart2/model.inc.c"
 #include "aford/model.inc.c"
+#include "slowmobar/model.inc.c"
+#include "voidleak/model.inc.c"

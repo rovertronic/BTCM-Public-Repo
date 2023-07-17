@@ -623,6 +623,8 @@ struct MarioState {
              u8 spring_boredom;
              u8 boning_time;
              u8 boning_timer;
+             f32 slowmobar;
+             u8 slowmo_recharge;
     // -- HackerSM64 MarioState fields end --
 };
 

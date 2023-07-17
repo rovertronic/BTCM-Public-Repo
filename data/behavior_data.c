@@ -9503,3 +9503,13 @@ const BehaviorScript bhvGhostFloor[] = {
         CALL_NATIVE(bhv_ghost_floor),
     END_LOOP(),
 };
+
+extern void bhv_void_leak(void);
+const BehaviorScript bhvVoidLeak[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 10000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_void_leak),
+    END_LOOP(),
+};

@@ -742,7 +742,7 @@ void loop_bone_train(void) {
         case 0:
         trainceil = cur_obj_nearest_object_with_behavior(bhvTrainCeil);
 
-        if (gMarioObject->platform == o) {
+        if ((gMarioObject->platform == o)&&(!gMarioState->ExitTroll)) {
             o->oAction++;
             if (trainceil) {
                 run_event(EVENT_TRAINDEATH);
@@ -6580,7 +6580,7 @@ void bhv_axe_trap(void) {
                 o->oAction++;
                 run_event(EVENT_DEATH);
             }
-            if (gMarioState->TrollTrigger == TTRIG_AXE) {
+            if ((gMarioState->TrollTrigger == TTRIG_AXE)&&(gMarioState->troll_checkpoint==1)) {
                 o->oVelX = 2.5f;
             }
         break;
@@ -6650,7 +6650,7 @@ void bhv_ghost_floor(void) {
             o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_GHOSTFLOOR2];
             if (gMarioState->TrollTrigger == TTRIG_GHOSTFLOOR) {
                 o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_GHOSTFLOOR];
-                cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
+                create_sound_spawner(SOUND_OBJ_BOO_LAUGH_LONG);
                 o->oAction++;
             }
         break;
@@ -6659,5 +6659,27 @@ void bhv_ghost_floor(void) {
                 o->oOpacity *= .8f;
             }
         break;
+    }
+}
+
+void bhv_void_leak(void) {
+    switch(o->oAction) {
+        case 1:
+            if ((o->oDistanceToMario < 1000.0f)&&(o->oHealth>0)) {
+                o->oPosX += sins(o->oAngleToMario)*35.0f;
+                o->oPosZ += coss(o->oAngleToMario)*35.0f;
+                o->oHealth--;
+            }
+        case 0:
+            if ((o->oBehParams2ndByte==1)&&(o->oAction==0)) {
+                o->oAction = 1;
+                o->oHealth = 60;
+            }
+
+            if (o->oDistanceToMario < 400.0f) {
+                run_event(EVENT_DEATH);
+                o->oAction=2;
+            }
+        break;   
     }
 }

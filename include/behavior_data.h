@@ -799,6 +799,7 @@ extern const BehaviorScript bhvSamplePlatform1[];
 extern const BehaviorScript bhvSamplePlatform2[];
 extern const BehaviorScript bhvTvshop[];
 extern const BehaviorScript bhvPostGameHint[];
+
 extern const BehaviorScript bhvEscalator[];
 extern const BehaviorScript bhvEscalatorSpawner[];
 extern const BehaviorScript bhvTrainCeil[];
@@ -816,5 +817,6 @@ extern const BehaviorScript bhvPillarTroll[];
 extern const BehaviorScript bhvBadCone[];
 extern const BehaviorScript bhvPlantTrap[];
 extern const BehaviorScript bhvGhostFloor[];
+extern const BehaviorScript bhvVoidLeak[];
 
 #endif // BEHAVIOR_DATA_H

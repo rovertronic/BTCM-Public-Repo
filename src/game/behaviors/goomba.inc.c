@@ -138,6 +138,11 @@ void bhv_goomba_init(void) {
  * Enter the jump action and set initial y velocity.
  */
 static void goomba_begin_jump(void) {
+    s32 bparam1 = (gCurrentObject->oBehParams >> 24) & 0xFF;
+    if ((bparam1 == 2)||(bparam1 == 3)) {
+        return;
+    }
+
     cur_obj_play_sound_2(SOUND_OBJ_GOOMBA_ALERT);
 
     o->oAction = GOOMBA_ACT_JUMP;
@@ -386,7 +391,7 @@ void bhv_goomba_update(void) {
             if (o->oDistanceToMario < 700.0f) {
                 if (o->oDamageOrCoinValue == 1) {
                     o->oDamageOrCoinValue = 3;
-                    cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
+                    create_sound_spawner(SOUND_OBJ_BOO_LAUGH_LONG);
                 }
                 o->oHealth = 10;
                 o->header.gfx.scale[0] += 0.7f;

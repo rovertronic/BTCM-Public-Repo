@@ -2020,10 +2020,34 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         }
 
     gMarioState->slowMoActive = ((gPlayer1Controller->buttonDown & R_TRIG)&&(gMarioState->Avatar == AVATAR_FORD));
+    if (gMarioState->slowmo_recharge) {
+        gMarioState->slowMoActive = FALSE;
+    }
+
     if (gMarioState->slowMoActive) {
         gMarioState->timeScale = lerp(gMarioState->timeScale,0.5f,0.1f);
+        gMarioState->slowmobar -= 0.006f;
+
+        if (gMarioState->slowmobar < 0.0f) {
+            gMarioState->slowmobar = 0.0f;
+            gMarioState->slowmo_recharge = TRUE;
+        }
     } else {
         gMarioState->timeScale = lerp(gMarioState->timeScale,1.0f,0.1f);
+
+        if (gMarioState->slowmobar < 1.0f) {
+            gMarioState->slowmo_recharge = TRUE;
+        }
+    }
+
+    if (gMarioState->slowmo_recharge) {
+        if (gMarioState->slowmobar < 1.0f) {
+            gMarioState->slowmobar += 0.01f;
+        }
+        if (gMarioState->slowmobar > 1.0f) {
+            gMarioState->slowmobar = 1.0f;
+            gMarioState->slowmo_recharge = FALSE;
+        }
     }
 
 
@@ -2454,6 +2478,8 @@ void init_mario(void) {
 
     gMarioState->Avatar = AVATAR_MARIO;
     gMarioState->TrollTrigger = TTRIG_NONE;
+    gMarioState->slowmobar = 1.0f;
+    gMarioState->slowmo_recharge = FALSE;
     gMarioState->ExitTroll = TRUE;
     gMarioState->slowMoActive = FALSE;
     gMarioState->timeScale = 1.0f;
