@@ -2537,7 +2537,8 @@ void init_mario(void) {
         case LEVEL_CCM:
             if (save_file_get_progression() == PROG_TL_NEWGAME) {
                 //just started
-                run_event(EVENT_TL_INTRO);
+                save_file_set_badge_unlock(1<<AVATAR_MARIO);
+                //run_event(EVENT_TL_INTRO);
             } else {
                 //not noob
                 play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_RUNOFF), 0);

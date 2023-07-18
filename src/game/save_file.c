@@ -20,6 +20,7 @@
 #include "ingame_menu.h"
 #include "puppycamold.h"
 #include "game/rovent.h"
+#include "mario.h"
 
 #define ALIGN4(val) (((val) + 0x3) & ~0x3)
 
@@ -880,6 +881,7 @@ void save_file_get_stats() {
         gMarioState->Options = 0xFD;
         save_file_set_costume_unlock( (1<<0) );
         save_file_set_stats();
+        save_file_set_badge_unlock(AVATAR_MARIO);
     }
 }
 

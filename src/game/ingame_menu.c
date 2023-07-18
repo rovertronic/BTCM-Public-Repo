@@ -3557,6 +3557,11 @@ s32 render_menus_and_dialogs(void) {
             play_init_bodylog = TRUE;
         }
 
+        if (!(save_file_get_badge_unlock() & (1<<selected_avatar))) {
+            selected_avatar = -1;
+            play_init_bodylog = TRUE;
+        }
+
         //shitty ass printing code
         if (selected_avatar != -1) {
             gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
@@ -3580,17 +3585,19 @@ s32 render_menus_and_dialogs(void) {
         create_dl_translation_matrix(MENU_MTX_PUSH, 160, 120, 0);
 
         for (u8 i = 0; i<4; i++) {
-            create_dl_scale_matrix(MENU_MTX_PUSH, bodylog_dl_sizes[i], bodylog_dl_sizes[i], 0.0f);
-            if (selected_avatar == i) {
-                bodylog_dl_sizes[i] = lerp(bodylog_dl_sizes[i],1.2f,0.2f);
-                gDPSetEnvColor(gDisplayListHead++, 100, 100, 100, 255);
-                gSPDisplayList(gDisplayListHead++, bodylog_dl_array[i]);
-            } else {
-                bodylog_dl_sizes[i] = lerp(bodylog_dl_sizes[i],1.0f,0.1f);
-                gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
-                gSPDisplayList(gDisplayListHead++, bodylog_dl_array[i]);
+            if (save_file_get_badge_unlock() & (1<<i)) {
+                create_dl_scale_matrix(MENU_MTX_PUSH, bodylog_dl_sizes[i], bodylog_dl_sizes[i], 0.0f);
+                if (selected_avatar == i) {
+                    bodylog_dl_sizes[i] = lerp(bodylog_dl_sizes[i],1.2f,0.2f);
+                    gDPSetEnvColor(gDisplayListHead++, 100, 100, 100, 255);
+                    gSPDisplayList(gDisplayListHead++, bodylog_dl_array[i]);
+                } else {
+                    bodylog_dl_sizes[i] = lerp(bodylog_dl_sizes[i],1.0f,0.1f);
+                    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+                    gSPDisplayList(gDisplayListHead++, bodylog_dl_array[i]);
+                }
+                gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
             }
-            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
         }
         
         //render bodylog ball

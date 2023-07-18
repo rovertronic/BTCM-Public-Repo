@@ -6819,6 +6819,14 @@ void bhv_checkpoint_flag(void) {
 
             if (gCurrLevelNum == LEVEL_CCM) {
                 run_event(EVENT_WATCH_NEAREST_TV);
+                switch(o->oBehParams2ndByte) {
+                    case 1:
+                        save_file_set_badge_unlock(1<<AVATAR_FORD);
+                    break;
+                    case 2:
+                        save_file_set_badge_unlock(1<<AVATAR_FAST);
+                    break;
+                }
             }
 
         }
