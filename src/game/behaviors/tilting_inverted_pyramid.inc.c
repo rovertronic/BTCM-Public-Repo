@@ -6626,6 +6626,99 @@ void bhv_troll_pillar(void) {
     dma_read(tex,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart+4096);
 };
 
+#define RGBA16SIZE 2048
+#define VIDEO_1_OFFSET TROLL_OFFSET + (45 * 64*64)
+#define VIDEO_2_OFFSET VIDEO_1_OFFSET + (566*RGBA16SIZE)
+#define VIDEO_3_OFFSET VIDEO_2_OFFSET + (263*RGBA16SIZE)
+#define VIDEO_4_OFFSET VIDEO_3_OFFSET + (219*RGBA16SIZE)
+#define VIDEO_5_OFFSET VIDEO_4_OFFSET + (299*RGBA16SIZE)
+#define VIDEO_6_OFFSET VIDEO_5_OFFSET + (223*RGBA16SIZE)
+#define VIDEO_7_OFFSET VIDEO_6_OFFSET + (190*RGBA16SIZE)
+#define SCREEN_OFFSET  VIDEO_7_OFFSET + (341*RGBA16SIZE)
+void bhv_monitor(void) {
+    u8 *tex = segmented_to_virtual(&monitor_screen_rgba16);
+    u32 offset = 0;
+    u32 frame = o->oTimer/2;
+    u8 video_to_play = o->oBehParams2ndByte;
+
+    switch(o->oAction) {
+        case 0:
+            //do nothing
+        break;
+        case 1:
+            switch(video_to_play) {
+                case 0:
+                    offset = VIDEO_1_OFFSET;
+                break;
+                case 1:
+                    offset = VIDEO_2_OFFSET;
+                break;
+                case 2:
+                    offset = VIDEO_3_OFFSET;
+                break;
+                case 3:
+                    offset = VIDEO_4_OFFSET;
+                break;
+                case 4:
+                    offset = VIDEO_5_OFFSET;
+                break;
+                case 5:
+                    offset = VIDEO_6_OFFSET;
+                break;
+                case 6:
+                    offset = VIDEO_7_OFFSET;
+                break;
+            }
+
+            dma_read(tex,(frame*RGBA16SIZE)+offset+_bad_appleSegmentRomStart,(frame*RGBA16SIZE)+offset+_bad_appleSegmentRomStart+RGBA16SIZE);
+
+            switch(video_to_play) {
+                case 0:
+                    if (o->oTimer == 566*2) {
+                        o->oAction++;
+                    }
+                break;
+                case 1:
+                    if (o->oTimer == 263*2) {
+                        o->oAction++;
+                    }
+                break;
+                case 2:
+                    if (o->oTimer == 219*2) {
+                        o->oAction++;
+                    }
+                break;
+                case 3:
+                    if (o->oTimer == 299*2) {
+                        o->oAction++;
+                    }
+                break;
+                case 4:
+                    if (o->oTimer == 223*2) {
+                        o->oAction++;
+                    }
+                break;
+                case 5:
+                    if (o->oTimer == 190*2) {
+                        o->oAction++;
+                    }
+                break;
+                case 6:
+                    if (o->oTimer == 341*2) {
+                        o->oAction++;
+                    }
+                break;
+            }
+        break;
+        case 2:
+            offset = SCREEN_OFFSET;
+            dma_read(tex,(frame*RGBA16SIZE)+offset+_bad_appleSegmentRomStart,(frame*RGBA16SIZE)+offset+_bad_appleSegmentRomStart+RGBA16SIZE);
+            o->oAction = 0;
+            o->oBehParams2ndByte ++;
+        break;
+    }
+}
+
 void bhv_plant_trap(void) {
     switch(o->oAction) {
         case 0:

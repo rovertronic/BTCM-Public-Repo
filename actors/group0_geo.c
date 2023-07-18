@@ -55,3 +55,4 @@
 #include "aford/geo.inc.c"
 #include "voidleak/geo.inc.c"
 #include "checkpoint_flag/geo.inc.c"
+#include "monitor/geo.inc.c"

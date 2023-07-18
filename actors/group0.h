@@ -602,4 +602,6 @@ extern const struct Animation *const Hammerbro_anims[];
 
 
 #include "checkpoint_flag/anim_header.h"
+#include "monitor/geo_header.h"
+
 #endif

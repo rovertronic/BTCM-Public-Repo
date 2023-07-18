@@ -819,5 +819,6 @@ extern const BehaviorScript bhvPlantTrap[];
 extern const BehaviorScript bhvGhostFloor[];
 extern const BehaviorScript bhvVoidLeak[];
 extern const BehaviorScript bhvCheckpointFlag[];
+extern const BehaviorScript bhvMonitor[];
 
 #endif // BEHAVIOR_DATA_H

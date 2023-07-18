@@ -72,6 +72,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_FORD,                    aford_geo),
     LOAD_MODEL_FROM_GEO(MODEL_VOIDLEAK,                voidleak_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CHECKPOINT_FLAG,  checkpoint_flag_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_MONITOR, monitor_geo),
 
     LOAD_MODEL_FROM_GEO(0xF0,                   crowbar2_geo),
     LOAD_MODEL_FROM_GEO(0xEF,                   green_coin_geo),

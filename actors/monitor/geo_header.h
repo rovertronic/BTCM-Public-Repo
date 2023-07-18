@@ -1,0 +1,13 @@
+extern const GeoLayout monitor_geo[];
+extern Lights1 monitor_screen_lights;
+extern u8 monitor_MetalTile_i8[];
+extern u8 monitor_screen_rgba16[];
+extern Vtx monitor_screen_mesh_layer_1_vtx_0[84];
+extern Gfx monitor_screen_mesh_layer_1_tri_0[];
+extern Vtx monitor_screen_mesh_layer_1_vtx_1[8];
+extern Gfx monitor_screen_mesh_layer_1_tri_1[];
+extern Gfx mat_monitor_metla[];
+extern Gfx mat_revert_monitor_metla[];
+extern Gfx mat_monitor_screen[];
+extern Gfx monitor_screen_mesh_layer_1[];
+extern Gfx monitor_material_revert_render_settings[];

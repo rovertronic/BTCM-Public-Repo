@@ -9525,3 +9525,12 @@ const BehaviorScript bhvCheckpointFlag[] = {
         CALL_NATIVE(bhv_checkpoint_flag),
     END_LOOP(),
 };
+
+extern void bhv_monitor(void);
+const BehaviorScript bhvMonitor[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_monitor),
+    END_LOOP(),
+};

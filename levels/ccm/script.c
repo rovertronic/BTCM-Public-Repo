@@ -171,6 +171,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -2501, -476, 3660, 0, 0, 0, 0x00000000, bhvKillerSpikes),
 		OBJECT(MODEL_NONE, -1801, -476, 3660, 0, 0, 0, 0x00000000, bhvKillerSpikes),
 		MARIO_POS(0x01, 0, -9249, -2727, 5627),
+		OBJECT(MODEL_MONITOR, -7923, -2286, 4706, 10, -47, 1, 0x00000000, bhvMonitor),
 		OBJECT(MODEL_GOOMBA, -4163, -860, 2362, 0, -63, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -8572, -2963, 2477, 0, -27, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -6749, -2963, 3293, 0, -77, 0, 0x00000000, bhvGoomba),
