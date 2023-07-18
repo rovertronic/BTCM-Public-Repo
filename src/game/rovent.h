@@ -108,6 +108,8 @@ enum revent_command_h {
 
     E_START_PRECREDITS,
     E_HUNDO,
+    E_WATCH_TV,
+    E_SONG_TITLE,//song text
     E_END,
 };
 
@@ -166,6 +168,8 @@ enum revent_events {
     EVENT_TRAINDEATH,
     EVENT_DEATH,
     EVENT_FELEGG,
+    EVENT_TL_INTRO,
+    EVENT_WATCH_NEAREST_TV,
 };
 
 enum revent_spline_list {

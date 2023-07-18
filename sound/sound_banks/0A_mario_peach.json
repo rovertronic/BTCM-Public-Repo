@@ -175,6 +175,48 @@
             "release_rate": 255,
             "envelope": "envelope0",
             "sound": "xscream"
+        },
+        "vid1": {
+            "ifdef": ["VERSION_US", "VERSION_EU", "VERSION_SH"],
+            "release_rate": 255,
+            "envelope": "envelope0",
+            "sound": "lavagang1"
+        },
+        "vid2": {
+            "ifdef": ["VERSION_US", "VERSION_EU", "VERSION_SH"],
+            "release_rate": 255,
+            "envelope": "envelope0",
+            "sound": "lavagang2"
+        },
+        "vid3": {
+            "ifdef": ["VERSION_US", "VERSION_EU", "VERSION_SH"],
+            "release_rate": 255,
+            "envelope": "envelope0",
+            "sound": "lavagang3"
+        },
+        "vid4": {
+            "ifdef": ["VERSION_US", "VERSION_EU", "VERSION_SH"],
+            "release_rate": 255,
+            "envelope": "envelope0",
+            "sound": "lavagang4"
+        },
+        "vid5": {
+            "ifdef": ["VERSION_US", "VERSION_EU", "VERSION_SH"],
+            "release_rate": 255,
+            "envelope": "envelope0",
+            "sound": "lavagang5"
+        },
+        "vid6": {
+            "ifdef": ["VERSION_US", "VERSION_EU", "VERSION_SH"],
+            "release_rate": 255,
+            "envelope": "envelope0",
+            "sound": "lavagang6"
+        },
+        "vid7": {
+            "ifdef": ["VERSION_US", "VERSION_EU", "VERSION_SH"],
+            "release_rate": 255,
+            "envelope": "envelope0",
+            "sound": "lavagang7"
         }
     },
     "instrument_list": [
@@ -208,6 +250,13 @@
         "inst26",
         "inst27",
         "inst28",
-        "inst29"
+        "inst29",
+        "vid1",
+        "vid2",
+        "vid3",
+        "vid4",
+        "vid5",
+        "vid6",
+        "vid7"
     ]
 }

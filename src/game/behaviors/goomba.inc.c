@@ -143,7 +143,10 @@ static void goomba_begin_jump(void) {
         return;
     }
 
-    cur_obj_play_sound_2(SOUND_OBJ_GOOMBA_ALERT);
+    if (!revent_active) {
+        //SHUT THE FUCK UP!!! IM TRYING TO TALK!
+        cur_obj_play_sound_2(SOUND_OBJ_GOOMBA_ALERT);
+    }
 
     o->oAction = GOOMBA_ACT_JUMP;
     o->oForwardVel = 0.0f;

@@ -6638,7 +6638,7 @@ void bhv_troll_pillar(void) {
 void bhv_monitor(void) {
     u8 *tex = segmented_to_virtual(&monitor_screen_rgba16);
     u32 offset = 0;
-    u32 frame = o->oTimer/2;
+    u32 frame = o->oTimer/3;
     u8 video_to_play = o->oBehParams2ndByte;
 
     switch(o->oAction) {
@@ -6646,6 +6646,33 @@ void bhv_monitor(void) {
             //do nothing
         break;
         case 1:
+
+            if (o->oTimer == 0) {
+                switch(video_to_play) {
+                    case 0:
+                        play_sound(SOUND_VID1, gGlobalSoundSource);
+                    break;
+                    case 1:
+                        play_sound(SOUND_VID2, gGlobalSoundSource);
+                    break;
+                    case 2:
+                        play_sound(SOUND_VID3, gGlobalSoundSource);
+                    break;
+                    case 3:
+                        play_sound(SOUND_VID4, gGlobalSoundSource);
+                    break;
+                    case 4:
+                        play_sound(SOUND_VID5, gGlobalSoundSource);
+                    break;
+                    case 5:
+                        play_sound(SOUND_VID6, gGlobalSoundSource);
+                    break;
+                    case 6:
+                        play_sound(SOUND_VID7, gGlobalSoundSource);
+                    break;
+                }
+            }
+        
             switch(video_to_play) {
                 case 0:
                     offset = VIDEO_1_OFFSET;
@@ -6674,37 +6701,37 @@ void bhv_monitor(void) {
 
             switch(video_to_play) {
                 case 0:
-                    if (o->oTimer == 566*2) {
+                    if (o->oTimer == 566*3) {
                         o->oAction++;
                     }
                 break;
                 case 1:
-                    if (o->oTimer == 263*2) {
+                    if (o->oTimer == 263*3) {
                         o->oAction++;
                     }
                 break;
                 case 2:
-                    if (o->oTimer == 219*2) {
+                    if (o->oTimer == 219*3) {
                         o->oAction++;
                     }
                 break;
                 case 3:
-                    if (o->oTimer == 299*2) {
+                    if (o->oTimer == 299*3) {
                         o->oAction++;
                     }
                 break;
                 case 4:
-                    if (o->oTimer == 223*2) {
+                    if (o->oTimer == 223*3) {
                         o->oAction++;
                     }
                 break;
                 case 5:
-                    if (o->oTimer == 190*2) {
+                    if (o->oTimer == 190*3) {
                         o->oAction++;
                     }
                 break;
                 case 6:
-                    if (o->oTimer == 341*2) {
+                    if (o->oTimer == 341*3) {
                         o->oAction++;
                     }
                 break;
@@ -6790,13 +6817,10 @@ void bhv_checkpoint_flag(void) {
 
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gMarioState->marioObj->header.gfx.cameraToObject);
 
-            //move the death warp to me
-            struct Object *dw = cur_obj_nearest_object_with_behavior(bhvDeathWarp);
-            if (dw) {
-                dw->oPosX = o->oPosX;
-                dw->oPosY = o->oPosY+150.0f;
-                dw->oPosZ = o->oPosZ;
+            if (gCurrLevelNum == LEVEL_CCM) {
+                run_event(EVENT_WATCH_NEAREST_TV);
             }
+
         }
     } else {
         o->oAnimState = 1;

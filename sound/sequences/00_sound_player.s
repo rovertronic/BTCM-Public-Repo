@@ -2046,6 +2046,14 @@ sound_ref .sound_die
 sound_ref .sound_nbody1
 sound_ref .sound_nbody2
 sound_ref .sound_xscream
+sound_ref .sound_vid1
+sound_ref .sound_vid2
+sound_ref .sound_vid3
+sound_ref .sound_vid4
+sound_ref .sound_vid5
+sound_ref .sound_vid6
+sound_ref .sound_vid7
+
 
 .sound_mario_jump_hoo:
 chan_setbank 8
@@ -2712,6 +2720,62 @@ chan_call .set_reverb
 chan_setlayer 0, .layer_scream
 chan_end
 
+.sound_vid1:
+chan_setbank 10
+chan_setinstr 31
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_vid
+chan_end
+
+.sound_vid2:
+chan_setbank 10
+chan_setinstr 32
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_vid
+chan_end
+
+.sound_vid3:
+chan_setbank 10
+chan_setinstr 33
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_vid
+chan_end
+
+.sound_vid4:
+chan_setbank 10
+chan_setinstr 34
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_vid
+chan_end
+
+.sound_vid5:
+chan_setbank 10
+chan_setinstr 35
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_vid
+chan_end
+
+.sound_vid6:
+chan_setbank 10
+chan_setinstr 36
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_vid
+chan_end
+
+.sound_vid7:
+chan_setbank 10
+chan_setinstr 37
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_vid
+chan_end
+
 .layer_F8A:
 layer_note1 39, 0x50, 127
 layer_end
@@ -2722,6 +2786,10 @@ layer_end
 
 .layer_scream:
 layer_note1 39, 0x100, 127
+layer_end
+
+.layer_vid:
+layer_note1 39, 0x1F00, 127
 layer_end
 
 #if defined(VERSION_EU) || defined(VERSION_SH)

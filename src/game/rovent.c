@@ -1166,6 +1166,14 @@ void event_main(void) {
                 gMarioState->gGlobalCoinGain += 100;
                 revent_index++;
             break;
+            case E_WATCH_TV:
+                revent_halt = TRUE;
+                lower_background_noise(2);
+            break;
+            case E_SONG_TITLE:
+                display_song_text(arg1);
+                revent_index+=2;
+            break;
             case E_END:
                 stop_event();
             break;
@@ -1256,6 +1264,21 @@ void event_main(void) {
             break;
             case E_WARP:
                 //nothing
+            break;
+            case E_WATCH_TV:
+                revent_camera_pos[0] = lerp(revent_camera_pos[0],revent_target_object->oPosX + (sins(revent_target_object->oFaceAngleYaw)*300.0f) ,0.2f);
+                revent_camera_pos[1] = lerp(revent_camera_pos[1],revent_target_object->oPosY ,0.2f);
+                revent_camera_pos[2] = lerp(revent_camera_pos[2],revent_target_object->oPosZ + (coss(revent_target_object->oFaceAngleYaw)*300.0f) ,0.2f);
+
+                revent_camera_foc[0] = lerp(revent_camera_foc[0],revent_target_object->oPosX ,0.2f);
+                revent_camera_foc[1] = lerp(revent_camera_foc[1],revent_target_object->oPosY ,0.2f);
+                revent_camera_foc[2] = lerp(revent_camera_foc[2],revent_target_object->oPosZ ,0.2f);
+
+                if (revent_target_object->oAction == 0) {
+                    revent_halt = FALSE;
+                    revent_index ++;
+                    raise_background_noise(2);
+                }
             break;
         }
     }

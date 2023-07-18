@@ -172,6 +172,8 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -1801, -476, 3660, 0, 0, 0, 0x00000000, bhvKillerSpikes),
 		MARIO_POS(0x01, 0, -9249, -2727, 5627),
 		OBJECT(MODEL_MONITOR, -7923, -2286, 4706, 10, -47, 1, 0x00000000, bhvMonitor),
+		OBJECT(MODEL_MONITOR, 32, 3825, -7265, 11, 134, 0, (1 << 16), bhvMonitor),
+		OBJECT(MODEL_MONITOR, -1580, 6490, -20166, 11, -130, 0, (2 << 16), bhvMonitor),
 		OBJECT(MODEL_GOOMBA, -4163, -860, 2362, 0, -63, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -8572, -2963, 2477, 0, -27, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -6749, -2963, 3293, 0, -77, 0, 0x00000000, bhvGoomba),
@@ -263,7 +265,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_WHOMP, 10279, 2295, -15402, 0, -180, 0, 0x00000000, bhvSmallWhomp),
 		TERRAIN(ccm_area_1_collision),
 		MACRO_OBJECTS(ccm_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_STREAMED_RUNOFF),
+		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

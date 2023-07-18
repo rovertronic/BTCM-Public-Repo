@@ -43,6 +43,7 @@
 #include "rovent.h"
 #include "ingame_menu.h"
 #include "levels/castle_grounds/shrnling1/geo_header.h"
+#include "seq_ids.h"
 
 #include "src/buffers/framebuffers.h"
 //gFrameBuffer0
@@ -2536,11 +2537,12 @@ void init_mario(void) {
         case LEVEL_CCM:
             if (save_file_get_progression() == PROG_TL_NEWGAME) {
                 //just started
+                run_event(EVENT_TL_INTRO);
             } else {
                 //not noob
-
+                play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_RUNOFF), 0);
+                display_song_text(2);
             }
-            display_song_text(2);
         break;
         case LEVEL_CASTLE:
             display_song_text(3);
