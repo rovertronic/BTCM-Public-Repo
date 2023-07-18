@@ -1,0 +1,55 @@
+{
+    "date": "1996-03-19",
+    "sample_bank": "streamed_audio",
+    "envelopes": {
+        "envelope": [
+            [
+                6,
+                32700
+            ],
+            [
+                6,
+                32700
+            ],
+            [
+                32700,
+                29430
+            ],
+            "hang"
+        ]
+    },
+    "instruments": {
+        "inst0": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "36_custom_troll_lab_intro"
+        },
+        "inst1": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "37_custom_keygen"
+        },
+        "inst2": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "38_custom_runoff"
+        },
+        "inst3": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "39_custom_sciences"
+        },
+        "inst4": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "3A_custom_turnaround"
+        }
+    },
+    "instrument_list": [
+        "inst0",
+        "inst1",
+        "inst2",
+        "inst3",
+        "inst4"
+    ]
+}

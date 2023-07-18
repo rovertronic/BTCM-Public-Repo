@@ -180,18 +180,18 @@
         "0C_extended_bank"
     ],
     "36_custom_troll_lab_intro": [
-        "streamed_audio"
+        "old_streamed_audio"
     ],
     "37_custom_keygen": [
-        "streamed_audio"
+        "old_streamed_audio"
     ],
     "38_custom_runoff": [
-        "streamed_audio"
+        "old_streamed_audio"
     ],
     "39_custom_sciences": [
-        "streamed_audio"
+        "old_streamed_audio"
     ],
     "3A_custom_turnaround": [
-        "streamed_audio"
+        "turnaround_hq"
     ]
 }
