@@ -1,6 +1,6 @@
 {
     "date": "1996-03-19",
-    "sample_bank": "streamed_audio",
+    "sample_bank": "old_streamed_audio",
     "envelopes": {
         "envelope": [
             [
@@ -38,18 +38,12 @@
             "release_rate": 10,
             "envelope": "envelope",
             "sound": "39_custom_sciences"
-        },
-        "inst4": {
-            "release_rate": 10,
-            "envelope": "envelope",
-            "sound": "3A_custom_turnaround"
         }
     },
     "instrument_list": [
         "inst0",
         "inst1",
         "inst2",
-        "inst3",
-        "inst4"
+        "inst3"
     ]
 }
