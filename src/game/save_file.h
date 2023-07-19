@@ -40,10 +40,13 @@ struct SaveFile {
     u8 UpgradeLevel : 4;
     u32 EquippedBadges : 24;
     u8 SavedCostume;
-    u8 SavedLanguage;
+    u8 SavedLanguage;//NOTE: Not language, actually seed for randomizer
+    //I'm scared that if I rename the variable GCC might pull a whoop-dee-doo and re-order the save struct
+    //That would be moronic, but I'm being extra safe
 
     struct SaveBlockSignature signature; // 32 bits
 };
+#define SavedSeed SavedLanguage //This is kind of shitty, but read above ^
 
 enum SaveFileIndex {
     SAVE_FILE_A,
@@ -138,6 +141,7 @@ enum SaveProgressFlags {
     SAVE_FLAG_HAPPY_SHOWRUNNER       = (1 << 13), /* 0x00002000 */
     SAVE_FLAG_DEFEATED_WHOMP         = (1 << 14), /* 0x00004000 */
     SAVE_FLAG_FREE_BADGE             = (1 << 15),
+    SAVE_FLAG_NEW_GAME_PLUS          = (1 << 16),
 
     //23 is limit, anything beyond are secret stars
 

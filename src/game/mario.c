@@ -43,6 +43,7 @@
 #include "rovent.h"
 #include "ingame_menu.h"
 #include "levels/castle_grounds/shrnling1/geo_header.h"
+#include "mtwister.h"
 
 #include "src/buffers/framebuffers.h"
 //gFrameBuffer0
@@ -1994,6 +1995,8 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     }
     
     //print_text_fmt_int(110, 56, "MEM %d", sPoolFreeSpace);
+    MTRand rseed = seedRand(gGlobalTimer);
+    print_text_fmt_int(110, 56, "RAND %d", (genRand(&rseed)*100.0f));
 
     if (gMarioState->CostumeID != costumechange) {
             cur_obj_spawn_particles(&D_8032F270);
