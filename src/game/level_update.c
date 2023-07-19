@@ -517,6 +517,11 @@ void check_instant_warp(void) {
     }
 #endif // ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
 
+    if ((gMarioState->boning_time)&&(gCurrAreaIndex==1)) {
+        change_area(2);
+        gMarioState->area = gCurrentArea;
+    }
+
     if ((floor = gMarioState->floor) != NULL) {
         s32 index = floor->type - SURFACE_INSTANT_WARP_1B;
         if (index >= INSTANT_WARP_INDEX_START && index < INSTANT_WARP_INDEX_STOP

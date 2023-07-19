@@ -210,6 +210,8 @@ Vtx *make_skybox_rect(s32 tileIndex, s8 colorIndex) {
  * The row and column are converted into an index into the skybox's tile list, which is then drawn in
  * world space so that the tiles will rotate with the camera.
  */
+void *skybox_rgba16_ptr = NULL;
+
 void draw_skybox_tile_grid(Gfx **dlist, s8 background, s8 player, s8 colorIndex) {
     s32 row;
     s32 col;
@@ -224,6 +226,10 @@ void draw_skybox_tile_grid(Gfx **dlist, s8 background, s8 player, s8 colorIndex)
             const Texture *const texture =
                 (*(SkyboxTexture *) segmented_to_virtual(sSkyboxTextures[background]))[tileIndex];
             Vtx *vertices = make_skybox_rect(tileIndex, colorIndex);
+
+            if (row==0&&col==0) {
+                skybox_rgba16_ptr = &texture;
+            }
 
             gLoadBlockTexture((*dlist)++, 32, 32, G_IM_FMT_RGBA, texture);
             gSPVertex((*dlist)++, VIRTUAL_TO_PHYSICAL(vertices), 4, 0);

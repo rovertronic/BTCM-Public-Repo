@@ -6,6 +6,7 @@
 #include "levels/bitfs/header.h"
 #include "levels/rr/header.h"
 #include "levels/ccm/header.h"
+#include "geo_commands.h"
 
 u8 aghealth = 3;
 u8 agstate = 0;
@@ -6588,20 +6589,29 @@ void bhv_axe_trap(void) {
 }
 
 #define TROLL_OFFSET 38400*4
+#define RGBA16SIZE 2048//32x32
+#define VIDEO_1_OFFSET TROLL_OFFSET + (45 * 64*64)
+#define VIDEO_2_OFFSET VIDEO_1_OFFSET + (566*RGBA16SIZE)
+#define VIDEO_3_OFFSET VIDEO_2_OFFSET + (263*RGBA16SIZE)
+#define VIDEO_4_OFFSET VIDEO_3_OFFSET + (219*RGBA16SIZE)
+#define VIDEO_5_OFFSET VIDEO_4_OFFSET + (299*RGBA16SIZE)
+#define VIDEO_6_OFFSET VIDEO_5_OFFSET + (223*RGBA16SIZE)
+#define VIDEO_7_OFFSET VIDEO_6_OFFSET + (190*RGBA16SIZE)
+#define SCREEN_OFFSET  VIDEO_7_OFFSET + (341*RGBA16SIZE)
+
 void bhv_troll_pillar(void) {
     u8 frame = o->oTimer%87;
     if (frame > 43) {
         frame = 43 - (frame - 44);
     }
 
-    switch(o->oAction) {
-        case 0: //wait to be hit
+    switch(gCurrAreaIndex) {
+        case 1: //wait to be hit
             if (lateral_dist_between_objects(o,gMarioObject) < 400.0) {
                 o->oAction++;
                 cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
                 gMarioState->boning_time = TRUE;
                 gMarioState->boning_timer = 90;
-                o->oVelY = 30.0f;
 
                 display_song_text(4);
                 play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_TURNAROUND), 0);
@@ -6609,7 +6619,11 @@ void bhv_troll_pillar(void) {
                 drop_and_set_mario_action(gMarioState, ACT_JUMP_KICK, 0);
             }
         break;
-        case 1:
+        case 2:
+            if (o->oTimer == 0) {
+                o->oVelY = 30.0f;
+            }
+
             frame = 44;
             o->oVelY -= 3.0f;
             o->oPosY += o->oVelY;
@@ -6626,15 +6640,6 @@ void bhv_troll_pillar(void) {
     dma_read(tex,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart+4096);
 };
 
-#define RGBA16SIZE 2048
-#define VIDEO_1_OFFSET TROLL_OFFSET + (45 * 64*64)
-#define VIDEO_2_OFFSET VIDEO_1_OFFSET + (566*RGBA16SIZE)
-#define VIDEO_3_OFFSET VIDEO_2_OFFSET + (263*RGBA16SIZE)
-#define VIDEO_4_OFFSET VIDEO_3_OFFSET + (219*RGBA16SIZE)
-#define VIDEO_5_OFFSET VIDEO_4_OFFSET + (299*RGBA16SIZE)
-#define VIDEO_6_OFFSET VIDEO_5_OFFSET + (223*RGBA16SIZE)
-#define VIDEO_7_OFFSET VIDEO_6_OFFSET + (190*RGBA16SIZE)
-#define SCREEN_OFFSET  VIDEO_7_OFFSET + (341*RGBA16SIZE)
 void bhv_monitor(void) {
     u8 *tex = segmented_to_virtual(&monitor_screen_rgba16);
     u32 offset = 0;

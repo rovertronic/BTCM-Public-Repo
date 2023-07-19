@@ -4,7 +4,7 @@
 #include "make_const_nonconst.h"
 
 
-ALIGNED8 const u8 dma_jumpscare[] = {
+ALIGNED8 const u8 dma_data[] = {
     #include "actors/amp/custom_jumpscare_mario.rgba16.inc.c"
     ,
     #include "actors/amp/custom_jumpscare_pingas.rgba16.inc.c"
@@ -32,8 +32,4 @@ ALIGNED8 const u8 dma_jumpscare[] = {
     #include "actors/amp/video_strip_7.rgba16.inc.c"
     ,
     #include "actors/amp/screen.rgba16.inc.c"
-    };
-
-ALIGNED8 const u8 dma_troll[] = {
-
 };
