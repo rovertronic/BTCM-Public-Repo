@@ -29,6 +29,7 @@
 #include "game/puppyprint.h"
 #include "game/puppylights.h"
 #include "game/puppycamold.h"
+#include "game/level_update.h"
 
 #include "game/game_init.h"
 #include "level_table.h"
@@ -771,7 +772,9 @@ static void level_cmd_set_menu_music(void) {
 }
 
 static void level_cmd_fadeout_music(void) {
-    fadeout_music(CMD_GET(s16, 2));
+    if (!gMarioState->boning_time) {
+        fadeout_music(CMD_GET(s16, 2));
+    }
     sCurrentCmd = CMD_NEXT;
 }
 

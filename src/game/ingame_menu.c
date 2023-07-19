@@ -3705,12 +3705,19 @@ s32 render_menus_and_dialogs(void) {
             }
 
             if (gGlobalTimer%30==0) {
-                gMarioState->boning_timer--;
-                pizza_timer_bounce_index =0;
+                if (gMarioState->boning_timer > 0) {
+                    gMarioState->boning_timer--;
+                    pizza_timer_bounce_index =0;
+                }
+            }
+
+            u8 timer_red = 255;
+            if (gMarioState->boning_timer < 10) {
+                timer_red = 100+(sins(gGlobalTimer*0x1000)*90);
             }
 
             gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, pizza_timer_alpha);
+                gDPSetEnvColor(gDisplayListHead++, 255, timer_red, timer_red, pizza_timer_alpha);
                 //make string
                 timer_number_str[0] = 19;
                 timer_number_str[1] = GLOBAL_CHAR_SPACE;

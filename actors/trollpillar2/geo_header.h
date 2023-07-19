@@ -1,0 +1,15 @@
+extern const GeoLayout trollpillar2_geo[];
+extern Lights1 trollpillar2_trollge_lights;
+extern Lights1 trollpillar2_white_lights;
+extern u8 trollpillar2_trollge_i8[];
+extern Vtx trollpillar2_Cube_005_mesh_layer_1_vtx_0[87];
+extern Gfx trollpillar2_Cube_005_mesh_layer_1_tri_0[];
+extern Vtx trollpillar2_Cube_005_mesh_layer_1_vtx_1[97];
+extern Gfx trollpillar2_Cube_005_mesh_layer_1_tri_1[];
+extern Vtx trollpillar2_Cube_005_mesh_layer_1_vtx_2[157];
+extern Gfx trollpillar2_Cube_005_mesh_layer_1_tri_2[];
+extern Gfx mat_trollpillar2_trollge[];
+extern Gfx mat_trollpillar2_white[];
+extern Gfx mat_trollpillar2_blackoutline[];
+extern Gfx trollpillar2_Cube_005_mesh_layer_1[];
+extern Gfx trollpillar2_material_revert_render_settings[];

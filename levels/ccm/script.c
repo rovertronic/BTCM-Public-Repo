@@ -72,7 +72,6 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CRATETRAP, cratetrap_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_QUARANTINE, quarantine_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_AXETRAP, axetrap_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_PILLAR_TROLL, pillar_troll_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BAROPE, barope_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOSTFLOOR, ghostfloor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOSTFLOOR2, ghostfloor2_geo), 

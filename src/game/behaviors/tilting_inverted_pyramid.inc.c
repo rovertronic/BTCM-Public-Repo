@@ -6622,7 +6622,7 @@ void bhv_troll_pillar(void) {
     }
 
 
-    u8 *tex = segmented_to_virtual(&pillar_troll_trollge_i8);
+    u8 *tex = segmented_to_virtual(&trollpillar2_trollge_i8);
     dma_read(tex,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart,(frame*4096)+TROLL_OFFSET+_bad_appleSegmentRomStart+4096);
 };
 

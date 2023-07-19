@@ -2,18 +2,10 @@
 
 void bhv_1up_interact(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject)) {
-        play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
-#ifdef MUSHROOMS_HEAL
-        gMarioState->healCounter   = 31;
-#ifdef BREATH_METER
-        gMarioState->breathCounter = 31;
-#endif
-#endif
-        gMarioState->gGlobalCoinGain += 10;
+        gMarioState->boning_time = FALSE;
+        gMarioState->troll_checkpoint = 2;
+        run_event(EVENT_DEATH);
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
-#if ENABLE_RUMBLE
-        queue_rumble_data(5, 80);
-#endif
     }
 }
 
@@ -298,11 +290,13 @@ void bhv_1up_hidden_in_pole_loop(void) {
 
         case MUSHROOM_ACT_MOVING:
             pole_1up_move_towards_mario();
-            object_step();
+            obj_update_pos_vel_xz();
+            o->oPosY += o->oVelY;
             break;
 
         case MUSHROOM_ACT_LOOP_IN_AIR:
-            object_step();
+            obj_update_pos_vel_xz();
+            o->oPosY += o->oVelY;
             if (o->oTimer > 17) {
                 spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             }
