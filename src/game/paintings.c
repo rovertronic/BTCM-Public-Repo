@@ -18,6 +18,7 @@
 #include "paintings.h"
 #include "save_file.h"
 #include "segment2.h"
+#include "randomizer.h"
 
 /**
  * @file paintings.c
@@ -1215,6 +1216,55 @@ void floor_painting_update(struct Painting *painting, struct Painting *paintingG
  * Render and update the painting whose id and group matches the values in the GraphNode's parameter.
  * Use PAINTING_ID(id, group) to set the right parameter in a level's geo layout.
  */
+
+ //bob
+ extern u8 *inside_castle_seg7_painting_textures_070235C0[];
+ extern Gfx inside_castle_seg7_painting_dl_07023050[];
+ //ccm
+ extern Gfx inside_castle_seg7_painting_dl_070230B0[];
+ extern u8 *inside_castle_seg7_painting_textures_070235C8[];
+ //wf
+ extern Gfx inside_castle_seg7_painting_dl_07023110[];
+ extern u8 *inside_castle_seg7_painting_textures_070235D0[];
+ //jrb
+ extern Gfx inside_castle_seg7_painting_dl_07023170[];
+ extern u8 *inside_castle_seg7_painting_textures_070235D8[];
+ //lll
+ extern Gfx inside_castle_seg7_painting_dl_070231D0[];
+ extern u8 *inside_castle_seg7_painting_textures_070235E0[];
+ //ssl
+ extern Gfx inside_castle_seg7_painting_dl_07023230[];
+ extern u8 *inside_castle_seg7_painting_textures_070235E8[];
+ //1
+ extern Gfx inside_castle_seg7_painting_dl_07023290[];
+ extern u8 *inside_castle_seg7_painting_textures_07023600[];
+ //2
+ extern Gfx inside_castle_seg7_painting_dl_070232F0[];
+ extern u8 *inside_castle_seg7_painting_textures_070235F8[];
+
+
+Gfx *painting_normal_display_lists[] = {
+    &inside_castle_seg7_painting_dl_07023050,//bob
+    &inside_castle_seg7_painting_dl_070230B0,//wf
+    &inside_castle_seg7_painting_dl_07023110,//jrb
+    &inside_castle_seg7_painting_dl_07023170,
+    &inside_castle_seg7_painting_dl_070231D0,//lll?
+    &inside_castle_seg7_painting_dl_07023230,//thwomp towers (ssl)
+    &inside_castle_seg7_painting_dl_07023290,//
+    &inside_castle_seg7_painting_dl_070232F0,
+};
+
+u8 **painting_texture_array_list[] = {
+    inside_castle_seg7_painting_textures_070235C0,
+    inside_castle_seg7_painting_textures_070235C8,
+    inside_castle_seg7_painting_textures_070235D0,
+    inside_castle_seg7_painting_textures_070235D8,
+    inside_castle_seg7_painting_textures_070235E0,
+    inside_castle_seg7_painting_textures_070235E8,//thwomp towers (ssl)
+    inside_castle_seg7_painting_textures_070235F8,
+    inside_castle_seg7_painting_textures_07023600,
+};
+
 Gfx *geo_painting_draw(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     struct GraphNodeGenerated *gen = (struct GraphNodeGenerated *) node;
     s32 group = (gen->parameter >> 8) & 0xFF;
@@ -1222,6 +1272,11 @@ Gfx *geo_painting_draw(s32 callContext, struct GraphNode *node, UNUSED void *con
     Gfx *paintingDlist = NULL;
     struct Painting **paintingGroup = sPaintingGroups[group];
     struct Painting *painting = segmented_to_virtual(paintingGroup[id]);
+
+    //for randomizer; swap texture ids
+    //painting_edit = segmented_to_virtual(&wf_painting);
+    painting->textureArray = painting_texture_array_list[ randomizer_levels[id] >> 8 ];
+    painting->normalDisplayList = painting_normal_display_lists[ randomizer_levels[id] >> 8 ];
 
     if (callContext != GEO_CONTEXT_RENDER) {
         reset_painting(painting);

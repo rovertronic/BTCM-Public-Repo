@@ -1067,7 +1067,7 @@ UNUSED static const u64 castle_inside_unused_1 = 0x0;
 
 
 // 0x07023050 - 0x070230B0
-static const Gfx inside_castle_seg7_painting_dl_07023050[] = {
+Gfx inside_castle_seg7_painting_dl_07023050[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700B800),
@@ -1083,7 +1083,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023050[] = {
 };
 
 // 0x070230B0 - 0x07023110
-static const Gfx inside_castle_seg7_painting_dl_070230B0[] = {
+Gfx inside_castle_seg7_painting_dl_070230B0[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700D800),
@@ -1099,7 +1099,7 @@ static const Gfx inside_castle_seg7_painting_dl_070230B0[] = {
 };
 
 // 0x07023110 - 0x07023170
-static const Gfx inside_castle_seg7_painting_dl_07023110[] = {
+Gfx inside_castle_seg7_painting_dl_07023110[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0700F800),
@@ -1115,7 +1115,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023110[] = {
 };
 
 // 0x07023170 - 0x070231D0
-static const Gfx inside_castle_seg7_painting_dl_07023170[] = {
+Gfx inside_castle_seg7_painting_dl_07023170[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07011800),
@@ -1131,7 +1131,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023170[] = {
 };
 
 // 0x070231D0 - 0x07023230
-static const Gfx inside_castle_seg7_painting_dl_070231D0[] = {
+Gfx inside_castle_seg7_painting_dl_070231D0[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07012800),
@@ -1147,7 +1147,7 @@ static const Gfx inside_castle_seg7_painting_dl_070231D0[] = {
 };
 
 // 0x07023230 - 0x07023290
-static const Gfx inside_castle_seg7_painting_dl_07023230[] = {
+Gfx inside_castle_seg7_painting_dl_07023230[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07015800),
@@ -1163,7 +1163,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023230[] = {
 };
 
 // 0x07023290 - 0x070232F0
-static const Gfx inside_castle_seg7_painting_dl_07023290[] = {
+Gfx inside_castle_seg7_painting_dl_07023290[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_07018800),
@@ -1179,7 +1179,7 @@ static const Gfx inside_castle_seg7_painting_dl_07023290[] = {
 };
 
 // 0x070232F0 - 0x07023350
-static const Gfx inside_castle_seg7_painting_dl_070232F0[] = {
+Gfx inside_castle_seg7_painting_dl_070232F0[] = {
     gsSPDisplayList(inside_castle_seg7_dl_07021A48),
     gsSPVertex(inside_castle_seg7_vertex_07021818, 8, 0),
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, inside_castle_seg7_texture_0701A800),
@@ -1300,43 +1300,43 @@ static const Gfx inside_castle_seg7_painting_dl_070235B8[] = {
     gsSPBranchList(inside_castle_seg7_painting_dl_07023580),
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235C0[] = {
+u8 *inside_castle_seg7_painting_textures_070235C0[] = {
     inside_castle_seg7_texture_0700B800, inside_castle_seg7_texture_0700A800,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235C8[] = {
+u8 *inside_castle_seg7_painting_textures_070235C8[] = {
     inside_castle_seg7_texture_0700D800, inside_castle_seg7_texture_0700C800,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235D0[] = {
+u8 *inside_castle_seg7_painting_textures_070235D0[] = {
     inside_castle_seg7_texture_0700F800, inside_castle_seg7_texture_0700E800,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235D8[] = {
+u8 *inside_castle_seg7_painting_textures_070235D8[] = {
     inside_castle_seg7_texture_07011800, inside_castle_seg7_texture_07010800,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235E0[] = {
+u8 *inside_castle_seg7_painting_textures_070235E0[] = {
     inside_castle_seg7_texture_07012800, inside_castle_seg7_texture_07013800,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235E8[] = {
+u8 *inside_castle_seg7_painting_textures_070235E8[] = {
     inside_castle_seg7_texture_07015800, inside_castle_seg7_texture_07014800,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235F0[] = {
+u8 *inside_castle_seg7_painting_textures_070235F0[] = {
     inside_castle_seg7_texture_07016800,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235F4[] = {
+u8 *inside_castle_seg7_painting_textures_070235F4[] = {
     inside_castle_seg7_texture_07017000,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_070235F8[] = {
+u8 *inside_castle_seg7_painting_textures_070235F8[] = {
     inside_castle_seg7_texture_07018800, inside_castle_seg7_texture_07017800,
 };
 
-static const u8 *const inside_castle_seg7_painting_textures_07023600[] = {
+u8 *inside_castle_seg7_painting_textures_07023600[] = {
     inside_castle_seg7_texture_0701A800, inside_castle_seg7_texture_07019800,
 };
 

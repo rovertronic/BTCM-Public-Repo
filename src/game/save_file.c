@@ -20,6 +20,7 @@
 #include "ingame_menu.h"
 #include "puppycamold.h"
 #include "game/rovent.h"
+#include "mtwister.h"
 
 #define ALIGN4(val) (((val) + 0x3) & ~0x3)
 

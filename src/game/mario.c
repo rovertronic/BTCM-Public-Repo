@@ -49,6 +49,7 @@
 //gFrameBuffer0
 
 #include "src/audio/synthesis.h"
+#include "randomizer.h"
 
 u8 near_music_box = FALSE;
 
@@ -1995,8 +1996,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     }
     
     //print_text_fmt_int(110, 56, "MEM %d", sPoolFreeSpace);
-    MTRand rseed = seedRand(gGlobalTimer);
-    print_text_fmt_int(110, 56, "RAND %d", (genRand(&rseed)*100.0f));
+
 
     if (gMarioState->CostumeID != costumechange) {
             cur_obj_spawn_particles(&D_8032F270);
@@ -2416,6 +2416,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
  **************************************************/
 
 void init_mario(void) {
+
     s16 currenthp = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
     struct Object *capObject;

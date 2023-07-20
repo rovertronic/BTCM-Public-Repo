@@ -29,6 +29,7 @@
 #include "game/puppyprint.h"
 #include "game/puppylights.h"
 #include "game/puppycamold.h"
+#include "game/randomizer.h"
 
 #include "game/game_init.h"
 #include "level_table.h"
@@ -340,6 +341,7 @@ static void level_cmd_init_level(void) {
     clear_objects();
     clear_areas();
     main_pool_push_state();
+    randomize_game(3,TRUE);
     for (u8 clearPointers = 0; clearPointers < AREA_COUNT; clearPointers++) {
         gAreaSkyboxStart[clearPointers] = 0;
         gAreaSkyboxEnd[clearPointers] = 0;
@@ -521,6 +523,18 @@ static void level_cmd_place_object(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
+//Area 240, Node 240, Area 241, Node 241
+u8 death_and_star_warps[][4] = {
+    {0x01,0x0B,0x01,0x0A},
+    {0x01,0x0D,0x01,0x0C},
+    {0x01,0x24,0x01,0x25},
+    {0x01,0x26,0x01,0x27},
+    {0x03,0x05,0x03,0x04},
+    {0x03,0x02,0x03,0x01},
+    {0x03,0x08,0x03,0x07},
+    {0x01,0x2A,0x01,0x29},
+};
+
 static void level_cmd_create_warp_node(void) {
     if (sCurrAreaIndex != -1) {
         struct ObjectWarpNode *warpNode =
@@ -535,6 +549,42 @@ static void level_cmd_create_warp_node(void) {
 
         warpNode->next = gAreas[sCurrAreaIndex].warpNodes;
         gAreas[sCurrAreaIndex].warpNodes = warpNode;
+
+        u8 warp_id = CMD_GET(u8, 2);
+        if (gCurrLevelNum == LEVEL_CASTLE) {
+            switch(warp_id) {
+                case 0x04://shell sewers
+                    if (sCurrAreaIndex == 1) {
+                        warpNode->node.destLevel = (u8)(randomizer_levels[7]);
+                    }
+                break;
+                case 0x00://big house
+                    if (sCurrAreaIndex == 3) {
+                        warpNode->node.destLevel = (u8)(randomizer_levels[6]);
+                    }
+                break;
+            }
+        }
+
+        //figure out if i'm a randomized level, and if so what
+        u8 level_redirected = 0;
+        u8 level_redirect_index = 0; //index that represents OG order
+        for (u8 i=0;i<8;i++) {
+            if (gCurrLevelNum == (u8)(randomizer_levels[i])) {
+                level_redirected = gCurrLevelNum;
+                level_redirect_index = i;//(randomizer_levels[i] >> 8);
+            }
+        }
+        if (level_redirected != 0) { //this is a randomized level. change the death and star warp.
+            if (warp_id == 240) {
+                warpNode->node.destArea = death_and_star_warps[level_redirect_index][0];
+                warpNode->node.destNode = death_and_star_warps[level_redirect_index][1];
+            }
+            if (warp_id == 241) {
+                warpNode->node.destArea = death_and_star_warps[level_redirect_index][2];
+                warpNode->node.destNode = death_and_star_warps[level_redirect_index][3];
+            }
+        }
     }
 
     sCurrentCmd = CMD_NEXT;
@@ -595,6 +645,39 @@ static void level_cmd_create_painting_warp_node(void) {
         node->destLevel = CMD_GET(u8, 3) + CMD_GET(u8, 6);
         node->destArea = CMD_GET(u8, 4);
         node->destNode = CMD_GET(u8, 5);
+
+        u8 warp_id = CMD_GET(u8, 2);
+        switch(warp_id) {
+            //RHR
+            case 0x0:
+            case 0x1:
+            case 0x2:
+                node->destLevel = (u8)(randomizer_levels[0]);
+            break;
+            //LFF
+            case 0x4:
+                node->destLevel = (u8)(randomizer_levels[1]);
+            break;
+            //JS
+            case 0x6:
+            case 0x7:
+            case 0x8:
+                node->destLevel = (u8)(randomizer_levels[2]);
+            break;
+            //PS
+            case 0x9:
+            case 0xA:
+            case 0xB:
+                node->destLevel = (u8)(randomizer_levels[3]);
+            break;
+            //CC
+            case 0xD:
+                node->destLevel = (u8)(randomizer_levels[4]);
+            break;
+            case 0x10:
+                node->destLevel = (u8)(randomizer_levels[5]);
+            break;
+        }
     }
 
     sCurrentCmd = CMD_NEXT;

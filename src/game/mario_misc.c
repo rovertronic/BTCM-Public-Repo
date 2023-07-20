@@ -31,6 +31,7 @@
 #include "src/engine/surface_load.h"
 #include "spawn_sound.h"
 #include "mario.h"
+#include "randomizer.h"
 
 #include "config.h"
 
@@ -112,6 +113,10 @@ Gfx *geo_draw_mario_head_goddard(s32 callContext, struct GraphNode *node, UNUSED
 u8 MaxCostumes = 11;
 
 void loop_costume_token(void) {
+    if (gCurrentObject->oAction == 0) {
+        gCurrentObject->oBehParams2ndByte = costume_table[gCurrentObject->oBehParams2ndByte];
+    }
+
     gMarioState->TokenParam2 = gCurrentObject->oBehParams2ndByte;
 
     if (gCurrentObject->oAction == 0) {
