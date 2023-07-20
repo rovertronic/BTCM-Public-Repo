@@ -341,7 +341,7 @@ static void level_cmd_init_level(void) {
     clear_objects();
     clear_areas();
     main_pool_push_state();
-    randomize_game(3,TRUE);
+    randomize_game(5,TRUE);
     for (u8 clearPointers = 0; clearPointers < AREA_COUNT; clearPointers++) {
         gAreaSkyboxStart[clearPointers] = 0;
         gAreaSkyboxEnd[clearPointers] = 0;

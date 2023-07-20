@@ -114,7 +114,7 @@ u8 MaxCostumes = 11;
 
 void loop_costume_token(void) {
     if (gCurrentObject->oAction == 0) {
-        gCurrentObject->oBehParams2ndByte = costume_table[gCurrentObject->oBehParams2ndByte];
+        gCurrentObject->oBehParams2ndByte = randomizer_costume_table[gCurrentObject->oBehParams2ndByte];
     }
 
     gMarioState->TokenParam2 = gCurrentObject->oBehParams2ndByte;

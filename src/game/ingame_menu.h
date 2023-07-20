@@ -49,7 +49,8 @@ enum HUDFlashModes {
     HUD_FLASH_KEYS
 };
 
-extern u32 pooptable[];
+extern u32 pooptable[]; //my favorite
+extern u16 shoptable[12][6];
 
 extern s16 gDialogID;
 
