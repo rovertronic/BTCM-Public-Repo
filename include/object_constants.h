@@ -984,6 +984,7 @@ enum troll_trigger {
     TTRIG_PLANT,
     TTRIG_GHOSTFLOOR,
     TTRIG_TRAIN,
+    TTRIG_FENCE_ME_IN,
 };
 
 /* Star General */

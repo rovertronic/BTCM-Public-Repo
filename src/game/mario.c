@@ -2221,6 +2221,15 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         }
     }
 
+    if ((gMarioState->boning_time)&&(gGlobalTimer%8==0)) {
+        if (gMarioState->boning_timer > 115) {
+            cur_obj_shake_screen(SHAKE_POS_SMALL);
+        }
+        if ((gMarioState->boning_timer > 0)&&(gMarioState->boning_timer < 10)) {
+            cur_obj_shake_screen(SHAKE_POS_SMALL);
+        }
+    }
+
     //Gamer Mario
     ColorShift += 0x200;
     RainbowMario[0] = (coss(ColorShift)+1)*127;
@@ -2390,6 +2399,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             struct Object *oneup;
             oneup = cur_obj_nearest_object_with_behavior(bhvHidden1upInPole);
             if (!oneup) {
+                play_puzzle_jingle();
                 spawn_object(gMarioObject,MODEL_1UP,bhvHidden1upInPole);
             }
         }

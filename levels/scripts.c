@@ -74,6 +74,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CHECKPOINT_FLAG,  checkpoint_flag_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MONITOR, monitor_geo),
     LOAD_MODEL_FROM_GEO(MODEL_PILLAR_TROLL, trollpillar2_geo), 
+    LOAD_MODEL_FROM_GEO(MODEL_TROLLSPAWN,   trollspawn_geo),
 
     LOAD_MODEL_FROM_GEO(0xF0,                   crowbar2_geo),
     LOAD_MODEL_FROM_GEO(0xEF,                   green_coin_geo),

@@ -6246,6 +6246,21 @@ void bhv_troll_trigger() {
     }
 }
 
+void bhv_box_checkpoint(void) {
+    u8 size = GET_BPARAM1(o->oBehParams);
+    u8 trigger = GET_BPARAM2(o->oBehParams);
+    f32 cube_radius = 100.0f*size;//+100 and -100 for a total of 200 : >
+
+    if (gMarioState->boning_timer==0            ) {return;}
+    if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
+    if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
+    if (gMarioState->pos[1]>o->oPosY+cube_radius) {return;}
+    if (gMarioState->pos[1]<o->oPosY-cube_radius) {return;}
+    if (gMarioState->pos[2]>o->oPosZ+cube_radius) {return;}
+    if (gMarioState->pos[2]<o->oPosZ-cube_radius) {return;}
+    gMarioState->troll_checkpoint = trigger;
+}
+
 void bhv_quicksand_escalator(void) {
     if(o->oAction>0){return;}
 
@@ -6446,7 +6461,7 @@ void bhv_springtrap(void) {
                 rigid_body_add_force(nearest_cone->rigidBody, &o->oPosVec, force, TRUE);
             }
 
-            if (gMarioState->spring_boredom > 5) {return;}
+            if (gMarioState->spring_boredom > 3) {return;}
             if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
             if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
             if (gMarioState->pos[1]>o->oPosY+cube_radius_2) {return;}
@@ -6607,11 +6622,13 @@ void bhv_troll_pillar(void) {
 
     switch(gCurrAreaIndex) {
         case 1: //wait to be hit
-            if (lateral_dist_between_objects(o,gMarioObject) < 400.0) {
+            if ((lateral_dist_between_objects(o,gMarioObject) < 400.0)&&(gMarioState->troll_checkpoint == 2)) {
                 o->oAction++;
                 cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
                 gMarioState->boning_time = TRUE;
-                gMarioState->boning_timer = 90;
+                gMarioState->boning_timer = 120;
+                gMarioState->troll_checkpoint = 3;
+                gMarioState->spring_boredom = 0;
 
                 display_song_text(4);
                 play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_TURNAROUND), 0);
@@ -6848,4 +6865,46 @@ void bhv_checkpoint_flag(void) {
 
     o->oFaceAngleRoll = sins(o->oTimer*0x900)*o->oVelY;
     o->oVelY *= 0.97f;
+}
+
+void bhv_troll_spawn(void) {
+    struct Object *trap;
+    switch(o->oAction) {
+        case 0:
+            cur_obj_hide();
+            if (o->oDistanceToMario < 2200.0f) {
+                create_sound_spawner(SOUND_OBJ_BOO_LAUGH_LONG);
+                o->oAction++;
+                o->oMoveAngleYaw = 0;
+            }
+        break;
+        case 1:
+            cur_obj_unhide();
+            cur_obj_scale(sins(o->oMoveAngleYaw));
+            if (o->oMoveAngleYaw <= 0) {
+                cur_obj_scale(0.1f);
+            }
+            o->oMoveAngleYaw += 0x800;
+
+            if (o->oMoveAngleYaw == 0x4000) {
+                switch (o->oBehParams2ndByte) {
+                    case 0:
+                        trap = spawn_object(o,MODEL_WHOMP,bhvSmallWhomp);
+                        trap->oMoveAngleYaw = o->oAngleToMario;
+                        trap->oFaceAngleYaw = o->oAngleToMario;
+                    break;
+                    case 1:
+                        trap = spawn_object(o,MODEL_GOOMBA,bhvGoombaNoDrop);
+                        trap->oMoveAngleYaw = o->oAngleToMario;
+                        trap->oFaceAngleYaw = o->oAngleToMario;
+                        trap->oBehParams = 0x01000000;
+                    break;
+                }
+            }
+            if (o->oTimer == 16) {
+                o->oAction ++;
+                cur_obj_hide();
+            }
+        break;
+    }
 }

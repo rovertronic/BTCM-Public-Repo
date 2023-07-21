@@ -43,6 +43,7 @@ void whomp_init(void) {
 }
 
 void whomp_turn(void) {
+
     if (o->oSubAction == 0) {
         o->oForwardVel = 0.0f;
         cur_obj_init_animation_with_accel_and_sound(0, 1.0f);
@@ -65,6 +66,10 @@ void whomp_patrol(void) {
     s16 marioAngle = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
     f32 distWalked = cur_obj_lateral_dist_to_home();
     f32 patrolDist = 700.0f;
+
+    if (gMarioState->boning_time) {
+        distWalked = 0.0f;
+    }
 
     cur_obj_init_animation_with_accel_and_sound(0, 1.0f);
     o->oForwardVel = 3.0f;
@@ -351,6 +356,10 @@ void bhv_whomp_loop(void) {
     f32 latdist;
 
     if ((gGlobalTimer%2==1)&&(gMarioState->slowMoActive)) {o->oTimer--;return;}
+
+    if (gMarioState->boning_time) {
+        cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
+    }
 
     cur_obj_update_floor_and_walls();
     cur_obj_call_action_function(sWhompActions);

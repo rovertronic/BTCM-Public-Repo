@@ -1146,6 +1146,11 @@ void event_main(void) {
                 revent_halt = TRUE;
             break;
             case E_TROLL_DEATH:
+                if ((gMarioState->boning_time)&&(gMarioState->boning_timer==0)) {
+                    gMarioState->troll_checkpoint = 2;
+                    gMarioState->boning_time = FALSE;
+                }
+
                 level_trigger_warp(gMarioState, WARP_OP_LOOK_UP);
                 sSourceWarpNodeId = 0x0A+gMarioState->troll_checkpoint;
                 revent_halt = TRUE;

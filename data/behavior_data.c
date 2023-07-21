@@ -6162,6 +6162,19 @@ const BehaviorScript bhvGoomba[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvGoombaNoDrop[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_goomba_init),
+    SCALE(0,150),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_goomba_update),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvRex[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -7206,7 +7219,7 @@ const BehaviorScript bhvTrainCeil[] = {
     END_LOOP(),
 };
 
-extern bhv_quicksand_escalator(void);
+extern void bhv_quicksand_escalator(void);
 const BehaviorScript bhvQuicksandEscalator[] = {
     BEGIN(OBJ_LIST_SURFACE),
     SET_FLOAT(oCollisionDistance, 10000),
@@ -7217,11 +7230,19 @@ const BehaviorScript bhvQuicksandEscalator[] = {
     END_LOOP(),
 };
 
-extern bhv_troll_trigger(void);
+extern void bhv_troll_trigger(void);
 const BehaviorScript bhvTrollTrigger[] = {
     BEGIN(OBJ_LIST_LEVEL),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_troll_trigger),
+    END_LOOP(),
+};
+
+extern void bhv_box_checkpoint(void);
+const BehaviorScript bhvBoxCheckpoint[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_box_checkpoint),
     END_LOOP(),
 };
 
@@ -9532,5 +9553,14 @@ const BehaviorScript bhvMonitor[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_monitor),
+    END_LOOP(),
+};
+
+extern void bhv_troll_spawn(void);
+const BehaviorScript bhvTrollSpawn[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_troll_spawn),
     END_LOOP(),
 };

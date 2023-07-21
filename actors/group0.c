@@ -139,3 +139,4 @@
 #include "checkpoint_flag/anims/table.inc.c"
 #include "monitor/model.inc.c"
 #include "trollpillar2/model.inc.c"
+#include "trollspawn/model.inc.c"

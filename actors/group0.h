@@ -606,4 +606,6 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "trollpillar2/geo_header.h"
 
+#include "trollspawn/geo_header.h"
+
 #endif
