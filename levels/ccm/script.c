@@ -401,6 +401,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, 984, -1310, 2152, 0, 0, 0, (6 << 24) | (TTRIG_PLANT << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, 10652, 3074, -11726, 0, 0, 0, (8 << 24) | (4 << 16), bhvBoxCheckpoint),
 		OBJECT(MODEL_NONE, -8755, -1116, 5262, 0, 0, 0, (10 << 24) | (TTRIG_FENCE_ME_IN << 16), bhvTrollTrigger),
+		OBJECT(MODEL_NONE, -9200, -2432, 6598, 0, 0, 0, (3 << 24) | (TTRIG_WINNER << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, -8614, 3094, -4936, 0, 0, 0, (3 << 24) | (TTRIG_TRAIN << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, -8614, 3094, -6719, 0, 0, 0, (3 << 24) | (TTRIG_TRAIN << 16), bhvTrollTrigger),
 		OBJECT(MODEL_TROLLGATE, 3370, 1455, -3787, 0, 0, 0, 0x00000000, bhvTrollgate),

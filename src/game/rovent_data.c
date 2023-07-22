@@ -1469,6 +1469,23 @@ s32 event_watch_nearest_tv[] = {
     E_END,
 };
 
+s32 event_tl_lab_intro[] = {
+    E_WAIT, 30,
+    E_CAM_TOGGLE,
+    E_TARGET_OBJECT, bhvMonitor,
+    E_TARGET_OBJECT_ACTION, 1,
+    E_WATCH_TV,
+    E_WAIT, 10,
+
+    E_CAM_TOGGLE,
+    E_SONG_TITLE, 3,
+    E_MUSIC, SEQ_STREAMED_SCIENCES,
+
+    E_PROGRESS_SET, PROG_TL_LEVEL2,
+
+    E_END,
+};
+
 //LIST DO NOT RENAME
 s32 *event_list[] = {
     &event_test,
@@ -1518,6 +1535,7 @@ s32 *event_list[] = {
     &event_felegg,
     &event_tl_intro,
     &event_watch_nearest_tv,
+    &event_tl_lab_intro
 };
 
 f32 *spline_list[] = {

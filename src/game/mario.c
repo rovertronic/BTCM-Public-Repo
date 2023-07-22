@@ -2558,7 +2558,7 @@ void init_mario(void) {
                 if (save_file_get_progression() == PROG_TL_NEWGAME) {
                     //just started
                     save_file_set_badge_unlock(1<<AVATAR_MARIO);
-                    //run_event(EVENT_TL_INTRO);
+                    run_event(EVENT_TL_INTRO);
                 } else {
                     //not noob
                     play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_RUNOFF), 0);
@@ -2566,7 +2566,14 @@ void init_mario(void) {
                 }
             break;
             case LEVEL_CASTLE:
-                display_song_text(3);
+                if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
+                    //enter the lab
+                    run_event(EVENT_TL_LAB_INTRO);
+                } else {
+                    //back to the lab
+                    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SCIENCES), 0);
+                    display_song_text(3);
+                }
             break;
         }
     }

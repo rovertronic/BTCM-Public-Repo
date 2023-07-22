@@ -170,6 +170,7 @@ enum revent_events {
     EVENT_FELEGG,
     EVENT_TL_INTRO,
     EVENT_WATCH_NEAREST_TV,
+    EVENT_TL_LAB_INTRO,
 };
 
 enum revent_spline_list {

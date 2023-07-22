@@ -3730,7 +3730,7 @@ DEFINE_DIALOG(DIALOG_FELEGG_1, 1, 4, 95, 180, _("\
 wait"))
 
 DEFINE_DIALOG(DIALOG_FELEGG_2, 1, 4, 95, 180, _("\
-didn't felegg do this troll already in 2019"))
+didn't felegg do this troll in 2019 already"))
 
 DEFINE_DIALOG(DIALOG_FELEGG_3, 1, 4, 95, 180, _("\
 way to be original rovert"))
