@@ -2575,6 +2575,10 @@ void init_mario(void) {
                     display_song_text(3);
                 }
             break;
+            case LEVEL_JRB:
+                //peach's castle intro
+                run_event(EVENT_CASTLE_INTRO);
+            break;
         }
     }
 

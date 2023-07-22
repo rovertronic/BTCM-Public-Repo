@@ -1419,6 +1419,7 @@ const BehaviorScript bhvSuperFlame[] = {
     END_LOOP(),
 };
 
+extern void upside_down_if_under_zero(void);
 const BehaviorScript bhvFlame[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
@@ -1429,6 +1430,7 @@ const BehaviorScript bhvFlame[] = {
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
     SET_INT(oIntangibleTimer, 0),
     CALL_NATIVE(bhv_init_room),
+    CALL_NATIVE(upside_down_if_under_zero),
     BEGIN_LOOP(),
         SET_INT(oInteractStatus, INT_STATUS_NONE),
         ANIMATE_TEXTURE(oAnimState, 2),
@@ -4292,7 +4294,6 @@ const BehaviorScript bhvBobomb[] = {
     BEGIN(OBJ_LIST_DESTRUCTIVE),
     OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, bobomb_seg8_anims_0802396C),
-    DROP_TO_FLOOR(),
     ANIMATE(BOBOMB_ANIM_WALKING),
     SET_INT(oIntangibleTimer, 0),
     SET_HOME(),
@@ -4716,7 +4717,7 @@ const BehaviorScript bhvExplosion[] = {
     SET_INTERACT_TYPE(INTERACT_DAMAGE),
     SET_INT(oDamageOrCoinValue, 4),
     SET_INT(oIntangibleTimer, 0),
-    SET_HITBOX_WITH_OFFSET(/*Radius*/ 150, /*Height*/ 300, /*Downwards offset*/ 150),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 1000, /*Height*/ 1000, /*Downwards offset*/ 150),
     SET_INT(oAnimState, OBJ_ANIM_STATE_INIT_ANIM),
     SET_INT(oBehParams2ndByte, 0),
     CALL_NATIVE(bhv_explosion_init),

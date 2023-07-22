@@ -6908,3 +6908,9 @@ void bhv_troll_spawn(void) {
         break;
     }
 }
+
+void upside_down_if_under_zero(void) {
+    if (o->oPosY < 0.0f) {
+        cur_obj_scale(-7.0f);
+    }
+}

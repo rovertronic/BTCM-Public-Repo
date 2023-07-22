@@ -964,6 +964,58 @@ Gfx *geo_render_mirror_mario(s32 callContext, struct GraphNode *node, UNUSED Mat
     return NULL;
 }
 
+#define CASTLE_MIRROR_Y 0.0f;
+Gfx *geo_render_mirror_mario_y(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx) {
+    f32 mirroredY;
+    struct Object *mario = gMarioStates[0].marioObj;
+
+    u8 show_cond = TRUE;
+
+    if ((gMarioState->TrollTrigger == TTRIG_NO_Y_REFLECTION)&&(gMarioState->ExitTroll == FALSE)) {
+        show_cond = FALSE;
+    }
+
+    switch (callContext) {
+        case GEO_CONTEXT_CREATE:
+            init_graph_node_object(NULL, &gMirrorMario, NULL, gVec3fZero, gVec3sZero, gVec3fOne);
+            break;
+        case GEO_CONTEXT_AREA_LOAD:
+            geo_add_child(node, &gMirrorMario.node);
+            break;
+        case GEO_CONTEXT_AREA_UNLOAD:
+            geo_remove_child(&gMirrorMario.node);
+            break;
+        case GEO_CONTEXT_RENDER:
+                // TODO: Is this a geo layout copy or a graph node copy?
+            if (show_cond) {
+                gMirrorMario.sharedChild = mario->header.gfx.sharedChild;
+                gMirrorMario.areaIndex = mario->header.gfx.areaIndex;
+                vec3s_copy(gMirrorMario.angle, mario->header.gfx.angle);
+                vec3f_copy(gMirrorMario.pos, mario->header.gfx.pos);
+                vec3f_copy(gMirrorMario.scale, mario->header.gfx.scale);
+
+                gMirrorMario.animInfo = mario->header.gfx.animInfo;
+                mirroredY = CASTLE_MIRROR_Y - gMirrorMario.pos[1];
+                gMirrorMario.pos[1] = (0.0f-mario->header.gfx.pos[1]) + CASTLE_MIRROR_Y;
+                gMirrorMario.scale[1] *= -1.0f;
+
+                ((struct GraphNode *) &gMirrorMario)->flags |= GRAPH_RENDER_ACTIVE;
+            } else {
+                gMirrorMario.sharedChild = mario->header.gfx.sharedChild;
+                gMirrorMario.areaIndex = mario->header.gfx.areaIndex;
+
+                gMirrorMario.animInfo = mario->header.gfx.animInfo;
+                gMirrorMario.pos[1] = -500.0f;
+                gMirrorMario.angle[1] = -gMirrorMario.angle[1];
+                gMirrorMario.scale[0] *= -1.0f;
+                
+                ((struct GraphNode *) &gMirrorMario)->flags &= ~GRAPH_RENDER_ACTIVE;
+            }
+            break;
+    }
+    return NULL;
+}
+
 /**
  * Since Mirror Mario has an x scale of -1, the mesh becomes inside out.
  * This node corrects that by changing the culling mode accordingly.

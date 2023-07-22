@@ -986,6 +986,8 @@ enum troll_trigger {
     TTRIG_TRAIN,
     TTRIG_FENCE_ME_IN,
     TTRIG_WINNER,
+    TTRIG_NO_Y_REFLECTION,
+    TTRIG_BOBOMB_ATTACK,
 };
 
 /* Star General */

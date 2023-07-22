@@ -68,20 +68,23 @@ void bobomb_check_interactions(void) {
 void bobomb_act_patrol(void) {
     o->oForwardVel = 5.0f;
 
-    s16 collisionFlags = object_step();
-    if (obj_return_home_if_safe(o, o->oHomeX, o->oHomeY, o->oHomeZ, 400)
-     && obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToMario, 0x2000)) {
-        o->oBobombFuseLit = TRUE;
-        o->oAction = BOBOMB_ACT_CHASE_MARIO;
-    }
+    //s16 collisionFlags = object_step();
+    //if (obj_return_home_if_safe(o, o->oHomeX, o->oHomeY, o->oHomeZ, 400)
+    // && obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToMario, 0x2000)) {
+    //    o->oBobombFuseLit = TRUE;
+    //    o->oAction = BOBOMB_ACT_CHASE_MARIO;
+    //}
+//
+    //obj_check_floor_death(collisionFlags, sObjFloor);
 
-    obj_check_floor_death(collisionFlags, sObjFloor);
+    o->oBobombFuseLit = TRUE;
+    o->oAction = BOBOMB_ACT_CHASE_MARIO;
 }
 
 void bobomb_act_chase_mario(void) {
     s16 animFrame = ++o->header.gfx.animInfo.animFrame;
 
-    o->oForwardVel = 20.0f;
+    o->oForwardVel = 80.0f;
     s16 collisionFlags = object_step();
 
     if (animFrame == 5 || animFrame == 16) {
@@ -90,6 +93,10 @@ void bobomb_act_chase_mario(void) {
 
     obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_YAW_INDEX, 0x800);
     obj_check_floor_death(collisionFlags, sObjFloor);
+
+    if (o->oDistanceToMario < 150.0f) {
+        o->oAction = BOBOMB_ACT_EXPLODE;
+    }
 }
 
 void bobomb_act_launched(void) {
@@ -239,6 +246,13 @@ void curr_obj_random_blink(s32 *blinkTimer) {
 
 void bhv_bobomb_loop(void) {
     s8 dustPeriodMinus1;
+
+    if (gMarioState->TrollTrigger == TTRIG_BOBOMB_ATTACK) {
+        cur_obj_unhide();
+    } else {
+        cur_obj_hide();
+        return;
+    }
 
     if (is_point_within_radius_of_mario(o->oPosX, o->oPosY, o->oPosZ, 4000)) {
         switch (o->oHeldState) {
