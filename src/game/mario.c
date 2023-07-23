@@ -2504,6 +2504,7 @@ void init_mario(void) {
     gMarioState->slowMoActive = FALSE;
     gMarioState->timeScale = 1.0f;
     gMarioState->spring_boredom = 0; // too many spring traps = unfun stream
+    gMarioState->y_reflection = 0.0f;
 
     jumpscared = FALSE;
 
@@ -2577,6 +2578,10 @@ void init_mario(void) {
             break;
             case LEVEL_JRB:
                 //peach's castle intro
+                save_file_set_badge_unlock(1<<AVATAR_MARIO);
+                save_file_set_badge_unlock(1<<AVATAR_FAST);
+                save_file_set_badge_unlock(1<<AVATAR_FORD);
+                save_file_set_badge_unlock(1<<AVATAR_PINGAS);
                 run_event(EVENT_CASTLE_INTRO);
             break;
         }

@@ -56,3 +56,4 @@
 #include "levels/jrb/bigmine/model.inc.c"
 #include "levels/jrb/bigmine/collision.inc.c"
 #include "levels/jrb/jrb_sky/model.inc.c"
+#include "levels/jrb/creepie_door/model.inc.c"

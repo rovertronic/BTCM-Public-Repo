@@ -988,6 +988,8 @@ enum troll_trigger {
     TTRIG_WINNER,
     TTRIG_NO_Y_REFLECTION,
     TTRIG_BOBOMB_ATTACK,
+    TTRIG_ADJUST_Y_REFLECTION,
+    TTRIG_VANISH_REFLECTION,
 };
 
 /* Star General */

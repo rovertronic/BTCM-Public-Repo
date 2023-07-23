@@ -964,7 +964,6 @@ Gfx *geo_render_mirror_mario(s32 callContext, struct GraphNode *node, UNUSED Mat
     return NULL;
 }
 
-#define CASTLE_MIRROR_Y 0.0f;
 Gfx *geo_render_mirror_mario_y(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx) {
     f32 mirroredY;
     struct Object *mario = gMarioStates[0].marioObj;
@@ -972,6 +971,9 @@ Gfx *geo_render_mirror_mario_y(s32 callContext, struct GraphNode *node, UNUSED M
     u8 show_cond = TRUE;
 
     if ((gMarioState->TrollTrigger == TTRIG_NO_Y_REFLECTION)&&(gMarioState->ExitTroll == FALSE)) {
+        show_cond = FALSE;
+    }
+    if (gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION) {
         show_cond = FALSE;
     }
 
@@ -995,8 +997,7 @@ Gfx *geo_render_mirror_mario_y(s32 callContext, struct GraphNode *node, UNUSED M
                 vec3f_copy(gMirrorMario.scale, mario->header.gfx.scale);
 
                 gMirrorMario.animInfo = mario->header.gfx.animInfo;
-                mirroredY = CASTLE_MIRROR_Y - gMirrorMario.pos[1];
-                gMirrorMario.pos[1] = (0.0f-mario->header.gfx.pos[1]) + CASTLE_MIRROR_Y;
+                gMirrorMario.pos[1] = gMarioState->y_reflection + (gMarioState->y_reflection-mario->header.gfx.pos[1]);
                 gMirrorMario.scale[1] *= -1.0f;
 
                 ((struct GraphNode *) &gMirrorMario)->flags |= GRAPH_RENDER_ACTIVE;

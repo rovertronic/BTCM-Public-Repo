@@ -30,3 +30,4 @@
 #include "levels/jrb/pode_seg/geo.inc.c"
 #include "levels/jrb/pode_head/geo.inc.c"
 #include "levels/jrb/bigmine/geo.inc.c"
+#include "levels/jrb/creepie_door/geo.inc.c"

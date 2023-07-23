@@ -17,6 +17,10 @@
 #include "actors/ocean_ttc/texscroll.inc.c"
 #include "actors/tl_logo2/texscroll.inc.c"
 #include "actors/voidleak/texscroll.inc.c"
+#include "actors/mario/texscroll.inc.c"
+#include "actors/a_fast/texscroll.inc.c"
+#include "actors/aford/texscroll.inc.c"
+#include "actors/a_pingas/texscroll.inc.c"
 void scroll_textures_group0() {
 	
 	
@@ -48,4 +52,8 @@ void scroll_textures_group0() {
 	scroll_actor_geo_tvhead();
 		scroll_actor_geo_tl_logo2();
 	scroll_actor_geo_voidleak();
+	scroll_actor_geo_mario();
+	scroll_actor_geo_a_fast();
+	scroll_actor_geo_aford();
+	scroll_actor_geo_a_pingas();
 }

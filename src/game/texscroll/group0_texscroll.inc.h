@@ -1,3 +1,7 @@
+#include "actors/a_pingas/texscroll.inc.h"
+#include "actors/aford/texscroll.inc.h"
+#include "actors/a_fast/texscroll.inc.h"
+#include "actors/mario/texscroll.inc.h"
 #include "actors/voidleak/texscroll.inc.h"
 #include "actors/tl_logo2/texscroll.inc.h"
 #include "actors/ocean_ttc/texscroll.inc.h"

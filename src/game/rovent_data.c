@@ -1503,6 +1503,19 @@ s32 event_castle_intro[] = {
     E_END,
 };
 
+s32 event_watch_nearest_tv_lv1_cp1[] = {
+    E_WAIT, 30,
+    E_CAM_TOGGLE,
+    E_TARGET_OBJECT, bhvMonitor,
+    E_TARGET_OBJECT_ACTION, 1,
+    E_WATCH_TV,
+    E_WAIT, 10,
+
+    E_SONG_TITLE, 5,
+    E_MUSIC, SEQ_EVENT_CUTSCENE_CREDITS,
+    E_END,
+};
+
 //LIST DO NOT RENAME
 s32 *event_list[] = {
     &event_test,
@@ -1553,7 +1566,8 @@ s32 *event_list[] = {
     &event_tl_intro,
     &event_watch_nearest_tv,
     &event_tl_lab_intro,
-    &event_castle_intro
+    &event_castle_intro,
+    &event_watch_nearest_tv_lv1_cp1,
 };
 
 f32 *spline_list[] = {

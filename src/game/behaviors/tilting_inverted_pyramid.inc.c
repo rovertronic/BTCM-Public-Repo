@@ -6211,6 +6211,11 @@ void bhv_troll_trigger() {
     f32 cube_radius = 100.0f*size;//+100 and -100 for a total of 200 : >
     u8 outside = FALSE;
 
+    if (gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION) {
+        //boss fight has started
+        return;
+    }
+
     switch(o->oAction) {
         case 0: //wait for mario to enter
             if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
@@ -6224,6 +6229,14 @@ void bhv_troll_trigger() {
             o->oAction++;
         break;
         case 1: //mario inside box
+
+            //hardcoded troll trigger stuff
+            switch(o->oBehParams2ndByte) {
+                case TTRIG_ADJUST_Y_REFLECTION:
+                    gMarioState->y_reflection = o->oPosY;
+                break;
+            }
+
             if (gMarioState->pos[0]>o->oPosX+cube_radius) {outside=TRUE;}
             if (gMarioState->pos[0]<o->oPosX-cube_radius) {outside=TRUE;}
             if (gMarioState->pos[1]>o->oPosY+cube_radius) {outside=TRUE;}
@@ -6912,5 +6925,13 @@ void bhv_troll_spawn(void) {
 void upside_down_if_under_zero(void) {
     if (o->oPosY < 0.0f) {
         cur_obj_scale(-7.0f);
+    }
+
+    //big flame for boss
+    if (o->oBehParams2ndByte == 1) {
+        cur_obj_scale(14.0f);
+    }
+    if (o->oBehParams2ndByte == 2) {
+        cur_obj_scale(14.0f);
     }
 }
