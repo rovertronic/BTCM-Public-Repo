@@ -1512,7 +1512,7 @@ s32 event_watch_nearest_tv_lv1_cp1[] = {
     E_WAIT, 10,
 
     E_SONG_TITLE, 5,
-    E_MUSIC, SEQ_EVENT_CUTSCENE_CREDITS,
+    E_MUSIC, SEQ_EVENT_CUTSCENE_ENDING,
     E_END,
 };
 

@@ -982,6 +982,8 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
     s16 warpDoorId = (obj->oBehParams >> 24);
 #endif
 
+
+
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
 #ifndef UNLOCK_ALL
         if (warpDoorId == 1 && !(saveFlags & SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR)) {
@@ -1011,6 +1013,8 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
             doorAction = ACT_UNLOCKING_KEY_DOOR;
         }
 #endif
+
+        return FALSE;
 
         if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
             u32 actionArg = should_push_or_pull_door(m, obj) + WARP_FLAG_DOOR_IS_WARP;
@@ -1043,6 +1047,10 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
     s16 requiredNumStars = o->oBehParams2ndByte;
     s16 behparam1 = o->oBehParams >> 24;
     s16 numStars = gMarioState->numStars;
+
+    if (gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION) {
+        return FALSE;
+    }
 
     if (behparam1 == 1) {
         numStars = gMarioState->numMetalStars;

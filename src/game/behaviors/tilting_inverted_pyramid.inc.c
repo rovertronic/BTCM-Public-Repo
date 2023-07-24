@@ -6853,13 +6853,14 @@ void bhv_checkpoint_flag(void) {
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gMarioState->marioObj->header.gfx.cameraToObject);
 
             if (gCurrLevelNum == LEVEL_CCM) {
-                run_event(EVENT_WATCH_NEAREST_TV);
                 switch(o->oBehParams2ndByte) {
                     case 1:
                         save_file_set_badge_unlock(1<<AVATAR_FORD);
+                        run_event(EVENT_LV1_CP1);
                     break;
                     case 2:
                         save_file_set_badge_unlock(1<<AVATAR_FAST);
+                        run_event(EVENT_WATCH_NEAREST_TV);
                     break;
                 }
             }

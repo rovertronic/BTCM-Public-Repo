@@ -1858,6 +1858,7 @@ f32 bad_apple_par = 0.0f;
 
 u16 mario_decay;
 u8 using_bodylog = FALSE;
+u8 weird_init = FALSE;
 
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
@@ -1884,6 +1885,49 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     gMarioState->StarRadarLocation[1] = gMarioState->pos[1];
     gMarioState->StarRadarLocation[2] = gMarioState->pos[2];
     gMarioState->StarRadarExist = TRUE;
+
+    if (weird_init) {
+        weird_init = FALSE;
+        //trolllab level start stuff
+        if (!gMarioState->boning_time) {
+            switch(gCurrLevelNum) {
+                case LEVEL_CCM:
+                    if (save_file_get_progression() == PROG_TL_NEWGAME) {
+                        //just started
+                        save_file_set_badge_unlock(1<<AVATAR_MARIO);
+                        run_event(EVENT_TL_INTRO);
+                    } else {
+                        //not noob
+                        if (gMarioState->troll_checkpoint == 0) {
+                            play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_RUNOFF), 0);
+                            display_song_text(2);
+                        } else {
+                            play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_ENDING), 0);
+                            display_song_text(5);
+                        }
+                    }
+                break;
+                case LEVEL_CASTLE:
+                    if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
+                        //enter the lab
+                        run_event(EVENT_TL_LAB_INTRO);
+                    } else {
+                        //back to the lab
+                        play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SCIENCES), 0);
+                        display_song_text(3);
+                    }
+                break;
+                case LEVEL_JRB:
+                    //peach's castle intro
+                    save_file_set_badge_unlock(1<<AVATAR_MARIO);
+                    save_file_set_badge_unlock(1<<AVATAR_FAST);
+                    save_file_set_badge_unlock(1<<AVATAR_FORD);
+                    save_file_set_badge_unlock(1<<AVATAR_PINGAS);
+                    //run_event(EVENT_CASTLE_INTRO);
+                break;
+            }
+        }
+    }
 
     //manage global coins
     if (gMarioState->gGlobalCoinGain > 0) {
@@ -2496,6 +2540,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 void init_mario(void) {
     s16 currenthp = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
+    weird_init = TRUE;
     gMarioState->Avatar = AVATAR_MARIO;
     gMarioState->TrollTrigger = TTRIG_NONE;
     gMarioState->slowmobar = 1.0f;
@@ -2551,41 +2596,6 @@ void init_mario(void) {
     //if (gCurrLevelNum == LEVEL_BITS) {
     //    save_file_set_progression(PROG_ON_AGAMEMNON);
     //}
-
-    //trolllab level start stuff
-    if (!gMarioState->boning_time) {
-        switch(gCurrLevelNum) {
-            case LEVEL_CCM:
-                if (save_file_get_progression() == PROG_TL_NEWGAME) {
-                    //just started
-                    save_file_set_badge_unlock(1<<AVATAR_MARIO);
-                    run_event(EVENT_TL_INTRO);
-                } else {
-                    //not noob
-                    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_RUNOFF), 0);
-                    display_song_text(2);
-                }
-            break;
-            case LEVEL_CASTLE:
-                if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
-                    //enter the lab
-                    run_event(EVENT_TL_LAB_INTRO);
-                } else {
-                    //back to the lab
-                    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SCIENCES), 0);
-                    display_song_text(3);
-                }
-            break;
-            case LEVEL_JRB:
-                //peach's castle intro
-                save_file_set_badge_unlock(1<<AVATAR_MARIO);
-                save_file_set_badge_unlock(1<<AVATAR_FAST);
-                save_file_set_badge_unlock(1<<AVATAR_FORD);
-                save_file_set_badge_unlock(1<<AVATAR_PINGAS);
-                run_event(EVENT_CASTLE_INTRO);
-            break;
-        }
-    }
 
     if (minigame_transition) {
         minigame_transition_func();

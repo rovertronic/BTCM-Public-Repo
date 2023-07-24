@@ -77,17 +77,17 @@ void bhv_cosmic_phantasm(void) {
     }
 
     switch(o->oAction) {
-        case 0:
-            o->oHealth = 3;
-            o->oNumLootCoins = 5;
-            if (o->oBehParams2ndByte == 2) {
-                o->oHealth = 2;
-                o->oNumLootCoins = 0;
+        case 0: //INIT
+            o->oHealth = 10;
+            cur_obj_become_intangible();
+            cur_obj_hide();
+            if ((o->oDistanceToMario > 1500.0f)&&(gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION)) {
+                //IN MY TRAP! I AM COMING.
+                o->oAction = 1;
+                cur_obj_init_animation_with_sound(2);//idle
+                cur_obj_become_tangible();
+                cur_obj_unhide();
             }
-
-            o->oAction = 1;
-            o->oTimer = random_u16()%60;
-            cur_obj_init_animation_with_sound(2);//idle
         break;
         case 1://idle ground
             o->oForwardVel = 0.0f;
@@ -264,6 +264,10 @@ void bhv_cosmic_phantasm(void) {
             if (o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND) {
                 o->oAction = 0;
             }
+        break;
+        //TROLL LAB BEHAVIOR
+        case 8:
+
         break;
     }
 }

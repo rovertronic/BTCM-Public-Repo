@@ -13213,7 +13213,7 @@ Gfx jrb_dl_bsmt_nocol_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx jrb_dl_carpet_mesh_layer_4_vtx_0[64] = {
+Vtx jrb_dl_carpet_mesh_layer_5_vtx_0[64] = {
 	{{ {350, 0, -350}, 0, {496, 496}, {101, 40, 99, 255} }},
 	{{ {700, 0, -350}, 0, {-16, 496}, {95, 34, 86, 255} }},
 	{{ {700, 0, -700}, 0, {-16, -16}, {87, 37, 93, 255} }},
@@ -13280,8 +13280,8 @@ Vtx jrb_dl_carpet_mesh_layer_4_vtx_0[64] = {
 	{{ {350, 0, -350}, 0, {496, 496}, {99, 39, 98, 255} }},
 };
 
-Gfx jrb_dl_carpet_mesh_layer_4_tri_0[] = {
-	gsSPVertex(jrb_dl_carpet_mesh_layer_4_vtx_0 + 0, 32, 0),
+Gfx jrb_dl_carpet_mesh_layer_5_tri_0[] = {
+	gsSPVertex(jrb_dl_carpet_mesh_layer_5_vtx_0 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
@@ -13290,7 +13290,7 @@ Gfx jrb_dl_carpet_mesh_layer_4_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
 	gsSP2Triangles(24, 25, 26, 0, 24, 26, 27, 0),
 	gsSP2Triangles(28, 29, 30, 0, 28, 30, 31, 0),
-	gsSPVertex(jrb_dl_carpet_mesh_layer_4_vtx_0 + 32, 32, 0),
+	gsSPVertex(jrb_dl_carpet_mesh_layer_5_vtx_0 + 32, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
@@ -34739,9 +34739,9 @@ Gfx jrb_dl_bsmt_nocol_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx jrb_dl_carpet_mesh_layer_4[] = {
+Gfx jrb_dl_carpet_mesh_layer_5[] = {
 	gsSPDisplayList(mat_jrb_dl_carpet),
-	gsSPDisplayList(jrb_dl_carpet_mesh_layer_4_tri_0),
+	gsSPDisplayList(jrb_dl_carpet_mesh_layer_5_tri_0),
 	gsSPDisplayList(mat_revert_jrb_dl_carpet),
 	gsSPEndDisplayList(),
 };

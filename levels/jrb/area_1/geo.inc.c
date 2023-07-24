@@ -9,7 +9,7 @@ const GeoLayout jrb_area_1_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, jrb_dl_bsmt_001_mesh_layer_5),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, -128, 0, jrb_dl_bsmt_nocol_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, -6089, 2025, -13354, jrb_dl_carpet_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, -6089, 2025, -13354, jrb_dl_carpet_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, -128, 0, jrb_dl_Cube_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, jrb_dl_Cube_mesh_layer_5),
