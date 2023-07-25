@@ -27,5 +27,6 @@ const struct Animation *const evil_mario_anims[] = {
 	&evil_mario_anim_mario_wiggle_sink,
 	&evil_mario_anim_mario_wiggle_rise,
 	&evil_mario_anim_mario_wiggle_run,
+	&evil_mario_anim_mario_wiggle_groundpound,
 	NULL,
 };

@@ -3616,6 +3616,22 @@ s32 render_menus_and_dialogs(void) {
             play_sound(SOUND_BLOG_3, gGlobalSoundSource);
             gMarioState->Avatar = last_selected_avatar;
             gMarioState->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[avatar_model_ids[gMarioState->Avatar]];
+
+            if (gMarioState->numMaxHP == 6) {
+                gMarioState->numMaxHP = 3;
+
+                gMarioState->health -= 0x100;
+                gMarioState->health /= 2; 
+                gMarioState->health += 0x100;
+            }
+
+            if (last_selected_avatar == AVATAR_PINGAS) {
+                gMarioState->health -= 0x100;
+                gMarioState->health *= 2; 
+                gMarioState->health += 0x100;
+
+                gMarioState->numMaxHP = 6;
+            }
         }
     }//end bodylog
 

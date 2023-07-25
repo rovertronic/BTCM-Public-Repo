@@ -6923,6 +6923,22 @@ void bhv_troll_spawn(void) {
     }
 }
 
+void bhv_void_goo(void) {
+    if (o->oTimer == 0) {
+        o->oMoveAngleYaw = 0x800;
+    }
+    o->header.gfx.scale[0] = sins(o->oMoveAngleYaw);
+    o->header.gfx.scale[2] = sins(o->oMoveAngleYaw);
+    if (o->oMoveAngleYaw <= 0) {
+        cur_obj_hide();
+    }
+    o->oMoveAngleYaw += 0x400;
+    if (o->oTimer == 31) {
+        o->oAction ++;
+        cur_obj_hide();
+    }
+}
+
 void upside_down_if_under_zero(void) {
     if (o->oPosY < 0.0f) {
         cur_obj_scale(-7.0f);

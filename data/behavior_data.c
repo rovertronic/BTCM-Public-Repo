@@ -9565,3 +9565,12 @@ const BehaviorScript bhvTrollSpawn[] = {
         CALL_NATIVE(bhv_troll_spawn),
     END_LOOP(),
 };
+
+extern void bhv_void_goo(void);
+const BehaviorScript bhvVoidGoo[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_void_goo),
+    END_LOOP(),
+};

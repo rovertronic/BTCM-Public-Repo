@@ -140,3 +140,4 @@
 #include "monitor/model.inc.c"
 #include "trollpillar2/model.inc.c"
 #include "trollspawn/model.inc.c"
+#include "voidgoo/model.inc.c"

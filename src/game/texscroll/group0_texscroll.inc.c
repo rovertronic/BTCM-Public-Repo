@@ -21,6 +21,7 @@
 #include "actors/a_fast/texscroll.inc.c"
 #include "actors/aford/texscroll.inc.c"
 #include "actors/a_pingas/texscroll.inc.c"
+#include "actors/voidgoo/texscroll.inc.c"
 void scroll_textures_group0() {
 	
 	
@@ -56,4 +57,5 @@ void scroll_textures_group0() {
 	scroll_actor_geo_a_fast();
 	scroll_actor_geo_aford();
 	scroll_actor_geo_a_pingas();
+	scroll_actor_geo_voidgoo();
 }

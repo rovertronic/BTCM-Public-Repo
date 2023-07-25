@@ -2004,7 +2004,7 @@ s32 cur_obj_set_hitbox_and_die_if_attacked(struct ObjectHitbox *hitbox, s32 deat
                 create_sound_spawner(deathSound);
                 }else{
                 o->oDmgFade = 255;
-                if (save_file_get_badge_equip() & (1<<3)) {
+                if (gMarioState->Avatar == AVATAR_PINGAS) {
                     o->oHealth-=2;
                 }
                 else

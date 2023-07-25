@@ -1987,7 +1987,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     //CONFIGURE GRAVITY
     gMarioState->gravMult = 1.0f;
     //badge gravity
-    if (save_file_get_badge_equip() & (1<<BADGE_WEIGHT)) {
+    if (gMarioState->Avatar == AVATAR_PINGAS) {
         gMarioState->gravMult *= 1.3f;
     }
     if (save_file_get_badge_equip() & (1<<BADGE_FEATHER)) {
@@ -2041,7 +2041,6 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     if (gMarioState->Avatar != costumechange) {
             cur_obj_spawn_particles(&D_8032F270);
             costumechange = gMarioState->Avatar;
-            gMarioState->numMaxHP = 3;
 
             switch(gMarioState->Avatar) {
                 case AVATAR_MARIO:
@@ -2049,7 +2048,6 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                     play_sound(SOUND_MARIO_HERE_WE_GO, gGlobalSoundSource);
                 break;
                 case AVATAR_PINGAS:
-                    gMarioState->numMaxHP = 6;
                     gMarioState->AvatarHeightOffset = 0.0f;
                     play_sound(SOUND_VO_PINGAS, gGlobalSoundSource);
                 break;
@@ -2806,6 +2804,9 @@ void init_mario_from_save_file(void) {
 
     gMarioState->numLives = DEFAULT_NUM_LIVES;
     gMarioState->health = 255 + (255*gMarioState->numMaxHP);
+    gMarioState->healthNormal = 255 + (255*3);
+    gMarioState->healthPingas = 255 + (255*6);
+
     gMarioState->numBadgePoints = gMarioState->numMaxFP;
 #ifdef BREATH_METER
     gMarioState->breath = 0x880;

@@ -58,3 +58,4 @@
 #include "monitor/geo.inc.c"
 #include "trollpillar2/geo.inc.c"
 #include "trollspawn/geo.inc.c"
+#include "voidgoo/geo.inc.c"

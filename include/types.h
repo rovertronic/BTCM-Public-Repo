@@ -556,6 +556,9 @@ struct MarioState {
     /*0xAD*/ s8 numLives;
              s16 gGlobalCoinGain;
     /*0xAE*/ s16 health;
+             s16 healthNormal;
+             s16 healthPingas;
+
     /*0xB0*/ s16 animYTrans;
              s8 powerup;
     /*0xB2*/ u8 hurtCounter;

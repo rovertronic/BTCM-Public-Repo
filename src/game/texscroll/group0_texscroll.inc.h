@@ -1,3 +1,4 @@
+#include "actors/voidgoo/texscroll.inc.h"
 #include "actors/a_pingas/texscroll.inc.h"
 #include "actors/aford/texscroll.inc.h"
 #include "actors/a_fast/texscroll.inc.h"
