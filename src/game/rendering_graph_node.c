@@ -1040,8 +1040,11 @@ void geo_process_shadow(struct GraphNodeShadow *node) {
             shadowPos[2] += -animOffset[0] * sinAng + animOffset[2] * cosAng;
         }
 
-        Gfx *shadowList = create_shadow_below_xyz(shadowPos, shadowScale * 0.5f,
-                                                  node->shadowSolidity, node->shadowType, shifted);
+        //doubled shadow ruins illusion of reflection vanishing
+        Gfx *shadowList = create_shadow_below_xyz(shadowPos, shadowScale * 0.5f, node->shadowSolidity, node->shadowType, shifted);
+        if (gCurGraphNodeObject == &gMirrorMario) {
+            shadowList = NULL;
+        }  
 
         if (shadowList != NULL) {
             mtxf_shadow(gMatStack[gMatStackIndex + 1], *gCurGraphNodeCamera->matrixPtr,

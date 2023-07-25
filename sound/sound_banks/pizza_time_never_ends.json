@@ -1,0 +1,37 @@
+{
+    "date": "2023-07-24",
+    "sample_bank": "streamed_audio",
+    "envelopes": {
+        "envelope": [
+            [
+                6,
+                32700
+            ],
+            [
+                6,
+                32700
+            ],
+            [
+                32700,
+                29430
+            ],
+            "hang"
+        ]
+    },
+    "instruments": {
+        "channel_1": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "pizza_time_never_ends_1"
+        },
+        "channel_2": {
+            "release_rate": 10,
+            "envelope": "envelope",
+            "sound": "pizza_time_never_ends_2"
+        }
+    },
+    "instrument_list": [
+        "channel_1",
+        "channel_2"
+    ]
+}

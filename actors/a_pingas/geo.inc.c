@@ -837,6 +837,7 @@ const GeoLayout a_pingas_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, a_pingas_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, a_pingas_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_INFRONT, a_pingas_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, mat_revert_a_pingas_void_layer1),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

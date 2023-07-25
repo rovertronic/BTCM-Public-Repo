@@ -353,7 +353,7 @@ Gfx *create_shadow_below_xyz(Vec3f pos, s16 shadowScale, u8 shadowSolidity, s8 s
         }
     }
 
-    if (gCurrLevelNum == LEVEL_BBH) {
+    if (gCurrLevelNum == LEVEL_JRB) {
         s->isDecal = FALSE;
     }
 
@@ -369,7 +369,7 @@ Gfx *create_shadow_below_xyz(Vec3f pos, s16 shadowScale, u8 shadowSolidity, s8 s
     // Move the shadow position to the floor height.
     pos[1] = floorHeight;
 
-    if (gCurrLevelNum == LEVEL_BBH) {
+    if (gCurrLevelNum == LEVEL_JRB) {
         pos[1] += 3.0f;
     }
 

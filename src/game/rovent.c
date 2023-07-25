@@ -1190,6 +1190,7 @@ void event_main(void) {
         arg1 = revent_pointer[revent_index+1];
         arg2 = revent_pointer[revent_index+2];
         arg3 = revent_pointer[revent_index+3];
+        f32 yoff = 0.0f;
 
         switch(command) {
             case E_WAIT:
@@ -1271,18 +1272,29 @@ void event_main(void) {
                 //nothing
             break;
             case E_WATCH_TV:
+                if (obj_has_behavior(revent_target_object, bhvPhantasm)) {
+                    yoff = 120.0f;
+                }
+
                 revent_camera_pos[0] = lerp(revent_camera_pos[0],revent_target_object->oPosX + (sins(revent_target_object->oFaceAngleYaw)*300.0f) ,0.2f);
-                revent_camera_pos[1] = lerp(revent_camera_pos[1],revent_target_object->oPosY ,0.2f);
+                revent_camera_pos[1] = lerp(revent_camera_pos[1],revent_target_object->oPosY+yoff ,0.2f);
                 revent_camera_pos[2] = lerp(revent_camera_pos[2],revent_target_object->oPosZ + (coss(revent_target_object->oFaceAngleYaw)*300.0f) ,0.2f);
 
                 revent_camera_foc[0] = lerp(revent_camera_foc[0],revent_target_object->oPosX ,0.2f);
-                revent_camera_foc[1] = lerp(revent_camera_foc[1],revent_target_object->oPosY ,0.2f);
+                revent_camera_foc[1] = lerp(revent_camera_foc[1],revent_target_object->oPosY+yoff ,0.2f);
                 revent_camera_foc[2] = lerp(revent_camera_foc[2],revent_target_object->oPosZ ,0.2f);
 
                 if (revent_target_object->oAction == 0) {
                     revent_halt = FALSE;
                     revent_index ++;
                     raise_background_noise(2);
+                }
+                if (obj_has_behavior(revent_target_object, bhvPhantasm)) {
+                    if (revent_target_object->oAction != 8) {
+                        revent_halt = FALSE;
+                        revent_index ++;
+                        raise_background_noise(2);
+                    }
                 }
             break;
         }

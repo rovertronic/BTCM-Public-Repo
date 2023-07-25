@@ -173,6 +173,7 @@ enum revent_events {
     EVENT_TL_LAB_INTRO,
     EVENT_CASTLE_INTRO,
     EVENT_LV1_CP1,
+    EVENT_KILLER_INTRO,
 };
 
 enum revent_spline_list {

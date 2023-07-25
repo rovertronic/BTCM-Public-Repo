@@ -1,9 +1,22 @@
 // fire_spitter.inc.c
 
 static void fire_spitter_act_idle(void) {
+
+    f32 dist = 1200.0f;
+    //if (o->oBehParams2ndByte == 1) {
+    //    dist = 2000.0f;
+    //    struct Object *the_phantasm = cur_obj_nearest_object_with_behavior(bhvPhantasm);
+    //    if (the_phantasm) {
+    //        if (the_phantasm->oAction == 0) {
+    //            dist = 1.0f;
+    //            //only shoot fire when battle is started. this is a shitty unclean method but whatever
+    //        }
+    //    }
+    //}
+
     approach_f32_ptr(&o->header.gfx.scale[0], 0.2f, 0.002f);
 
-    if (o->oTimer > 4 && o->oDistanceToMario < 1200.0f && !(o->oMoveFlags & OBJ_MOVE_MASK_IN_WATER)) {
+    if (o->oTimer > 4 && o->oDistanceToMario < dist && !(o->oMoveFlags & OBJ_MOVE_MASK_IN_WATER)) {
         //o->oAction = FIRE_SPITTER_ACT_SPIT_FIRE;
         //o->oFireSpitterScaleVel = 0.05f;
         cur_obj_play_sound_2(SOUND_OBJ_FLAME_BLOWN);

@@ -253,6 +253,7 @@ struct GraphNodeObject {
     /*0x4C*/ struct SpawnInfo *spawnInfo;
     /*0x50*/ Mat4 *throwMatrix; // matrix ptr
     /*0x54*/ Vec3f cameraToObject;
+    /*0x55*/ u8 behParam2; //must be set manually
 #ifdef OBJECTS_REJ
     u16 ucode;
 #endif

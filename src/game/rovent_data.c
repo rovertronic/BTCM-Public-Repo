@@ -1516,6 +1516,16 @@ s32 event_watch_nearest_tv_lv1_cp1[] = {
     E_END,
 };
 
+s32 event_killer_intro[] = {
+    E_STOP_MUSIC, SEQ_STREAMED_SMOKEHALLS,
+    E_MUSIC, SEQ_STREAMED_PIZZA_TIME_NEVER_ENDS,
+    E_SONG_TITLE, 6,
+    E_TARGET_OBJECT, bhvPhantasm,
+    E_CAM_TOGGLE,
+    E_WATCH_TV,
+    E_END,
+};
+
 //LIST DO NOT RENAME
 s32 *event_list[] = {
     &event_test,
@@ -1568,6 +1578,7 @@ s32 *event_list[] = {
     &event_tl_lab_intro,
     &event_castle_intro,
     &event_watch_nearest_tv_lv1_cp1,
+    &event_killer_intro,
 };
 
 f32 *spline_list[] = {

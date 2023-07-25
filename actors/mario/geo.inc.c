@@ -817,6 +817,7 @@ const GeoLayout mario_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, mario_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, mario_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_INFRONT, mario_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, mat_revert_mario_void_layer1),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

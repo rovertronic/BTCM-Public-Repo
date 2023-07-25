@@ -13,3 +13,6 @@
 #include "anim_mario_death.inc.c"
 #include "anim_mario_wiggle_intro.inc.c"
 #include "anim_mario_wiggle_stun.inc.c"
+#include "anim_mario_wiggle_sink.inc.c"
+#include "anim_mario_wiggle_rise.inc.c"
+#include "anim_mario_wiggle_run.inc.c"

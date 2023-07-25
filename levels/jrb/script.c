@@ -114,6 +114,8 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_RED_FLAME, -2089, -295, -8334, 0, 0, 0, 0x00000000, bhvFlame),
 		OBJECT(MODEL_RED_FLAME, -6089, -295, -4434, 0, 0, 0, 0x00000000, bhvFlame),
 		OBJECT(MODEL_NONE, -6089, 305, -434, 0, 0, 0, 0x00000000, bhvFireSpitter),
+		OBJECT(MODEL_NONE, -7798, 3113, -15213, 0, 0, 0, (1 << 16), bhvFireSpitter),
+		OBJECT(MODEL_NONE, -4423, 3113, -11819, 0, 0, 0, (1 << 16), bhvFireSpitter),
 		OBJECT(MODEL_NONE, -3637, -2015, 7646, 0, 90, 0, (0x0B << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, -6009, 2025, -10257, 0, 90, 0, (0x0A << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_MONITOR, -2752, -1769, 7646, 0, -90, 0, (5 << 16), bhvMonitor),

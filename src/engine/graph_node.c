@@ -312,6 +312,7 @@ struct GraphNodeObject *init_graph_node_object(struct AllocOnlyPool *pool,
         graphNode->animInfo.animAccel = 0x10000;
         graphNode->animInfo.animTimer = 0;
         graphNode->node.flags |= GRAPH_RENDER_HAS_ANIMATION;
+        graphNode->behParam2 = 0;
     }
 
     return graphNode;

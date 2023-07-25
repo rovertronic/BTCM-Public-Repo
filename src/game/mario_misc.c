@@ -594,10 +594,6 @@ Gfx *geo_switch_mario_eyes(s32 callContext, struct GraphNode *node, UNUSED Mat4 
     struct MarioBodyState *bodyState = &gBodyStates[switchCase->numCases];
     s16 blinkFrame;
 
-    if (gMarioState->action == ACT_TROLLDEATH) {
-        bodyState->eyeState = MARIO_EYES_DEAD;
-    }
-
     if (callContext == GEO_CONTEXT_RENDER) {
         if (bodyState->eyeState == 0) {
             blinkFrame = ((switchCase->numCases * 32 + gAreaUpdateCounter) >> 1) & 0x1F;
@@ -610,7 +606,14 @@ Gfx *geo_switch_mario_eyes(s32 callContext, struct GraphNode *node, UNUSED Mat4 
             switchCase->selectedCase = bodyState->eyeState - 1;
         }
 
-        if (gMarioState->isAfterlife) {
+        //dead person have x eyes
+        if (gMarioState->action == ACT_TROLLDEATH) {
+            bodyState->eyeState = MARIO_EYES_DEAD;
+        }
+
+        //creepie void boss phantasm
+        if ((gCurGraphNodeObject != &gMarioObject->header.gfx)&&(gCurGraphNodeObject != &gMirrorMario)) {
+            //boss phantasm should be creepie and have noyeeys
             switchCase->selectedCase = 3;
         }
     }
@@ -635,6 +638,12 @@ Gfx *geo_mario_tilt_torso(s32 callContext, struct GraphNode *node, UNUSED Mat4 *
         rotNode->rotation[0] = bodyState->torsoAngle[1];
         rotNode->rotation[1] = bodyState->torsoAngle[2];
         rotNode->rotation[2] = bodyState->torsoAngle[0];
+        if ((gCurGraphNodeObject != &gMarioObject->header.gfx)&&(gCurGraphNodeObject != &gMirrorMario)) {
+            //boss phantasm should not tilty
+            rotNode->rotation[0] = 0;
+            rotNode->rotation[1] = 0;
+            rotNode->rotation[2] = 0;
+        }
     }
     return NULL;
 }
@@ -768,10 +777,6 @@ Gfx *geo_switch_mario_cap_effect(s32 callContext, struct GraphNode *node, UNUSED
         switchCase->selectedCase = bodyState->modelState >> 8;
     }
 
-    if ((gCurGraphNodeObject != &gMarioObject->header.gfx)&&(gCurGraphNodeObject != &gMirrorMario)) {
-        switchCase->selectedCase = MODEL_STATE_METAL >> 8;
-        }
-
     if ((gMarioState->flags & MARIO_WING_CAP)&&(gCurGraphNodeObject == &gMarioObject->header.gfx)) {
         switchCase->selectedCase = 4;
     }
@@ -780,8 +785,16 @@ Gfx *geo_switch_mario_cap_effect(s32 callContext, struct GraphNode *node, UNUSED
         switchCase->selectedCase = MODEL_STATE_METAL >> 8;
     }
 
+    //render in front when dead
     if (gMarioState->action == ACT_TROLLDEATH) {
         switchCase->selectedCase = 1;
+    }
+    //creepie void boss phantasm
+    if ((gCurGraphNodeObject != &gMarioObject->header.gfx)&&(gCurGraphNodeObject != &gMirrorMario)) {
+        //the boss phantasm looks normal but eyeless, the rest uze the void material
+        if (gCurGraphNodeObject->behParam2 > 0) {
+            switchCase->selectedCase = MODEL_STATE_METAL >> 8;
+        }
     }
 
     return NULL;

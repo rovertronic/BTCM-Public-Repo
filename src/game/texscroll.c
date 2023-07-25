@@ -43,10 +43,6 @@ void scroll_textures() {
 		scroll_textures_bob();
 	}
 
-	if(SCROLL_CONDITION(sSegmentROMTable[0x4] == (uintptr_t)_group0_yay0SegmentRomStart)) {
-		scroll_textures_group0();
-	}
-
 	if(SCROLL_CONDITION(sSegmentROMTable[0x7] == (uintptr_t)_wf_segment_7SegmentRomStart)) {
 		scroll_textures_wf();
 	}

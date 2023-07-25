@@ -820,6 +820,7 @@ const GeoLayout a_fast_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, a_fast_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, a_fast_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_INFRONT, a_fast_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, mat_revert_a_fast_void_layer1),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

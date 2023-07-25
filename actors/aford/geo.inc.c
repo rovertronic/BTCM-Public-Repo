@@ -820,6 +820,7 @@ const GeoLayout aford_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, aford_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, aford_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_INFRONT, aford_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, mat_revert_aford_void_layer1),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
