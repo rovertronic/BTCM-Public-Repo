@@ -73,7 +73,7 @@ const LevelScript level_jrb_entry[] = {
 	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, jrb_area_1),
-		WARP_NODE(0x0A/*spawn*/, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0A/*spawn*/, LEVEL_JRB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_BLUE_FLAME, -7798, 978, -15213, 0, 0, 0, (2 << 16), bhvFlame),
 		OBJECT(MODEL_BLUE_FLAME, -4423, 978, -11819, 0, 0, 0, (2 << 16), bhvFlame),
 		OBJECT(MODEL_BLUE_FLAME, -7798, 3113, -15213, 0, 0, 0, (1 << 16), bhvFlame),
@@ -114,8 +114,6 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_RED_FLAME, -2089, -295, -8334, 0, 0, 0, 0x00000000, bhvFlame),
 		OBJECT(MODEL_RED_FLAME, -6089, -295, -4434, 0, 0, 0, 0x00000000, bhvFlame),
 		OBJECT(MODEL_NONE, -6089, 305, -434, 0, 0, 0, 0x00000000, bhvFireSpitter),
-		OBJECT(MODEL_NONE, -7798, 3113, -15213, 0, 0, 0, (1 << 16), bhvFireSpitter),
-		OBJECT(MODEL_NONE, -4423, 3113, -11819, 0, 0, 0, (1 << 16), bhvFireSpitter),
 		OBJECT(MODEL_NONE, -3637, -2015, 7646, 0, 90, 0, (0x0B << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, -6009, 2025, -10257, 0, 90, 0, (0x0A << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_MONITOR, -2752, -1769, 7646, 0, -90, 0, (5 << 16), bhvMonitor),

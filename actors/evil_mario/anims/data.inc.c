@@ -17,3 +17,4 @@
 #include "anim_mario_wiggle_rise.inc.c"
 #include "anim_mario_wiggle_run.inc.c"
 #include "anim_mario_wiggle_groundpound.inc.c"
+#include "anim_mario_wiggle_cast.inc.c"

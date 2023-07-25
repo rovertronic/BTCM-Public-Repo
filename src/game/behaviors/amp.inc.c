@@ -81,7 +81,7 @@ static void homing_amp_appear_loop(void) {
 
     // Once the timer becomes greater than 90, i.e. 91 frames have passed,
     // reset the amp's size and start chasing Mario.
-    if (o->oTimer > 90) {
+    if (o->oTimer > 50) {
         cur_obj_scale(1.0f);
         o->oAction = HOMING_AMP_ACT_CHASE;
         o->oAmpYPhase = 0;
@@ -139,7 +139,7 @@ static void homing_amp_chase_loop(void) {
     check_amp_attack();
 
     // Give up if Mario goes further than 1500 units from the amp's original position
-    if (!is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 1500)) {
+    if (o->prevObj->oAction != 13) {
         o->oAction = HOMING_AMP_ACT_GIVE_UP;
     }
 }
@@ -148,17 +148,10 @@ static void homing_amp_chase_loop(void) {
  * Give up on chasing Mario.
  */
 static void homing_amp_give_up_loop(void) {
-    // Move forward for 152 frames
-    o->oForwardVel = 15.0f;
-
-    if (o->oTimer > 150) {
-        // Hide the amp and reset it back to its inactive state
-        vec3f_copy(&o->oPosVec, &o->oHomeVec);
-        o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
-        o->oAction = HOMING_AMP_ACT_INACTIVE;
-        o->oAnimState = 0;
-        o->oForwardVel = 0.0f;
-        o->oHomingAmpAvgY = o->oHomeY;
+    if (o->oTimer < 30) {
+        cur_obj_scale(1.0f - (0.9f * (f32)(o->oTimer / 30.0f)));
+    } else {
+        mark_obj_for_deletion(o);
     }
 }
 
@@ -189,11 +182,8 @@ static void amp_attack_cooldown_loop(void) {
 void bhv_homing_amp_loop(void) {
     switch (o->oAction) {
         case HOMING_AMP_ACT_INACTIVE:
-            if (is_point_within_radius_of_mario(o->oHomeX, o->oHomeY, o->oHomeZ, 800) == TRUE) {
-                // Make the amp start to appear, and un-hide it.
                 o->oAction = HOMING_AMP_ACT_APPEAR;
                 o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
-            }
             break;
 
         case HOMING_AMP_ACT_APPEAR:

@@ -339,7 +339,7 @@ void bhv_cosmic_phantasm(void) {
             if (o->oTimer < 450) {
                 //ATTACK!
                 switch(o->oHealth) {
-                    case 99://phase 1: mario kickers
+                    case 1://phase 1: mario kickers
                         if ((o->oTimer % 10 == 0)&&(minion_count < 10)) {
                             hammer = spawn_object(o,MODEL_MARIO,bhvPhantasm);
                             s16 random_angle = random_u16();
@@ -351,7 +351,20 @@ void bhv_cosmic_phantasm(void) {
                             minion_total++;
                         }
                     break;
-                    case 2://phase 2: fast runners
+                    case 2://phase 2: ford casters (early exit like)
+                        if ((o->oTimer % 30 == 0)&&(minion_count < 10)) {
+                            hammer = spawn_object(o,MODEL_FORD,bhvPhantasm);
+                            s16 random_angle = random_u16();
+                            f32 random_distance = 400.0f+(random_float()*1000.0f);
+                            hammer->oPosX += (sins(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (sins(random_angle)*random_distance);
+                            hammer->oPosZ += (coss(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (coss(random_angle)*random_distance);
+                            hammer->oBehParams2ndByte = 4;
+                            hammer->prevObj = o->parentObj;
+                            minion_count++;
+                            minion_total++;
+                        }
+                    break;
+                    case 3://phase 3: fast runners
                         if ((o->oTimer % 10 == 0)&&(minion_count < 8)) {
                             hammer = spawn_object(o,MODEL_FAST,bhvPhantasm);
                             s16 random_angle = random_u16();
@@ -364,7 +377,7 @@ void bhv_cosmic_phantasm(void) {
                             minion_total++;
                         }
                     break;
-                    case 1://phase 3: pingas groundpounders
+                    case 4://phase 4: pingas groundpounders
                         if ((o->oTimer % 30 == 0)&&(minion_count < 6)) {
                             hammer = spawn_object(o,MODEL_PINGAS,bhvPhantasm);
                             s16 random_angle = random_u16();
@@ -375,6 +388,29 @@ void bhv_cosmic_phantasm(void) {
                             if (minion_total%2==1) {
                                 hammer->oBehParams |= 0x01000000;//they don't groundpound over mario
                             }
+                            minion_count++;
+                            minion_total++;
+                        }
+                    break;
+                    case 5: //mario kickers AND ford casters
+                        if ((o->oTimer % 20 == 0)&&(minion_count < 10)) {
+                            hammer = spawn_object(o,MODEL_MARIO,bhvPhantasm);
+                            s16 random_angle = random_u16();
+                            f32 random_distance = 400.0f+(random_float()*800.0f);
+                            hammer->oPosX += (sins(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (sins(random_angle)*random_distance);
+                            hammer->oPosZ += (coss(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (coss(random_angle)*random_distance);
+                            hammer->oBehParams2ndByte = 1;
+                            minion_count++;
+                            minion_total++;
+                        }
+                        if ((o->oTimer % 20 == 10)&&(minion_count < 10)) {
+                            hammer = spawn_object(o,MODEL_FORD,bhvPhantasm);
+                            s16 random_angle = random_u16();
+                            f32 random_distance = 400.0f+(random_float()*1000.0f);
+                            hammer->oPosX += (sins(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (sins(random_angle)*random_distance);
+                            hammer->oPosZ += (coss(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (coss(random_angle)*random_distance);
+                            hammer->oBehParams2ndByte = 4;
+                            hammer->prevObj = o->parentObj;
                             minion_count++;
                             minion_total++;
                         }
@@ -411,6 +447,10 @@ void bhv_cosmic_phantasm(void) {
                         cur_obj_init_animation_with_sound(18);//wigglegroundpound
                         o->oAction = 17;
                     break;
+                    case 4:
+                        cur_obj_init_animation_with_sound(19);//wigglecast
+                        o->oAction = 18;
+                    break;
                 }
             }
         break;
@@ -421,24 +461,11 @@ void bhv_cosmic_phantasm(void) {
                 spawn_object(o,MODEL_VOID_GOO,bhvVoidGoo);
             }
             if (o->oTimer == 39) {
-                switch(o->oHealth) {
-                    case 2: //run around
-                        o->oAction = 16;
-                        cur_obj_init_animation_with_sound(17);//wigglerun
-                        o->oMoveAngleYaw = random_u16();
-                    break;
-                    case 3: //ground pound
-                        o->oAction = 17;
-                        cur_obj_init_animation_with_sound(18);//wigglegroundpound
-                    break;
-                    default: //spin attack
-                        o->oInteractStatus = 0;
-                        o->oIntangibleTimer = 0;
-                        o->oAction = 4;
-                        cur_obj_become_tangible();
-                        cur_obj_init_animation_with_sound(5);//spin
-                    break;
-                }
+                o->oInteractStatus = 0;
+                o->oIntangibleTimer = 0;
+                o->oAction = 4;
+                cur_obj_become_tangible();
+                cur_obj_init_animation_with_sound(5);//spin
             }
         break;
         case 16: //run around like a maniac
@@ -446,7 +473,7 @@ void bhv_cosmic_phantasm(void) {
             if (o->oForwardVel < 400.0f) {
                 o->oForwardVel += 8.0f;
             }
-            if (o->oTimer%4==0) {
+            if (o->oTimer%6==0) {
                 if (o->oForwardVel > 100.0f) {
                     hammer = spawn_object(o,MODEL_BLUE_FLAME,bhvThwompFlame);
                     hammer->oPosY += 40.0f;
@@ -461,12 +488,18 @@ void bhv_cosmic_phantasm(void) {
                 cur_obj_play_sound_2(SOUND_OBJ_BOO_BOUNCE_TOP);
             }
             o->oFaceAngleYaw = o->oMoveAngleYaw;
-            if ((o->oTimer%10==0)&&((random_u16()%3)==0)&&(o->oMoveFlags & OBJ_MOVE_ON_GROUND)) {
-                o->oVelY = 30.0f;
+            if ((o->oTimer%10==0)&&(o->oMoveFlags & OBJ_MOVE_ON_GROUND)&&(gMarioState->action == ACT_WALL_STICK)) {
+                //attack mario if wallsticking
+                o->oMoveAngleYaw = o->oAngleToMario;
+                o->oVelY = 30.0f+(random_float()*40.0f);
                 cur_obj_play_sound_2(SOUND_ACTION_SPIN);
             }
 
-            if (o->oTimer > 200) {
+            if ((o->oTimer > 200)&&(o->oMoveFlags & OBJ_MOVE_ON_GROUND)) {
+                finish_attack_phantasm();
+            }
+            if (o->oTimer > 250) {
+                //might be oob, force attack finish
                 finish_attack_phantasm();
             }
         break;
@@ -474,7 +507,7 @@ void bhv_cosmic_phantasm(void) {
             phantasm_invincible();
 
             if (o->oTimer == 0) {
-                o->oHomeY = gMarioState->pos[1] + 300.0f;
+                o->oHomeY = gMarioState->pos[1] + 350.0f;
                 if (GET_BPARAM1(o->oBehParams) == 0) {
                     //behparam0 will start with 40 speed
                     o->oForwardVel = 40.0f;
@@ -534,6 +567,18 @@ void bhv_cosmic_phantasm(void) {
                 if (o->oTimer > 140) {
                     finish_attack_phantasm();
                 }
+            }
+        break;
+        case 18: //fire
+            o->oMoveAngleYaw = obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_YAW_INDEX, 0x200);
+            o->oFaceAngleYaw = o->oMoveAngleYaw;
+            if (o->oTimer == 0) {
+                hammer = spawn_object(o,MODEL_AMP,bhvHomingAmp);
+                hammer->oPosY += 200.0f;
+                hammer->prevObj = o->parentObj;//the original boss
+            }
+            if (o->oTimer > 89) {
+                finish_attack_phantasm();
             }
         break;
     }
