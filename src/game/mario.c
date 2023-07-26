@@ -1925,6 +1925,10 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                     save_file_set_badge_unlock(1<<AVATAR_PINGAS);
                     //run_event(EVENT_CASTLE_INTRO);
                 break;
+                case LEVEL_BOB:
+                    //end of the game, void g114
+                    run_event(EVENT_WATCH_NEAREST_TV);
+                break;
             }
         }
     }

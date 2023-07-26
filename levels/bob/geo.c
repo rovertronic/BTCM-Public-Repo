@@ -31,3 +31,4 @@
 #include "levels/bob/shock/geo.inc.c"
 #include "levels/bob/kingbully/geo.inc.c"
 #include "levels/bob/shard/geo.inc.c"
+#include "levels/bob/taxi/geo.inc.c"

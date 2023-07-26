@@ -31,3 +31,7 @@
 #include "levels/bob/shock/model.inc.c"
 #include "levels/bob/kingbully/model.inc.c"
 #include "levels/bob/shard/model.inc.c"
+#include "levels/bob/taxi/model.inc.c"
+#include "levels/bob/taxi/anims/data.inc.c"
+#include "levels/bob/taxi/anims/table.inc.c"
+#include "levels/bob/creditplane/model.inc.c"

@@ -6616,17 +6616,6 @@ void bhv_axe_trap(void) {
     }
 }
 
-#define TROLL_OFFSET 38400*4
-#define RGBA16SIZE 2048//32x32
-#define VIDEO_1_OFFSET TROLL_OFFSET + (45 * 64*64)
-#define VIDEO_2_OFFSET VIDEO_1_OFFSET + (566*RGBA16SIZE)
-#define VIDEO_3_OFFSET VIDEO_2_OFFSET + (263*RGBA16SIZE)
-#define VIDEO_4_OFFSET VIDEO_3_OFFSET + (219*RGBA16SIZE)
-#define VIDEO_5_OFFSET VIDEO_4_OFFSET + (299*RGBA16SIZE)
-#define VIDEO_6_OFFSET VIDEO_5_OFFSET + (223*RGBA16SIZE)
-#define VIDEO_7_OFFSET VIDEO_6_OFFSET + (190*RGBA16SIZE)
-#define SCREEN_OFFSET  VIDEO_7_OFFSET + (341*RGBA16SIZE)
-
 void bhv_troll_pillar(void) {
     u8 frame = o->oTimer%87;
     if (frame > 43) {
@@ -6950,5 +6939,30 @@ void upside_down_if_under_zero(void) {
     }
     if (o->oBehParams2ndByte == 2) {
         cur_obj_scale(14.0f);
+    }
+}
+
+void bhv_taxi(void) {
+    switch(o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 1000.0f) {
+                cur_obj_init_animation_with_sound(1);
+                cur_obj_play_sound_2(SOUND_GENERAL_OPEN_IRON_DOOR);
+                o->oAction = 1;
+            }
+        break;
+        case 1:
+            if (gMarioState->TrollTrigger == TTRIG_TAXI) {
+                cur_obj_init_animation_with_sound(2);
+                cur_obj_play_sound_2(SOUND_GENERAL_CLOSE_IRON_DOOR);
+                o->oAction = 2;
+                o->oForwardVel = 0.0f;
+                run_event(EVENT_TAXI);
+            }
+        break;
+        case 2:
+            o->oForwardVel += 0.1f;
+            o->oPosZ += o->oForwardVel;
+        break;
     }
 }

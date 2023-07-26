@@ -1526,6 +1526,19 @@ s32 event_killer_intro[] = {
     E_END,
 };
 
+s32 event_taxi[] = {
+    E_ACT, ACT_DISAPPEARED,
+    E_MUSIC, SEQ_STREAMED_FENCEMEIN,
+    E_SONG_TITLE, 7,
+    E_CAM_TOGGLE,
+    E_TARGET_OBJECT, bhvTaxi,
+    E_CAM_MANUAL_ECM, ECM_TRACK_TARGET,
+    E_WAIT, 220,
+    E_START_PRECREDITS,
+    E_WAIT, 50,
+    E_END,
+};
+
 //LIST DO NOT RENAME
 s32 *event_list[] = {
     &event_test,
@@ -1579,6 +1592,7 @@ s32 *event_list[] = {
     &event_castle_intro,
     &event_watch_nearest_tv_lv1_cp1,
     &event_killer_intro,
+    &event_taxi,
 };
 
 f32 *spline_list[] = {

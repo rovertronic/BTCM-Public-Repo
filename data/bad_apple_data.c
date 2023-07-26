@@ -32,4 +32,6 @@ ALIGNED8 const u8 dma_data[] = {
     #include "actors/amp/video_strip_7.rgba16.inc.c"
     ,
     #include "actors/amp/screen.rgba16.inc.c"
+    ,
+    #include "actors/amp/credits_roll.rgba16.inc.c"
 };

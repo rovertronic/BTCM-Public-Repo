@@ -67,4 +67,10 @@ extern const LevelScript level_bob_entry[];
 #include "levels/bob/shard/geo_header.h"
 
 
+#include "levels/bob/taxi/geo_header.h"
+
+#include "levels/bob/taxi/anim_header.h"
+
+#include "levels/bob/creditplane/header.h"
+
 #endif

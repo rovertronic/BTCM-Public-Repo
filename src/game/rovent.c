@@ -1165,7 +1165,7 @@ void event_main(void) {
             break;
             case E_START_PRECREDITS:
                 start_precredits = TRUE;
-                revent_index++;
+                revent_halt = TRUE;
             break;
             case E_HUNDO:
                 gMarioState->gGlobalCoinGain += 100;

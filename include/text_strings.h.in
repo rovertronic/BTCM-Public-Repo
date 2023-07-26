@@ -95,7 +95,7 @@
 #define TEXT_SONG5 _("/ Michael Wyckoff - Turn Around (BONELAB OST)")
 #define TEXT_SONG6 _("/ Thorndust - VR World (SM64:BTCM OST)")
 #define TEXT_SONG7 _("/ ClascyJitto - PIZZA TIME NEVER ENDS (Pizza Tower OST)")
-#define TEXT_SONG8 _("Cursed Boss")
+#define TEXT_SONG8 _("/ Michael Wyckoff - Don't Fence Me In")
 
 #define TEXT_SONG9 _("Road To The Boss")
 #define TEXT_SONG10 _("Urbowser")
@@ -735,31 +735,31 @@
 #define TEXT_MENU_STARS_DE _("   GEHEIME STERNE")
 #endif // VERSION_EU
 
-#define PRE_CREDITS_1 _("Wrath of the Verdant Exile")
-#define PRE_CREDITS_2 _("Punished Elf")
+#define PRE_CREDITS_1 _("Super Mario 64 Created By:")
+#define PRE_CREDITS_2 _("Nintendo")
 
-#define PRE_CREDITS_3 _("Written By:")
-#define PRE_CREDITS_4 _("RationaLess")
+#define PRE_CREDITS_3 _("BONELAB Created By:")
+#define PRE_CREDITS_4 _("Stress Level Zero")
 
-#define PRE_CREDITS_5 _("Original Soundtrack")
-#define PRE_CREDITS_6 _("Thorndust, SpK")
+#define PRE_CREDITS_5 _("ROM Hack Created By:")
+#define PRE_CREDITS_6 _("Rovert")
 
-#define PRE_CREDITS_7 _("Music Ports")
-#define PRE_CREDITS_8 _("ArcticJaguar725")
+#define PRE_CREDITS_7 _("HackerSM64 Created By:")
+#define PRE_CREDITS_8 _("HackerSM64 Team")
 
-#define PRE_CREDITS_9 _("Castle Painting Art")
-#define PRE_CREDITS_10 _("BoomerDaCat")
+#define PRE_CREDITS_9 _("Physics Engine & Streamed Audio Tool")
+#define PRE_CREDITS_10 _("Arthurtilly")
 
-#define PRE_CREDITS_11 _("HackerSM64 Port")
-#define PRE_CREDITS_12 _("axollyon")
+#define PRE_CREDITS_11 _("Graphical Effects Help")
+#define PRE_CREDITS_12 _("axollyon & theCozies")
 
-#define PRE_CREDITS_13 _("Badge Art")
-#define PRE_CREDITS_14 _("HeroTechne,Pyro Jay")
+#define PRE_CREDITS_13 _("Blender Help")
+#define PRE_CREDITS_14 _("anonymous-moose")
 
-#define PRE_CREDITS_15 _("Title Screen")
-#define PRE_CREDITS_16 _("Biobak")
+#define PRE_CREDITS_15 _("Created for the SimpleFlips Competition")
+#define PRE_CREDITS_16 _("Troll Hacks 2023")
 
-#define PRE_CREDITS_17 _("Major Code Contributions")
-#define PRE_CREDITS_18 _("Arthurtilly")
+#define PRE_CREDITS_17 _("Thank you to my Patreons!")
+#define PRE_CREDITS_18 _("Henry Kumpel, ZT, Pizza Brian")
 
 #endif // TEXT_STRINGS_H

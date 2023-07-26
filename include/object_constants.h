@@ -990,6 +990,7 @@ enum troll_trigger {
     TTRIG_BOBOMB_ATTACK,
     TTRIG_ADJUST_Y_REFLECTION,
     TTRIG_VANISH_REFLECTION,
+    TTRIG_TAXI,
 };
 
 /* Star General */

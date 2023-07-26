@@ -9574,3 +9574,14 @@ const BehaviorScript bhvVoidGoo[] = {
         CALL_NATIVE(bhv_void_goo),
     END_LOOP(),
 };
+
+extern void bhv_taxi(void);
+const BehaviorScript bhvTaxi[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    LOAD_ANIMATIONS(oAnimations, taxi_anims),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    ANIMATE(0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_taxi),
+    END_LOOP(),
+};

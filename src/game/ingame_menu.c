@@ -34,6 +34,7 @@
 #include "hud.h"
 #include "mario.h"
 #include "levels/castle_inside/header.h"
+#include "levels/bob/header.h"
 
 u8 letgo = FALSE;
 
@@ -3351,9 +3352,19 @@ void render_pre_credits() {
         return;
     }
 
+    //fadeout
+    create_dl_translation_matrix(MENU_MTX_PUSH, 0, 400, 0);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 5.0f, 5.0f, 0.0f);
+    gDPSetEnvColor(gDisplayListHead++, 0,0,0, (u8)(gMarioState->PortalTint*255.0f));
+
+    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+    gDPSetEnvColor(gDisplayListHead++, 255,255,255,255);
+    gMarioState->PortalTint = lerp(gMarioState->PortalTint,1.0f,0.15f);
+
+
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, precredits_alpha);
-
 
     print_generic_string(get_str_x_pos_from_center(160,precredits_ptr[precredits_index],0), 50, precredits_ptr[precredits_index]);
 
@@ -3361,26 +3372,33 @@ void render_pre_credits() {
         print_generic_string(get_str_x_pos_from_center(80,precredits_ptr[precredits_index+1],0), 10, precredits_ptr[precredits_index+1]);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
+    create_dl_translation_matrix(MENU_MTX_PUSH, 160.0f , 160.0f, 0);
+        gSPDisplayList(gDisplayListHead++, &creditplane_Plane_001_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
 
-    precredits_timer++;
-    if (precredits_timer < 150) {
-        precredits_alpha += 4;
-        if (precredits_alpha > 255) {
-            precredits_alpha = 255;
-        }
-    } else {
-        precredits_alpha -= 4;
-        if (precredits_alpha < 0) {
-            precredits_alpha = 0;
-            precredits_timer = 0;
-            precredits_index += 2;
+    if (gMarioState->PortalTint > 0.995f) {
+        precredits_timer++;
+        if (precredits_timer < 170) {
+            precredits_alpha += 4;
+            if (precredits_alpha > 255) {
+                precredits_alpha = 255;
+            }
+        } else {
+            precredits_alpha -= 4;
+            if (precredits_alpha < 0) {
+                precredits_alpha = 0;
+                precredits_timer = 0;
+                precredits_index += 2;
 
-            if (precredits_index >= 18) {
-                start_precredits = FALSE;
+                u8 *tex = segmented_to_virtual(&creditplane_credit_default_rgba16);
+                dma_read(tex,_bad_appleSegmentRomStart+CREDITS_OFFSET+((precredits_index/2)*0x8000),_bad_appleSegmentRomStart+CREDITS_OFFSET+((precredits_index/2)*0x8000)+0x8000);
+
+                if (precredits_index >= 18) {
+                    start_precredits = FALSE;
+                }
             }
         }
-
     }
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
@@ -3449,8 +3467,6 @@ s32 render_menus_and_dialogs(void) {
 
     create_dl_ortho_matrix();
 
-    render_pre_credits();
-
     if (gMarioState->Options & (1<<OPT_MUSIC)) {
         //fade_volume_scale(SEQ_PLAYER_LEVEL,100,1);
         }else{
@@ -3515,18 +3531,7 @@ s32 render_menus_and_dialogs(void) {
         }
     //screen tint
 
-    //portal screen tint
-    if (gMarioState->PortalTint > 0.05f) {
-        create_dl_translation_matrix(MENU_MTX_PUSH, 0, 400, 0);
-        create_dl_scale_matrix(MENU_MTX_NOPUSH, 5.0f, 5.0f, 0.0f);
-        gDPSetEnvColor(gDisplayListHead++, 0x77, 0x57, 0x92, (u8)(gMarioState->PortalTint*255.0f));
-
-        gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
-        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-        gDPSetEnvColor(gDisplayListHead++, 255,255,255,255);
-
-        gMarioState->PortalTint *= .96;
-    }
+    render_pre_credits();
 
     if (gMarioState->MenuToRender == 1) {
         render_empty_box(160, 183+70);
@@ -3636,7 +3641,7 @@ s32 render_menus_and_dialogs(void) {
     }//end bodylog
 
     //render hp
-    if ((!revent_active)&&(!using_bodylog)) {
+    if ((!revent_active)&&(!using_bodylog)&&(!start_precredits)) {
         gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
         u8 hp = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
         u8 maxhp = gMarioState->numMaxHP;

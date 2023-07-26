@@ -93,7 +93,7 @@ void lower_background_noise(s32 a) {
             set_audio_muted(TRUE);
             break;
         case 2:
-            seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
+            seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 20);
             break;
     }
     sMusicVolume |= a;

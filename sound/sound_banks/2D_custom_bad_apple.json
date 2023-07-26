@@ -8,19 +8,10 @@
         ]
     },
     "instruments": {
-        "inst0": {
-            "release_rate": 10,
-            "envelope": "envelope0",
-            "sound": "custom_bad_apple_L"
-        },
-        "inst1": {
-            "release_rate": 10,
-            "envelope": "envelope0",
-            "sound": "custom_bad_apple_R"
-        }
+
     },
     "instrument_list": [
-        "inst0",
-        "inst1"
+        null,
+        null
     ]
 }

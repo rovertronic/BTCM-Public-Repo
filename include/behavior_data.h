@@ -824,5 +824,6 @@ extern const BehaviorScript bhvBoxCheckpoint[];
 extern const BehaviorScript bhvTrollSpawn[];
 extern const BehaviorScript bhvGoombaNoDrop[];
 extern const BehaviorScript bhvVoidGoo[];
+extern const BehaviorScript bhvTaxi[];
 
 #endif // BEHAVIOR_DATA_H
