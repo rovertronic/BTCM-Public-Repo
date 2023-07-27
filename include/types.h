@@ -630,6 +630,10 @@ struct MarioState {
              f32 slowmobar;
              u8 slowmo_recharge;
              f32 y_reflection;
+             
+             u16 deaths;//i dont think anyone is gonna die more than 255 times but just in case
+             u32 leveltime;
+
     // -- HackerSM64 MarioState fields end --
 };
 

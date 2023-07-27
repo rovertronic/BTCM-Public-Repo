@@ -3745,4 +3745,4 @@ screw this"))
 DEFINE_DIALOG(DIALOG_RESULTS, 1, 4, 95, 180, _("\
 RESULTS:\n\
 Total Time Spent - [%]\n\
-Deaths - [%]."))
+Deaths - [%]"))

@@ -3733,6 +3733,8 @@ s32 render_menus_and_dialogs(void) {
             }
 
             if (gGlobalTimer%30==0) {
+                //increment level timer
+                gMarioState->leveltime++;
                 if (gMarioState->boning_timer > 0) {
                     gMarioState->boning_timer--;
                     pizza_timer_bounce_index =0;

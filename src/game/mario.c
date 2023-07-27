@@ -1910,6 +1910,8 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                 case LEVEL_CASTLE:
                     //reset level variables when entering HUB
                     gMarioState->troll_checkpoint = 0;
+                    gMarioState->deaths = 0;
+                    gMarioState->leveltime = 0;
 
                     if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
                         //enter the lab
@@ -2823,28 +2825,35 @@ void init_mario_from_save_file(void) {
 
     gHudDisplay.coins = 0;
     gHudDisplay.wedges = 8;
+
+    gMarioState->deaths = 0;
+    gMarioState->leveltime = 0;
 }
 
 u8 sbuf1[4];
-u8 sbuf2[4];
+u8 sbuf2[10];
 //til strings are s8 but too lazy to go back
+
 s32 trolllab_level_win(struct MarioState *m) {
     struct Object *evil_1up;
-
     evil_1up = cur_obj_nearest_object_with_behavior(bhvHidden1upInPole);
     if (evil_1up) {
         mark_obj_for_deletion(evil_1up);
     }
+
+    u8 hour = m->leveltime /3600;
+    u8 minute = (m->leveltime/60)%60;
+    u8 second = m->leveltime%60;
 
     m->boning_time = FALSE;
     m->boning_timer = 0;
     display_song_text(8);
     play_cutscene_music(SEQUENCE_ARGS(15, SEQ_STREAMED_WINNER));
 
-    int_to_str(0,sbuf1);
-    int_to_str(0,sbuf2);
-    rtext_insert_pointer[0] = &sbuf1;
-    rtext_insert_pointer[1] = &sbuf2;
+    int_to_str(gMarioState->deaths,sbuf1);
+    int_to_str_time(hour, minute, second, sbuf2);
+    rtext_insert_pointer[1] = &sbuf1;
+    rtext_insert_pointer[0] = &sbuf2;
     run_event(EVENT_WINNER);
 
     switch(gCurrLevelNum) {

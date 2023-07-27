@@ -1151,6 +1151,7 @@ void event_main(void) {
                     gMarioState->boning_time = FALSE;
                 }
 
+                gMarioState->deaths++;
                 level_trigger_warp(gMarioState, WARP_OP_LOOK_UP);
                 sSourceWarpNodeId = 0x0A+gMarioState->troll_checkpoint;
                 revent_halt = TRUE;
