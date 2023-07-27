@@ -2535,17 +2535,24 @@ s32 render_pause_courses_and_castle(void) {
 #endif
 
                     if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
-                        level_set_transition(0, NULL);
-                        play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
-                        gDialogBoxState = DIALOG_STATE_OPENING;
-                        gMenuMode = MENU_MODE_NONE;
-
                         if (gDialogLineNum == MENU_OPT_EXIT_COURSE) {
-                            //restore hp and mana on course exit
-                            gMarioState->health = 255 + (255*gMarioState->numMaxHP);
-                            gMarioState->numBadgePoints = gMarioState->numMaxFP;
-                            index = gDialogLineNum;
+                            if (save_file_check_progression(PROG_TL_LEVEL1_BEAT)) {
+                                //restore hp and mana on course exit
+                                level_set_transition(0, NULL);
+                                play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
+                                gDialogBoxState = DIALOG_STATE_OPENING;
+                                gMenuMode = MENU_MODE_NONE;
+                                gMarioState->health = 255 + (255*gMarioState->numMaxHP);
+                                gMarioState->numBadgePoints = gMarioState->numMaxFP;
+                                index = gDialogLineNum;
+                            } else {
+                                play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                            }
                         } else { // MENU_OPT_CONTINUE or MENU_OPT_CAMERA_ANGLE_R
+                            level_set_transition(0, NULL);
+                            play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
+                            gDialogBoxState = DIALOG_STATE_OPENING;
+                            gMenuMode = MENU_MODE_NONE;
                             index = MENU_OPT_DEFAULT;
                         }
 
