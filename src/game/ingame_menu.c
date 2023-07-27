@@ -3436,9 +3436,9 @@ f32 display_song_x = -220.0f;
 
 u16 display_song_flags = 0;
 void display_song_text(u8 song_text_id) {
-    u16 bit = 1 << song_text_id;
+    u16 bit = (1 << song_text_id);
 
-    if (!(display_song_flags &= bit)) {
+    if (!(display_song_flags & bit)) {
         display_song_timer = 180;
         display_song_index = song_text_id;
         display_song_x = -get_string_width(musicmenu_titles[display_song_index]);

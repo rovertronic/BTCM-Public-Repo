@@ -296,9 +296,7 @@ static void restore_save_file_data(s32 fileIndex, s32 srcSlot) {
 }
 
 void save_file_do_save(s32 fileIndex) {
-    if ((gSaveFileModified)
-    && (gMarioState->Options & (1<<OPT_SAVE))
-    && (gSaveBuffer.files[fileIndex][0].progression >= PROG_TRUE_START ) ) { // do not save game until you start
+    if (gSaveFileModified) {
         // Compute checksum
         add_save_block_signature(&gSaveBuffer.files[fileIndex][0],
                                  sizeof(gSaveBuffer.files[fileIndex][0]), SAVE_FILE_MAGIC);

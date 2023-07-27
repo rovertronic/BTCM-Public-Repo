@@ -1114,13 +1114,14 @@ s32 play_mode_paused(void) {
         if (gDebugLevelSelect) {
             fade_into_special_warp(WARP_SPECIAL_LEVEL_SELECT, 1);
         } else {
-            if (save_file_get_progression() == PROG_ON_AGAMEMNON) {
-                //agamemnon pause exit
-                initiate_warp(LEVEL_BITS, 0x01, 0x0A, WARP_FLAGS_NONE);
-            } else {
-                //normal pause exit
-                initiate_warp(EXIT_COURSE_LEVEL, EXIT_COURSE_AREA, EXIT_COURSE_NODE, WARP_FLAGS_NONE);
-            }
+            //if (save_file_get_progression() == PROG_ON_AGAMEMNON) {
+            //    //agamemnon pause exit
+            //    initiate_warp(LEVEL_BITS, 0x01, 0x0A, WARP_FLAGS_NONE);
+            //} else {
+            //    //normal pause exit
+            //    initiate_warp(EXIT_COURSE_LEVEL, EXIT_COURSE_AREA, EXIT_COURSE_NODE, WARP_FLAGS_NONE);
+            //}
+            initiate_warp(LEVEL_CASTLE, 0x01, 0x0A, WARP_FLAGS_NONE);
             fade_into_special_warp(WARP_SPECIAL_NONE, 0);
             gSavedCourseNum = COURSE_NONE;
         }

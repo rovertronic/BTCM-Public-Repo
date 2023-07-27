@@ -2862,5 +2862,6 @@ s32 trolllab_level_win(struct MarioState *m) {
         break;
     }
 
+    save_file_do_save(gCurrSaveFileNum - 1);
     return set_mario_action(m, ACT_LVUP_DANCE, 0);
 }
