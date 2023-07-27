@@ -34360,6 +34360,25 @@ Gfx jrb_dl_reflection2_mesh_layer_1_tri_2[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx jrb_dl_z_mesh_layer_5_vtx_0[8] = {
+	{{ {-6768, 2025, -13631}, 0, {-16, -16}, {255, 255, 255, 255} }},
+	{{ {-5813, 2025, -14033}, 0, {1008, -16}, {255, 255, 255, 255} }},
+	{{ {-6367, 2025, -14033}, 0, {-16, -16}, {255, 255, 255, 255} }},
+	{{ {-5413, 2025, -13631}, 0, {1008, -16}, {255, 255, 255, 255} }},
+	{{ {-6768, 2025, -13072}, 0, {-16, 1008}, {255, 255, 255, 255} }},
+	{{ {-5413, 2025, -13072}, 0, {1008, 1008}, {255, 255, 255, 255} }},
+	{{ {-6368, 2025, -12678}, 0, {-16, 1008}, {255, 255, 255, 255} }},
+	{{ {-5813, 2025, -12678}, 0, {1008, 1008}, {255, 255, 255, 255} }},
+};
+
+Gfx jrb_dl_z_mesh_layer_5_tri_0[] = {
+	gsSPVertex(jrb_dl_z_mesh_layer_5_vtx_0 + 0, 8, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSP2Triangles(4, 3, 0, 0, 4, 5, 3, 0),
+	gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_jrb_dl_Carpet[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -34693,6 +34712,22 @@ Gfx mat_revert_jrb_dl_door[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_jrb_dl_ztopper_layer5[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+	gsSPGeometryMode(G_SHADE | G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH, 0),
+	gsDPSetRenderMode(GBL_c1(G_BL_CLR_MEM, G_BL_0, G_BL_CLR_MEM, G_BL_1) | GBL_c2(G_BL_CLR_MEM, G_BL_0, G_BL_CLR_MEM, G_BL_1), Z_CMP | Z_UPD | IM_RD | CVG_DST_CLAMP | ZMODE_OPA),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_jrb_dl_ztopper_layer5[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_SHADE | G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
+	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
+	gsSPEndDisplayList(),
+};
+
 Gfx jrb_dl_bsmt_mesh_layer_1[] = {
 	gsSPDisplayList(mat_jrb_dl_Carpet),
 	gsSPDisplayList(jrb_dl_bsmt_mesh_layer_1_tri_0),
@@ -34826,6 +34861,13 @@ Gfx jrb_dl_reflection2_mesh_layer_1[] = {
 	gsSPDisplayList(mat_jrb_dl_door),
 	gsSPDisplayList(jrb_dl_reflection2_mesh_layer_1_tri_2),
 	gsSPDisplayList(mat_revert_jrb_dl_door),
+	gsSPEndDisplayList(),
+};
+
+Gfx jrb_dl_z_mesh_layer_5[] = {
+	gsSPDisplayList(mat_jrb_dl_ztopper_layer5),
+	gsSPDisplayList(jrb_dl_z_mesh_layer_5_tri_0),
+	gsSPDisplayList(mat_revert_jrb_dl_ztopper_layer5),
 	gsSPEndDisplayList(),
 };
 

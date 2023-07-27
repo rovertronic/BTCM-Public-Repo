@@ -3432,7 +3432,7 @@ u8 play_init_bodylog = TRUE;
 
 u8 display_song_timer = 0;
 u8 display_song_index = 0;
-f32 display_song_x = -160.0f;
+f32 display_song_x = -220.0f;
 
 u16 display_song_flags = 0;
 void display_song_text(u8 song_text_id) {
@@ -3674,10 +3674,9 @@ s32 render_menus_and_dialogs(void) {
     }
     //end slowmo bar
 
-
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
         if (display_song_timer < 1) {
-            display_song_x = lerp(display_song_x,-get_string_width(musicmenu_titles[display_song_index]),0.2f);
+            display_song_x = lerp(display_song_x,-get_string_width(musicmenu_titles[display_song_index]) - 20.0f,0.2f);
         }
         if (display_song_timer > 150) {
             display_song_x =lerp(display_song_x,10.0f,0.2f);
@@ -3685,6 +3684,14 @@ s32 render_menus_and_dialogs(void) {
         if (display_song_timer > 0) {
             display_song_timer--;
         }
+
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 153);
+        create_dl_translation_matrix(MENU_MTX_PUSH, get_string_width(musicmenu_titles[display_song_index])+display_song_x , 229.0f, 0);
+        gSPDisplayList(gDisplayListHead++, &musicbar_musicbar_mesh);
+        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
         gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
         print_generic_string(display_song_x, 220, musicmenu_titles[display_song_index]);

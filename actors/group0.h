@@ -610,4 +610,6 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "voidgoo/geo_header.h"
 
+#include "musicbar/header.h"
+
 #endif
