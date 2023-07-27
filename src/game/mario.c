@@ -1908,6 +1908,9 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                     }
                 break;
                 case LEVEL_CASTLE:
+                    //reset level variables when entering HUB
+                    gMarioState->troll_checkpoint = 0;
+
                     if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
                         //enter the lab
                         run_event(EVENT_TL_LAB_INTRO);
@@ -2198,7 +2201,6 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             }
         }
     }
-
 
     //this code is dumb lol
     if ((gCurrDemoInput != NULL)&&(did_started == 0)) {
@@ -2821,4 +2823,35 @@ void init_mario_from_save_file(void) {
 
     gHudDisplay.coins = 0;
     gHudDisplay.wedges = 8;
+}
+
+u8 sbuf1[4];
+u8 sbuf2[4];
+//til strings are s8 but too lazy to go back
+s32 trolllab_level_win(struct MarioState *m) {
+    struct Object *evil_1up;
+
+    evil_1up = cur_obj_nearest_object_with_behavior(bhvHidden1upInPole);
+    if (evil_1up) {
+        mark_obj_for_deletion(evil_1up);
+    }
+
+    m->boning_time = FALSE;
+    m->boning_timer = 0;
+    display_song_text(8);
+    play_cutscene_music(SEQUENCE_ARGS(15, SEQ_STREAMED_WINNER));
+
+    int_to_str(0,sbuf1);
+    int_to_str(0,sbuf2);
+    rtext_insert_pointer[0] = &sbuf1;
+    rtext_insert_pointer[1] = &sbuf2;
+    run_event(EVENT_WINNER);
+
+    switch(gCurrLevelNum) {
+        case LEVEL_BOB:
+            save_file_set_progression(PROG_TL_LEVEL1_BEAT);
+        break;
+    }
+
+    return set_mario_action(m, ACT_LVUP_DANCE, 0);
 }

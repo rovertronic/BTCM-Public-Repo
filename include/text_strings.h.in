@@ -88,16 +88,15 @@
 #define TEXT_SPK _("SpK")
 #define TEXT_NOMICO _("ZUN, nomico") //bad apple
 
-#define TEXT_SONG1 _("/ Michael Wyckoff - Keygen (BONELAB OST)")
-#define TEXT_SONG2 _("/ Michael Wyckoff - Smoke Halls (BONELAB OST)")
-#define TEXT_SONG3 _("/ Michael Wyckoff - Runoff (BONEWORKS OST)")
-#define TEXT_SONG4 _("/ Michael Wyckoff - Unsolved Sciences (BONELAB OST)")
-#define TEXT_SONG5 _("/ Michael Wyckoff - Turn Around (BONELAB OST)")
-#define TEXT_SONG6 _("/ Thorndust - VR World (SM64:BTCM OST)")
-#define TEXT_SONG7 _("/ ClascyJitto - PIZZA TIME NEVER ENDS (Pizza Tower OST)")
-#define TEXT_SONG8 _("/ Michael Wyckoff - Don't Fence Me In")
-
-#define TEXT_SONG9 _("Road To The Boss")
+#define TEXT_SONG1 _("/ Michael Wyckoff - Keygen (BONELAB)")
+#define TEXT_SONG2 _("/ Michael Wyckoff - Smoke Halls (BONELAB)")
+#define TEXT_SONG3 _("/ Michael Wyckoff - Runoff (BONEWORKS)")
+#define TEXT_SONG4 _("/ Michael Wyckoff - Unsolved Sciences (BONELAB)")
+#define TEXT_SONG5 _("/ Michael Wyckoff - Turn Around (BONELAB)")
+#define TEXT_SONG6 _("/ Thorndust - VR World (SM64:BTCM)")
+#define TEXT_SONG7 _("/ ClascyJitto - PIZZA TIME NEVER ENDS (Pizza Tower)")
+#define TEXT_SONG8 _("/ Michael Wyckoff - Don't Fence Me In (BONELAB)")
+#define TEXT_SONG9 _("/ Michael Wyckoff - Ninja Warrior 5th Section (BONELAB)")
 #define TEXT_SONG10 _("Urbowser")
 #define TEXT_SONG11 _("Big House")
 

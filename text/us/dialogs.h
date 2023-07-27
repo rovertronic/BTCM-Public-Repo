@@ -3741,3 +3741,8 @@ as if they were your own."))
 
 DEFINE_DIALOG(DIALOG_FELEGG_5, 1, 4, 95, 180, _("\
 screw this"))
+
+DEFINE_DIALOG(DIALOG_RESULTS, 1, 4, 95, 180, _("\
+RESULTS:\n\
+Total Time Spent - [%]\n\
+Deaths - [%]."))

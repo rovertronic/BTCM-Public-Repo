@@ -17,6 +17,7 @@
 #include "surface_terrains.h"
 #include "rumble_init.h"
 #include "game/rovent.h"
+#include "seq_ids.h"
 
 s32 check_common_idle_cancels(struct MarioState *m) {
     mario_drop_held_object(m);
@@ -1087,6 +1088,10 @@ s32 check_common_stationary_cancels(struct MarioState *m) {
             update_mario_sound_and_camera(m);
             return drop_and_set_mario_action(m, ACT_STANDING_DEATH, 0);
         }
+    }
+
+    if ((m->TrollTrigger == TTRIG_WINNER)&&(m->action != ACT_LVUP_DANCE)) {
+        return trolllab_level_win(m);
     }
     return FALSE;
 }

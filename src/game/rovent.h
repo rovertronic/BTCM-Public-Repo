@@ -175,6 +175,7 @@ enum revent_events {
     EVENT_LV1_CP1,
     EVENT_KILLER_INTRO,
     EVENT_TAXI,
+    EVENT_WINNER,
 };
 
 enum revent_spline_list {

@@ -17,6 +17,7 @@
 #include "ingame_menu.h"
 #include "save_file.h"
 #include "rovent.h"
+#include "seq_ids.h"
 
 #include "config.h"
 
@@ -2079,6 +2080,10 @@ s32 check_common_moving_cancels(struct MarioState *m) {
             run_event(EVENT_DEATH);
             return FALSE;
         }
+    }
+
+    if ((m->TrollTrigger == TTRIG_WINNER)&&(m->action != ACT_LVUP_DANCE)) {
+        return trolllab_level_win(m);
     }
 
     return FALSE;

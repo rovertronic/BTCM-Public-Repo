@@ -1539,6 +1539,19 @@ s32 event_taxi[] = {
     E_END,
 };
 
+s32 event_winner[] = {
+    E_CAM_TOGGLE,
+    E_TARGET_MARIO,
+    E_CAM_CLOSE_UP,
+    E_CAM_FOCUS_TARGET,
+
+    E_WAIT, 90,
+    E_DIALOG_AND_PRESSA, DIALOG_RESULTS,
+    E_CLOSE_DIALOG,
+    E_WAIT, 20,
+    E_WARP, 0x11, //winner warp
+};
+
 //LIST DO NOT RENAME
 s32 *event_list[] = {
     &event_test,
@@ -1593,6 +1606,7 @@ s32 *event_list[] = {
     &event_watch_nearest_tv_lv1_cp1,
     &event_killer_intro,
     &event_taxi,
+    &event_winner,
 };
 
 f32 *spline_list[] = {

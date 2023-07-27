@@ -478,6 +478,7 @@ enum DialogId {
     DIALOG_FELEGG_3,
     DIALOG_FELEGG_4,
     DIALOG_FELEGG_5,
+    DIALOG_RESULTS,
 
     DIALOG_COUNT
 };

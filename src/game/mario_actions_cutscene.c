@@ -740,6 +740,7 @@ s32 act_lvup_dance(struct MarioState *m) {
     set_custom_mario_animation(m,10);
     stop_and_set_height_to_floor(m);
     m->marioObj->header.gfx.pos[1] = m->pos[1];
+    m->marioObj->header.gfx.pos[1] += m->AvatarHeightOffset;
     return FALSE;
 }
 
