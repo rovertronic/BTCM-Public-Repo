@@ -4,6 +4,7 @@
 #include "levels/ccm/bone_elevator/texscroll.inc.c"
 #include "levels/ccm/executive/texscroll.inc.c"
 #include "levels/ccm/texscroll.inc.c"
+#include "levels/ccm/introbg/texscroll.inc.c"
 void scroll_textures_ccm() {
 	
 	scroll_ccm_level_geo_fan();
@@ -15,4 +16,5 @@ void scroll_textures_ccm() {
 
 	scroll_ccm_level_geo_executive();
 	scroll_ccm();
+	scroll_ccm_level_geo_introbg();
 }

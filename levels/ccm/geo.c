@@ -61,3 +61,5 @@
 #include "levels/ccm/barope/geo.inc.c"
 #include "levels/ccm/ghostfloor/geo.inc.c"
 #include "levels/ccm/ghostfloor2/geo.inc.c"
+#include "levels/ccm/introbg/geo.inc.c"
+#include "levels/ccm/introscan/geo.inc.c"

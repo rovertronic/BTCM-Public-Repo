@@ -108,3 +108,5 @@
 #include "levels/ccm/barope/model.inc.c"
 #include "levels/ccm/ghostfloor/model.inc.c"
 #include "levels/ccm/ghostfloor2/model.inc.c"
+#include "levels/ccm/introbg/model.inc.c"
+#include "levels/ccm/introscan/model.inc.c"

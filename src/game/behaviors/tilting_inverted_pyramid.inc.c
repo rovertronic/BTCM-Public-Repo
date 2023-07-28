@@ -6966,3 +6966,20 @@ void bhv_taxi(void) {
         break;
     }
 }
+
+void bhv_introbg(void) {
+    switch(o->oAction) {
+        case 1:
+            o->oPosX -= 3.0f;
+            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+        break;
+        case 2:
+            o->oPosY += 2.0f;
+            cur_obj_play_sound_1(SOUND_AIR_AMP_BUZZ);
+        break;
+        case 3:
+            o->oPosY += 30.0f;
+            cur_obj_shake_screen(SHAKE_POS_LARGE);
+        break;
+    }
+}

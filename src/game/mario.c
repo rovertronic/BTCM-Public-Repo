@@ -1913,14 +1913,15 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                     gMarioState->deaths = 0;
                     gMarioState->leveltime = 0;
 
-                    if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
-                        //enter the lab
-                        run_event(EVENT_TL_LAB_INTRO);
-                    } else {
-                        //back to the lab
-                        play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SCIENCES), 0);
-                        display_song_text(3);
-                    }
+                    run_event(EVENT_TL_LAB_INTRO);
+                    //if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
+                    //    //enter the lab
+                    //    run_event(EVENT_TL_LAB_INTRO);
+                    //} else {
+                    //    //back to the lab
+                    //    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SCIENCES), 0);
+                    //    display_song_text(3);
+                    //}
                 break;
                 case LEVEL_JRB:
                     //peach's castle intro

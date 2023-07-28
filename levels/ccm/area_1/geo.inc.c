@@ -4,6 +4,7 @@ const GeoLayout ccm_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2086, -108, -3037, ccm_dl_aaaa_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -8979, -2608, 7218, ccm_dl_Cube_008_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_vcancollide_light_passthrough_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_vcancollide_light_passthrough_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2086, -108, -3037, ccm_dl_viscol_mesh_layer_1),

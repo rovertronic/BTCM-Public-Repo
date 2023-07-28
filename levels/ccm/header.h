@@ -181,4 +181,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/ghostfloor2/geo_header.h"
 
+#include "levels/ccm/introbg/geo_header.h"
+
+#include "levels/ccm/introscan/geo_header.h"
+
 #endif

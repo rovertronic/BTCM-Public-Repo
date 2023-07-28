@@ -1,3 +1,4 @@
+#include "levels/ccm/introbg/texscroll.inc.h"
 #include "levels/ccm/texscroll.inc.h"
 #include "levels/ccm/executive/texscroll.inc.h"
 #include "levels/ccm/bone_elevator/texscroll.inc.h"

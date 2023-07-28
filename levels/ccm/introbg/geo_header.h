@@ -1,0 +1,12 @@
+extern const GeoLayout introbg_geo[];
+extern u8 introbg__4_rgba16[];
+extern u8 introbg_void__rgba16[];
+extern Vtx introbg_Plane_014_mesh_layer_1_vtx_0[8];
+extern Gfx introbg_Plane_014_mesh_layer_1_tri_0[];
+extern Vtx introbg_Plane_014_mesh_layer_1_vtx_1[20];
+extern Gfx introbg_Plane_014_mesh_layer_1_tri_1[];
+extern Gfx mat_introbg_castle[];
+extern Gfx mat_introbg_void_layer1[];
+extern Gfx mat_revert_introbg_void_layer1[];
+extern Gfx introbg_Plane_014_mesh_layer_1[];
+extern Gfx introbg_material_revert_render_settings[];

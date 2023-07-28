@@ -3746,3 +3746,31 @@ DEFINE_DIALOG(DIALOG_RESULTS, 1, 4, 95, 180, _("\
 RESULTS:\n\
 Total Time Spent - [%]\n\
 Deaths - [%]"))
+
+DEFINE_DIALOG(DIALOG_TL_INTRO_1, 1, 4, 95, 180, _("\
+No issues reported. Next!                        "))
+
+DEFINE_DIALOG(DIALOG_TL_INTRO_2, 1, 4, 95, 180, _("\
+Halt the line."))
+
+DEFINE_DIALOG(DIALOG_TL_INTRO_3, 1, 4, 95, 180, _("\
+Hah! What the hell happened here?\n\
+This one has a huge memory leak."))
+
+DEFINE_DIALOG(DIALOG_TL_INTRO_4, 1, 4, 95, 180, _("\
+It won't even fit on a cartridge!\n\
+This box is definitely an anomaly."))
+
+DEFINE_DIALOG(DIALOG_TL_INTRO_5, 1, 4, 95, 180, _("\
+Want me to archive this one for research?"))
+
+DEFINE_DIALOG(DIALOG_TL_INTRO_6, 1, 4, 95, 180, _("\
+No. This one does not meet the standards.\n\
+Therefore, it must be discarded.\n\
+Reroute the package to void disposal immediately."))
+
+DEFINE_DIALOG(DIALOG_TL_INTRO_7, 1, 4, 95, 180, _("\
+Tch. Fair enough."))
+
+DEFINE_DIALOG(DIALOG_TL_INTRO_8, 1, 4, 95, 180, _("\
+Bye bye little buddy."))

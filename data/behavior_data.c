@@ -9585,3 +9585,20 @@ const BehaviorScript bhvTaxi[] = {
         CALL_NATIVE(bhv_taxi),
     END_LOOP(),
 };
+
+extern void bhv_introbg(void);
+const BehaviorScript bhvIntroBg[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_introbg),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvIntroScan[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_introbg),
+    END_LOOP(),
+};

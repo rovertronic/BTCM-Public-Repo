@@ -75,6 +75,8 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BAROPE, barope_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOSTFLOOR, ghostfloor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOSTFLOOR2, ghostfloor2_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_INTROBG, introbg_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_INTROSCAN, introscan_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -234,6 +236,8 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_SPRINGTRAP, 3092, 1244, -4243, 0, 90, 0, 0x00000000, bhvSpringtrap),
 		OBJECT(MODEL_SPRINGTRAP, 3392, 1244, -4243, 0, 90, 0, 0x00000000, bhvSpringtrap),
 		OBJECT(MODEL_SPRINGTRAP, 2792, 1244, -4243, 0, 90, 0, 0x00000000, bhvSpringtrap),
+		OBJECT(MODEL_INTROBG, -8979, -2648, 6916, 0, 0, 0, 0x00000000, bhvIntroBg),
+		OBJECT(MODEL_INTROSCAN, -8979, -2737, 7218, 0, 0, 0, 0x00000000, bhvIntroScan),
 		OBJECT(0xFB, -8685, 3217, -5823, 0, 180, 0, 0x00000000, bhvBoneTrain),
 		OBJECT(MODEL_TRAINCEIL, -8486, 4052, -6086, 0, 0, 0, 0x00000000, bhvTrainCeil),
 		OBJECT(MODEL_NONE, -1760, 2997, -4685, 0, 0, 0, (8 << 24) | (TTRIG_ESCALATOR_1 << 16), bhvTrollTrigger),
