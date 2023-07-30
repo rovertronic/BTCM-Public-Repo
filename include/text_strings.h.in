@@ -97,7 +97,7 @@
 #define TEXT_SONG7 _("/ ClascyJitto - PIZZA TIME NEVER ENDS (Pizza Tower)")
 #define TEXT_SONG8 _("/ Michael Wyckoff - Don't Fence Me In (BONELAB)")
 #define TEXT_SONG9 _("/ Michael Wyckoff - Ninja Warrior 5th Section (BONELAB)")
-#define TEXT_SONG10 _("Urbowser")
+#define TEXT_SONG10 _("/ Michael Wyckoff - Ready Set Hunt (Hover Junkers)")
 #define TEXT_SONG11 _("Big House")
 
 #define TEXT_SONG12 _("SMB1 Overworld")
