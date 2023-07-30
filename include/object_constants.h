@@ -991,6 +991,8 @@ enum troll_trigger {
     TTRIG_ADJUST_Y_REFLECTION,
     TTRIG_VANISH_REFLECTION,
     TTRIG_TAXI,
+    TTRIG_PANEL_FLIP,
+    TTRIG_RUN_EARLY,
 };
 
 /* Star General */

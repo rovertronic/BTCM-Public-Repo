@@ -27,3 +27,4 @@
 #include "levels/hmc/minecart/geo.inc.c"
 #include "levels/hmc/wboulder/geo.inc.c"
 #include "levels/hmc/cobie/geo.inc.c"
+#include "levels/hmc/hoverwall/geo.inc.c"

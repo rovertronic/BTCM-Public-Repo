@@ -73,3 +73,5 @@
 #include "levels/hmc/Map6/model.inc.c"
 #include "levels/hmc/banner/anims/data.inc.c"
 #include "levels/hmc/banner/anims/table.inc.c"
+#include "levels/hmc/hoverwall/model.inc.c"
+#include "levels/hmc/hoverwall/collision.inc.c"

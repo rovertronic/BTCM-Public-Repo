@@ -827,5 +827,6 @@ extern const BehaviorScript bhvVoidGoo[];
 extern const BehaviorScript bhvTaxi[];
 extern const BehaviorScript bhvIntroBg[];
 extern const BehaviorScript bhvIntroScan[];
+extern const BehaviorScript bhvHoverWall[];
 
 #endif // BEHAVIOR_DATA_H

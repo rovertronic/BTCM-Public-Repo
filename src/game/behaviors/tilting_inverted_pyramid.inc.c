@@ -6983,3 +6983,50 @@ void bhv_introbg(void) {
         break;
     }
 }
+
+void bhv_hover_wall(void) {
+    f32 reverse = 1.0f;
+    if (o->oBehParams2ndByte == 1) {
+        reverse = -1.0f;
+    }
+
+    switch(o->oAction) {
+        case 0://hover and wait
+        case 3:
+            o->oPosY = o->oHomeY + (sins(o->oTimeScaleTimer*0x800)*20.0f);
+            if ((gMarioState->TrollTrigger==TTRIG_RUN_EARLY)&&(!gMarioState->ExitTroll)&&(o->oAction==0)) {
+                o->oTimeScaleTimer = 100.0f;
+            }
+            if (o->oTimeScaleTimer > 59.0f) {
+                o->oAction++;
+            }
+        break;
+        case 1:
+        case 4:
+            o->oPosY = o->oHomeY + (((u8)o->oTimeScaleTimer%2==0)*8.0f);
+            if ((gMarioState->TrollTrigger==TTRIG_RUN_EARLY)&&(!gMarioState->ExitTroll)&&(o->oAction==1)) {
+                o->oTimeScaleTimer = 100.0f;
+            }
+            if (o->oTimeScaleTimer > 14.0f) {
+                o->oVelZ = 60.0f;
+                if (gMarioState->TrollTrigger == TTRIG_PANEL_FLIP) {
+                    o->oVelZ = -o->oVelZ;
+                }
+                o->oAction++;
+            }
+        break;
+        case 2: //fly z-
+            o->oPosZ += o->oVelZ*gMarioState->timeScale*reverse;
+            if (o->oTimeScaleTimer > 49.0f) {
+                o->oAction++;
+            }
+        break;
+        case 5:
+            o->oPosZ -= o->oVelZ*gMarioState->timeScale*reverse;
+            if (o->oTimeScaleTimer > 49.0f) {
+                o->oAction = 0;//reset state
+                o->oPosZ = o->oHomeZ;
+            }
+        break;
+    }
+}

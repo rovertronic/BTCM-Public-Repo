@@ -59,7 +59,7 @@ const LevelScript level_castle_inside_entry[] = {
 	AREA(1, castle_inside_area_1),
 		WARP_NODE(/*spawn*/0x0A, LEVEL_CASTLE, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x01/*lv1*/, LEVEL_CCM, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		WARP_NODE(0x02/*lv2*/, LEVEL_WF, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x02/*lv2*/, LEVEL_HMC, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x03/*lv3*/, LEVEL_JRB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -992, 0, 0, 0, -90, 0, 0x00000000, bhvAgcrack),
 		OBJECT(MODEL_NONE, -992, -117, 0, 0, 0, 0, 0x00000000, bhvStaticObject),

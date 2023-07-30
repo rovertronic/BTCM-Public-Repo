@@ -108,4 +108,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/banner/anim_header.h"
 
+#include "levels/hmc/hoverwall/geo_header.h"
+
+#include "levels/hmc/hoverwall/collision_header.h"
+
 #endif
