@@ -7089,3 +7089,9 @@ void bhv_junker(void) {
     }
 
 }
+
+void bhv_desert_pillar(void) {
+    if ((lateral_dist_between_objects(gMarioObject,o) < 460.0f)&&(gMarioState->pos[1] < o->oPosY)) {
+        o->oPosY = gMarioState->pos[1];
+    }
+}

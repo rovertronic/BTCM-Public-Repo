@@ -58,6 +58,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_COCKTUS, cocktus1_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_COCKTUS2, cocktus2_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_JUNKER, junker_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_DESERT_PILLAR, desert_pillar_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -69,6 +70,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_COCKTUS, 8904, 773, -2002, 0, 0, 0, 0x00000000, bhvSmallBully),
 		OBJECT(MODEL_COCKTUS, 669, 5287, 12833, 0, 0, 0, 0x00000000, bhvSmallBully),
 		OBJECT(MODEL_NONE, 8181, 1037, 9412, 0, 0, 0, (2 << 16), bhvCoinFormation),
+		OBJECT(MODEL_DESERT_PILLAR, 9193, 1445, 9552, 0, 0, 0, 0x00000000, bhvDesertPillar),
 		OBJECT(MODEL_HOVERWALL, 9145, 1202, -459, 0, 0, 0, (0 << 16), bhvHoverWall),
 		OBJECT(MODEL_HOVERWALL, 8581, 1202, 5541, 0, 0, 0, (1 << 16), bhvHoverWall),
 		OBJECT(MODEL_HOVERWALL, 9145, 1202, 5541, 0, 0, 0, (0 << 16), bhvHoverWall),

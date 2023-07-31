@@ -9647,3 +9647,12 @@ const BehaviorScript bhvJunker[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+extern void bhv_desert_pillar(void);
+const BehaviorScript bhvDesertPillar[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_desert_pillar),
+    END_LOOP(),
+};
