@@ -1618,9 +1618,8 @@ s32 event_winner[] = {
 
     E_WAIT, 90,
     E_DIALOG_AND_PRESSA, DIALOG_RESULTS,
-    E_DIALOG, DIALOG_TL_DEMO_END,
-    //E_CLOSE_DIALOG,
-    //E_WAIT, 20,
+    E_CLOSE_DIALOG,
+    E_WAIT, 20,
     E_WARP, 0x11, //winner warp
 };
 

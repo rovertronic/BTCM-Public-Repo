@@ -3774,7 +3774,3 @@ Tch. Fair enough."))
 
 DEFINE_DIALOG(DIALOG_TL_INTRO_8, 1, 4, 95, 180, _("\
 Bye bye little buddy."))
-
-DEFINE_DIALOG(DIALOG_TL_DEMO_END, 1, 4, 95, 180, _("\
-PATREON DEMO END\n\
-Thank you for supporting me on Patreon!"))

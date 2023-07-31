@@ -1141,8 +1141,8 @@ void event_main(void) {
                 revent_index += 2;
             break;
             case E_WARP:
-                //level_trigger_warp(gMarioState, WARP_OP_LOOK_UP);
-                //sSourceWarpNodeId = arg1;
+                level_trigger_warp(gMarioState, WARP_OP_LOOK_UP);
+                sSourceWarpNodeId = arg1;
                 revent_halt = TRUE;
             break;
             case E_TROLL_DEATH:
