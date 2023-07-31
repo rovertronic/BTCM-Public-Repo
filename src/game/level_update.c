@@ -177,6 +177,9 @@ u32 pressed_pause(void) {
     u32 dialogActive = get_dialog_id() >= 0;
     u32 intangible = (gMarioState->action & ACT_FLAG_INTANGIBLE) != 0;
 
+    //patreon demo only
+    return FALSE;
+
     if ((minigame_real)||(revent_active)) {
         return FALSE;
     }

@@ -488,6 +488,7 @@ enum DialogId {
     DIALOG_TL_INTRO_6,
     DIALOG_TL_INTRO_7,
     DIALOG_TL_INTRO_8,
+    DIALOG_TL_DEMO_END,
 
     DIALOG_COUNT
 };

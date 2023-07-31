@@ -12,7 +12,7 @@
 
 // Enables a comprehensive standalone profiler. Automatically enabled by PUPPYPRINT_DEBUG.
 // If not using PUPPYPRINT_DEBUG, press L to toggle the profiler.
- #define USE_PROFILER
+//#define USE_PROFILER
 
 // TEST LEVEL
 // Uncomment this define and set a test level in order to boot straight into said level.
@@ -21,7 +21,7 @@
 //#define TEST_LEVEL LEVEL_TTC
 //#define TEST_LEVEL LEVEL_BOB
 //#define TEST_LEVEL LEVEL_RR
-//#define TEST_LEVEL LEVEL_JRB
+#define TEST_LEVEL LEVEL_CCM
 
 // Enables debug level select. Hold L while the game boots to turn it on.
 //#define DEBUG_LEVEL_SELECT
@@ -30,7 +30,7 @@
 //#define ENABLE_DEBUG_FREE_MOVE
 
 // Enables a custom, enhanced performance profiler. (Enables PUPPYPRINT by default in config_safeguards).
- #define PUPPYPRINT_DEBUG 1
+//#define PUPPYPRINT_DEBUG 1
 
 // Uses cycles instead of microseconds in Puppyprint debug output.
 // #define PUPPYPRINT_DEBUG_CYCLES
