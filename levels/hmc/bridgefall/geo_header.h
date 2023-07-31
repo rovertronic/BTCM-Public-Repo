@@ -1,0 +1,15 @@
+extern const GeoLayout bridgefall_geo[];
+extern u8 bridgefall_SandCanyon_ci8[];
+extern u8 bridgefall_SandCanyon_pal_rgba16[];
+extern u8 bridgefall_Mesa_rgba16[];
+extern u8 bridgefall_another_multitex_i4[];
+extern Vtx bridgefall_lvl_001_mesh_layer_1_vtx_0[16];
+extern Gfx bridgefall_lvl_001_mesh_layer_1_tri_0[];
+extern Vtx bridgefall_lvl_001_mesh_layer_1_vtx_1[49];
+extern Gfx bridgefall_lvl_001_mesh_layer_1_tri_1[];
+extern Gfx mat_bridgefall_Sand_002[];
+extern Gfx mat_revert_bridgefall_Sand_002[];
+extern Gfx mat_bridgefall_Mesa_001_layer1[];
+extern Gfx mat_revert_bridgefall_Mesa_001_layer1[];
+extern Gfx bridgefall_lvl_001_mesh_layer_1[];
+extern Gfx bridgefall_material_revert_render_settings[];

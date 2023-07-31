@@ -732,11 +732,21 @@ s32 act_wall_stick(struct MarioState *m) {
 
     find_surface_on_ray(&m->pos, &raydir, &surf, &hitpos, RAYCAST_FIND_ALL);
     if (surf == NULL) {
-        return set_mario_action(m, ACT_FREEFALL, 0);
+        m->pos[1] += 100.0f;
+        find_surface_on_ray(&m->pos, &raydir, &surf, &hitpos, RAYCAST_FIND_ALL);
+        m->pos[1] -= 100.0f;
+
+        if (surf == NULL) {
+            return set_mario_action(m, ACT_FREEFALL, 0);
+        } else {
+            if (surf->object != NULL) {
+                apply_platform_displacement(&sMarioDisplacementInfo, m->pos, &m->faceAngle[1], surf->object);
+            }    
+        }
     } else {
         if (surf->object != NULL) {
             apply_platform_displacement(&sMarioDisplacementInfo, m->pos, &m->faceAngle[1], surf->object);
-            }
+        }
     }
 
     m->vel[0] = 0.0f;

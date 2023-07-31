@@ -9,9 +9,9 @@ static struct ObjectHitbox sSmallBullyHitbox = {
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
     /* radius:            */ 73,
-    /* height:            */ 123,
-    /* hurtboxRadius:     */ 63,
-    /* hurtboxHeight:     */ 113,
+    /* height:            */ 403,
+    /* hurtboxRadius:     */ 350,
+    /* hurtboxHeight:     */ 400,
 };
 
 static struct ObjectHitbox sBigBullyHitbox = {
@@ -42,7 +42,6 @@ static s16 obj_turn_pitch_toward_mario_e(f32 targetOffsetY, s16 turnAmount) {
 }
 
 void bhv_small_bully_init(void) {
-    cur_obj_init_animation(0);
     vec3f_copy(&o->oHomeVec, &o->oPosVec);
     o->oBehParams2ndByte = BULLY_BP_SIZE_SMALL;
     o->oGravity = 4.0f;
@@ -53,7 +52,6 @@ void bhv_small_bully_init(void) {
 }
 
 void bhv_big_bully_init(void) {
-    cur_obj_init_animation(0);
     vec3f_copy(&o->oHomeVec, &o->oPosVec);
     o->oPosY += 2000.0f;
     o->oBehParams2ndByte = BULLY_BP_SIZE_BIG;
@@ -81,7 +79,6 @@ void bully_check_mario_collision(void) {
         o->oForwardVel = 2500.0f / o->hitboxRadius;
         o->oMoveAngleYaw = o->oAngleToMario+0x8000;
         o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
-        cur_obj_init_animation(3);
         o->oBullyMarioCollisionAngle = o->oMoveAngleYaw;
     }
 }
@@ -91,6 +88,13 @@ void bully_act_chase_mario(void) {
     f32 posY = o->oPosY;
     f32 homeZ = o->oHomeZ;
 
+    if (o->oTimer == 0) {
+        o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_COCKTUS2];
+        cur_obj_init_animation(0);
+    }
+    if (o->oTimer == 15) {
+        cur_obj_init_animation(1);
+    }
     if (o->oTimer < 10) {
         o->oForwardVel = 3.0f;
         obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_YAW_INDEX, 0x1000);
@@ -108,7 +112,6 @@ void bully_act_chase_mario(void) {
 
     if ((!is_point_within_radius_of_mario(homeX, posY, homeZ, 1000))&&((o->oBehParams2ndByte != BULLY_BP_SIZE_SMALL))) {
         o->oAction = BULLY_ACT_PATROL;
-        cur_obj_init_animation(0);
     }
 }
 
@@ -138,7 +141,6 @@ void bully_act_knockback(void) {
                 }
             }
         o->oBullyKBTimerAndMinionKOCounter = 0;
-        cur_obj_init_animation(1);
     }
 
 }
@@ -295,14 +297,13 @@ void bhv_bully_loop(void) {
                 o->oAction = BULLY_ACT_BOSS;
                 }
 
-            o->oForwardVel = 5.0f;
+            o->oForwardVel = 0.0f;
+            o->oFaceAngleYaw = 0;
+            o->oMoveAngleYaw = 0;
 
             if (obj_return_home_if_safe(o, o->oHomeX, o->oPosY, o->oHomeZ, 800) == TRUE) {
                 o->oAction = BULLY_ACT_CHASE_MARIO;
-                cur_obj_init_animation(1);
             }
-
-            bully_step();
             break;
 
         case BULLY_ACT_CHASE_MARIO:
@@ -511,14 +512,13 @@ void bhv_big_bully_with_minions_loop(void) {
 
     switch (o->oAction) {
         case BULLY_ACT_PATROL:
-            o->oForwardVel = 5.0f;
+            o->oForwardVel = 0.0f;
+            o->oFaceAngleYaw = 0;
+            o->oMoveAngleYaw = 0;
 
             if (obj_return_home_if_safe(o, o->oHomeX, o->oPosY, o->oHomeZ, 1000) == TRUE) {
                 o->oAction = BULLY_ACT_CHASE_MARIO;
-                cur_obj_init_animation(1);
             }
-
-            bully_step();
             break;
 
         case BULLY_ACT_CHASE_MARIO:

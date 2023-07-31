@@ -489,23 +489,30 @@ u32 bully_knock_back_mario(struct MarioState *mario) {
     bully->oPosX = bullyData.posX;
     bully->oPosZ = bullyData.posZ;
 
+    //if (marioDYaw < -0x4000 || marioDYaw > 0x4000) {
+    //    mario->faceAngle[1] += 0x8000;
+    //    mario->forwardVel *= -1.0f;
+//
+    //    if (mario->action & ACT_FLAG_AIR) {
+    //        bonkAction = ACT_BACKWARD_AIR_KB;
+    //    } else {
+    //        bonkAction = ACT_SOFT_BACKWARD_GROUND_KB;
+    //    }
+    //} else {
+    //    if (mario->action & ACT_FLAG_AIR) {
+    //        bonkAction = ACT_FORWARD_AIR_KB;
+    //    } else {
+    //        bonkAction = ACT_SOFT_FORWARD_GROUND_KB;
+    //    }
+    //}
+
+    bonkAction = ACT_THROWN_BACKWARD;
+    mario->forwardVel = 150.0f;
+    mario->vel[1] = 30.0f;
     if (marioDYaw < -0x4000 || marioDYaw > 0x4000) {
         mario->faceAngle[1] += 0x8000;
         mario->forwardVel *= -1.0f;
-
-        if (mario->action & ACT_FLAG_AIR) {
-            bonkAction = ACT_BACKWARD_AIR_KB;
-        } else {
-            bonkAction = ACT_SOFT_BACKWARD_GROUND_KB;
-        }
-    } else {
-        if (mario->action & ACT_FLAG_AIR) {
-            bonkAction = ACT_FORWARD_AIR_KB;
-        } else {
-            bonkAction = ACT_SOFT_FORWARD_GROUND_KB;
-        }
     }
-
     return bonkAction;
 }
 

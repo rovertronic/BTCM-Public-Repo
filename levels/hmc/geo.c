@@ -28,3 +28,8 @@
 #include "levels/hmc/wboulder/geo.inc.c"
 #include "levels/hmc/cobie/geo.inc.c"
 #include "levels/hmc/hoverwall/geo.inc.c"
+#include "levels/hmc/bridgefall/geo.inc.c"
+#include "levels/hmc/cocktus1/geo.inc.c"
+#include "levels/hmc/cocktus2/geo.inc.c"
+#include "levels/hmc/junker/geo.inc.c"
+#include "levels/hmc/desert_pillar/geo.inc.c"

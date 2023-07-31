@@ -4875,12 +4875,13 @@ const BehaviorScript bhvATM[] = {
 };
 
 const BehaviorScript bhvSmallBully[] = {
-    BEGIN(OBJ_LIST_GENACTOR),
+    BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
-    LOAD_ANIMATIONS(oAnimations, bully_seg5_anims_0500470C),
+    LOAD_ANIMATIONS(oAnimations, cocktus_anims),
     DROP_TO_FLOOR(),
     SET_HOME(),
     CALL_NATIVE(bhv_small_bully_init),
+    SET_FLOAT(oDrawingDistance,30000.0f),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_bully_loop),
@@ -9613,6 +9614,36 @@ const BehaviorScript bhvHoverWall[] = {
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hover_wall),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_bridgefall(void);
+const BehaviorScript bhvBridgeFall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 30000),
+    SET_FLOAT(oCollisionDistance, 3000),
+    LOAD_COLLISION_DATA(bridgefall_collision),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bridgefall),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_junker(void);
+const BehaviorScript bhvJunker[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 30000),
+    SET_FLOAT(oCollisionDistance, 3000),
+    LOAD_ANIMATIONS(oAnimations, junker_anims),
+    LOAD_COLLISION_DATA(junker_collision),
+    ANIMATE(0),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_junker),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

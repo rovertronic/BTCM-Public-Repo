@@ -7030,3 +7030,62 @@ void bhv_hover_wall(void) {
         break;
     }
 }
+
+void bhv_bridgefall(void) {
+    switch(o->oAction) {
+        case 0:
+            if (gMarioState->TrollTrigger == TTRIG_BRIDGE_FALL) {
+                 o->oAction ++;
+                 create_sound_spawner(SOUND_GENERAL2_PYRAMID_TOP_EXPLOSION);
+            }
+        break;
+        case 1:
+            o->oFaceAngleRoll += 0x200*gMarioState->timeScale;
+            if (o->oTimeScaleTimer > 20.0f) {
+                o->oAction++;
+            }
+        break;
+    }
+}
+
+void bhv_junker(void) {
+    switch(o->oAction) {
+        case 0:
+            o->header.gfx.animInfo.animFrame = 0;
+            if (gMarioObject->platform == o) {
+                o->oAction++;
+                o->oVelZ = 0.0f;
+                cur_obj_play_sound_2(SOUND_GENERAL_OPEN_IRON_DOOR);
+            }
+        break;
+        case 1://off we go
+        case 2:
+            if (o->oVelZ > -30.0f) {
+                o->oVelZ -= 1.0f*gMarioState->timeScale;
+            }
+            o->oPosZ += o->oVelZ;
+            o->oPosY -= 0.2f*gMarioState->timeScale;
+
+            if ((o->oTimeScaleTimer > 69.0f)&&(o->oAction==1)) {
+                o->oAction = 2;
+                cur_obj_init_animation_with_sound(1);
+            }
+
+            if (o->oAction == 2) {
+                o->header.gfx.animInfo.animFrame = ((u8)(o->oTimeScaleTimer)%40);
+            }
+
+            if ((o->oBehParams2ndByte==1)&&(o->oTimeScaleTimer > 150.0f)) {
+                //i think my timescale is funky here (outright wrong) but it just has to be mostly acceptable for now
+                o->oVelY -= 1.0f*gMarioState->timeScale;
+                o->oPosY += o->oVelY*gMarioState->timeScale;
+                o->oFaceAnglePitch += 0x50*gMarioState->timeScale;
+            }
+        break;
+    }
+
+    if (o->oPosY < 0.0f) {
+        mark_obj_for_deletion(o);
+    }
+
+}

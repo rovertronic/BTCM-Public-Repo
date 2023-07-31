@@ -112,4 +112,22 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/hoverwall/collision_header.h"
 
+#include "levels/hmc/bridgefall/geo_header.h"
+
+#include "levels/hmc/bridgefall/collision_header.h"
+
+#include "levels/hmc/cocktus1/geo_header.h"
+
+#include "levels/hmc/cocktus2/geo_header.h"
+
+#include "levels/hmc/cocktus/anim_header.h"
+
+#include "levels/hmc/junker/geo_header.h"
+
+#include "levels/hmc/junker/anim_header.h"
+
+#include "levels/hmc/junker/collision_header.h"
+
+#include "levels/hmc/desert_pillar/geo_header.h"
+
 #endif
