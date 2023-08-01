@@ -6624,7 +6624,7 @@ void bhv_troll_pillar(void) {
 
     switch(gCurrAreaIndex) {
         case 1: //wait to be hit
-            if ((lateral_dist_between_objects(o,gMarioObject) < 400.0)&&(gMarioState->troll_checkpoint == 2)) {
+            if ((lateral_dist_between_objects(o,gMarioObject) < 400.0)&&(gMarioState->pos[1] > (o->oPosY-10.0f))&&(gMarioState->troll_checkpoint == 2)) {
                 o->oAction++;
                 cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
                 gMarioState->boning_time = TRUE;
@@ -6861,9 +6861,12 @@ void bhv_checkpoint_flag(void) {
                 break;
                 case LEVEL_HMC:
                     case 1:
-                        save_file_set_badge_unlock(1<<AVATAR_PINGAS);
-                        run_event(EVENT_WATCH_NEAREST_TV);
-                    break;
+                    switch(o->oBehParams2ndByte) {
+                        case 1:
+                            save_file_set_badge_unlock(1<<AVATAR_PINGAS);
+                            run_event(EVENT_WATCH_NEAREST_TV);
+                        break;
+                    }
                 break;
             }
 
@@ -7002,6 +7005,10 @@ void bhv_hover_wall(void) {
     if (o->oBehParams2ndByte == 1) {
         reverse = -1.0f;
     }
+    if (gMarioState->boning_time) {
+        o->oTimeScaleTimer += gMarioState->timeScale;
+        reverse*=2.0f;
+    }
 
     switch(o->oAction) {
         case 0://hover and wait
@@ -7062,13 +7069,32 @@ void bhv_bridgefall(void) {
 }
 
 void bhv_junker(void) {
+    f32 rev = 1.0f;
+    if (o->oBehParams2ndByte == 2) {
+        rev = -1.0f;
+    }
+
     switch(o->oAction) {
         case 0:
             o->header.gfx.animInfo.animFrame = 0;
             if (gMarioObject->platform == o) {
-                o->oAction++;
-                o->oVelZ = 0.0f;
-                cur_obj_play_sound_2(SOUND_GENERAL_OPEN_IRON_DOOR);
+                if (o->oBehParams2ndByte == 2) {
+                    if ((o->oDistanceToMario < 1500.0f)&&(gMarioStates[0].flags & MARIO_PUSHING)) {
+                        if (gMarioState->Avatar == AVATAR_PINGAS) {
+                            o->oAction++;
+                            o->oVelZ = 0.0f;
+                            cur_obj_play_sound_2(SOUND_GENERAL_OPEN_IRON_DOOR);
+                        } else {
+                            print_text_fmt_int(20, 200, "NEEDS A STRONG PUSH", 0);
+                        }
+                    } else {
+                        print_text_fmt_int(20, 200, "NEEDS A PUSH", 0);
+                    }
+                } else {
+                    o->oAction++;
+                    o->oVelZ = 0.0f;
+                    cur_obj_play_sound_2(SOUND_GENERAL_OPEN_IRON_DOOR);
+                }
             }
         break;
         case 1://off we go
@@ -7076,7 +7102,7 @@ void bhv_junker(void) {
             if (o->oVelZ > -30.0f) {
                 o->oVelZ -= 1.0f*gMarioState->timeScale;
             }
-            o->oPosZ += o->oVelZ;
+            o->oPosZ += o->oVelZ*rev;
             o->oPosY -= 0.2f*gMarioState->timeScale;
 
             if ((o->oTimeScaleTimer > 69.0f)&&(o->oAction==1)) {
@@ -7089,6 +7115,12 @@ void bhv_junker(void) {
             }
 
             if ((o->oBehParams2ndByte==1)&&(o->oTimeScaleTimer > 90.0f)) {
+                //i think my timescale is funky here (outright wrong) but it just has to be mostly acceptable for now
+                o->oVelY -= 1.0f*gMarioState->timeScale;
+                o->oPosY += o->oVelY*gMarioState->timeScale;
+                o->oFaceAnglePitch += 0x50*gMarioState->timeScale;
+            }
+            if ((o->oBehParams2ndByte==2)&&(o->oTimeScaleTimer > 220.0f)) {
                 //i think my timescale is funky here (outright wrong) but it just has to be mostly acceptable for now
                 o->oVelY -= 1.0f*gMarioState->timeScale;
                 o->oPosY += o->oVelY*gMarioState->timeScale;

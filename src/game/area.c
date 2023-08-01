@@ -408,6 +408,10 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
+f32 gSplitOffsetC = 0.0f;
+f32 gSplitOffset = 0.0f;
+u8 gSplitPass = 0;
+
 void render_game(void) {
 #ifdef MUSIC_PREVIEWING
     u32 currBGM = get_current_background_music() & 0x7F;
@@ -430,8 +434,15 @@ void render_game(void) {
 #endif
 
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
+        gSplitPass = 0;
+        gSplitOffset = -gSplitOffsetC;
         if (gCurrentArea->graphNode) {
             geo_process_root(gCurrentArea->graphNode, gViewportOverride, gViewportClip, gFBSetColor);
+            if (gSplitOffsetC > 0.0f) {
+                gSplitPass = 1;
+                gSplitOffset = gSplitOffsetC;
+                geo_process_root(gCurrentArea->graphNode, gViewportOverride, gViewportClip, gFBSetColor);
+            }
         }
 
         gSPViewport(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&gViewport));

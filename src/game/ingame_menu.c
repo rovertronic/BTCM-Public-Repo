@@ -2544,6 +2544,7 @@ s32 render_pause_courses_and_castle(void) {
                                 gMenuMode = MENU_MODE_NONE;
                                 gMarioState->health = 255 + (255*gMarioState->numMaxHP);
                                 gMarioState->numBadgePoints = gMarioState->numMaxFP;
+                                //gMarioState->troll_checkpoint = 0;//reset checkpoint when exit course
                                 index = gDialogLineNum;
                             } else {
                                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);

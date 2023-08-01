@@ -679,11 +679,13 @@ static void make_roll_matrix(Mtx *mtx, s16 angle) {
 /**
  * Process a camera node.
  */
-void geo_process_camera(struct GraphNodeCamera *node) {
+void geo_process_camera(struct GraphNodeCamera *node, f32 split_offset) {
     Mat4 cameraTransform;
     Mtx *rollMtx = alloc_display_list(sizeof(*rollMtx));
 
-
+    f32 unused_dist;
+    s16 unused_pitch;
+    s16 yaw;
 
     if (node->fnNode.func != NULL) {
         node->fnNode.func(GEO_CONTEXT_RENDER, &node->fnNode.node, gMatStack[gMatStackIndex]);
@@ -691,6 +693,10 @@ void geo_process_camera(struct GraphNodeCamera *node) {
     make_roll_matrix(rollMtx, node->rollScreen);
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(rollMtx), G_MTX_PROJECTION | G_MTX_MUL | G_MTX_NOPUSH);
+
+    vec3f_get_dist_and_angle(&node->pos,&node->focus,&unused_dist,&unused_pitch,&yaw);
+    node->pos[0] += sins(yaw+0x4000)*split_offset;
+    node->pos[2] += coss(yaw+0x4000)*split_offset;
 
     mtxf_lookat(cameraTransform, node->pos, node->focus, node->roll);
     mtxf_mul(gMatStack[gMatStackIndex + 1], cameraTransform, gMatStack[gMatStackIndex]);
@@ -1346,7 +1352,7 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
                     case GRAPH_NODE_TYPE_MASTER_LIST:          geo_process_master_list         ((struct GraphNodeMasterList          *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_LEVEL_OF_DETAIL:      geo_process_level_of_detail     ((struct GraphNodeLevelOfDetail       *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_SWITCH_CASE:          geo_process_switch              ((struct GraphNodeSwitchCase          *) curGraphNode); break;
-                    case GRAPH_NODE_TYPE_CAMERA:               geo_process_camera              ((struct GraphNodeCamera              *) curGraphNode); break;
+                    case GRAPH_NODE_TYPE_CAMERA:               geo_process_camera              ((struct GraphNodeCamera              *) curGraphNode, gSplitOffset); break;
                     case GRAPH_NODE_TYPE_TRANSLATION_ROTATION: geo_process_translation_rotation((struct GraphNodeTranslationRotation *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_TRANSLATION:          geo_process_translation         ((struct GraphNodeTranslation         *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_ROTATION:             geo_process_rotation            ((struct GraphNodeRotation            *) curGraphNode); break;
@@ -1358,7 +1364,10 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
                     case GRAPH_NODE_TYPE_SHADOW:               geo_process_shadow              ((struct GraphNodeShadow              *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_OBJECT_PARENT:        geo_process_object_parent       ((struct GraphNodeObjectParent        *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_GENERATED_LIST:       geo_process_generated_list      ((struct GraphNodeGenerated           *) curGraphNode); break;
-                    case GRAPH_NODE_TYPE_BACKGROUND:           geo_process_background          ((struct GraphNodeBackground          *) curGraphNode); break;
+                    case GRAPH_NODE_TYPE_BACKGROUND:
+                            if (gSplitPass == 0) {
+                                geo_process_background((struct GraphNodeBackground *) curGraphNode);
+                            }break;
                     case GRAPH_NODE_TYPE_HELD_OBJ:             geo_process_held_object         ((struct GraphNodeHeldObject          *) curGraphNode); break;
                     case GRAPH_NODE_TYPE_BONE:                 geo_process_bone                ((struct GraphNodeBone                *) curGraphNode); break;
                     default:                                   geo_try_process_children        ((struct GraphNode                    *) curGraphNode); break;
@@ -1389,17 +1398,15 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         vec3s_set(viewport->vp.vtrans, node->x * 4, node->y * 4, 511);
         vec3s_set(viewport->vp.vscale, node->width * 4, node->height * 4, 511);
 
-        if (gIsConsole == FALSE) {
-            clear_framebuffer(0);
-        }
-
+        /*
         if (b != NULL) {
             clear_framebuffer(clearColor);
             make_viewport_clip_rect(b);
             *viewport = *b;
         }
+        */
 
-        else if (c != NULL) {
+        if (c != NULL) {
             clear_framebuffer(clearColor);
             make_viewport_clip_rect(c);
         }

@@ -451,7 +451,7 @@ s32 mario_get_floor_class(struct MarioState *m) {
     // This doesn't matter too much since normally the slide terrain
     // is checked for anyways.
     if ((m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE) {
-        floorClass = SURFACE_CLASS_VERY_SLIPPERY;
+        floorClass = SURFACE_CLASS_SLIPPERY;
     } else {
         floorClass = SURFACE_CLASS_DEFAULT;
     }
@@ -1877,6 +1877,19 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     u8 *sus = segmented_to_virtual(&castle_courtyard_dl_output_0_custom_i8_ia8);
     u8 coinrepeats = 1;
     //u16 *walltex2 = segmented_to_virtual(&shrnling1_Static_i8);
+
+    if ((gMarioState->TrollTrigger == TTRIG_DIZZY)&&(!gMarioState->ExitTroll)) {
+        if (gSplitOffsetC < 500) {
+            gSplitOffsetC += 10;
+        }
+    } else {
+        if (gSplitOffsetC > 0) {
+            gSplitOffsetC -= 10;
+        }     
+    }
+    if (gCurrLevelNum!=LEVEL_HMC) {
+        gSplitOffsetC = 0;
+    }
 
     //penis shooting cum all over the screen
     //translation: this is an unecessary level of abstraction, however i am reusing

@@ -9635,7 +9635,7 @@ const BehaviorScript bhvBridgeFall[] = {
 extern void bhv_junker(void);
 const BehaviorScript bhvJunker[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE|OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     SET_FLOAT(oDrawingDistance, 30000),
     SET_FLOAT(oCollisionDistance, 3000),
     LOAD_ANIMATIONS(oAnimations, junker_anims),
