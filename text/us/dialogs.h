@@ -3747,10 +3747,10 @@ RESULTS:\n\
 Total Time Spent - [%]\n\
 Deaths - [%]"))
 
-DEFINE_DIALOG(DIALOG_TL_INTRO_1, 1, 4, 95, 180, _("\
+DEFINE_DIALOG(DIALOG_TL_INTRO_1, 8, 4, 95, 180, _("\
 No issues reported. Next!                        "))
 
-DEFINE_DIALOG(DIALOG_TL_INTRO_2, 1, 4, 95, 180, _("\
+DEFINE_DIALOG(DIALOG_TL_INTRO_2, 8, 4, 95, 180, _("\
 Halt the line."))
 
 DEFINE_DIALOG(DIALOG_TL_INTRO_3, 1, 4, 95, 180, _("\
@@ -3764,7 +3764,7 @@ This box is definitely an anomaly."))
 DEFINE_DIALOG(DIALOG_TL_INTRO_5, 1, 4, 95, 180, _("\
 Want me to archive this one for research?"))
 
-DEFINE_DIALOG(DIALOG_TL_INTRO_6, 1, 4, 95, 180, _("\
+DEFINE_DIALOG(DIALOG_TL_INTRO_6, 8, 4, 95, 180, _("\
 No. This one does not meet the standards.\n\
 Therefore, it must be discarded.\n\
 Reroute the package to void disposal immediately."))

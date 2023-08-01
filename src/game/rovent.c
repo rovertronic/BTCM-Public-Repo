@@ -702,6 +702,7 @@ void render_costume_menu() {
     }
 }
 
+u8 dialog_is_pink = FALSE;
 void read_dialog(s32 dialog_id) {
     u16 i;
     u16 i2;
@@ -711,6 +712,11 @@ void read_dialog(s32 dialog_id) {
     u8 **dialogTable = segmented_to_virtual(seg2_dialog_table);
     struct DialogEntry *sdialog = segmented_to_virtual(dialogTable[dialog_id]);
     u8 *sstr = segmented_to_virtual(sdialog->str);
+
+    dialog_is_pink = FALSE;
+    if (sdialog->unused == 8) {
+        dialog_is_pink = TRUE;
+    }
 
     rtext_current_read_dialog = dialog_id;
 
@@ -1395,6 +1401,9 @@ void render_revent_textbox(void) {
         gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, rtext_opacity);
         print_generic_string(9, 40, rtext_display);//rtext_pressa
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, rtext_opacity);
+        if (dialog_is_pink) {
+            gDPSetEnvColor(gDisplayListHead++, 255, 50, 255, rtext_opacity);
+        }
         print_generic_string(10, 41, rtext_display);
         //render press a
         if (((revent_pointer[revent_index] == E_DIALOG_WAIT_PRESSA)||(revent_pointer[revent_index] == E_DIALOG_AND_PRESSA))&&(rtext_done)) {
