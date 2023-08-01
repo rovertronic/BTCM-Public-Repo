@@ -31,10 +31,7 @@ void bhv_recovery_heart_loop(void) {
     }
 
     if ((o->oSpinningHeartTotalSpin += o->oAngleVelYaw) >= 0x10000) {
-        gMarioState->healCounter += 4;
-#ifdef BREATH_METER
-        gMarioState->breathCounter += 4;
-#endif
+        gMarioState->hurtCounter += 4;
         o->oSpinningHeartTotalSpin -= 0x10000;
     }
 

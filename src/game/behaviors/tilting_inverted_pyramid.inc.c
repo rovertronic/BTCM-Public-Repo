@@ -6545,7 +6545,7 @@ void bhv_quarantine(void) {
             }
         break;
         case 1: //kil mario
-            o->oPosY -= 60.0f*gMarioState->timeScale;
+            o->oPosY -= 55.0f*gMarioState->timeScale;
             if ((gMarioState->ExitTroll == FALSE)&&(gMarioState->pos[1] > o->oPosY)) {
                 gMarioState->pos[1] = o->oPosY;
                 gMarioState->vel[1] = 0.0f;
@@ -6610,7 +6610,7 @@ void bhv_axe_trap(void) {
                 run_event(EVENT_DEATH);
             }
             if ((gMarioState->TrollTrigger == TTRIG_AXE)&&(!gMarioState->ExitTroll)&&(gMarioState->troll_checkpoint==1)) {
-                o->oVelX = 2.5f;
+                o->oVelX = 2.4f;
             }
         break;
     }
@@ -6807,11 +6807,16 @@ void bhv_ghost_floor(void) {
 }
 
 void bhv_void_leak(void) {
+    f32 spd = 35.0f;
+    if (gMarioState->boning_time) {
+        spd = 25.0f;
+    }
+
     switch(o->oAction) {
         case 1:
             if ((o->oDistanceToMario < 1000.0f)&&(o->oHealth>0)) {
-                o->oPosX += sins(o->oAngleToMario)*35.0f;
-                o->oPosZ += coss(o->oAngleToMario)*35.0f;
+                o->oPosX += sins(o->oAngleToMario)*spd;
+                o->oPosZ += coss(o->oAngleToMario)*spd;
                 o->oHealth--;
             }
         case 0:
@@ -6841,17 +6846,25 @@ void bhv_checkpoint_flag(void) {
 
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gMarioState->marioObj->header.gfx.cameraToObject);
 
-            if (gCurrLevelNum == LEVEL_CCM) {
-                switch(o->oBehParams2ndByte) {
+            switch(gCurrLevelNum) {
+                case LEVEL_CCM:
+                    switch(o->oBehParams2ndByte) {
+                        case 1:
+                            save_file_set_badge_unlock(1<<AVATAR_FORD);
+                            run_event(EVENT_LV1_CP1);
+                        break;
+                        case 2:
+                            save_file_set_badge_unlock(1<<AVATAR_FAST);
+                            run_event(EVENT_WATCH_NEAREST_TV);
+                        break;
+                    }
+                break;
+                case LEVEL_HMC:
                     case 1:
-                        save_file_set_badge_unlock(1<<AVATAR_FORD);
-                        run_event(EVENT_LV1_CP1);
-                    break;
-                    case 2:
-                        save_file_set_badge_unlock(1<<AVATAR_FAST);
+                        save_file_set_badge_unlock(1<<AVATAR_PINGAS);
                         run_event(EVENT_WATCH_NEAREST_TV);
                     break;
-                }
+                break;
             }
 
         }
@@ -7075,7 +7088,7 @@ void bhv_junker(void) {
                 o->header.gfx.animInfo.animFrame = ((u8)(o->oTimeScaleTimer)%40);
             }
 
-            if ((o->oBehParams2ndByte==1)&&(o->oTimeScaleTimer > 150.0f)) {
+            if ((o->oBehParams2ndByte==1)&&(o->oTimeScaleTimer > 90.0f)) {
                 //i think my timescale is funky here (outright wrong) but it just has to be mostly acceptable for now
                 o->oVelY -= 1.0f*gMarioState->timeScale;
                 o->oPosY += o->oVelY*gMarioState->timeScale;

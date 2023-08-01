@@ -155,6 +155,12 @@ void update_sliding_angle(struct MarioState *m, f32 accel, f32 lossFactor) {
     s16 slopeAngle = atan2s(floor->normal.z, floor->normal.x);
     f32 steepness = sqrtf(floor->normal.x * floor->normal.x + floor->normal.z * floor->normal.z);
 
+    if (mario_get_floor_class(m) == SURFACE_CLASS_VERY_SLIPPERY) {
+        if (steepness < 0.5f) {
+            steepness = 0.5f;
+        }
+    }
+
     m->slideVelX += accel * steepness * sins(slopeAngle);
     m->slideVelZ += accel * steepness * coss(slopeAngle);
 
@@ -508,6 +514,9 @@ s32 should_begin_sliding(struct MarioState *m) {
         if (slideLevel || movingBackward || mario_facing_downhill(m, FALSE)) {
             return TRUE;
         }
+    }
+    if (mario_get_floor_class(m) == SURFACE_CLASS_VERY_SLIPPERY) {
+        return TRUE;
     }
 
     return FALSE;
@@ -1531,7 +1540,7 @@ void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32
 
 s32 common_slide_action_with_jump(struct MarioState *m, u32 stopAction, u32 jumpAction, u32 airAction,
                                   s32 animation) {
-    if (m->actionTimer == 5) {
+    if (m->actionTimer == 2) {
         if (m->input & INPUT_A_PRESSED) {
             return set_jumping_action(m, jumpAction, 0);
         }

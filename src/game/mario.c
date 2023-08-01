@@ -651,7 +651,7 @@ s32 mario_floor_is_steep(struct MarioState *m) {
     // This does not matter in vanilla game practice.
     if (!mario_facing_downhill(m, FALSE)) {
         switch (mario_get_floor_class(m)) {
-            case SURFACE_CLASS_VERY_SLIPPERY: normY = COS15; break;
+            case SURFACE_CLASS_VERY_SLIPPERY: normY = 1.0f; break;
             case SURFACE_CLASS_SLIPPERY:      normY = COS20; break;
             default:                          normY = COS30; break;
             case SURFACE_CLASS_NOT_SLIPPERY:  normY = COS30; break;
@@ -1915,7 +1915,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 
                     if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
                         //enter the lab
-                        run_event(EVENT_TL_LAB_INTRO);
+                        //run_event(EVENT_TL_LAB_INTRO);
                     } else {
                         //back to the lab
                         play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SCIENCES), 0);
@@ -2848,7 +2848,7 @@ s32 trolllab_level_win(struct MarioState *m) {
         mark_obj_for_deletion(evil_1up);
     }
 
-    u8 hour = m->leveltime /3600;
+    u8 hour = m->leveltime/3600;
     u8 minute = (m->leveltime/60)%60;
     u8 second = m->leveltime%60;
 
@@ -2864,8 +2864,11 @@ s32 trolllab_level_win(struct MarioState *m) {
     run_event(EVENT_WINNER);
 
     switch(gCurrLevelNum) {
-        case LEVEL_BOB:
+        case LEVEL_CCM: //LEVEL 1
             save_file_set_progression(PROG_TL_LEVEL1_BEAT);
+        break;
+        case LEVEL_HMC: //LEVEL 2
+            save_file_set_progression(PROG_TL_LEVEL2_BEAT);
         break;
     }
 

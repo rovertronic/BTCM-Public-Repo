@@ -1820,18 +1820,19 @@ UNUSED void unused_8031FED0(u8 player, u32 bits, s8 arg2) {
 
 /**
  * Lower a sequence player's volume over fadeDuration frames.
- * If player is SEQ_PLAYER_LEVEL (background music), the given percentage is ignored
+ * If player is SEQ_PLAYER_LEVEL (background music), the given percentage is ignored : this is stupid and pointless. you don't trust the developers to make
+ the level audio 40 themselves? are they that lazy? fuckign stupid.
  * and a max target volume of 40 is used.
  *
  * Called from threads: thread5_game_loop
  */
 void seq_player_lower_volume(u8 player, u16 fadeDuration, u8 percentage) {
-    if (player == SEQ_PLAYER_LEVEL) {
-        sLowerBackgroundMusicVolume = TRUE;
-        begin_background_music_fade(fadeDuration);
-    } else if (gSequencePlayers[player].enabled == TRUE) {
+    //if (player == SEQ_PLAYER_LEVEL) {
+    //    sLowerBackgroundMusicVolume = TRUE;
+    //    begin_background_music_fade(fadeDuration);
+    //} else if (gSequencePlayers[player].enabled == TRUE) {
         seq_player_fade_to_percentage_of_volume(player, fadeDuration, percentage);
-    }
+    //}
 }
 
 /**

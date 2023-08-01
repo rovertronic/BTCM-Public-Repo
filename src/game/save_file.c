@@ -655,6 +655,7 @@ u32 save_file_check_progression(u32 prog_enum) {
 u32 save_file_set_progression(u32 prog_enum) {
     if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].progression < prog_enum) {
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].progression = prog_enum;
+        gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
         gSaveFileModified = TRUE;
     }
 }

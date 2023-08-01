@@ -54,8 +54,10 @@ const LevelScript level_bob_entry[] = {
 	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, bob_area_1),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		MARIO_POS(0x01, 0, 1402, 0, 0),
 		OBJECT(MODEL_MONITOR, 986, 329, -375, 0, 45, 0, (6 << 16), bhvMonitor),
+		OBJECT(MODEL_NONE, 1402, 0, 0, 0, -90, 0, (0x0A << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, -195, 188, -1492, 0, 0, 0, (2 << 24) | (TTRIG_TAXI << 16), bhvTrollTrigger),
 		OBJECT(MODEL_TAXI, -189, 0, -1405, 0, 0, 0, 0x00000000, bhvTaxi),
 		TERRAIN(bob_area_1_collision),

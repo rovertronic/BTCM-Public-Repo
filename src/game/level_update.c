@@ -1303,7 +1303,7 @@ s32 init_level(void) {//
     switch(gCurrLevelNum) {
         case LEVEL_HMC:
         case LEVEL_JRB:
-            gMarioState->LavaHeat = 2;
+            gMarioState->LavaHeat = 1;
         break;
         case LEVEL_SL:
             gMarioState->LavaHeat = 5;

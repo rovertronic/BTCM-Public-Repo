@@ -509,10 +509,16 @@ u32 bully_knock_back_mario(struct MarioState *mario) {
     bonkAction = ACT_THROWN_BACKWARD;
     mario->forwardVel = 150.0f;
     mario->vel[1] = 30.0f;
+    if (gMarioState->Avatar == AVATAR_PINGAS) {
+        //stronk
+        mario->forwardVel = 10.0f;
+        mario->vel[1] = 3.0f;
+    }
     if (marioDYaw < -0x4000 || marioDYaw > 0x4000) {
         mario->faceAngle[1] += 0x8000;
         mario->forwardVel *= -1.0f;
     }
+
     return bonkAction;
 }
 
@@ -766,18 +772,18 @@ u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
     obj->oInteractStatus = INT_STATUS_INTERACTED;
 
-    if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - obj->oDamageOrCoinValue < 100 && m->numCoins >= 100 && (!gMarioState->hundredSpawned)) {
-        gMarioState->hundredSpawned = TRUE;
-        if (gCurrLevelNum == LEVEL_RR) {
-            //hacky way of spawning a 100 coin star that warps u out
-            old_params = gCurrentObject->oBehParams;
-            gCurrentObject->oBehParams = 0x05000000;
-            spawn_default_star(gMarioState->pos[0],gMarioState->pos[1]+300.0f,gMarioState->pos[2]);
-            gCurrentObject->oBehParams = old_params;
-        } else {
-            bhv_spawn_star_no_level_exit(STAR_BP_ACT_6);
-        }
-    }
+    //if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - obj->oDamageOrCoinValue < 100 && m->numCoins >= 100 && (!gMarioState->hundredSpawned)) {
+    //    gMarioState->hundredSpawned = TRUE;
+    //    if (gCurrLevelNum == LEVEL_RR) {
+    //        //hacky way of spawning a 100 coin star that warps u out
+    //        old_params = gCurrentObject->oBehParams;
+    //        gCurrentObject->oBehParams = 0x05000000;
+    //        spawn_default_star(gMarioState->pos[0],gMarioState->pos[1]+300.0f,gMarioState->pos[2]);
+    //        gCurrentObject->oBehParams = old_params;
+    //    } else {
+    //        //bhv_spawn_star_no_level_exit(STAR_BP_ACT_6);
+    //    }
+    //}
 
     if (m->numCoins > 255) {
         m->numCoins = 255;
@@ -1298,6 +1304,11 @@ u32 interact_bully(struct MarioState *m, UNUSED u32 interactType, struct Object 
         attack_object(obj, interaction);
         bounce_back_from_attack(m, interaction);
 
+        if (gMarioState->Avatar == AVATAR_PINGAS) {
+            obj->oForwardVel = -100.0f;
+            obj->oVelY = 100.0f;
+        }
+
         return TRUE;
     } else if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)
              && !(obj->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
@@ -1310,8 +1321,6 @@ u32 interact_bully(struct MarioState *m, UNUSED u32 interactType, struct Object 
 
         push_mario_out_of_object(m, obj, 5.0f);
         drop_and_set_mario_action(m, bully_knock_back_mario(m), 0);
-
-
 
         return TRUE;
     }
