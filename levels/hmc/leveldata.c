@@ -86,3 +86,5 @@
 #include "levels/hmc/junker/anims/table.inc.c"
 #include "levels/hmc/junker/collision.inc.c"
 #include "levels/hmc/desert_pillar/model.inc.c"
+#include "levels/hmc/bigredcoin/collision.inc.c"
+#include "levels/hmc/bigredcoin/model.inc.c"

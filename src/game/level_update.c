@@ -716,10 +716,6 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
         dmg_amount = 0x80;
     }
 
-    if (gMarioState->boning_time) {
-        fadeMusic = FALSE;
-    }
-
     if (sDelayedWarpOp == WARP_OP_NONE) {
         m->invincTimer = -1;
         sDelayedWarpArg = WARP_FLAGS_NONE;
@@ -791,39 +787,15 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                     play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x14, 0x0, 0x0, 0x0);
                 }
                 else{
-                    //make death floor work in sign game
-                    if (minigame_real) {
-                        end_minigame();
-                    } else {
-                        mario_stop_riding_and_holding(gMarioState);
-
-                        //what the fuck is this bruhhhh
-                        //fuck sm64 hp
-                        //i have no idea if changing the 8 to a 5 will work, hope it does!
-                        resp_cond = (gMarioState->health > (dmg_amount * 5 * ((f32)(gMarioState->numMaxHP)/3.0f)));
-                        if (save_file_get_badge_equip() & (1<<BADGE_BOTTOMLESS)) {
-                            resp_cond = (gMarioState->numBadgePoints > 0);
-                        }
-
-                        if (resp_cond) {
-                            //make mario respawn if he has over a third of his HP
-                                fadeMusic = FALSE;
-                                sSourceWarpNodeId = 0x0A;
-                                gMarioState->NewLevel = TRUE;
-                            } else {
-                            //if he has under, then go gaga and die
-                                sSourceWarpNodeId = WARP_NODE_DEATH;
-                                gMarioState->InsideCourse = TRUE;
-
-                                if (save_file_get_badge_equip() & (1<<BADGE_HARDCORE)) {
-                                    //DELETE SAVE FILE!!!!
-                                    save_file_erase(gCurrSaveFileNum-1);
-                                    sDelayedWarpOp = WARP_OP_GAME_OVER;
-                                }
-                            }
-                        play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);
-                        sDelayedWarpTimer = 20;
+                    gMarioState->deaths++;
+                    if ((gMarioState->boning_time)&&(gMarioState->boning_timer==0)) {
+                        gMarioState->troll_checkpoint = 2;
+                        gMarioState->boning_time = FALSE;
                     }
+
+                    sDelayedWarpTimer = 30;
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x14, 0, 0, 0);
+                    sSourceWarpNodeId = 0x0A+gMarioState->troll_checkpoint;
                 }
                 break;
 
@@ -877,6 +849,10 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 }
                 fadeMusic = FALSE;
                 break;
+        }
+
+        if (gMarioState->boning_time) {
+            fadeMusic = FALSE;
         }
 
         if (fadeMusic && gCurrDemoInput == NULL) {
@@ -1299,7 +1275,7 @@ s32 init_level(void) {//
         gMarioState->NewTimerMode = 1;
     }
 
-    gMarioState->LavaHeat = 3;
+    gMarioState->LavaHeat = 1;
     switch(gCurrLevelNum) {
         case LEVEL_HMC:
         case LEVEL_JRB:

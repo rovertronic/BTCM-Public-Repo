@@ -831,5 +831,6 @@ extern const BehaviorScript bhvHoverWall[];
 extern const BehaviorScript bhvBridgeFall[];
 extern const BehaviorScript bhvJunker[];
 extern const BehaviorScript bhvDesertPillar[];
+extern const BehaviorScript bhvBigRedCoin[];
 
 #endif // BEHAVIOR_DATA_H

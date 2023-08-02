@@ -9656,3 +9656,16 @@ const BehaviorScript bhvDesertPillar[] = {
         CALL_NATIVE(bhv_desert_pillar),
     END_LOOP(),
 };
+
+const BehaviorScript bhvBigRedCoin[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SET_INT(oNumLootCoins, 5),
+    // Whomp - common:
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(bigredcoin_collision),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 0, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_whomp_loop),
+    END_LOOP(),
+};

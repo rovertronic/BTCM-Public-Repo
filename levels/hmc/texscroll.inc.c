@@ -1,6 +1,6 @@
 void scroll_hmc_dl_adarksky_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 480;
+	int count = 488;
 	int width = 256 * 0x20;
 	int height = 256 * 0x20;
 

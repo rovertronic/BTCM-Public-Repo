@@ -33,3 +33,4 @@
 #include "levels/hmc/cocktus2/geo.inc.c"
 #include "levels/hmc/junker/geo.inc.c"
 #include "levels/hmc/desert_pillar/geo.inc.c"
+#include "levels/hmc/bigredcoin/geo.inc.c"

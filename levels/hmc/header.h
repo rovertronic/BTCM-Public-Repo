@@ -130,4 +130,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/desert_pillar/geo_header.h"
 
+#include "levels/hmc/bigredcoin/collision_header.h"
+
+#include "levels/hmc/bigredcoin/geo_header.h"
+
 #endif

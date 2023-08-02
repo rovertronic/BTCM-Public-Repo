@@ -6845,6 +6845,7 @@ void bhv_checkpoint_flag(void) {
             o->oTimer = 0;
 
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gMarioState->marioObj->header.gfx.cameraToObject);
+            gMarioState->health = 255 + (255*gMarioState->numMaxHP); //checkpoints heal you.
 
             switch(gCurrLevelNum) {
                 case LEVEL_CCM:
@@ -6917,6 +6918,14 @@ void bhv_troll_spawn(void) {
                         trap->oMoveAngleYaw = o->oAngleToMario;
                         trap->oFaceAngleYaw = o->oAngleToMario;
                         trap->oBehParams = 0x01000000;
+                    break;
+                    case 2:
+                        trap = spawn_object(o,MODEL_COCKTUS,bhvSmallBully);
+                    break;
+                    case 3:
+                        trap = spawn_object(o,MODEL_BIGREDCOIN,bhvBigRedCoin);
+                        trap->oMoveAngleYaw = o->oAngleToMario;
+                        trap->oFaceAngleYaw = o->oAngleToMario;
                     break;
                 }
             }
