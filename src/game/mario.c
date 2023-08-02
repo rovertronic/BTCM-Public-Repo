@@ -1938,6 +1938,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                 case LEVEL_HMC:
                     //lvl2
                     display_song_text(9);
+                    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_JUNK), 0);
                     save_file_set_badge_unlock(1<<AVATAR_MARIO);
                     save_file_set_badge_unlock(1<<AVATAR_FAST);
                     save_file_set_badge_unlock(1<<AVATAR_FORD);
