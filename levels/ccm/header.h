@@ -185,4 +185,6 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/introscan/geo_header.h"
 
+#include "levels/ccm/burger/geo_header.h"
+
 #endif

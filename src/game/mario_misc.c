@@ -595,6 +595,11 @@ Gfx *geo_switch_mario_eyes(s32 callContext, struct GraphNode *node, UNUSED Mat4 
     s16 blinkFrame;
 
     if (callContext == GEO_CONTEXT_RENDER) {
+        //dead person have x eyes
+        if (gMarioState->action == ACT_TROLLDEATH) {
+            bodyState->eyeState = MARIO_EYES_DEAD;
+        }
+
         if (bodyState->eyeState == 0) {
             blinkFrame = ((switchCase->numCases * 32 + gAreaUpdateCounter) >> 1) & 0x1F;
             if (blinkFrame < 7) {
@@ -604,11 +609,6 @@ Gfx *geo_switch_mario_eyes(s32 callContext, struct GraphNode *node, UNUSED Mat4 
             }
         } else {
             switchCase->selectedCase = bodyState->eyeState - 1;
-        }
-
-        //dead person have x eyes
-        if (gMarioState->action == ACT_TROLLDEATH) {
-            bodyState->eyeState = MARIO_EYES_DEAD;
         }
 
         //creepie void boss phantasm

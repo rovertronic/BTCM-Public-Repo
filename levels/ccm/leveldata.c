@@ -110,3 +110,4 @@
 #include "levels/ccm/ghostfloor2/model.inc.c"
 #include "levels/ccm/introbg/model.inc.c"
 #include "levels/ccm/introscan/model.inc.c"
+#include "levels/ccm/burger/model.inc.c"

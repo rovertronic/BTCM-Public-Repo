@@ -77,6 +77,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_GHOSTFLOOR2, ghostfloor2_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_INTROBG, introbg_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_INTROSCAN, introscan_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BURGER, burger_geo),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -100,6 +101,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_BAROPE, 4615, 4936, -20155, 0, 0, 0, (100 << 16), bhvPoleGrabbing),
 		OBJECT(MODEL_BAROPE, 4317, 5831, -21322, 0, 0, 0, (1 << 24) | (100 << 16), bhvPoleGrabbing),
 		OBJECT(MODEL_BREAKABLE_BOX, -5358, 2994, -8058, 0, 0, 0, (BREAKABLE_BOX_BP_LARGE << 16), bhvBreakableBox),
+		OBJECT(MODEL_BURGER, 3721, 1338, -6251, 0, 0, 0, 0x00000000, bhvBurger),
 		OBJECT(MODEL_CHECKPOINT_FLAG, 767, 3344, -8062, 0, -90, 0, (1 << 16), bhvCheckpointFlag),
 		OBJECT(MODEL_CHECKPOINT_FLAG, -2028, 5523, -20671, 0, 90, 0, (2 << 16), bhvCheckpointFlag),
 		OBJECT(MODEL_NONE, 2947, 2295, -19386, 0, -90, 0, (2 << 16), bhvCoinFormation),

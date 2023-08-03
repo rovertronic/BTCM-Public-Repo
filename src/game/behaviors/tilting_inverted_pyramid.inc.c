@@ -7149,3 +7149,21 @@ void bhv_desert_pillar(void) {
         o->oPosY = gMarioState->pos[1];
     }
 }
+
+void bhv_burger(void) {
+    o->oFaceAngleYaw += 0x200;
+    switch(o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 250.0f) {
+                cur_obj_hide();
+                o->oAction++;
+                cur_obj_play_sound_2(SOUND_PEACH_DEAR_MARIO);
+            }
+        break;
+        case 1:
+            gMarioState->squishTimer = 30;
+            obj_scale(gMarioObject,3.0f);
+            gMarioObject->header.gfx.scale[1] = 0.8f;
+        break;
+    }
+}

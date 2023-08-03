@@ -63,3 +63,4 @@
 #include "levels/ccm/ghostfloor2/geo.inc.c"
 #include "levels/ccm/introbg/geo.inc.c"
 #include "levels/ccm/introscan/geo.inc.c"
+#include "levels/ccm/burger/geo.inc.c"
