@@ -88,3 +88,5 @@
 #include "levels/hmc/desert_pillar/model.inc.c"
 #include "levels/hmc/bigredcoin/collision.inc.c"
 #include "levels/hmc/bigredcoin/model.inc.c"
+#include "levels/hmc/swingboard/model.inc.c"
+#include "levels/hmc/swingboard/collision.inc.c"

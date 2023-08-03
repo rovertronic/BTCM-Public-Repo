@@ -995,6 +995,7 @@ enum troll_trigger {
     TTRIG_RUN_EARLY,
     TTRIG_BRIDGE_FALL,
     TTRIG_DIZZY,
+    TTRIG_SWINGBOARD,
 };
 
 /* Star General */

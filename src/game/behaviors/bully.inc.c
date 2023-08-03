@@ -475,7 +475,7 @@ void bhv_bully_loop(void) {
             
     }
 
-    set_object_visibility(o, 3000);
+    set_object_visibility(o, 10000);
 }
 
 void big_bully_spawn_minion(s32 x, s32 y, s32 z, s16 yaw) {

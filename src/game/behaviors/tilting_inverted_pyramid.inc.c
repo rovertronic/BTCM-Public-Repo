@@ -7186,3 +7186,38 @@ void bhv_fencemein(void) {
         break;
     }
 }
+
+void bhv_swingboard(void) {
+    switch(o->oAction) {
+        case 0:
+            if (gMarioState->TrollTrigger == TTRIG_SWINGBOARD ) {
+                o->oAction++;
+            }
+        break;
+        case 1:
+            o->oFaceAngleRoll += 0x400 * gMarioState->timeScale;
+            if (o->oFaceAngleRoll > 0x4000) {
+                o->oFaceAngleRoll = 0x4000;
+                o->oAction++;
+            }
+        break;
+        case 2:
+            if (o->oTimeScaleTimer > 30.0f) {
+                o->oAction++;
+            }
+        break;
+        case 3:
+            o->oFaceAngleRoll -= 0x400 * gMarioState->timeScale;
+            if (o->oFaceAngleRoll < 0) {
+                o->oFaceAngleRoll = 0;
+                o->oAction++;
+            }
+        break;
+        case 4:
+            //rearm when falling down
+            if (gMarioState->TrollTrigger == TTRIG_NONE) {
+                o->oAction = 0;
+            }
+        break;
+    }
+}

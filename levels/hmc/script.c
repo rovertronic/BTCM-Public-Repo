@@ -61,6 +61,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_JUNKER, junker_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_DESERT_PILLAR, desert_pillar_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIGREDCOIN, bigredcoin_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SWINGBOARD, swingboard_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -103,11 +104,14 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, 2522, 9915, -2383, 0, 90, 0, (0x0B << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, 4984, 17756, 5903, 0, -180, 0, (0x0C << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_RED_COIN, 5579, 1992, 10779, 0, 0, 0, 0x00000000, bhvYellowCoin),
+		OBJECT(MODEL_SWINGBOARD, 3616, 9915, -2386, 0, 0, 0, 0x00000000, bhvSwingboard),
 		OBJECT(MODEL_NONE, 8836, 1146, 3934, 0, 0, 0, (5 << 24) | (TTRIG_NONE << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, 8836, 1146, 5534, 0, 0, 0, (5 << 24) | (TTRIG_PANEL_FLIP << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, 9226, 1305, -459, 0, 0, 0, (5 << 24) | (TTRIG_RUN_EARLY << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, 6791, 868, -2190, 0, 0, 0, (5 << 24) | (TTRIG_BRIDGE_FALL << 16), bhvTrollTrigger),
 		OBJECT(MODEL_NONE, 5274, 17764, 3121, 0, 0, 0, (15 << 24) | (TTRIG_DIZZY << 16), bhvTrollTrigger),
+		OBJECT(MODEL_NONE, 3545, 9504, -2401, 0, 0, 0, (4 << 24) | (TTRIG_SWINGBOARD << 16), bhvTrollTrigger),
+		OBJECT(MODEL_NONE, 3258, 7683, -2401, 0, 0, 0, (4 << 24) | (TTRIG_NONE << 16), bhvTrollTrigger),
 		TERRAIN(hmc_area_1_collision),
 		MACRO_OBJECTS(hmc_area_1_macro_objs),
 		STOP_MUSIC(0),

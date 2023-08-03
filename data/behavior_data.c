@@ -9689,3 +9689,17 @@ const BehaviorScript bhvFenceMeIn[] = {
         CALL_NATIVE(bhv_fencemein),
     END_LOOP(),
 };
+
+extern void bhv_swingboard(void);
+const BehaviorScript bhvSwingboard[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 30000),
+    SET_FLOAT(oCollisionDistance, 3000),
+    LOAD_COLLISION_DATA(swingboard_collision),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_swingboard),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

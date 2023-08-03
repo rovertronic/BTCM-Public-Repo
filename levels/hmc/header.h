@@ -134,4 +134,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/bigredcoin/geo_header.h"
 
+#include "levels/hmc/swingboard/geo_header.h"
+
+#include "levels/hmc/swingboard/collision_header.h"
+
 #endif

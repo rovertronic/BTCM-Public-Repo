@@ -41,7 +41,7 @@ extern Vtx hmc_dl_lvl_mesh_layer_1_vtx_3[1485];
 extern Gfx hmc_dl_lvl_mesh_layer_1_tri_3[];
 extern Vtx hmc_dl_lvl_mesh_layer_1_vtx_4[894];
 extern Gfx hmc_dl_lvl_mesh_layer_1_tri_4[];
-extern Vtx hmc_dl_lvl_mesh_layer_1_vtx_5[2409];
+extern Vtx hmc_dl_lvl_mesh_layer_1_vtx_5[2345];
 extern Gfx hmc_dl_lvl_mesh_layer_1_tri_5[];
 extern Vtx hmc_dl_lvl_mesh_layer_1_vtx_6[116];
 extern Gfx hmc_dl_lvl_mesh_layer_1_tri_6[];
