@@ -187,4 +187,6 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/burger/geo_header.h"
 
+#include "levels/ccm/fencemein/geo_header.h"
+
 #endif

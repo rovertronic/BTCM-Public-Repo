@@ -7167,3 +7167,22 @@ void bhv_burger(void) {
         break;
     }
 }
+
+void bhv_fencemein(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oOpacity = 0;
+            cur_obj_hide();
+            if (gMarioState->TrollTrigger == TTRIG_FENCE_ME_IN) {
+                create_sound_spawner(SOUND_OBJ_BOO_LAUGH_LONG);
+                cur_obj_unhide();
+                o->oAction++;
+            }
+        break;
+        case 1:
+            if (o->oOpacity < 255) {
+                o->oOpacity += 51;
+            }
+        break;
+    }
+}

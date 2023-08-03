@@ -111,3 +111,4 @@
 #include "levels/ccm/introbg/model.inc.c"
 #include "levels/ccm/introscan/model.inc.c"
 #include "levels/ccm/burger/model.inc.c"
+#include "levels/ccm/fencemein/model.inc.c"

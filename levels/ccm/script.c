@@ -77,7 +77,8 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_GHOSTFLOOR2, ghostfloor2_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_INTROBG, introbg_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_INTROSCAN, introscan_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_BURGER, burger_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_BURGER, burger_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_FENCEMEIN, fencemein_geo),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -330,6 +331,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(0xFF, -6204, -1312, 920, 0, -90, 0, 0x00000000, bhvOnlyFan),
 		OBJECT(0xFF, -5604, -1312, 920, 0, -90, 0, 0x00000000, bhvOnlyFan),
 		OBJECT(0xFF, 4670, 187, 3560, 0, 0, 0, 0x00000000, bhvOnlyFan),
+		OBJECT(MODEL_FENCEMEIN, -8734, -1472, 4481, 0, 0, 0, 0x00000000, bhvFenceMeIn),
 		OBJECT(MODEL_NONE, -2308, -860, 3868, 0, 0, 0, 0x00000000, bhvKillerSpikes),
 		OBJECT(MODEL_NONE, -2608, -860, 3868, 0, 0, 0, 0x00000000, bhvKillerSpikes),
 		OBJECT(MODEL_NONE, -2308, -860, 4168, 0, 0, 0, 0x00000000, bhvKillerSpikes),
