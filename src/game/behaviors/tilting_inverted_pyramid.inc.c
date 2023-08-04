@@ -6852,10 +6852,12 @@ void bhv_checkpoint_flag(void) {
                     switch(o->oBehParams2ndByte) {
                         case 1:
                             save_file_set_badge_unlock(1<<AVATAR_FORD);
+                            save_file_do_save(gCurrSaveFileNum - 1);
                             run_event(EVENT_LV1_CP1);
                         break;
                         case 2:
                             save_file_set_badge_unlock(1<<AVATAR_FAST);
+                            save_file_do_save(gCurrSaveFileNum - 1);
                             run_event(EVENT_WATCH_NEAREST_TV);
                         break;
                     }
@@ -6865,6 +6867,7 @@ void bhv_checkpoint_flag(void) {
                     switch(o->oBehParams2ndByte) {
                         case 1:
                             save_file_set_badge_unlock(1<<AVATAR_PINGAS);
+                            save_file_do_save(gCurrSaveFileNum - 1);
                             run_event(EVENT_WATCH_NEAREST_TV);
                         break;
                     }

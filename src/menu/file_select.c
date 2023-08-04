@@ -1627,6 +1627,17 @@ f32 cursor_x = 0.0f;
 u8 str_glyph_star[] = {DIALOG_CHAR_STAR_FILLED,DIALOG_CHAR_TERMINATOR};
 u8 str_glyph_star_open[] = {DIALOG_CHAR_STAR_OPEN,DIALOG_CHAR_TERMINATOR};
 
+u8 txt_lv1[] = {TEXT_FILE_LV1};
+u8 txt_lv2[] = {TEXT_FILE_LV2};
+u8 txt_lv3[] = {TEXT_FILE_LV3};
+u8 txt_lv4[] = {TEXT_FILE_LV4};
+u8 *lvtext[] = {
+    &txt_lv1,
+    &txt_lv2,
+    &txt_lv3,
+    &txt_lv4,
+};
+
 void new_file_select() {
     s8 i;
     s8 j;
@@ -1722,15 +1733,23 @@ void new_file_select() {
 
             //CLOWN FONT
             gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-                //print gold stars
-                print_hud_lut_string(HUD_LUT_GLOBAL, 45+flsex[i], 40+(i*60), starIcon);
-                int_to_str(save_file_get_total_golden_star_count(i,0,24), starCountText);
-                print_hud_lut_string(HUD_LUT_GLOBAL, 65+flsex[i], 40+(i*60), starCountText);
+                //print current level
+                u8 lvl_text_index = 0;
+                switch(save_file_index_get_prog(i)) {
+                    case PROG_TL_LEVEL1_BEAT:
+                    case PROG_TL_LEVEL2:
+                    lvl_text_index = 1;
+                    break;
+                    case PROG_TL_LEVEL2_BEAT:
+                    case PROG_TL_LEVEL3:
+                    lvl_text_index = 2;
+                    break;
+                    case PROG_TL_LEVEL3_BEAT:
+                    lvl_text_index = 3;
+                    break;
+                }
 
-                //print metal stars
-                print_hud_lut_string(HUD_LUT_GLOBAL, 100+flsex[i], 40+(i*60), metalStarIcon);
-                int_to_str(save_file_get_total_metal_star_count(i,0,24), starCountText);
-                print_hud_lut_string(HUD_LUT_GLOBAL, 120+flsex[i], 40+(i*60), starCountText);
+                print_hud_lut_string(HUD_LUT_GLOBAL, 45+flsex[i], 40+(i*60), lvtext[lvl_text_index]);
 
             gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 

@@ -3,7 +3,12 @@
 
 #include "text_menu_strings.h"
 
-#define TEXT_VERSION _("NOT ASSOCIATED WITH NINTENDO OR SRESS LEVEL ZERO")
+#define TEXT_VERSION _("BETA 1.0")
+
+#define TEXT_FILE_LV1 _("STREETS")
+#define TEXT_FILE_LV2 _("DESERT")
+#define TEXT_FILE_LV3 _("CASTLE")
+#define TEXT_FILE_LV4 _("COMPLETE")
 
 // pain
 #define NC_CAMX 				_("Camera X Sensitivity")
