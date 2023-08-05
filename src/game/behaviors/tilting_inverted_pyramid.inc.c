@@ -6658,7 +6658,6 @@ void bhv_troll_pillar(void) {
         break;
         case 2:
             if (gCurrLevelNum == LEVEL_JRB) {
-                frame = 43;//eeheehee
                 return;
             }
 

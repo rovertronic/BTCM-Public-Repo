@@ -1943,7 +1943,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                 case LEVEL_JRB:
                     //peach's castle intro
                     if (save_file_get_progression() == PROG_TL_LEVEL2_BEAT) {
-                        //run_event(EVENT_CASTLE_INTRO);
+                        run_event(EVENT_CASTLE_INTRO);
                     } else {
                         display_song_text(1);
                         play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SMOKEHALLS), 0);
