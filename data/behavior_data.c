@@ -9704,3 +9704,13 @@ const BehaviorScript bhvSwingboard[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+extern void bhv_creepie_floor(void);
+const BehaviorScript bhvCreepieFloor[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 30000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_creepie_floor),
+    END_LOOP(),
+};

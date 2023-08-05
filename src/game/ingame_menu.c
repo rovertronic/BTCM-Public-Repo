@@ -174,10 +174,10 @@ u8 upgradeyes[] = {TEXT_UPGRADE_YES};
 u8 upgradeno[] = {TEXT_UPGRADE_NO};
 
 u8 badgecolors[24][3] = {
-    {255,0x00,0x00},
-    {0x9C,0x43,0x22},
-    {0x19,0x6B,0xC7},
-    {0xDF,0x4A,0x18},
+    {255,0x00,0x00},//maro
+    {0xDF,0x4A,0x18},//pingas
+    {0x68,0x64,0x5C},//security director
+    {0xBA,0xAF,0xBA},//fazt
     {0x6C,0xC6,0xD7},
     {0x6C,0xC6,0xD7},
     {0x72,0xC6,0xAE},
@@ -3404,6 +3404,8 @@ void render_pre_credits() {
                 dma_read(tex,_bad_appleSegmentRomStart+CREDITS_OFFSET+((precredits_index/2)*0x8000),_bad_appleSegmentRomStart+CREDITS_OFFSET+((precredits_index/2)*0x8000)+0x8000);
 
                 if (precredits_index >= 18) {
+                    level_trigger_warp(gMarioState, WARP_OP_LOOK_UP);
+                    sSourceWarpNodeId = 0x0B;
                     start_precredits = FALSE;
                 }
             }

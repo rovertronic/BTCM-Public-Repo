@@ -800,9 +800,18 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
 
             case WARP_OP_LOOK_UP: // enter totwc
-                sDelayedWarpTimer = 30;
-                sSourceWarpNodeId = WARP_NODE_LOOK_UP;
-                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x14, 0, 0, 0);
+                if (start_precredits) {
+                    //creditswarp
+                    fadeMusic = FALSE;
+                    sDelayedWarpTimer = 1;
+                    sSourceWarpNodeId = 0x0B;
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 1, 0, 0, 0);
+                } else {
+                    //normal
+                    sDelayedWarpTimer = 30;
+                    sSourceWarpNodeId = WARP_NODE_LOOK_UP;
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x14, 0, 0, 0);
+                }
                 // play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
                 break;
 
@@ -1476,6 +1485,6 @@ s32 lvl_set_current_level(UNUSED s16 initOrUpdate, s32 levelNum) {
  * Play the "thank you so much for to playing my game" sound.
  */
 s32 lvl_play_the_end_screen_sound(UNUSED s16 initOrUpdate, UNUSED s32 levelNum) {
-    play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
+    //play_sound(SOUND_MENU_THANK_YOU_PLAYING_MY_GAME, gGlobalSoundSource);
     return TRUE;
 }

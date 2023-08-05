@@ -95,4 +95,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/creepie_door/geo_header.h"
 
+#include "levels/jrb/creepie_floor/geo_header.h"
+
 #endif

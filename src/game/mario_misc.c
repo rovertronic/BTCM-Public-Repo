@@ -947,7 +947,7 @@ Gfx *geo_render_mirror_mario(s32 callContext, struct GraphNode *node, UNUSED Mat
             break;
         case GEO_CONTEXT_RENDER:
                 // TODO: Is this a geo layout copy or a graph node copy?
-            if (gMarioState->ExitTroll == FALSE) {
+            if ((gMarioState->ExitTroll == FALSE)&&(!save_file_check_progression(PROG_TL_LEVEL3_BEAT))) {
                 gMirrorMario.sharedChild = mario->header.gfx.sharedChild;
                 gMirrorMario.areaIndex = mario->header.gfx.areaIndex;
                 vec3s_copy(gMirrorMario.angle, mario->header.gfx.angle);

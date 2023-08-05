@@ -5233,6 +5233,11 @@ s32 check_mario_cracking(void) {
 #include "levels/castle_inside/header.h"
 
 void bhv_agcrack(void) {
+    if (save_file_check_progression(PROG_TL_LEVEL3_BEAT)) {
+        return;
+        //evil clone no longer exists
+    }
+
     switch(o->oAction) {
         case 0:
             if (check_mario_cracking()) {
@@ -6211,8 +6216,8 @@ void bhv_troll_trigger() {
     f32 cube_radius = 100.0f*size;//+100 and -100 for a total of 200 : >
     u8 outside = FALSE;
 
-    if ((gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION)||
-    (gMarioState->TrollTrigger == TTRIG_POSTFIGHT)) {
+    if (((gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION)||
+    (gMarioState->TrollTrigger == TTRIG_POSTFIGHT))&&(trigger != TTRIG_PILLAR_TROLL)) {
         //boss fight has started
         return;
     }
@@ -6625,22 +6630,38 @@ void bhv_troll_pillar(void) {
 
     switch(gCurrAreaIndex) {
         case 1: //wait to be hit
-            if (((lateral_dist_between_objects(o,gMarioObject) < 400.0)&&(gMarioState->pos[1] > (o->oPosY-10.0f))&&(gMarioState->troll_checkpoint == 2))||
-                (gMarioState->TrollTrigger == TTRIG_PILLAR_TROLL)) { //this is one nasty if statement
-                o->oAction++;
-                cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
-                gMarioState->boning_time = TRUE;
-                gMarioState->boning_timer = 120;
-                gMarioState->troll_checkpoint = 3;
-                gMarioState->spring_boredom = 0;
+            if (gCurrLevelNum == LEVEL_JRB) {
+                //hardcoded behavior for inside castle
+                if (gMarioState->TrollTrigger == TTRIG_PILLAR_TROLL) {
+                    cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
+                    gMarioState->troll_checkpoint = 3;
+                    display_song_text(10);
+                    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_ROOFTOPS), 0);
+                    gMarioState->boning_time = TRUE;
+                    gMarioState->boning_timer = 120;
+                }
+            } else {
+                //level 1 and 2
+                if ((lateral_dist_between_objects(o,gMarioObject) < 400.0)&&(gMarioState->pos[1] > (o->oPosY-10.0f))&&(gMarioState->troll_checkpoint == 2)) {
+                    cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
+                    gMarioState->boning_time = TRUE;
+                    gMarioState->boning_timer = 120;
+                    gMarioState->troll_checkpoint = 3;
+                    gMarioState->spring_boredom = 0;
 
-                display_song_text(4);
-                play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_TURNAROUND), 0);
+                    display_song_text(4);
+                    play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_TURNAROUND), 0);
 
-                drop_and_set_mario_action(gMarioState, ACT_JUMP_KICK, 0);
+                    drop_and_set_mario_action(gMarioState, ACT_JUMP_KICK, 0);
+                }
             }
         break;
         case 2:
+            if (gCurrLevelNum == LEVEL_JRB) {
+                frame = 43;//eeheehee
+                return;
+            }
+
             if (o->oTimer == 0) {
                 o->oVelY = 30.0f;
             }
@@ -7256,5 +7277,18 @@ void bhv_pipe_init(void) {
             load_object_static_model();
         }
         o->oAction = 1;
+    }
+}
+
+void bhv_creepie_floor(void) {
+    if (o->oBehParams2ndByte == 1) {
+        o->header.gfx.scale[0] = -1.0f;
+        if (o->oTimer < 10) {
+            o->oFaceAngleRoll += 0x500;
+        }
+    } else {
+        if (o->oTimer < 10) {
+            o->oFaceAngleRoll -= 0x500;
+        }
     }
 }

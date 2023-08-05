@@ -55,6 +55,7 @@ const LevelScript level_bob_entry[] = {
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_ENDING, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		MARIO_POS(0x01, 0, 1402, 0, 0),
 		OBJECT(MODEL_MONITOR, 986, 329, -375, 0, 45, 0, (6 << 16), bhvMonitor),
 		OBJECT(MODEL_NONE, 1402, 0, 0, 0, -90, 0, (0x0A << 16), bhvInstantActiveWarp),
