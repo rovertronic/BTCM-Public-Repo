@@ -74,6 +74,7 @@ enum SeqId {
     SEQ_STREAMED_FENCEMEIN,  // 0x3D
     SEQ_STREAMED_WINNER,  // 0x3E
     SEQ_STREAMED_JUNK,  // 0x3F
+    SEQ_ROOFTOPS,  // 0x40
     SEQ_COUNT,
 };
 

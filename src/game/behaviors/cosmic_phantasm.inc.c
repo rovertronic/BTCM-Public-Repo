@@ -330,6 +330,13 @@ void bhv_cosmic_phantasm(void) {
                 o->oAction = 13;
                 minion_count = 0;
                 minion_total = 0;
+
+                //"death" state
+                if (o->oHealth == 5) {
+                    mark_obj_for_deletion(o);
+                    o->oAction = 12;
+                    stop_background_music(SEQUENCE_ARGS(4, SEQ_STREAMED_PIZZA_TIME_NEVER_ENDS));
+                }
             }
         break;
         case 13://execute boss attacks

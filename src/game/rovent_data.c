@@ -1569,7 +1569,7 @@ s32 event_castle_intro[] = {
     E_SONG_TITLE, 1,
     E_MUSIC, SEQ_STREAMED_SMOKEHALLS,
 
-    //E_PROGRESS_SET, PROG_TL_LEVEL2,
+    E_PROGRESS_SET, PROG_TL_LEVEL3,
 
     E_END,
 };

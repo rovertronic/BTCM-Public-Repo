@@ -1928,7 +1928,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 
                     if (save_file_get_progression() == PROG_TL_LEVEL1_BEAT) {
                         //enter the lab
-                        //run_event(EVENT_TL_LAB_INTRO);
+                        run_event(EVENT_TL_LAB_INTRO);
                     } else {
                         //back to the lab
                         play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SCIENCES), 0);
@@ -1939,17 +1939,15 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                     //lvl2
                     display_song_text(9);
                     play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_JUNK), 0);
-                    save_file_set_badge_unlock(1<<AVATAR_MARIO);
-                    save_file_set_badge_unlock(1<<AVATAR_FAST);
-                    save_file_set_badge_unlock(1<<AVATAR_FORD);
                 break;
                 case LEVEL_JRB:
                     //peach's castle intro
-                    save_file_set_badge_unlock(1<<AVATAR_MARIO);
-                    save_file_set_badge_unlock(1<<AVATAR_FAST);
-                    save_file_set_badge_unlock(1<<AVATAR_FORD);
-                    save_file_set_badge_unlock(1<<AVATAR_PINGAS);
-                    //run_event(EVENT_CASTLE_INTRO);
+                    if (save_file_get_progression() == PROG_TL_LEVEL2) {
+                        run_event(EVENT_CASTLE_INTRO);
+                    } else {
+                        display_song_text(1);
+                        play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_STREAMED_SMOKEHALLS), 0);
+                    }
                 break;
                 case LEVEL_BOB:
                     //end of the game, void g114
