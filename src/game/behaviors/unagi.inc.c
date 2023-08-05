@@ -145,8 +145,34 @@ void unagi_act_3(void) {
 }
 
 void bhv_unagi_loop(void) {
-    s32 i;
+    switch(o->oAction) {
+        case 0:
+            cur_obj_hide();
+            o->oPosX = o->oHomeX - 1800.0f;
+            if (gMarioState->TrollTrigger == TTRIG_EEL) {
+                o->oAction++;
+                cur_obj_unhide();
+                play_sound(SOUND_XSCREAM, o->header.gfx.cameraToObject);
+            }
+        break;
+        case 1:
+            set_camera_shake_from_point(SHAKE_POS_LARGE, gLakituState.pos[0],gLakituState.pos[1],gLakituState.pos[2]);
+            if (o->oPosX < o->oHomeX) {
+                o->oPosX += 150.0f;
+            } else {
+                gMarioState->health = 0;
+                run_event(EVENT_DEATH);
+                o->oAction++;
+            }
+        break;
+        case 2:
+            set_camera_shake_from_point(SHAKE_POS_LARGE, gLakituState.pos[0],gLakituState.pos[1],gLakituState.pos[2]);
+        break;
+    }
+}
 
+/*
+    s32 i;
     if (!o->oUnagiHasStar) {
         o->oUnagiDistanceToMario = 99999.0f;
         if (o->oDistanceToMario < 3000.0f) {
@@ -176,7 +202,7 @@ void bhv_unagi_loop(void) {
             unagi_act_1_4(UNAGI_ACT_RETURN_TO_CAVE);
             break;
     }
-}
+*/
 
 void bhv_unagi_subobject_loop(void) {
     if (!o->parentObj->oUnagiHasStar) {

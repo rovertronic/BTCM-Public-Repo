@@ -6625,7 +6625,8 @@ void bhv_troll_pillar(void) {
 
     switch(gCurrAreaIndex) {
         case 1: //wait to be hit
-            if ((lateral_dist_between_objects(o,gMarioObject) < 400.0)&&(gMarioState->pos[1] > (o->oPosY-10.0f))&&(gMarioState->troll_checkpoint == 2)) {
+            if (((lateral_dist_between_objects(o,gMarioObject) < 400.0)&&(gMarioState->pos[1] > (o->oPosY-10.0f))&&(gMarioState->troll_checkpoint == 2))||
+                (gMarioState->TrollTrigger == TTRIG_PILLAR_TROLL)) { //this is one nasty if statement
                 o->oAction++;
                 cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
                 gMarioState->boning_time = TRUE;
