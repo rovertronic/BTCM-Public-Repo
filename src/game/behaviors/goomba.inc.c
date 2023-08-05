@@ -381,25 +381,17 @@ void bhv_goomba_update(void) {
 #endif
         }
 
-        if (o->oHealth == 1) {
-            o->oDamageOrCoinValue = 2;
-            o->oNumLootCoins = 2;
-            }
-
-        if (o->oNumLootCoins == 2) {
-            o->oAnimState = 0;
-            }
-
         if (bparam1 == 1) {
             if (o->oDistanceToMario < 700.0f) {
                 if (o->oDamageOrCoinValue == 1) {
-                    o->oDamageOrCoinValue = 3;
                     create_sound_spawner(SOUND_OBJ_BOO_LAUGH_LONG);
                 }
                 o->oHealth = 10;
-                o->header.gfx.scale[0] += 0.7f;
-                o->header.gfx.scale[1] += 0.7f;
-                o->header.gfx.scale[2] += 0.7f;
+                if (o->header.gfx.scale[1] < 10.0f) {
+                    o->header.gfx.scale[0] += 0.7f;
+                    o->header.gfx.scale[1] += 0.7f;
+                    o->header.gfx.scale[2] += 0.7f;
+                }
             }
         }
         if (bparam1 == 2) {

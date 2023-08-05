@@ -1765,7 +1765,7 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
     //! (Pause buffered hitstun) Since the global timer increments while paused,
     //  this can be paused through to give continual invisibility. This leads to
     //  no interaction with objects.
-    if ((m->invincTimer >= 3) && (gGlobalTimer & 1) && (gCurrLevelNum!=LEVEL_CCM)) {
+    if ((m->invincTimer >= 3) && (gGlobalTimer & 1)) {
         m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     }
 
@@ -2490,6 +2490,8 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             return ACTIVE_PARTICLE_NONE;
         }
 
+        print_text_fmt_int(210, 72, "TIME %d", gMarioState->leveltime);
+
         //CROWBAR
         if (gMarioState->powerup == 1) {
             if (gMarioState->input & INPUT_B_PRESSED) {
@@ -2569,14 +2571,13 @@ void init_mario(void) {
     s16 currenthp = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
     weird_init = TRUE;
-    gMarioState->Avatar = AVATAR_MARIO;
+
     gMarioState->TrollTrigger = TTRIG_NONE;
     gMarioState->slowmobar = 1.0f;
     gMarioState->slowmo_recharge = FALSE;
     gMarioState->ExitTroll = TRUE;
     gMarioState->slowMoActive = FALSE;
     gMarioState->timeScale = 1.0f;
-    gMarioState->spring_boredom = 0; // too many spring traps = unfun stream
     gMarioState->y_reflection = 0.0f;
 
     jumpscared = FALSE;
@@ -2798,7 +2799,7 @@ void init_mario(void) {
         gMarioState->heldObjParam2 = 0;
     }
 
-
+    set_avatar_settings();
     
 }
 
@@ -2810,6 +2811,9 @@ void init_mario_from_save_file(void) {
     gMarioState->boning_timer = 0;
     sSelectedFileNum = FALSE;
     fs_ms = 0;
+
+    gMarioState->spring_boredom = 0; // too many spring traps = unfun stream
+    gMarioState->spike_boredom = 0; //too many spike traps = unfun stream
 
     gMarioState->toggleHud = TRUE;
     gMarioState->playerID = 0;

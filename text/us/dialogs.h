@@ -3736,7 +3736,7 @@ DEFINE_DIALOG(DIALOG_FELEGG_3, 1, 4, 95, 180, _("\
 way to be original rovert"))
 
 DEFINE_DIALOG(DIALOG_FELEGG_4, 1, 4, 95, 180, _("\
-what a lameass. copying other people's trolls.\n\
+what a lameo. copying other people's trolls.\n\
 as if they were your own."))
 
 DEFINE_DIALOG(DIALOG_FELEGG_5, 1, 4, 95, 180, _("\

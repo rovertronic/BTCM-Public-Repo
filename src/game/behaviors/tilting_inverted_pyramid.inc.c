@@ -6348,6 +6348,7 @@ void bhv_killer_spike() {
 
     switch (o->oAction) {
         case 0:
+            if (gMarioState->spike_boredom > 2) {return;}
             if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
             if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
             if (gMarioState->pos[1]>o->oPosY+cube_radius_2) {return;}
@@ -6355,6 +6356,7 @@ void bhv_killer_spike() {
             if (gMarioState->pos[2]>o->oPosZ+cube_radius) {return;}
             if (gMarioState->pos[2]<o->oPosZ-cube_radius) {return;}
 
+            gMarioState->spike_boredom ++;
             o->oAction++;
             gMarioState->health = 0;
             run_event(EVENT_DEATH);
@@ -6480,7 +6482,7 @@ void bhv_springtrap(void) {
                 rigid_body_add_force(nearest_cone->rigidBody, &o->oPosVec, force, TRUE);
             }
 
-            if (gMarioState->spring_boredom > 3) {return;}
+            if (gMarioState->spring_boredom > 2) {return;}
             if (gMarioState->pos[0]>o->oPosX+cube_radius) {return;}
             if (gMarioState->pos[0]<o->oPosX-cube_radius) {return;}
             if (gMarioState->pos[1]>o->oPosY+cube_radius_2) {return;}
@@ -6594,12 +6596,12 @@ void bhv_quarantine(void) {
 void bhv_axe_trap(void) {
     f32 axe_radius = 40.0f;//SIDE
 
-    o->oMoveAnglePitch += o->oVelX*gMarioState->timeScale*0x500;
+    o->oMoveAnglePitch += o->oVelX*gMarioState->timeScale*0x400;
 
     if (o->oBehParams2ndByte == 1) {
-        o->oFaceAnglePitch = sins(o->oMoveAnglePitch) * -0x1500;
+        o->oFaceAnglePitch = sins(o->oMoveAnglePitch) * -0x2000;
     } else {
-        o->oFaceAnglePitch = sins(o->oMoveAnglePitch) * 0x1500;
+        o->oFaceAnglePitch = sins(o->oMoveAnglePitch) * 0x2000;
     }
     o->oPosZ = o->oHomeZ - sins(o->oFaceAnglePitch)*1000.0f;
     o->oPosY = (o->oHomeY+1000.0f) - coss(o->oFaceAnglePitch)*1000.0f;
@@ -6611,12 +6613,13 @@ void bhv_axe_trap(void) {
             o->oAction++;
         break;
         case 1:
-            if ((lateral_dist_between_objects(o,gMarioObject) < 250.0f)&&(gMarioState->pos[0]>o->oPosX-axe_radius)&&(gMarioState->pos[0]<o->oPosX+axe_radius)) {
+            if ((lateral_dist_between_objects(o,gMarioObject) < 250.0f)&&(gMarioState->pos[0]>o->oPosX-axe_radius)&&
+            (gMarioState->pos[0]<o->oPosX+axe_radius)&&(gMarioState->pos[1] > o->oPosY-100.0f)) {
                 o->oAction++;
                 run_event(EVENT_DEATH);
             }
             if ((gMarioState->TrollTrigger == TTRIG_AXE)&&(!gMarioState->ExitTroll)&&(gMarioState->troll_checkpoint==1)) {
-                o->oVelX = 2.4f;
+                o->oVelX = 2.0f;
             }
         break;
     }
@@ -6831,7 +6834,7 @@ void bhv_ghost_floor(void) {
 void bhv_void_leak(void) {
     f32 spd = 35.0f;
     if (gMarioState->boning_time) {
-        spd = 25.0f;
+        spd = 15.0f;
     }
 
     switch(o->oAction) {

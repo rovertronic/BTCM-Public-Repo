@@ -2545,6 +2545,7 @@ s32 render_pause_courses_and_castle(void) {
                                 gMenuMode = MENU_MODE_NONE;
                                 gMarioState->health = 255 + (255*gMarioState->numMaxHP);
                                 gMarioState->numBadgePoints = gMarioState->numMaxFP;
+                                gMarioState->boning_time = FALSE;
                                 //gMarioState->troll_checkpoint = 0;//reset checkpoint when exit course
                                 index = gDialogLineNum;
                             } else {
@@ -3470,6 +3471,27 @@ u8 pizza_timer_bounce_array[] = {
 };
 pizza_timer_bounce_index = 4;
 
+
+void set_avatar_settings(void) {
+    gMarioState->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[avatar_model_ids[gMarioState->Avatar]];
+
+    if (gMarioState->numMaxHP == 6) {
+        gMarioState->numMaxHP = 3;
+
+        gMarioState->health -= 0x100;
+        gMarioState->health /= 2; 
+        gMarioState->health += 0x100;
+    }
+
+    if (gMarioState->Avatar == AVATAR_PINGAS) {
+        gMarioState->health -= 0x100;
+        gMarioState->health *= 2; 
+        gMarioState->health += 0x100;
+
+        gMarioState->numMaxHP = 6;
+    }
+}
+
 s32 render_menus_and_dialogs(void) {
     u8 timer_number_str[6];
     s32 mode = MENU_OPT_NONE;
@@ -3631,23 +3653,7 @@ s32 render_menus_and_dialogs(void) {
             bodylog_was_used = FALSE;
             play_sound(SOUND_BLOG_3, gGlobalSoundSource);
             gMarioState->Avatar = last_selected_avatar;
-            gMarioState->marioObj->header.gfx.sharedChild = gLoadedGraphNodes[avatar_model_ids[gMarioState->Avatar]];
-
-            if (gMarioState->numMaxHP == 6) {
-                gMarioState->numMaxHP = 3;
-
-                gMarioState->health -= 0x100;
-                gMarioState->health /= 2; 
-                gMarioState->health += 0x100;
-            }
-
-            if (last_selected_avatar == AVATAR_PINGAS) {
-                gMarioState->health -= 0x100;
-                gMarioState->health *= 2; 
-                gMarioState->health += 0x100;
-
-                gMarioState->numMaxHP = 6;
-            }
+            set_avatar_settings();
         }
     }//end bodylog
 
@@ -3745,7 +3751,6 @@ s32 render_menus_and_dialogs(void) {
 
             if (gGlobalTimer%30==0) {
                 //increment level timer
-                gMarioState->leveltime++;
                 if (gMarioState->boning_timer > 0) {
                     gMarioState->boning_timer--;
                     pizza_timer_bounce_index =0;
@@ -3772,6 +3777,10 @@ s32 render_menus_and_dialogs(void) {
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     
+    if ((gGlobalTimer%30==0)&&(!revent_active)&&(gMarioState->TrollTrigger == TTRIG_WINNER)) {
+        //increment level timer
+        gMarioState->leveltime++;
+    }
 
 
     gMarioState->GlobalPaused = TRUE;
