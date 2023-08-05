@@ -336,6 +336,7 @@ void bhv_cosmic_phantasm(void) {
                     mark_obj_for_deletion(o);
                     o->oAction = 12;
                     stop_background_music(SEQUENCE_ARGS(4, SEQ_STREAMED_PIZZA_TIME_NEVER_ENDS));
+                    gMarioState->TrollTrigger = TTRIG_POSTFIGHT;
                 }
             }
         break;

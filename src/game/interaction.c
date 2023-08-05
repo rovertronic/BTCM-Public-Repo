@@ -1056,13 +1056,15 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
     s16 behparam1 = o->oBehParams >> 24;
     s16 numStars = gMarioState->numStars;
 
-    if (gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION) {
-        return FALSE;
-    }
-    if (o->oBehParams2ndByte == 1) {
-        struct Object *nearest_phantasm = cur_obj_nearest_object_with_behavior(bhvPhantasm);
-        if (nearest_phantasm) {
+    if (gMarioState->TrollTrigger != TTRIG_POSTFIGHT) {
+        if (gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION) {
             return FALSE;
+        }
+        if (o->oBehParams2ndByte == 1) {
+            struct Object *nearest_phantasm = cur_obj_nearest_object_with_behavior(bhvPhantasm);
+            if (nearest_phantasm) {
+                return FALSE;
+            }
         }
     }
 

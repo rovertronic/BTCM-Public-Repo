@@ -1942,7 +1942,7 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
                 break;
                 case LEVEL_JRB:
                     //peach's castle intro
-                    if (save_file_get_progression() == PROG_TL_LEVEL2) {
+                    if (save_file_get_progression() == PROG_TL_LEVEL2_BEAT) {
                         run_event(EVENT_CASTLE_INTRO);
                     } else {
                         display_song_text(1);
@@ -2881,6 +2881,9 @@ s32 trolllab_level_win(struct MarioState *m) {
         break;
         case LEVEL_HMC: //LEVEL 2
             save_file_set_progression(PROG_TL_LEVEL2_BEAT);
+        break;
+        case LEVEL_JRB: //LEVEL 3
+            save_file_set_progression(PROG_TL_LEVEL3_BEAT);
         break;
     }
 

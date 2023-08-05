@@ -6211,7 +6211,8 @@ void bhv_troll_trigger() {
     f32 cube_radius = 100.0f*size;//+100 and -100 for a total of 200 : >
     u8 outside = FALSE;
 
-    if (gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION) {
+    if ((gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION)||
+    (gMarioState->TrollTrigger == TTRIG_POSTFIGHT)) {
         //boss fight has started
         return;
     }
