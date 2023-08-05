@@ -2093,19 +2093,19 @@ void render_pause_my_score_coins(void) {
     u8 *courseName = segmented_to_virtual(courseNameTbl[courseIndex]);
 
     if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
-        print_generic_string(TXT_COURSE_X, 157, LANGUAGE_ARRAY(textCourse));
-        int_to_str(gCurrCourseNum, strCourseNum);
-        print_generic_string(CRS_NUM_X1, 157, strCourseNum);
+        //print_generic_string(TXT_COURSE_X, 157, LANGUAGE_ARRAY(textCourse));
+        //int_to_str(gCurrCourseNum, strCourseNum);
+        //print_generic_string(CRS_NUM_X1, 157, strCourseNum);
 
         u8 *actName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 7 + gDialogCourseActNum - 1]);
 
         if (starFlags & (1 << (gDialogCourseActNum - 1))) {
-            print_generic_string(TXT_STAR_X, 140, textStar);
+            //print_generic_string(TXT_STAR_X, 140, textStar);
         } else {
-            print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
+            //print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
         }
 
-        print_generic_string(ACT_NAME_X, 140, actName);
+        //print_generic_string(ACT_NAME_X, 140, actName);
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);
     } else {
         print_generic_string(SECRET_LVL_NAME_X, 157, &courseName[3]);
@@ -2411,28 +2411,29 @@ void build_tabs(void) {
     //MAGIC TAB SCRAPPED
     */
 
-    if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX) {
-        //course
-        if (gMarioState->nearVendor > 0) {
-            //can equip badges when near vendors
-            add_tab(1);
-        }
-        //if (save_file_check_progression(PROG_POSTPOST_GAME)) {
-            add_tab(5);//cheats
-        //}
-    } else {
-        //castle
-        add_tab(1);
-        if (gMarioState->Level != 8) {
-            add_tab(2);
-        }
+    //if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX) {
+    //    //course
+    //    if (gMarioState->nearVendor > 0) {
+    //        //can equip badges when near vendors
+    //        add_tab(1);
+    //    }
+    //    //if (save_file_check_progression(PROG_POSTPOST_GAME)) {
+    //        add_tab(5);//cheats
+    //    //}
+    //} else {
+    //    //castle
+    //    add_tab(1);
+    //    if (gMarioState->Level != 8) {
+    //        add_tab(2);
+    //    }
+//
+    //    //if (save_file_check_progression(PROG_POSTPOST_GAME)) {
+    //        add_tab(5);//cheats
+    //    //}
+    //}
+    //add_tab(3);
 
-        //if (save_file_check_progression(PROG_POSTPOST_GAME)) {
-            add_tab(5);//cheats
-        //}
-    }
-
-    add_tab(3);
+    add_tab(5);
 }
 
 #define total_spells 3
@@ -2562,40 +2563,40 @@ s32 render_pause_courses_and_castle(void) {
                     break;
                 case DIALOG_STATE_HORIZONTAL:
                     shade_screen();
-                    render_pause_castle_menu_box(160+vpxo, 143+vpyo);
-                    render_pause_castle_main_strings(104+vpxo, 60+vpyo);
+                    //render_pause_castle_menu_box(160+vpxo, 143+vpyo);
+                    //render_pause_castle_main_strings(104+vpxo, 60+vpyo);
 
 
                     //print game progress
-                    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-                        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, gDialogTextAlpha);
-                        int_to_str_spaces((s32)winpercent,number_text);
-                        string_insert(11,3,number_text,txt_prog1);
-                        print_generic_string(23, 184, txt_prog1);
-
-                        int_to_str_time(hour,minute,second,&number_text);
-                        print_generic_string(23, 20, number_text);
-
-                        for (i=0;i<6;i++) {
-                            int_to_str_slash(progress_table[i*2], progress_table[(i*2)+1], number_text);
-                            print_generic_string(84, 169-(i*16), number_text);
-                        }
-
-                        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-                        if (save_file_check_progression(PROG_POSTPOST_GAME)) {
-                            gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, gDialogTextAlpha);
-                            }
-                        print_generic_string(24, 185, txt_prog1);
-
-                        int_to_str_time(hour,minute,second,&number_text);
-                        print_generic_string(24, 21, number_text);
-
-                        for (i=0;i<6;i++) {
-                            int_to_str_slash(progress_table[i*2], progress_table[(i*2)+1], number_text);
-                            print_generic_string(85, 170-(i*16), number_text);
-                        }
-
-                    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+                    //gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+                    //    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, gDialogTextAlpha);
+                    //    int_to_str_spaces((s32)winpercent,number_text);
+                    //    string_insert(11,3,number_text,txt_prog1);
+                    //    print_generic_string(23, 184, txt_prog1);
+//
+                    //    int_to_str_time(hour,minute,second,&number_text);
+                    //    print_generic_string(23, 20, number_text);
+//
+                    //    for (i=0;i<6;i++) {
+                    //        int_to_str_slash(progress_table[i*2], progress_table[(i*2)+1], number_text);
+                    //        print_generic_string(84, 169-(i*16), number_text);
+                    //    }
+//
+                    //    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+                    //    if (save_file_check_progression(PROG_POSTPOST_GAME)) {
+                    //        gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, gDialogTextAlpha);
+                    //        }
+                    //    print_generic_string(24, 185, txt_prog1);
+//
+                    //    int_to_str_time(hour,minute,second,&number_text);
+                    //    print_generic_string(24, 21, number_text);
+//
+                    //    for (i=0;i<6;i++) {
+                    //        int_to_str_slash(progress_table[i*2], progress_table[(i*2)+1], number_text);
+                    //        print_generic_string(85, 170-(i*16), number_text);
+                    //    }
+//
+                    //gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
                     break;
             }
 

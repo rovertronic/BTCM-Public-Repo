@@ -942,6 +942,7 @@ const BehaviorScript bhvWarp[] = {
     END_LOOP(),
 };
 
+extern void bhv_pipe_init(void);
 const BehaviorScript bhvWarpPipe[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -950,7 +951,8 @@ const BehaviorScript bhvWarpPipe[] = {
     SET_FLOAT(oDrawingDistance, 32000),
     SET_INT(oIntangibleTimer, 0),
     SET_HITBOX(/*Radius*/ 70, /*Height*/ 50),
-    CALL_NATIVE(load_object_static_model),
+    //CALL_NATIVE(load_object_static_model), in pipe init now
+    CALL_NATIVE(bhv_pipe_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_warp_loop),
     END_LOOP(),

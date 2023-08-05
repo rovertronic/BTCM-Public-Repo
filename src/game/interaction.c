@@ -1052,20 +1052,18 @@ u8 starbuf1[4];
 u8 starbuf2[4];
 
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
-    s16 requiredNumStars = o->oBehParams2ndByte;
+    s16 requiredNumStars = 0;
     s16 behparam1 = o->oBehParams >> 24;
     s16 numStars = gMarioState->numStars;
 
     if (gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION) {
         return FALSE;
     }
-
-    if (behparam1 == 1) {
-        numStars = gMarioState->numMetalStars;
-    }
-    if (behparam1 == 2) {
-        numStars = save_file_check_progression(PROG_DEFEAT_BOWSER_1);
-        requiredNumStars = 1;
+    if (o->oBehParams2ndByte == 1) {
+        struct Object *nearest_phantasm = cur_obj_nearest_object_with_behavior(bhvPhantasm);
+        if (nearest_phantasm) {
+            return FALSE;
+        }
     }
 
     #ifdef UNLOCK_ALL

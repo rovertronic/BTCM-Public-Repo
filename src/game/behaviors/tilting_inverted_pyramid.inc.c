@@ -7224,3 +7224,35 @@ void bhv_swingboard(void) {
         break;
     }
 }
+
+void bhv_pipe_init(void) {
+    u8 do_load_collision = TRUE;
+
+    switch(o->oBehParams2ndByte) {
+        case 2:
+            if (!save_file_check_progression(PROG_TL_LEVEL1_BEAT)) {
+                mark_obj_for_deletion(o);
+                do_load_collision = FALSE;
+            }
+        break;
+        case 3:
+            if (!save_file_check_progression(PROG_TL_LEVEL2_BEAT)) {
+                mark_obj_for_deletion(o);
+                do_load_collision = FALSE;
+            }
+        break;
+        case 4:
+            if (!save_file_check_progression(PROG_TL_LEVEL3_BEAT)) {
+                mark_obj_for_deletion(o);
+                do_load_collision = FALSE;
+            }
+        break;
+    }
+
+    if (o->oAction == 0) {
+        if (do_load_collision) {
+            load_object_static_model();
+        }
+        o->oAction = 1;
+    }
+}
