@@ -19,6 +19,10 @@ void check_phantasm_attack(void) {
             o->oMoveAngleYaw = gMarioState->faceAngle[1]+0x8000;
             o->oFaceAngleYaw = o->oMoveAngleYaw;
 
+            if (gMarioState->health < (200 + (255*gMarioState->numMaxHP))) {
+                obj_spawn_yellow_coins(o, 1);
+            }
+
             if (gMarioState->Avatar == AVATAR_PINGAS) {
                 o->oHealth ++;
                 o->oForwardVel = -90.0f;
@@ -332,7 +336,7 @@ void bhv_cosmic_phantasm(void) {
                 minion_total = 0;
 
                 //"death" state
-                if (o->oHealth == 5) {
+                if (o->oHealth == 6) {
                     mark_obj_for_deletion(o);
                     o->oAction = 12;
                     stop_background_music(SEQUENCE_ARGS(4, SEQ_STREAMED_PIZZA_TIME_NEVER_ENDS));
@@ -400,8 +404,8 @@ void bhv_cosmic_phantasm(void) {
                             minion_total++;
                         }
                     break;
-                    case 5: //mario kickers AND ford casters
-                        if ((o->oTimer % 20 == 0)&&(minion_count < 10)) {
+                    case 5: //everyone at once
+                        if ((o->oTimer % 40 == 0)&&(minion_count < 6)) {
                             hammer = spawn_object(o,MODEL_MARIO,bhvPhantasm);
                             s16 random_angle = random_u16();
                             f32 random_distance = 400.0f+(random_float()*800.0f);
@@ -411,7 +415,7 @@ void bhv_cosmic_phantasm(void) {
                             minion_count++;
                             minion_total++;
                         }
-                        if ((o->oTimer % 20 == 10)&&(minion_count < 10)) {
+                        if ((o->oTimer % 40 == 10)&&(minion_count < 6)) {
                             hammer = spawn_object(o,MODEL_FORD,bhvPhantasm);
                             s16 random_angle = random_u16();
                             f32 random_distance = 400.0f+(random_float()*1000.0f);
@@ -419,6 +423,30 @@ void bhv_cosmic_phantasm(void) {
                             hammer->oPosZ += (coss(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (coss(random_angle)*random_distance);
                             hammer->oBehParams2ndByte = 4;
                             hammer->prevObj = o->parentObj;
+                            minion_count++;
+                            minion_total++;
+                        }
+                        if ((o->oTimer % 40 == 20)&&(minion_count < 6)) {
+                            hammer = spawn_object(o,MODEL_FAST,bhvPhantasm);
+                            s16 random_angle = random_u16();
+                            f32 random_distance = 400.0f+(random_float()*800.0f);
+                            hammer->oPosX += (sins(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (sins(random_angle)*random_distance);
+                            hammer->oPosZ += (coss(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (coss(random_angle)*random_distance);
+                            hammer->oBehParams2ndByte = 2;
+                            hammer->oGraphYOffset = 50.0f;
+                            minion_count++;
+                            minion_total++;
+                        }
+                        if ((o->oTimer % 40 == 30)&&(minion_count < 6)) {
+                            hammer = spawn_object(o,MODEL_PINGAS,bhvPhantasm);
+                            s16 random_angle = random_u16();
+                            f32 random_distance = 400.0f+(random_float()*800.0f);
+                            hammer->oPosX += (sins(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (sins(random_angle)*random_distance);
+                            hammer->oPosZ += (coss(gMarioState->faceAngle[1])*gMarioState->forwardVel*5.0f) + (coss(random_angle)*random_distance);
+                            hammer->oBehParams2ndByte = 3;
+                            if (minion_total%2==1) {
+                                hammer->oBehParams |= 0x01000000;//they don't groundpound over mario
+                            }
                             minion_count++;
                             minion_total++;
                         }
@@ -534,7 +562,7 @@ void bhv_cosmic_phantasm(void) {
                 }
                 if (o->oSubAction == 1) {
                     o->oForwardVel = 0.0f;
-                    if (o->oTimer < 60) {
+                    if ((o->oTimer < 60)&&(GET_BPARAM1(o->oBehParams) == 0)) {
                         //early groundpound
                         o->header.gfx.animInfo.animFrame = 60;
                         o->oTimer = 60;

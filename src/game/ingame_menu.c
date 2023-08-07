@@ -2432,8 +2432,6 @@ void build_tabs(void) {
     //    //}
     //}
     //add_tab(3);
-
-    add_tab(5);
 }
 
 #define total_spells 3
@@ -3010,27 +3008,27 @@ s32 render_pause_courses_and_castle(void) {
         }
 
         //print tab boxes
-        for (i=0;i<5;i++) {
-            create_dl_translation_matrix(MENU_MTX_PUSH, 19+(i*60), 226, 0);
-            create_dl_scale_matrix(MENU_MTX_NOPUSH, .4f, 0.2f, 1.0f);
-            gDPSetEnvColor(gDisplayListHead++, 20, 20, 20, 255);
-            if (tab_index==i) {
-                gDPSetEnvColor(gDisplayListHead++, 60, 60, 60, 255);
-            }
-            if (i > tablist_count-1) {
-                gDPSetEnvColor(gDisplayListHead++, 20, 20, 20, 150);
-            }
-            gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
-            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-        }
+        //for (i=0;i<5;i++) {
+        //    create_dl_translation_matrix(MENU_MTX_PUSH, 19+(i*60), 226, 0);
+        //    create_dl_scale_matrix(MENU_MTX_NOPUSH, .4f, 0.2f, 1.0f);
+        //    gDPSetEnvColor(gDisplayListHead++, 20, 20, 20, 255);
+        //    if (tab_index==i) {
+        //        gDPSetEnvColor(gDisplayListHead++, 60, 60, 60, 255);
+        //    }
+        //    if (i > tablist_count-1) {
+        //        gDPSetEnvColor(gDisplayListHead++, 20, 20, 20, 150);
+        //    }
+        //    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
+        //    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        //}
 
-        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-        //print tab names
-        for (i=0;i<tablist_count;i++) {
-            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
-            print_generic_string(20+(i*60), 210, tabs[tablist[i]]);
-        }
-        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+        //gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        ////print tab names
+        //for (i=0;i<tablist_count;i++) {
+        //    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        //    print_generic_string(20+(i*60), 210, tabs[tablist[i]]);
+        //}
+        //gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     }
 
 
@@ -3762,15 +3760,17 @@ s32 render_menus_and_dialogs(void) {
                 timer_red = 100+(sins(gGlobalTimer*0x1000)*90);
             }
 
-            gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-                gDPSetEnvColor(gDisplayListHead++, 255, timer_red, timer_red, pizza_timer_alpha);
-                //make string
-                timer_number_str[0] = 19;
-                timer_number_str[1] = GLOBAL_CHAR_SPACE;
-                int_to_str(gMarioState->boning_timer,&timer_number_str[2]);
-                print_hud_lut_string_big(HUD_LUT_GLOBAL, 10, 200-pizza_timer_bounce_array[pizza_timer_bounce_index], timer_number_str);
+            if (gCurrLevelNum != LEVEL_JRB) {
+                gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
+                    gDPSetEnvColor(gDisplayListHead++, 255, timer_red, timer_red, pizza_timer_alpha);
+                    //make string
+                    timer_number_str[0] = 19;
+                    timer_number_str[1] = GLOBAL_CHAR_SPACE;
+                    int_to_str(gMarioState->boning_timer,&timer_number_str[2]);
+                    print_hud_lut_string_big(HUD_LUT_GLOBAL, 10, 200-pizza_timer_bounce_array[pizza_timer_bounce_index], timer_number_str);
 
-            gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+                gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+            }
 
             gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);//fucked up
         }

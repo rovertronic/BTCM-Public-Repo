@@ -3,7 +3,7 @@
 
 #include "text_menu_strings.h"
 
-#define TEXT_VERSION _("BETA 1.0")
+#define TEXT_VERSION _("BETA 1.1")
 
 #define TEXT_FILE_LV1 _("STREETS")
 #define TEXT_FILE_LV2 _("DESERT")

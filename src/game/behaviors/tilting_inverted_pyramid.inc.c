@@ -6279,6 +6279,7 @@ void bhv_box_checkpoint(void) {
     if (gMarioState->pos[2]>o->oPosZ+cube_radius) {return;}
     if (gMarioState->pos[2]<o->oPosZ-cube_radius) {return;}
     gMarioState->troll_checkpoint = trigger;
+    gMarioState->boning_timer_reset = GET_BPARAM4(o->oBehParams);
 }
 
 void bhv_quicksand_escalator(void) {
@@ -6643,6 +6644,7 @@ void bhv_troll_pillar(void) {
                     play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(15, SEQ_ROOFTOPS), 0);
                     gMarioState->boning_time = TRUE;
                     gMarioState->boning_timer = 120;
+                    gMarioState->boning_timer_reset = 120;
                 }
             } else {
                 //level 1 and 2
@@ -6650,6 +6652,7 @@ void bhv_troll_pillar(void) {
                     cur_obj_play_sound_2(SOUND_GENERAL_CASTLE_TRAP_OPEN);
                     gMarioState->boning_time = TRUE;
                     gMarioState->boning_timer = 120;
+                    gMarioState->boning_timer_reset = 120;
                     gMarioState->troll_checkpoint = 3;
                     gMarioState->spring_boredom = 0;
 

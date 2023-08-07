@@ -2594,7 +2594,13 @@ void init_mario(void) {
     gMarioState->SpotlightTarget = gMarioObject;
     gMarioState->SpotlightTargetYOffset = 0.0f;
 
-    gMarioState->boning_timer = gMarioState->boning_timer_reset;
+    if (gMarioState->boning_time) {
+        if (gMarioState->boning_timer < gMarioState->boning_timer_reset) {
+            gMarioState->boning_timer = gMarioState->boning_timer_reset;
+        }
+    } else {
+        gMarioState->boning_timer = 0;
+    }
 
     gMarioState->isAfterlife = FALSE;
     if (save_file_get_progression() == PROG_POSTGAME) {
