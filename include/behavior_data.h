@@ -836,5 +836,8 @@ extern const BehaviorScript bhvBurger[];
 extern const BehaviorScript bhvFenceMeIn[];
 extern const BehaviorScript bhvSwingboard[];
 extern const BehaviorScript bhvCreepieFloor[];
+extern const BehaviorScript bhvCrusher[];
+extern const BehaviorScript bhvGlitch[];
+extern const BehaviorScript bhvEvilThing[];
 
 #endif // BEHAVIOR_DATA_H

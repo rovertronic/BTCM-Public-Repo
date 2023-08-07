@@ -628,6 +628,7 @@ struct MarioState {
              u8 spike_boredom;
              u8 boning_time;
              u8 boning_timer;
+             u8 boning_timer_reset;
              f32 slowmobar;
              u8 slowmo_recharge;
              f32 y_reflection;

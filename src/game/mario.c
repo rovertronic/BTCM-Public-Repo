@@ -2490,8 +2490,6 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
             return ACTIVE_PARTICLE_NONE;
         }
 
-        print_text_fmt_int(210, 72, "TIME %d", gMarioState->leveltime);
-
         //CROWBAR
         if (gMarioState->powerup == 1) {
             if (gMarioState->input & INPUT_B_PRESSED) {
@@ -2596,17 +2594,7 @@ void init_mario(void) {
     gMarioState->SpotlightTarget = gMarioObject;
     gMarioState->SpotlightTargetYOffset = 0.0f;
 
-    //2d in flappy bird
-    if ((gCurrLevelNum == LEVEL_CASTLE_COURTYARD)&&(gCurrAreaIndex == 4)) {
-        gMarioState->_2D = TRUE;
-    }
-    //2d in trial
-    if (gCurrLevelNum == LEVEL_RR) {
-        gMarioState->_2D = FALSE;
-        if (gCurrAreaIndex == 4) {
-            gMarioState->_2D = TRUE;
-        }
-    }
+    gMarioState->boning_timer = gMarioState->boning_timer_reset;
 
     gMarioState->isAfterlife = FALSE;
     if (save_file_get_progression() == PROG_POSTGAME) {
@@ -2809,6 +2797,7 @@ void init_mario_from_save_file(void) {
     gMarioState->troll_checkpoint = 0;
     gMarioState->boning_time = FALSE;
     gMarioState->boning_timer = 0;
+    gMarioState->boning_timer_reset = 0;
     sSelectedFileNum = FALSE;
     fs_ms = 0;
 
@@ -2873,6 +2862,7 @@ s32 trolllab_level_win(struct MarioState *m) {
 
     m->boning_time = FALSE;
     m->boning_timer = 0;
+    m->boning_timer_reset = 0;
     display_song_text(8);
     play_cutscene_music(SEQUENCE_ARGS(15, SEQ_STREAMED_WINNER));
 

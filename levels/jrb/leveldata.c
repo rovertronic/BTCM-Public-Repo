@@ -58,3 +58,11 @@
 #include "levels/jrb/jrb_sky/model.inc.c"
 #include "levels/jrb/creepie_door/model.inc.c"
 #include "levels/jrb/creepie_floor/model.inc.c"
+#include "levels/jrb/crusher/model.inc.c"
+#include "levels/jrb/glitch1/model.inc.c"
+#include "levels/jrb/glitch2/model.inc.c"
+
+#include "levels/jrb/evilpath.c"
+#include "levels/jrb/evilthing/model.inc.c"
+#include "levels/jrb/evilthing/anims/data.inc.c"
+#include "levels/jrb/evilthing/anims/table.inc.c"

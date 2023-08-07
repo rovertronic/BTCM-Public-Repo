@@ -1,6 +1,7 @@
 
 
 #include "levels/hmc/header.h"
+#include "levels/jrb/header.h"
 #include "levels/ddd/header.h"
 #include "levels/wdw/header.h"
 #include "levels/bitfs/header.h"
@@ -7292,5 +7293,132 @@ void bhv_creepie_floor(void) {
         if (o->oTimer < 10) {
             o->oFaceAngleRoll -= 0x500;
         }
+    }
+}
+
+void bhv_crusher(void) {
+    switch(o->oAction) {
+        case 0:
+            o->oPosY += 805.0f;
+            o->oAction ++;
+        break;
+        case 1:
+            if (gMarioState->TrollTrigger == TTRIG_CRUSHER) {
+                gMarioState->forwardVel = 0.0f;
+                o->oAction++;
+            }
+        break;
+        case 2:
+            o->oPosY -= 200.0f;
+            if (o->oPosY < o->oHomeY) {
+                o->oPosY = o->oHomeY;
+                o->oAction++;
+                cur_obj_play_sound_2(SOUND_GENERAL_TOX_BOX_MOVE);
+                cur_obj_shake_screen(SHAKE_POS_LARGE);
+                run_event(EVENT_DEATH);
+            }
+            if (gMarioState->pos[1] > o->oPosY) {
+                gMarioState->pos[1] = o->oPosY;
+            }
+        break;
+    }
+}
+
+void bhv_glitch(void) {
+    f32 mdist = lateral_dist_between_objects(gMarioObject,o);
+    switch(o->oAction) {
+        case 0:
+            cur_obj_hide();
+            if (mdist < 1800.0f) {
+                o->oAction++;
+                cur_obj_unhide();
+            }
+        break;
+        case 1:
+            if ((random_u16()%4)==0) {
+                o->oFaceAngleYaw = random_u16();
+            }
+            if ((random_u16()%4)==0) {
+                o->oFaceAnglePitch = random_u16();
+            }
+            if ((random_u16()%4)==0) {
+                o->oFaceAngleRoll = random_u16();
+            }
+            if (mdist < 500.0f) {
+                o->oAction++;
+                gMarioState->boning_time = FALSE;
+                gMarioState->boning_timer = 0;
+                gMarioState->troll_checkpoint = 2;
+                run_event(EVENT_DEATH);
+            }
+        break;
+    }
+}
+
+u16 evil_path_index = 0;
+f32 close_the_distance = 3000.0f;
+void bhv_evil_thing(void) {
+    f32 mdist = lateral_dist_between_objects(gMarioObject,o);
+    f32 (*epath)[3] = segmented_to_virtual(&evilpath);
+
+    o->oFaceAngleYaw = o->oAngleToMario;
+    switch(o->oAction) {
+        case 0:
+            evil_path_index = 0;
+            close_the_distance = 3000.0f;
+            o->oAction++;
+        break;
+        case 1:
+            o->oPosX = epath[evil_path_index][0];
+            o->oPosY = epath[evil_path_index][1];
+            o->oPosZ = epath[evil_path_index][2];
+            if ((gGlobalTimer%2)==1) {
+                evil_path_index++;
+            }
+
+            if (mdist < 1400.0f) {
+                if ((gGlobalTimer%10)==1) {
+                    cur_obj_play_sound_2(SOUND_GENERAL_LOUD_POUND);
+                    cur_obj_shake_screen(SHAKE_POS_LARGE);
+                }
+            }
+            if (mdist < 600.0f) {
+                gMarioState->boning_time = FALSE;
+                gMarioState->boning_timer = 0;
+                gMarioState->troll_checkpoint = 2;
+                o->oAction = 2;
+                cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_ROAR);
+                run_event(EVENT_DEATH);
+            }
+
+            if (close_the_distance > 2000.0f) {
+                close_the_distance -= 3.0f;
+            }
+
+            mdist = lateral_dist_between_objects(gMarioObject,o);
+            while (mdist > close_the_distance) {
+                evil_path_index++;
+                o->oPosX = epath[evil_path_index][0];
+                o->oPosY = epath[evil_path_index][1];
+                o->oPosZ = epath[evil_path_index][2];
+                mdist = lateral_dist_between_objects(gMarioObject,o);
+
+                if (evil_path_index > 1490) {
+                    mdist = 0.0f;
+                    o->oAction=3;
+                }
+            }
+            if (evil_path_index > 1490) {
+                o->oAction=3;
+            }
+        break;
+        case 2: //do nothing
+
+        break;
+        case 3: //sink away
+            if (o->oTimer < 60) {
+                o->oPosY -= 30.0f;
+            }
+        break;
     }
 }

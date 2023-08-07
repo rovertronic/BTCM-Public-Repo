@@ -15,6 +15,7 @@ const GeoLayout jrb_area_1_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, jrb_dl_Cube_mesh_layer_5),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, -128, 0, jrb_dl_Cube_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 0, -128, 0, jrb_dl_grate_nolight_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, -128, 0, jrb_dl_paintings_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 0, -128, 0, jrb_dl_paintings_001_mesh_layer_6),

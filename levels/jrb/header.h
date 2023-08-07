@@ -19,6 +19,8 @@ extern const GeoLayout jrb_geo_000A00[];
 extern const GeoLayout jrb_geo_000A18[];
 extern const GeoLayout jrb_geo_000AFC[];
 
+extern f32 evilpath[][3];
+
 // leveldata
 extern const Gfx jrb_seg7_dl_07002FD0[];
 extern const Gfx jrb_seg7_dl_07004940[];
@@ -60,6 +62,7 @@ extern const Collision jrb_seg7_area_2_collision[];
 extern const MacroObject jrb_seg7_area_2_macro_objs[];
 extern const struct MovtexQuadCollection jrb_movtex_sunken_ship_water[];
 
+
 // script
 extern const LevelScript level_jrb_entry[];
 
@@ -96,5 +99,15 @@ extern const LevelScript level_jrb_entry[];
 #include "levels/jrb/creepie_door/geo_header.h"
 
 #include "levels/jrb/creepie_floor/geo_header.h"
+
+#include "levels/jrb/crusher/geo_header.h"
+
+#include "levels/jrb/glitch1/geo_header.h"
+
+#include "levels/jrb/glitch2/geo_header.h"
+
+#include "levels/jrb/evilthing/geo_header.h"
+
+#include "levels/jrb/evilthing/anim_header.h"
 
 #endif

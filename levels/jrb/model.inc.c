@@ -27177,6 +27177,32 @@ Gfx jrb_dl_Cube_mesh_layer_5_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx jrb_dl_Cube_003_mesh_layer_1_vtx_0[4] = {
+	{{ {-5689, 533, -2912}, 0, {-778, 1008}, {32, 1, 5, 0} }},
+	{{ {-5689, 933, -2912}, 0, {-778, -16}, {49, 2, 20, 0} }},
+	{{ {-5689, 933, -3556}, 0, {871, -16}, {39, 2, 20, 0} }},
+	{{ {-5689, 533, -3556}, 0, {871, 1008}, {52, 2, 17, 0} }},
+};
+
+Gfx jrb_dl_Cube_003_mesh_layer_1_tri_0[] = {
+	gsSPVertex(jrb_dl_Cube_003_mesh_layer_1_vtx_0 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx jrb_dl_Cube_003_mesh_layer_1_vtx_1[4] = {
+	{{ {-5689, 133, -2912}, 0, {-778, 1008}, {32, 1, 9, 0} }},
+	{{ {-5689, 533, -2912}, 0, {-778, -16}, {42, 2, 14, 0} }},
+	{{ {-5689, 533, -3556}, 0, {871, -16}, {57, 3, 27, 0} }},
+	{{ {-5689, 133, -3556}, 0, {871, 1008}, {45, 2, 16, 0} }},
+};
+
+Gfx jrb_dl_Cube_003_mesh_layer_1_tri_1[] = {
+	gsSPVertex(jrb_dl_Cube_003_mesh_layer_1_vtx_1 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
 Vtx jrb_dl_grate_nolight_mesh_layer_4_vtx_0[48] = {
 	{{ {3214, -1887, 5246}, 0, {-2029, -2029}, {0, 127, 0, 255} }},
 	{{ {3214, -1887, 5646}, 0, {-3477, -581}, {0, 127, 0, 255} }},
@@ -67835,6 +67861,16 @@ Gfx jrb_dl_Cube_mesh_layer_5[] = {
 	gsSPDisplayList(mat_jrb_dl_Floor),
 	gsSPDisplayList(jrb_dl_Cube_mesh_layer_5_tri_0),
 	gsSPDisplayList(mat_revert_jrb_dl_Floor),
+	gsSPEndDisplayList(),
+};
+
+Gfx jrb_dl_Cube_003_mesh_layer_1[] = {
+	gsSPDisplayList(mat_jrb_dl_Top),
+	gsSPDisplayList(jrb_dl_Cube_003_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_jrb_dl_Top),
+	gsSPDisplayList(mat_jrb_dl_Bottom),
+	gsSPDisplayList(jrb_dl_Cube_003_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_jrb_dl_Bottom),
 	gsSPEndDisplayList(),
 };
 

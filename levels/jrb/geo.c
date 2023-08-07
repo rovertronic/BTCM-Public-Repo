@@ -32,3 +32,7 @@
 #include "levels/jrb/bigmine/geo.inc.c"
 #include "levels/jrb/creepie_door/geo.inc.c"
 #include "levels/jrb/creepie_floor/geo.inc.c"
+#include "levels/jrb/crusher/geo.inc.c"
+#include "levels/jrb/glitch1/geo.inc.c"
+#include "levels/jrb/glitch2/geo.inc.c"
+#include "levels/jrb/evilthing/geo.inc.c"

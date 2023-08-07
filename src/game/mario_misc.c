@@ -989,6 +989,12 @@ Gfx *geo_render_mirror_mario_y(s32 callContext, struct GraphNode *node, UNUSED M
     if (gMarioState->TrollTrigger == TTRIG_VANISH_REFLECTION) {
         show_cond = FALSE;
     }
+    if (gMarioState->action == ACT_TROLLDEATH) {
+        show_cond = FALSE;
+    }
+    if (gMarioState->TrollTrigger == TTRIG_POSTFIGHT) {
+        show_cond = FALSE;
+    }
 
     switch (callContext) {
         case GEO_CONTEXT_CREATE:

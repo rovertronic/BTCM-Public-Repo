@@ -3777,7 +3777,7 @@ s32 render_menus_and_dialogs(void) {
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     
-    if ((gGlobalTimer%30==0)&&(!revent_active)&&(gMarioState->TrollTrigger == TTRIG_WINNER)) {
+    if ((gGlobalTimer%30==0)&&(!revent_active)&&(gMarioState->TrollTrigger != TTRIG_WINNER)) {
         //increment level timer
         gMarioState->leveltime++;
     }

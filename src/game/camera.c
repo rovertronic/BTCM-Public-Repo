@@ -11141,6 +11141,7 @@ void set_fov_bbh(struct MarioState *m) {
 /**
  * Sets the field of view for the GraphNodeCamera
  */
+f32 escape_fov = 0.0f;
 Gfx *geo_camera_fov(s32 callContext, struct GraphNode *g, UNUSED void *context) {
     struct GraphNodePerspective *perspective = (struct GraphNodePerspective *) g;
     struct MarioState *marioState = &gMarioStates[0];
@@ -11185,7 +11186,18 @@ Gfx *geo_camera_fov(s32 callContext, struct GraphNode *g, UNUSED void *context) 
         }
     }
 
-    perspective->fov = sFOVState.fov;
+    if ((gMarioState->boning_time)&&(gCurrLevelNum==LEVEL_JRB)) {
+        if (escape_fov < 20.0f) {
+            escape_fov+= 0.5f;
+        }
+    } else {
+        escape_fov-= 0.5f;
+        if (escape_fov < 0.0f) {
+            escape_fov = 0.0f;
+        }
+    }
+
+    perspective->fov = sFOVState.fov + escape_fov;
     shake_camera_fov(perspective);
     return NULL;
 }

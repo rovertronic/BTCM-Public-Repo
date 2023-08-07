@@ -9714,3 +9714,36 @@ const BehaviorScript bhvCreepieFloor[] = {
         CALL_NATIVE(bhv_creepie_floor),
     END_LOOP(),
 };
+
+extern void bhv_crusher(void);
+const BehaviorScript bhvCrusher[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 30000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_crusher),
+    END_LOOP(),
+};
+
+extern void bhv_glitch(void);
+const BehaviorScript bhvGlitch[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 30000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_glitch),
+    END_LOOP(),
+};
+
+extern void bhv_evil_thing(void);
+const BehaviorScript bhvEvilThing[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE|OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    SET_FLOAT(oDrawingDistance, 30000),
+    LOAD_ANIMATIONS(oAnimations, evilthing_anims),
+    ANIMATE(0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_evil_thing),
+    END_LOOP(),
+};
