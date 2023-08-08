@@ -28,6 +28,7 @@
 #include "config.h"
 #include "puppyprint.h"
 #include "rovent.h"
+#include "mario.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -2592,6 +2593,10 @@ s32 update_c_up(UNUSED struct Camera *c, Vec3f focus, Vec3f pos) {
  * Make Mario's head move in C-Up mode.
  */
 void move_mario_head_c_up(UNUSED struct Camera *c) {
+    if (using_bodylog) {
+        return;
+    }
+
     sCUpCameraPitch += (s16)(gPlayer1Controller->stickY * 10.f);
     sModeOffsetYaw -= (s16)(gPlayer1Controller->stickX * 10.f);
 
@@ -3340,6 +3345,10 @@ void reset_camera(struct Camera *c) {
     sCSideButtonYaw = 0;
     s8DirModeBaseYaw = 0;
     s8DirModeBaseYaw = 8192*((u16)(gMarioState->faceAngle[1]/8192))+0x8000;
+    if (save_file_get_progression() == PROG_TL_NEWGAME) {
+        s8DirModeBaseYaw = 0;
+    }
+
     s8DirModeYawOffset = 0;
     c->doorStatus = DOOR_DEFAULT;
     sMarioCamState->headRotation[0] = 0;

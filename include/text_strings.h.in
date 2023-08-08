@@ -3,7 +3,7 @@
 
 #include "text_menu_strings.h"
 
-#define TEXT_VERSION _("BETA 1.1")
+#define TEXT_VERSION _("COMPETITION 1.0 RELEASE")
 
 #define TEXT_FILE_LV1 _("STREETS")
 #define TEXT_FILE_LV2 _("DESERT")
@@ -749,7 +749,7 @@
 #define PRE_CREDITS_6 _("Rovert")
 
 #define PRE_CREDITS_7 _("HackerSM64 Created By:")
-#define PRE_CREDITS_8 _("HackerSM64 Team")
+#define PRE_CREDITS_8 _("HackerN64 Team")
 
 #define PRE_CREDITS_9 _("Physics Engine & Streamed Audio Tool")
 #define PRE_CREDITS_10 _("Arthurtilly")

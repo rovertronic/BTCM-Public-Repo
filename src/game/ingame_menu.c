@@ -1953,18 +1953,9 @@ void change_dialog_camera_angle(void) {
 
 void shade_screen(void) {
 
-    // This is a bit weird. It reuses the dialog text box (width 130, height -80),
-    // so scale to at least fit the screen.
-    if (1) { // axo: what?
-        create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
-        create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.6f, 3.4f, 1.0f);
-        
-    }
-    else
-    {
-        create_dl_translation_matrix(MENU_MTX_PUSH, -500.0f, SCREEN_HEIGHT, 0);
-        create_dl_scale_matrix(MENU_MTX_NOPUSH, 8.0f, 8.0f, 1.0f); //widde screen
-    }
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, -500.0f, SCREEN_HEIGHT, 0);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 8.0f, 8.0f, 1.0f); //widde screen
 
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 110);
     gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
@@ -3361,7 +3352,7 @@ void render_pre_credits() {
     }
 
     //fadeout
-    create_dl_translation_matrix(MENU_MTX_PUSH, 0, 400, 0);
+    create_dl_translation_matrix(MENU_MTX_PUSH, -200, 400, 0);
     create_dl_scale_matrix(MENU_MTX_NOPUSH, 5.0f, 5.0f, 0.0f);
     gDPSetEnvColor(gDisplayListHead++, 0,0,0, (u8)(gMarioState->PortalTint*255.0f));
 
@@ -3700,18 +3691,20 @@ s32 render_menus_and_dialogs(void) {
             display_song_timer--;
         }
 
-        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 153);
-        create_dl_translation_matrix(MENU_MTX_PUSH, get_string_width(musicmenu_titles[display_song_index])+display_song_x , 229.0f, 0);
-        gSPDisplayList(gDisplayListHead++, &musicbar_musicbar_mesh);
-        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        if ((display_song_timer > 0)||(display_song_x > -get_string_width(musicmenu_titles[display_song_index]))) {
+            gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 153);
+            create_dl_translation_matrix(MENU_MTX_PUSH, get_string_width(musicmenu_titles[display_song_index])+display_song_x , 229.0f, 0);
+            gSPDisplayList(gDisplayListHead++, &musicbar_musicbar_mesh);
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
-        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
-        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
-        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
-        print_generic_string(display_song_x, 220, musicmenu_titles[display_song_index]);
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
-        print_generic_string(display_song_x+1, 220+1, musicmenu_titles[display_song_index]);
+            gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+            print_generic_string(display_song_x, 220, musicmenu_titles[display_song_index]);
+            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            print_generic_string(display_song_x+1, 220+1, musicmenu_titles[display_song_index]);
+        }
 
 
         //jumpscare code
