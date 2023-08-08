@@ -947,6 +947,9 @@ void event_main(void) {
                 revent_camera_pos[1] += 150.0f;
                 revent_camera_foc[2] = revent_camera_pos[2];
                 revent_camera_pos[2] += coss(revent_target_object->oFaceAngleYaw)*300.0f;
+                if (gMarioState->Avatar == AVATAR_FAST) {
+                    revent_camera_foc[1] += 25.0f;
+                }
                 revent_index ++;
             break;
             case E_CAM_MANUAL_ECM:
