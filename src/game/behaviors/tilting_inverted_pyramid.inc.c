@@ -6794,6 +6794,7 @@ void bhv_monitor(void) {
             offset = SCREEN_OFFSET;
             dma_read(tex,(frame*RGBA16SIZE)+offset+_bad_appleSegmentRomStart,(frame*RGBA16SIZE)+offset+_bad_appleSegmentRomStart+RGBA16SIZE);
             o->oAction = 0;
+            play_sound(SOUND_SHUT_UP_TV, gGlobalSoundSource);
             o->oBehParams2ndByte ++;
         break;
     }
@@ -7111,6 +7112,7 @@ void bhv_bridgefall(void) {
 
 void bhv_junker(void) {
     f32 rev = 1.0f;
+    u8 stall = FALSE;
     if (o->oBehParams2ndByte == 2) {
         rev = -1.0f;
     }
@@ -7140,6 +7142,8 @@ void bhv_junker(void) {
         break;
         case 1://off we go
         case 2:
+            cur_obj_play_sound_1(SOUND_ENV_WIND1);
+
             if (o->oVelZ > -30.0f) {
                 o->oVelZ -= 1.0f*gMarioState->timeScale;
             }
@@ -7155,13 +7159,18 @@ void bhv_junker(void) {
                 o->header.gfx.animInfo.animFrame = ((u8)(o->oTimeScaleTimer)%40);
             }
 
+
+            if ((o->oBehParams2ndByte==0)&&(o->oTimeScaleTimer > 510.0f)) {
+                stall=TRUE;
+            }
             if ((o->oBehParams2ndByte==1)&&(o->oTimeScaleTimer > 90.0f)) {
-                //i think my timescale is funky here (outright wrong) but it just has to be mostly acceptable for now
-                o->oVelY -= 1.0f*gMarioState->timeScale;
-                o->oPosY += o->oVelY*gMarioState->timeScale;
-                o->oFaceAnglePitch += 0x50*gMarioState->timeScale;
+                stall=TRUE;
             }
             if ((o->oBehParams2ndByte==2)&&(o->oTimeScaleTimer > 220.0f)) {
+                stall=TRUE;
+            }
+
+            if (stall) {
                 //i think my timescale is funky here (outright wrong) but it just has to be mostly acceptable for now
                 o->oVelY -= 1.0f*gMarioState->timeScale;
                 o->oPosY += o->oVelY*gMarioState->timeScale;

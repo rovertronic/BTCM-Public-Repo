@@ -2053,6 +2053,7 @@ sound_ref .sound_vid4
 sound_ref .sound_vid5
 sound_ref .sound_vid6
 sound_ref .sound_vid7
+sound_ref .sound_shutuptv
 
 
 .sound_mario_jump_hoo:
@@ -2696,6 +2697,14 @@ chan_call .set_reverb
 chan_setlayer 0, .layer_F8A
 chan_end
 
+.sound_shutuptv:
+chan_setbank 10
+chan_setinstr 27
+chan_setval 20
+chan_call .set_reverb
+chan_setlayer 0, .layer_shut_up_tv
+chan_end
+
 .sound_nbody1:
 chan_setbank 10
 chan_setinstr 28
@@ -2778,6 +2787,10 @@ chan_end
 
 .layer_F8A:
 layer_note1 39, 0x50, 127
+layer_end
+
+.layer_shut_up_tv:
+layer_note1 39, 0x50, 0
 layer_end
 
 .layer_ford:

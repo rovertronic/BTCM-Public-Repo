@@ -729,6 +729,9 @@ s32 act_wall_stick(struct MarioState *m) {
     if (m->input & INPUT_A_PRESSED) {
         return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
     }
+    if (m->Avatar != AVATAR_FAST) {
+        return set_mario_action(m, ACT_FREEFALL, 0);
+    }
 
     find_surface_on_ray(&m->pos, &raydir, &surf, &hitpos, RAYCAST_FIND_ALL);
     if (surf == NULL) {
