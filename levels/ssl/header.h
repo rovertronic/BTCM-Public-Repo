@@ -124,4 +124,6 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/rbowser/geo_header.h"
 
+#include "levels/ssl/sub/geo_header.h"
+
 #endif

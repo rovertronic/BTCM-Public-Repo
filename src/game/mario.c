@@ -1860,10 +1860,10 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     u8 CostumeId = gMarioState->CostumeID;
     struct Object *sp1C;
     struct SpawnParticlesInfo D_8032F270 = { 2, 20, MODEL_MIST, 0, 40, 5, 30, 20, 252, 30, 10.0f, 10.0f };
-    u8 *Hatcol = segmented_to_virtual(&mario_hat_v4_lights);
-    u8 *Pantcol = segmented_to_virtual(&mario_button_v4_lights);
-    u8 *Shoecol = segmented_to_virtual(&mario_shoes_v4_lights);
-    u8 *Tokencol = segmented_to_virtual(&token_token_lights);
+    //u8 *Hatcol = segmented_to_virtual(&mario_hat_v4_lights);
+    //u8 *Pantcol = segmented_to_virtual(&mario_button_v4_lights);
+    //u8 *Shoecol = segmented_to_virtual(&mario_shoes_v4_lights);
+    //u8 *Tokencol = segmented_to_virtual(&token_token_lights);
     u16 *walltex = segmented_to_virtual(&ccm_dl_Screen_ia8);
     u8 timerdelay = 0;
     u16 i;
@@ -2170,74 +2170,74 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         }
     }
 
-    //Gamer Mario
-    ColorShift += 0x200;
-    RainbowMario[0] = (coss(ColorShift)+1)*127;
-    RainbowMario[1] = (coss(ColorShift + 21845)+1)*127;
-    RainbowMario[2] = (coss(ColorShift - 21845)+1)*127;
-    RainbowMario[3] = (sins(ColorShift)+1)*127;
-    RainbowMario[4] = (sins(ColorShift + 21845)+1)*127;
-    RainbowMario[5] = (sins(ColorShift - 21845)+1)*127;
-
-    //HAT
-    Hatcol[8] = CostumeData[CostumeId][0];//Diffuse
-    Hatcol[9] = CostumeData[CostumeId][1];
-    Hatcol[10] = CostumeData[CostumeId][2];
-    Hatcol[12] = CostumeData[CostumeId][0];
-    Hatcol[13] = CostumeData[CostumeId][1];
-    Hatcol[14] = CostumeData[CostumeId][2];
-
-    Hatcol[0] = CostumeData[CostumeId][0]/2;//Ambient
-    Hatcol[1] = CostumeData[CostumeId][1]/2;
-    Hatcol[2] = CostumeData[CostumeId][2]/2;
-    Hatcol[4] = CostumeData[CostumeId][0]/2;
-    Hatcol[5] = CostumeData[CostumeId][1]/2;
-    Hatcol[6] = CostumeData[CostumeId][2]/2;
-
-    //TOKEN
-    Tokencol[8] = CostumeData[gMarioState->TokenParam2][0];//Diffuse
-    Tokencol[9] = CostumeData[gMarioState->TokenParam2][1];
-    Tokencol[10] = CostumeData[gMarioState->TokenParam2][2];
-    Tokencol[12] = CostumeData[gMarioState->TokenParam2][0];
-    Tokencol[13] = CostumeData[gMarioState->TokenParam2][1];
-    Tokencol[14] = CostumeData[gMarioState->TokenParam2][2];
-
-    Tokencol[0] = CostumeData[gMarioState->TokenParam2][0]/2;//Ambient
-    Tokencol[1] = CostumeData[gMarioState->TokenParam2][1]/2;
-    Tokencol[2] = CostumeData[gMarioState->TokenParam2][2]/2;
-    Tokencol[4] = CostumeData[gMarioState->TokenParam2][0]/2;
-    Tokencol[5] = CostumeData[gMarioState->TokenParam2][1]/2;
-    Tokencol[6] = CostumeData[gMarioState->TokenParam2][2]/2;
-
-    //JEANS
-    Pantcol[8] = CostumeData[CostumeId][3];//Diffuse
-    Pantcol[9] = CostumeData[CostumeId][4];
-    Pantcol[10] = CostumeData[CostumeId][5];
-    Pantcol[12] = CostumeData[CostumeId][3];
-    Pantcol[13] = CostumeData[CostumeId][4];
-    Pantcol[14] = CostumeData[CostumeId][5];
-
-    Pantcol[0] = CostumeData[CostumeId][3]/2;//Ambient
-    Pantcol[1] = CostumeData[CostumeId][4]/2;
-    Pantcol[2] = CostumeData[CostumeId][5]/2;
-    Pantcol[4] = CostumeData[CostumeId][3]/2;
-    Pantcol[5] = CostumeData[CostumeId][4]/2;
-    Pantcol[6] = CostumeData[CostumeId][5]/2;
-
-    //SHOES
-    Shoecol[8] = CostumeData[CostumeId][6];//Diffuse
-    Shoecol[9] = CostumeData[CostumeId][7];
-    Shoecol[10] = CostumeData[CostumeId][8];
-    Shoecol[12] = CostumeData[CostumeId][6];
-    Shoecol[13] = CostumeData[CostumeId][7];
-    Shoecol[14] = CostumeData[CostumeId][8];
-
-    Shoecol[0] = CostumeData[CostumeId][6]/2;//Ambient
-    Shoecol[1] = CostumeData[CostumeId][7]/2;
-    Shoecol[2] = CostumeData[CostumeId][8]/2;
-    Shoecol[4] = CostumeData[CostumeId][6]/2;
-    Shoecol[5] = CostumeData[CostumeId][7]/2;
-    Shoecol[6] = CostumeData[CostumeId][8]/2;
+    ////Gamer Mario
+    //ColorShift += 0x200;
+    //RainbowMario[0] = (coss(ColorShift)+1)*127;
+    //RainbowMario[1] = (coss(ColorShift + 21845)+1)*127;
+    //RainbowMario[2] = (coss(ColorShift - 21845)+1)*127;
+    //RainbowMario[3] = (sins(ColorShift)+1)*127;
+    //RainbowMario[4] = (sins(ColorShift + 21845)+1)*127;
+    //RainbowMario[5] = (sins(ColorShift - 21845)+1)*127;
+//
+    ////HAT
+    //Hatcol[8] = CostumeData[CostumeId][0];//Diffuse
+    //Hatcol[9] = CostumeData[CostumeId][1];
+    //Hatcol[10] = CostumeData[CostumeId][2];
+    //Hatcol[12] = CostumeData[CostumeId][0];
+    //Hatcol[13] = CostumeData[CostumeId][1];
+    //Hatcol[14] = CostumeData[CostumeId][2];
+//
+    //Hatcol[0] = CostumeData[CostumeId][0]/2;//Ambient
+    //Hatcol[1] = CostumeData[CostumeId][1]/2;
+    //Hatcol[2] = CostumeData[CostumeId][2]/2;
+    //Hatcol[4] = CostumeData[CostumeId][0]/2;
+    //Hatcol[5] = CostumeData[CostumeId][1]/2;
+    //Hatcol[6] = CostumeData[CostumeId][2]/2;
+//
+    ////TOKEN
+    //Tokencol[8] = CostumeData[gMarioState->TokenParam2][0];//Diffuse
+    //Tokencol[9] = CostumeData[gMarioState->TokenParam2][1];
+    //Tokencol[10] = CostumeData[gMarioState->TokenParam2][2];
+    //Tokencol[12] = CostumeData[gMarioState->TokenParam2][0];
+    //Tokencol[13] = CostumeData[gMarioState->TokenParam2][1];
+    //Tokencol[14] = CostumeData[gMarioState->TokenParam2][2];
+//
+    //Tokencol[0] = CostumeData[gMarioState->TokenParam2][0]/2;//Ambient
+    //Tokencol[1] = CostumeData[gMarioState->TokenParam2][1]/2;
+    //Tokencol[2] = CostumeData[gMarioState->TokenParam2][2]/2;
+    //Tokencol[4] = CostumeData[gMarioState->TokenParam2][0]/2;
+    //Tokencol[5] = CostumeData[gMarioState->TokenParam2][1]/2;
+    //Tokencol[6] = CostumeData[gMarioState->TokenParam2][2]/2;
+//
+    ////JEANS
+    //Pantcol[8] = CostumeData[CostumeId][3];//Diffuse
+    //Pantcol[9] = CostumeData[CostumeId][4];
+    //Pantcol[10] = CostumeData[CostumeId][5];
+    //Pantcol[12] = CostumeData[CostumeId][3];
+    //Pantcol[13] = CostumeData[CostumeId][4];
+    //Pantcol[14] = CostumeData[CostumeId][5];
+//
+    //Pantcol[0] = CostumeData[CostumeId][3]/2;//Ambient
+    //Pantcol[1] = CostumeData[CostumeId][4]/2;
+    //Pantcol[2] = CostumeData[CostumeId][5]/2;
+    //Pantcol[4] = CostumeData[CostumeId][3]/2;
+    //Pantcol[5] = CostumeData[CostumeId][4]/2;
+    //Pantcol[6] = CostumeData[CostumeId][5]/2;
+//
+    ////SHOES
+    //Shoecol[8] = CostumeData[CostumeId][6];//Diffuse
+    //Shoecol[9] = CostumeData[CostumeId][7];
+    //Shoecol[10] = CostumeData[CostumeId][8];
+    //Shoecol[12] = CostumeData[CostumeId][6];
+    //Shoecol[13] = CostumeData[CostumeId][7];
+    //Shoecol[14] = CostumeData[CostumeId][8];
+//
+    //Shoecol[0] = CostumeData[CostumeId][6]/2;//Ambient
+    //Shoecol[1] = CostumeData[CostumeId][7]/2;
+    //Shoecol[2] = CostumeData[CostumeId][8]/2;
+    //Shoecol[4] = CostumeData[CostumeId][6]/2;
+    //Shoecol[5] = CostumeData[CostumeId][7]/2;
+    //Shoecol[6] = CostumeData[CostumeId][8]/2;
 
     timerdelay = 30;
 

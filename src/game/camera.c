@@ -2988,12 +2988,14 @@ void update_lakitu(struct Camera *c) {
 
 
 void cutscene_2D(struct Camera *c) {
-    c->pos[0] = _2D_Camera_X+_2D_Camera_Offset_X;
-    c->focus[0] = _2D_Camera_X+_2D_Camera_Offset_X;
-    _2D_Camera_Offset_X = approach_f32_asymptotic(_2D_Camera_Offset_X, _2D_Camera_Offset_Target_X, 0.1f);
-    c->pos[1] = _2D_Camera_Y;
-    c->focus[1] = _2D_Camera_Y;
-    _2D_Camera_Y = approach_f32_asymptotic(_2D_Camera_Y, _2D_Camera_Y_Target, 0.2f);
+    if (gPlayer1Controller->buttonDown & L_TRIG) {
+        c->pos[0] = _2D_Camera_X+_2D_Camera_Offset_X;
+        c->focus[0] = _2D_Camera_X+_2D_Camera_Offset_X;
+        _2D_Camera_Offset_X = approach_f32_asymptotic(_2D_Camera_Offset_X, _2D_Camera_Offset_Target_X, 0.1f);
+        c->pos[1] = _2D_Camera_Y;
+        c->focus[1] = _2D_Camera_Y;
+        _2D_Camera_Y = approach_f32_asymptotic(_2D_Camera_Y, _2D_Camera_Y_Target, 0.2f);
+    }
 
     //ingenious camera logic
     if (gMarioState->pos[0] > _2D_Camera_X+100.0f){

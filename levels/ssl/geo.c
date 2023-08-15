@@ -41,3 +41,4 @@
 #include "levels/ssl/retrotoad/geo.inc.c"
 #include "levels/ssl/smashbrick/geo.inc.c"
 #include "levels/ssl/rbowser/geo.inc.c"
+#include "levels/ssl/sub/geo.inc.c"

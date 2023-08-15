@@ -138,7 +138,8 @@ void bhv_goomba_init(void) {
  * Enter the jump action and set initial y velocity.
  */
 static void goomba_begin_jump(void) {
-    cur_obj_play_sound_2(SOUND_OBJ_GOOMBA_ALERT);
+    //cur_obj_play_sound_2(SOUND_OBJ_GOOMBA_ALERT);
+    //SHUT THE FUCK UP!!!!!! X2
 
     o->oAction = GOOMBA_ACT_JUMP;
     o->oForwardVel = 0.0f;

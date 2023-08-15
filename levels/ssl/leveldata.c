@@ -66,3 +66,4 @@
 #include "levels/ssl/smashbrick/model.inc.c"
 #include "levels/ssl/smashbrick/collision.inc.c"
 #include "levels/ssl/rbowser/model.inc.c"
+#include "levels/ssl/sub/model.inc.c"

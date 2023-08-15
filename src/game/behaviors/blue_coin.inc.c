@@ -135,7 +135,7 @@ void bhv_blue_coin_switch_loop(void) {
                 cur_obj_hide();
 #endif
                 // Set to BLUE_COIN_SWITCH_ACT_TICKING
-                o->oAction = BLUE_COIN_SWITCH_ACT_TICKING;
+                obj_mark_for_deletion(o);
 #ifdef BLUE_COIN_SWITCH_RETRY
                 // ???
                 o->oVelY    = 0.0f;
