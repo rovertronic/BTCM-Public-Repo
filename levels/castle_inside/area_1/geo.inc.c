@@ -12,6 +12,7 @@ const GeoLayout castle_inside_area_1_geo[] = {
 		GEO_ASM(LAYER_OPAQUE, geo_render_mirror_mario),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_ai_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_aj_z_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2430, 0, -1496, 90, 0, 72, castle_inside_dl_Apollo_low_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -3563, 500, 0, 0, -90, 0, castle_inside_dl_Cylinder_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, castle_inside_dl_decal_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, castle_inside_dl_gridy_mesh_layer_6),
