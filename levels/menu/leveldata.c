@@ -1857,3 +1857,5 @@ const Collision main_menu_seg7_collision[] = {
 #endif
 
 #include "levels/menu/replaced/model.inc.c"
+
+#include "levels/menu/rovert_logo/model.inc.c"
