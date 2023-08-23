@@ -62,6 +62,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_DESERT_PILLAR, desert_pillar_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIGREDCOIN, bigredcoin_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SWINGBOARD, swingboard_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_OMNIWHEEL, omniwheel_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -99,6 +100,11 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_JUNKER, -2829, 5287, 11149, 0, -180, 0, (1 << 16), bhvJunker),
 		OBJECT(MODEL_JUNKER, -2828, 3868, 10971, 0, -180, 0, 0x00000000, bhvJunker),
 		OBJECT(MODEL_MONITOR, 1671, 10194, -2388, 0, 90, 0, (4 << 16), bhvMonitor),
+		OBJECT(MODEL_OMNIWHEEL, 2849, 1893, 10265, 0, 0, 0, 0x00000000, bhvEvilCobie),
+		OBJECT(MODEL_OMNIWHEEL, 2449, 1893, 11264, 0, 125, 0, 0x00000000, bhvEvilCobie),
+		OBJECT(MODEL_OMNIWHEEL, 1615, 1893, 10913, 0, 104, 0, 0x00000000, bhvEvilCobie),
+		OBJECT(MODEL_OMNIWHEEL, 589, 3693, 12187, 0, 72, 0, 0x00000000, bhvEvilCobie),
+		OBJECT(MODEL_OMNIWHEEL, 655, 4938, 12270, 0, -118, 0, 0x00000000, bhvEvilCobie),
 		OBJECT(MODEL_PILLAR_TROLL, 5411, 17756, 6474, 0, -180, 0, 0x00000000, bhvPillarTroll),
 		OBJECT(MODEL_NONE, 0, 0, 0, 0, 90, 0, (0x0A << 16), bhvInstantActiveWarp),
 		OBJECT(MODEL_NONE, 2522, 9915, -2383, 0, 90, 0, (0x0B << 16), bhvInstantActiveWarp),

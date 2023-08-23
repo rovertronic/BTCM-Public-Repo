@@ -138,4 +138,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/swingboard/collision_header.h"
 
+#include "levels/hmc/omniwheel/geo_header.h"
+
 #endif

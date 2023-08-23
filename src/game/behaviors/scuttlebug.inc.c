@@ -1021,9 +1021,9 @@ void bhv_BadCobie(void) {
             o->oExtraVariable1 = 6; //ammunition
             o->oAction = 1;
             o->oTimer = random_u16();
+            o->prevObj = spawn_object(o,MODEL_SNUFIT,bhvSnufit);
         break;
         case 1:
-            o->oFaceAnglePitch = 0;
             o->oMoveAngleYaw = o->oAngleToMario;
 
             o->oForwardVel *= .9f;
@@ -1042,7 +1042,7 @@ void bhv_BadCobie(void) {
 
             if (o->oTimer % 12 == 11) {
                 cur_obj_init_animation_with_sound(0);
-                shoot = (o->oDistanceToMario < 1100.0f);
+                shoot = FALSE;// (o->oDistanceToMario < 1100.0f);
                 cur_obj_init_animation_with_sound(2-shoot);
                 if (shoot) {
                     o->oExtraVariable1--;
@@ -1059,6 +1059,8 @@ void bhv_BadCobie(void) {
                     cur_obj_init_animation_with_sound(0);
                 }
             }
+
+            o->oFaceAnglePitch += o->oForwardVel*50;
         break;
         case 2: //reloading
             if (o->oTimer > 15) {
@@ -1074,11 +1076,14 @@ void bhv_BadCobie(void) {
             }
 
         break;
+        case 3://no more
+            mark_obj_for_deletion(o);
+        break;
     }
 
     cur_obj_update_floor_and_walls();
     cur_obj_move_standard(-30);
-    cur_obj_set_hitbox_and_die_if_attacked(&sLadybugHitbox, SOUND_GENERAL_SPLATTERING,0);
+    //cur_obj_set_hitbox_and_die_if_attacked(&sLadybugHitbox, SOUND_GENERAL_SPLATTERING,0);
 }
 
 struct ObjectHitbox sMissileHitbox = {

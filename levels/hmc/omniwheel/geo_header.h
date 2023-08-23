@@ -1,0 +1,11 @@
+extern const GeoLayout omniwheel_geo[];
+extern Lights1 omniwheel_omniwheel_lights;
+extern u8 omniwheel_omniwheel_ci8[];
+extern u8 omniwheel_omniwheel_pal_rgba16[];
+extern Vtx omniwheel_Icosphere_mesh_layer_1_vtx_cull[8];
+extern Vtx omniwheel_Icosphere_mesh_layer_1_vtx_0[76];
+extern Gfx omniwheel_Icosphere_mesh_layer_1_tri_0[];
+extern Gfx mat_omniwheel_omniwheel[];
+extern Gfx mat_revert_omniwheel_omniwheel[];
+extern Gfx omniwheel_Icosphere_mesh_layer_1[];
+extern Gfx omniwheel_material_revert_render_settings[];

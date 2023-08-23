@@ -35,3 +35,4 @@
 #include "levels/hmc/desert_pillar/geo.inc.c"
 #include "levels/hmc/bigredcoin/geo.inc.c"
 #include "levels/hmc/swingboard/geo.inc.c"
+#include "levels/hmc/omniwheel/geo.inc.c"

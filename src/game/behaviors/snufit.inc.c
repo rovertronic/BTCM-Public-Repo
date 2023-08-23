@@ -160,8 +160,14 @@ void bhv_snufit_loop(void) {
             o->oSnufitScale = 1.0f;
         }
 
+        o->oPosX = o->parentObj->oPosX;
+        o->oPosY = o->parentObj->oPosY+140.0f+(8.0f * coss(4000 * gGlobalTimer));
+        o->oPosZ = o->parentObj->oPosZ;
+
         cur_obj_scale(o->oSnufitScale);
-        obj_check_attacks(&sSnufitHitbox, o->oAction);
+        if (obj_check_attacks(&sSnufitHitbox, o->oAction)) {
+            o->parentObj->oAction = 3;
+        }
     }
 }
 

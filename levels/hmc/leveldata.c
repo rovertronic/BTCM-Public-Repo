@@ -90,3 +90,4 @@
 #include "levels/hmc/bigredcoin/model.inc.c"
 #include "levels/hmc/swingboard/model.inc.c"
 #include "levels/hmc/swingboard/collision.inc.c"
+#include "levels/hmc/omniwheel/model.inc.c"
