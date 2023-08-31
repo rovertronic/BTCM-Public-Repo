@@ -3244,10 +3244,12 @@ DEFINE_DIALOG(DIALOG_CREDITS_25, 1, 6, 95, 180, _("\
 Special Thanks:\n\
 YHWH, Family, My 3 Brothers\n\
 Chillyn', RationaLess, SimpleFlips"))
+//This special thanks screen sucks. I'm going to be removing it
+//until I have something more meaningful and not shoehorned in
 
 DEFINE_DIALOG(DIALOG_CREDITS_26, 1, 6, 95, 180, _("\
-Patreons as of 5-22-23:\n\
-Henry Kumpel"))
+Patreons as of 8-31-23:\n\
+Henry Kumpel, ZT, Pizza Brian"))
 
 DEFINE_DIALOG(DIALOG_PALAMEDES_1, 1, 6, 95, 180, _("\
 the sustenance of thought is required to synthesize\n\

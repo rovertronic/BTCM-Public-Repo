@@ -1534,9 +1534,12 @@ void render_dialog_entries(void) {
             || (!(save_file_get_flags() & SAVE_FLAG_FREE_BADGE))) { //you can claim your free badge here
                 if (!(save_file_get_badge_unlock() & (1<<shoptable[shopid][(shopselection*2)]) )) {//only buy badge if not already owned
                     play_sound(SOUND_GENERAL_COIN_WATER, gGlobalSoundSource);
-                    gMarioState->gGlobalCoinGain -= shoptable[shopid][1+(shopselection*2)];
                     save_file_set_flags(SAVE_FLAG_FREE_BADGE); // no more free loading bitch,.
                     save_file_set_badge_unlock( (1<<shoptable[shopid][(shopselection*2)]) );
+                    if (!(save_file_get_flags() & SAVE_FLAG_FREE_BADGE)) {
+                        //only remove money when badges are no longer free
+                        gMarioState->gGlobalCoinGain -= shoptable[shopid][1+(shopselection*2)];
+                    }
                 }
             }
         }

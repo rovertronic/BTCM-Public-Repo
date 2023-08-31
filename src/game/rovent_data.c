@@ -1178,8 +1178,6 @@ s32 event_credits[] = {
     E_WAIT, 170,
     E_DIALOG, DIALOG_CREDITS_26, //Patreon List
     E_WAIT, 150,
-    E_DIALOG, DIALOG_CREDITS_25,
-    E_WAIT, 200,
     E_WARP, 0x01,
 };
 
