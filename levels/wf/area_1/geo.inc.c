@@ -1,4 +1,5 @@
 #include "src/game/envfx_snow.h"
+#include "actors/group0.h"
 
 const GeoLayout wf_area_1_geo[] = {
 	GEO_NODE_START(),

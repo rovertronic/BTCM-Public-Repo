@@ -108,6 +108,7 @@ void bhv_goomba_triplet_spawner_update(void) {
  * Initialization function for goomba.
  */
 void bhv_goomba_init(void) {
+
     o->oGoombaSize = o->oBehParams2ndByte & GOOMBA_BP_SIZE_MASK;
 
     o->oGoombaScale = sGoombaProperties[o->oGoombaSize].scale;
@@ -120,18 +121,21 @@ void bhv_goomba_init(void) {
 
     o->oGravity = -8.0f / 3.0f * o->oGoombaScale;
 
-#ifdef FLOOMBAS
     if (o->oIsFloomba) {
         o->oAnimState += FLOOMBA_ANIM_STATE_EYES_OPEN;
     }
-#ifdef INTRO_FLOOMBAS
     if (o->oAction == FLOOMBA_ACT_STARTUP) {
         o->oZoomPosZ = o->oPosZ;
         o->oGoombaScale = 0.0f;
         cur_obj_hide();
     }
-#endif
-#endif
+
+    //if (!o->oIsFloomba) {
+    //    if (rule_check(0,FALSE)) {
+    //        spawn_object(o,MODEL_MARIO,bhvPhantasm);
+    //        mark_obj_for_deletion(o);
+    //    }
+    //}
 }
 
 /**

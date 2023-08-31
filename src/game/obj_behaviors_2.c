@@ -47,6 +47,7 @@
 #include "spawn_sound.h"
 #include "puppylights.h"
 #include "game/rovent.h"
+ #include "randomizer.h"
 
 //! TODO: remove static
 

@@ -34,6 +34,7 @@
 #include "rumble_init.h"
 #include "puppylights.h"
 #include "game/rovent.h"
+#include "randomizer.h"
 
 /**
  * @file obj_behaviors.c

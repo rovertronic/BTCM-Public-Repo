@@ -83,6 +83,16 @@
 #endif
 #endif
 
+#define TEXT_WARNING _("Next fall will kill.")
+//RANDOMIZER RULES
+#define TEXT_RANDOMIZER_RULE_1 _("-Goombas are replaced with Cosmic Phantasms")
+#define TEXT_RANDOMIZER_RULE_2 _("-Lose 10 coins on death instead of 5")
+#define TEXT_RANDOMIZER_RULE_3 _("-120 coin stars")
+#define TEXT_RANDOMIZER_RULE_4 _("-Lava does 1 extra damage")
+
+#define TEXT_RANDOMIZER_PRULE_1 _("-6 red coin stars")
+#define TEXT_RANDOMIZER_PRULE_2 _("-1 ups restore max mana")
+
 //MUSIC AUTHORS
 #define TEXT_THORNDUST _("Thorndust")
 #define TEXT_JAGUAR _("Koji Kondo\nPorted by: ArcticJaguar725")
@@ -396,6 +406,7 @@
 #define TAB4 _("OPTIONS")
 #define TAB5 _("MAGIC")
 #define TAB6 _("CHEATS")
+#define TAB7 _("NG+")
 
 #define TEXT_FILE_OPTIONS _("BEGIN       ERASE")
 #define TEXT_HOLD_TO_ERASE _("HOLD A TO ERASE")

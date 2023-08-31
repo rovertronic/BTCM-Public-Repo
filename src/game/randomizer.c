@@ -10,10 +10,41 @@
 u16 randomizer_costume_table[15];
 u16 randomizer_levels[8];
 u16 randomizer_badges[30];
+u16 randomizer_negative_rules[4];
+u16 randomizer_positive_rules[2];
+
+s32 rule_check(u16 rule, u8 positive) {
+    u8 rule_flagged = FALSE;
+
+    if (positive) {
+        for (u8 i=0;i<2;i++){
+            if (randomizer_positive_rules[i] == rule) {
+                rule_flagged = TRUE;
+            }
+        }   
+    } else {
+        for (u8 i=0;i<4;i++){
+            if (randomizer_negative_rules[i] == rule) {
+                rule_flagged = TRUE;
+            }
+        }
+    }
+
+    return rule_flagged;
+}
+
 
 void reset_randomizer_factory() {
     for (u8 i=0; i<15; i++) {
         randomizer_costume_table[i] = i;
+    }
+
+    for (u8 i=0; i<4; i++) {
+        randomizer_negative_rules[i] = i;
+    }
+
+    for (u8 i=0; i<2; i++) {
+        randomizer_positive_rules[i] = i;
     }
 
     randomizer_levels[0] = LEVEL_BOB | 0x0000;
@@ -109,4 +140,7 @@ void randomize_game(u32 seed, u8 is_newgame) {
         shoptable[shop_ids_to_randomize[i]][4] = randomizer_badges[(i*3)+2];
     }
 
+    //randomize rules
+    shuffleArray(&randomizer_negative_rules,4);
+    shuffleArray(&randomizer_positive_rules,2);
 }

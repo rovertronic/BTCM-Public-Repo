@@ -3246,6 +3246,7 @@ YHWH, Family, My 3 Brothers\n\
 Chillyn', RationaLess, SimpleFlips"))
 //This special thanks screen sucks. I'm going to be removing it
 //until I have something more meaningful and not shoehorned in
+//it also needs to be more tasteful
 
 DEFINE_DIALOG(DIALOG_CREDITS_26, 1, 6, 95, 180, _("\
 Patreons as of 8-31-23:\n\

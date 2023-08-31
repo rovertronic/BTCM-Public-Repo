@@ -42,6 +42,11 @@ void bhv_red_coin_init(void) {
  * the orange number counter.
  */
 void bhv_red_coin_loop(void) {
+    u8 reds_needed = 8;
+    if (rule_check(0,TRUE)) {
+       reds_needed = 6;
+    }
+
     // If Mario interacted with the object...
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         //for BOARD minigame
@@ -55,7 +60,7 @@ void bhv_red_coin_loop(void) {
             o->parentObj->oHiddenStarTriggerCounter++;
 
             // Spawn the orange number counter, as long as it isn't the last coin.
-            if (o->parentObj->oHiddenStarTriggerCounter != 8) {
+            if (o->parentObj->oHiddenStarTriggerCounter != reds_needed) {
                 spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
             }
 

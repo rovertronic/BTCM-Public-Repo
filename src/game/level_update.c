@@ -33,7 +33,7 @@
 #include "puppylights.h"
 #include "level_commands.h"
 #include "game/rovent.h"
-
+#include "randomizer.h"
 #include "config.h"
 
 // TODO: Make these ifdefs better
@@ -1296,6 +1296,9 @@ s32 init_level(void) {//
         case LEVEL_BITFS:
             gMarioState->LavaHeat = 4;
         break;
+    }
+    if (rule_check(3,FALSE)) {
+        gMarioState->LavaHeat++;
     }
 
     gMarioState->_2D = FALSE;

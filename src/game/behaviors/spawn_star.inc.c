@@ -226,6 +226,10 @@ void bhv_hidden_red_coin_star_init(void) {
 
 void bhv_hidden_red_coin_star_loop(void) {
     s8 starId;
+    u8 reds_needed = 8;
+    if (rule_check(0,TRUE)) {
+       reds_needed = 6;
+    }
     starId = (o->oBehParams >> 24) & 0xFF;
     gRedCoinsCollected = o->oHiddenStarTriggerCounter;
 
@@ -239,7 +243,7 @@ void bhv_hidden_red_coin_star_loop(void) {
 
     switch (o->oAction) {
         case HIDDEN_STAR_ACT_INACTIVE:
-            if (o->oHiddenStarTriggerCounter == 8) {
+            if (o->oHiddenStarTriggerCounter == reds_needed) {
                 o->oAction = HIDDEN_STAR_ACT_ACTIVE;
             }
             break;

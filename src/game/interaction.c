@@ -28,6 +28,7 @@
 #include "src/engine/behavior_script.h"
 #include "ingame_menu.h"
 #include "object_list_processor.h"
+#include "randomizer.h"
 
 u8  sDelayInvincTimer;
 s16 sInvulnerable;
@@ -735,6 +736,10 @@ void reset_mario_pitch(struct MarioState *m) {
 
 u8 coinloop = 0;
 u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
+    u8 hundred_value = 100;
+    if (rule_check(2,FALSE)) {
+        hundred_value = 120;
+    }
     u32 old_params;
     if (obj->oDamageOrCoinValue == 3) { //green coin
         if (save_file_get_badge_equip() & (1<<BADGE_HEAL)) {
@@ -759,7 +764,7 @@ u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
     obj->oInteractStatus = INT_STATUS_INTERACTED;
 
-    if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - obj->oDamageOrCoinValue < 100 && m->numCoins >= 100 && (!gMarioState->hundredSpawned)) {
+    if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - obj->oDamageOrCoinValue < hundred_value && m->numCoins >= hundred_value && (!gMarioState->hundredSpawned)) {
         gMarioState->hundredSpawned = TRUE;
         if (gCurrLevelNum == LEVEL_RR) {
             //hacky way of spawning a 100 coin star that warps u out

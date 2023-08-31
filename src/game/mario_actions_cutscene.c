@@ -29,6 +29,7 @@
 #include "rumble_init.h"
 #include "rovent.h"
 #include "actors/group0.h"
+#include "randomizer.h"
 
 static struct Object *sIntroWarpPipeObj;
 static struct Object *sEndPeachObj;
@@ -1303,6 +1304,9 @@ s32 act_death_exit(struct MarioState *m) {
 #endif
         // m->numLives--;
         m->gGlobalCoinGain -= 5;
+        if (rule_check(1,FALSE)) {
+            m->gGlobalCoinGain -= 5;
+        }
         // restore 7.75 units of health
         m->healCounter = 99;
         m->numBadgePoints = m->numMaxFP;
@@ -1320,6 +1324,9 @@ s32 act_unused_death_exit(struct MarioState *m) {
         play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
         // m->numLives--;
         m->gGlobalCoinGain -= 5;
+        if (rule_check(1,FALSE)) {
+            m->gGlobalCoinGain -= 5;
+        }
         // restore 7.75 units of health
         m->healCounter = 99;
         m->numBadgePoints = m->numMaxFP;
@@ -1340,6 +1347,9 @@ s32 act_falling_death_exit(struct MarioState *m) {
 #endif
         // m->numLives--;
         m->gGlobalCoinGain -= 5;
+        if (rule_check(1,FALSE)) {
+            m->gGlobalCoinGain -= 5;
+        }
         // restore 7.75 units of health
         m->healCounter = 100;
         m->numBadgePoints = m->numMaxFP;
@@ -1396,6 +1406,9 @@ s32 act_special_death_exit(struct MarioState *m) {
 #endif
         // m->numLives--;
         m->gGlobalCoinGain -= 5;
+        if (rule_check(1,FALSE)) {
+            m->gGlobalCoinGain -= 5;
+        }
         m->healCounter = 99;
         m->numBadgePoints = m->numMaxFP;
     }

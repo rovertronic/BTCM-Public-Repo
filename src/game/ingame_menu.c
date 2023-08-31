@@ -32,6 +32,7 @@
 #include "rovent.h"
 #include "level_update.h"
 #include "hud.h"
+#include "randomizer.h"
 
 u8 letgo = FALSE;
 
@@ -161,7 +162,8 @@ u8 tab3[] = {TAB3};
 u8 tab4[] = {TAB4};
 u8 tab5[] = {TAB5};
 u8 tab6[] = {TAB6};
-u8 *tabs[] = { {tab1},{tab2},{tab3},{tab4},{tab5},{tab6} };
+u8 tab7[] = {TAB7};
+u8 *tabs[] = { {tab1},{tab2},{tab3},{tab4},{tab5},{tab6},{tab7} };
 u8 tablist[] = {0,0,0,0,0};
 u8 tablist_count = 0;
 u16 progress_table[12];
@@ -2386,12 +2388,13 @@ void build_tabs(void) {
             add_tab(2);
         }
 
-        //if (save_file_check_progression(PROG_POSTPOST_GAME)) {
+        if (save_file_check_progression(PROG_POSTPOST_GAME)) {
             add_tab(5);//cheats
-        //}
+        }
     }
 
     add_tab(3);
+    add_tab(6);
 }
 
 #define total_spells 3
@@ -2405,6 +2408,21 @@ f32 winpercent;
 
 //for level up message.
 u8 lvbuf[4];
+
+
+u8 trr1[] = {TEXT_RANDOMIZER_RULE_1};
+u8 trr2[] = {TEXT_RANDOMIZER_RULE_2};
+u8 trr3[] = {TEXT_RANDOMIZER_RULE_3};
+u8 trr4[] = {TEXT_RANDOMIZER_RULE_4};
+u8 * text_randomizer_rules[] = {
+    &trr1,&trr2,&trr3,&trr4,
+};
+
+u8 trpr1[] = {TEXT_RANDOMIZER_PRULE_1};
+u8 trpr2[] = {TEXT_RANDOMIZER_PRULE_2};
+u8 * text_randomizer_prules[] = {
+    &trpr1,&trpr2,
+};
 
 s32 render_pause_courses_and_castle(void) {
     s16 index;
@@ -2930,6 +2948,27 @@ s32 render_pause_courses_and_castle(void) {
                 build_tabs();
             }
 
+        break;
+        case 6://new game +
+            shade_screen();
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+            //negative rules
+            for (u8 i=0;i<4;i++){
+                gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+                print_generic_string(24,165-(i*16), text_randomizer_rules[randomizer_negative_rules[i]]);
+                gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
+                print_generic_string(25,166-(i*16), text_randomizer_rules[randomizer_negative_rules[i]]);
+
+            }
+            //positive rules
+            for (u8 i=0;i<2;i++){
+                gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+                print_generic_string(24,94-(i*16), text_randomizer_prules[randomizer_positive_rules[i]]);
+                gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
+                print_generic_string(25,95-(i*16), text_randomizer_prules[randomizer_positive_rules[i]]);
+
+            }
+            gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
         break;
     }
 

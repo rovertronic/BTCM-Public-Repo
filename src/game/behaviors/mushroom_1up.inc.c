@@ -1,5 +1,4 @@
 // mushroom_1up.inc.c
-
 void bhv_1up_interact(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject)) {
         play_sound(SOUND_GENERAL_COLLECT_1UP, gGlobalSoundSource);
@@ -14,6 +13,9 @@ void bhv_1up_interact(void) {
 #if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
 #endif
+        if (rule_check(1,TRUE)) {
+            gMarioState->numBadgePoints = gMarioState->numMaxFP;
+        }
     }
 }
 
