@@ -877,7 +877,7 @@ void save_file_get_stats() {
         gMarioState->Level = 0;
         gMarioState->numEquippedBadges = 0;
         gMarioState->Options = 0xFD;
-        save_file_set_costume_unlock( (1<<0) );
+        //save_file_set_costume_unlock( (1<<0) );
         save_file_set_stats();
     }
 }

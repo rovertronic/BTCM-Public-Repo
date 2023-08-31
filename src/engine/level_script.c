@@ -303,6 +303,9 @@ void level_cmd_fileselect_condition(void) {
     } else {
         sRegister = LEVEL_CASTLE_GROUNDS;
     }
+
+    //new game plus will instantly pop you into the castle
+    sRegister = LEVEL_CASTLE;
     if (save_file_get_progression() == PROG_ON_AGAMEMNON) {
         sRegister = LEVEL_BITS;
     }
@@ -341,7 +344,7 @@ static void level_cmd_init_level(void) {
     clear_objects();
     clear_areas();
     main_pool_push_state();
-    randomize_game(5,TRUE);
+    randomize_game(8,TRUE);
     for (u8 clearPointers = 0; clearPointers < AREA_COUNT; clearPointers++) {
         gAreaSkyboxStart[clearPointers] = 0;
         gAreaSkyboxEnd[clearPointers] = 0;
