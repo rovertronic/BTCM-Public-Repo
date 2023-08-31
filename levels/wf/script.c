@@ -257,6 +257,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(0xE3, 12657, 3149, -5, 0, 0, 0, 0x00010000, bhv_Wallet),
 		OBJECT(MODEL_THI_WARP_PIPE, -5520, 4430, 8839, 0, -170, 0, 0x00010000, bhvWarpPipe),
 		TERRAIN(wf_area_1_collision),
+		ROOMS(wf_area_1_collision_rooms),
 		MACRO_OBJECTS(wf_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_FARM),
 		TERRAIN_TYPE(TERRAIN_GRASS),
