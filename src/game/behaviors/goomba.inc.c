@@ -109,6 +109,10 @@ void bhv_goomba_triplet_spawner_update(void) {
  */
 void bhv_goomba_init(void) {
 
+    if (rule_check(0,FALSE)) {
+        o->oBehParams2ndByte = 1;
+    }
+
     o->oGoombaSize = o->oBehParams2ndByte & GOOMBA_BP_SIZE_MASK;
 
     o->oGoombaScale = sGoombaProperties[o->oGoombaSize].scale;
@@ -129,13 +133,6 @@ void bhv_goomba_init(void) {
         o->oGoombaScale = 0.0f;
         cur_obj_hide();
     }
-
-    //if (!o->oIsFloomba) {
-    //    if (rule_check(0,FALSE)) {
-    //        spawn_object(o,MODEL_MARIO,bhvPhantasm);
-    //        mark_obj_for_deletion(o);
-    //    }
-    //}
 }
 
 /**
@@ -340,7 +337,9 @@ void bhv_goomba_update(void) {
             }
         }
 
-        // cur_obj_scale(o->oGoombaScale);
+        if (o->oBehParams2ndByte == 1) {
+            cur_obj_scale(o->oGoombaScale);
+        }
         obj_update_blinking(&o->oGoombaBlinkTimer, 30, 50, 5);
 #ifdef FLOOMBAS
         if (o->oIsFloomba) {

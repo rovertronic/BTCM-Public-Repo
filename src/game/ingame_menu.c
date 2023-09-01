@@ -2378,9 +2378,9 @@ void build_tabs(void) {
             //can equip badges when near vendors
             add_tab(1);
         }
-        //if (save_file_check_progression(PROG_POSTPOST_GAME)) {
+        if (save_file_check_progression(PROG_POSTPOST_GAME)) {
             add_tab(5);//cheats
-        //}
+        }
     } else {
         //castle
         add_tab(1);
