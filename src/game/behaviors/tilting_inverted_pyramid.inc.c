@@ -6095,3 +6095,13 @@ void bhv_postgame_hint() {
 
     o->oInteractStatus = 0;
 }
+
+void bhv_act_select_wallet(void) {
+    if (!(save_file_get_wallet_unlock() & (1<<o->oBehParams2ndByte))) {
+        o->header.gfx.sharedChild =  gLoadedGraphNodes[MODEL_NOWALLET];
+    }
+}
+
+void bhv_act_select_wallet_loop(void) {
+    gCurrentObject->oFaceAngleYaw = sins(gCurrentObject->oTimer * 0x400) * 3000;
+}

@@ -1124,6 +1124,19 @@ const BehaviorScript bhv_Wallet[] = {
     END_LOOP(),
 };
 
+extern void bhv_act_select_wallet(void);
+extern void bhv_act_select_wallet_loop(void);
+const BehaviorScript bhvWalletAct[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    SET_HOME(),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 16000),
+    CALL_NATIVE(bhv_act_select_wallet),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_act_select_wallet_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvCfan[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),

@@ -564,4 +564,6 @@ extern const struct Animation *const Hammerbro_anims[];
 
 #include "crowbar2/geo_header.h"
 
+#include "nowallet/geo_header.h"
+
 #endif

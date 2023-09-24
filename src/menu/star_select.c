@@ -125,6 +125,28 @@ void render_100_coin_star(u8 stars) {
     }
 }
 
+
+#define NO_WALLET 12 //you will never have wallet 12
+
+u8 wallet_id_table[] = {
+    NO_WALLET,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    NO_WALLET,
+    NO_WALLET,
+    NO_WALLET,
+    NO_WALLET
+};
+
 /**
  * Act Selector Init Action
  * Checks how many stars has been obtained in a course, to render
@@ -137,6 +159,17 @@ void bhv_act_selector_init(void) {
     u8 stars = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
     u8 aglevel = ((gCurrCourseNum>=COURSE_TTM)&&(gCurrCourseNum<=COURSE_RR));
     u8 sfair_level = (gCurrCourseNum == COURSE_WDW);
+    struct Object * wallet;
+
+    //wallet
+    if (wallet_id_table[gCurrCourseNum] != NO_WALLET) {
+        wallet = spawn_object(gCurrentObject,0xE3,bhvWalletAct);
+        wallet->oBehParams2ndByte = wallet_id_table[gCurrCourseNum];
+        wallet->oPosY -= 50.0f;
+        wallet->oPosX -= 380.0f;
+        wallet->oPosZ -= 20.0f;
+    }
+
 
     sVisibleStars = 0;
     while (i != sObtainedStars) {

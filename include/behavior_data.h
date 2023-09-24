@@ -796,5 +796,6 @@ extern const BehaviorScript bhvSamplePlatform1[];
 extern const BehaviorScript bhvSamplePlatform2[];
 extern const BehaviorScript bhvTvshop[];
 extern const BehaviorScript bhvPostGameHint[];
+extern const BehaviorScript bhvWalletAct[];
 
 #endif // BEHAVIOR_DATA_H
