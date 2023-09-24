@@ -1916,16 +1916,16 @@ void shade_screen(void) {
 
     // This is a bit weird. It reuses the dialog text box (width 130, height -80),
     // so scale to at least fit the screen.
-    if (1) { // axo: what?
-        create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
-        create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.6f, 3.4f, 1.0f);
+    //if (1) { // axo: what?
+        create_dl_translation_matrix(MENU_MTX_PUSH, -200.0f, SCREEN_HEIGHT, 0);
+        create_dl_scale_matrix(MENU_MTX_NOPUSH, 5.0f, 3.4f, 1.0f);
         
-    }
-    else
-    {
-        create_dl_translation_matrix(MENU_MTX_PUSH, -500.0f, SCREEN_HEIGHT, 0);
-        create_dl_scale_matrix(MENU_MTX_NOPUSH, 8.0f, 8.0f, 1.0f); //widde screen
-    }
+    //}
+    //else
+    //{
+    //    create_dl_translation_matrix(MENU_MTX_PUSH, -500.0f, SCREEN_HEIGHT, 0);
+    //    create_dl_scale_matrix(MENU_MTX_NOPUSH, 8.0f, 8.0f, 1.0f); //widde screen
+    //}
 
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 110);
     gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);

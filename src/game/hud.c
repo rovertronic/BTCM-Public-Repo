@@ -578,9 +578,20 @@ void render_hud_power_meter(void) {
     s16 loop2;
     u8 wideoffet5 = 0;
 
-    if (0) {
-        wideoffet5 = 22;
-        }
+    //HARDCORE DANGER WARNING
+    u8 dmg_amount = 0x40;
+    u8 resp_cond = FALSE;
+    if (save_file_get_badge_equip() & (1<<BADGE_BRITTLE)) {
+        dmg_amount = 0x80;
+    }
+    resp_cond = (gMarioState->health > 0x100+(dmg_amount * 4 * ((f32)(gMarioState->numMaxHP)/3.0f)));
+    if (save_file_get_badge_equip() & (1<<BADGE_BOTTOMLESS)) {
+        resp_cond = (gMarioState->numBadgePoints > 0);
+    }
+    if ( (save_file_get_badge_equip() & (1<<BADGE_HARDCORE)) && (!resp_cond) && ((gGlobalTimer/10)%2) ) {
+        print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), 46, "DANGER");
+    }
+
     //RENDER BLANK METERS FIRST
     loop = gMarioState->numMaxHP;
     loop2 = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;

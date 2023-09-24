@@ -29,4 +29,10 @@ extern Gfx *intro_seg7_dl_copyright_trademark;
 extern f32 intro_seg7_table_scale_1[];
 extern f32 intro_seg7_table_scale_2[];
 
+#include "levels/menu/evilbadge_gameover/header.h"
+
+#include "levels/menu/fh1/header.h"
+
+#include "levels/menu/fh2/header.h"
+
 #endif // SEGMENT7_H

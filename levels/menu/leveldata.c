@@ -1858,4 +1858,8 @@ const Collision main_menu_seg7_collision[] = {
 
 #include "levels/menu/replaced/model.inc.c"
 
-#include "levels/menu/rovert_logo/model.inc.c"
+//#include "levels/menu/rovert_logo/model.inc.c"
+//#include "levels/menu/evilbadge_gameover/model.inc.c"
+#include "levels/menu/evilbadge_gameover/model.inc.c"
+#include "levels/menu/fh1/model.inc.c"
+#include "levels/menu/fh2/model.inc.c"

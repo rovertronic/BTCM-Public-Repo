@@ -184,4 +184,6 @@ void basic_update(void);
 
 void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 arg3);
 
+extern u8 hardcore_sequence_go;
+
 #endif // LEVEL_UPDATE_H

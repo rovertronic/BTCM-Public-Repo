@@ -24,6 +24,7 @@
 #include "game/puppycamold.h"
 #include "actors/group0.h"
 #include "game/ingame_menu.h"
+#include "game/level_update.h"
 
 #include "eu_translation.h"
 #if MULTILANG
@@ -1623,9 +1624,80 @@ f32 flsex[3] = {0.0f};
 f32 cursor_y = 0.0f;
 f32 cursor_x = 0.0f;
 
+u16 hardcore_sequence_timer = 0;
+f32 hardcore_sequence_opacity_bg = 255.0f;
+f32 hardcore_sequence_opacity_badge = 0.0f;
+u8 hardcore_sequence_is_red = 0;
+u8 hardcore_sequence_shake = 0;
+f32 hardcore_sequence_shatter = 0.0f;
+f32 hardcore_sequence_shatter_speed = -2.0f;
 
 u8 str_glyph_star[] = {DIALOG_CHAR_STAR_FILLED,DIALOG_CHAR_TERMINATOR};
 u8 str_glyph_star_open[] = {DIALOG_CHAR_STAR_OPEN,DIALOG_CHAR_TERMINATOR};
+
+s32 hardcore_sequence() {
+    if (hardcore_sequence_timer == 0) {
+        play_sound(SOUND_GENERAL2_BOWSER_EXPLODE, gGlobalSoundSource);
+    }
+    if (hardcore_sequence_timer == 200) {
+        hardcore_sequence_is_red = 255;
+        play_sound(SOUND_GENERAL2_BOBOMB_EXPLOSION, gGlobalSoundSource);
+        hardcore_sequence_opacity_badge = 255.0f;
+    }
+    if (hardcore_sequence_timer < 200) {
+        if (hardcore_sequence_timer%8 == 0) {
+            hardcore_sequence_shake ++;
+        }
+    } else {
+        hardcore_sequence_shake = 1;
+        //the sequence breaks if this number is 0. this makes completely no fucking sense.
+    }
+    if (hardcore_sequence_timer > 200) {
+        hardcore_sequence_shatter += hardcore_sequence_shatter_speed;
+        hardcore_sequence_shatter_speed = lerp(hardcore_sequence_shatter_speed,-0.5f,0.1f);
+    }
+    
+    hardcore_sequence_opacity_badge = lerp(hardcore_sequence_opacity_badge,255.0f,0.01f);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    // render black backdrop
+    create_dl_translation_matrix(MENU_MTX_PUSH, -200.0f, SCREEN_HEIGHT, 0);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 5.0f, 3.4f, 1.0f);
+    gDPSetEnvColor(gDisplayListHead++, hardcore_sequence_is_red, 0, 0, hardcore_sequence_opacity_bg);
+    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    //render shattered save file :3
+    create_dl_translation_matrix(MENU_MTX_PUSH, 160+hardcore_sequence_shatter, 120, 0);
+    gSPDisplayList(gDisplayListHead++, fh1_p_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, 160-hardcore_sequence_shatter, 120, 0);
+    gSPDisplayList(gDisplayListHead++, fh2_q_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+
+    // render evil badge
+    create_dl_translation_matrix(MENU_MTX_PUSH, 160+ (random_u16()%hardcore_sequence_shake) - (hardcore_sequence_shake/2) , 120+ (random_u16()%hardcore_sequence_shake) - (hardcore_sequence_shake/2), 0);
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, hardcore_sequence_opacity_badge);
+    gSPDisplayList(gDisplayListHead++, evilbadge_gameover_Plane_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+    hardcore_sequence_timer ++;
+    if (hardcore_sequence_timer >= 300) {
+        hardcore_sequence_opacity_bg = 255.0f;
+        hardcore_sequence_opacity_badge = 0.0f;
+        hardcore_sequence_is_red = 0;
+        hardcore_sequence_timer = 0;
+        hardcore_sequence_shatter = 0.0f;
+        hardcore_sequence_shatter_speed = -2.0f;
+        hardcore_sequence_go = FALSE;
+    }
+    return TRUE;
+}
 
 void new_file_select() {
     s8 i;
@@ -1640,6 +1712,10 @@ void new_file_select() {
     u32 second;
 
     create_dl_ortho_matrix();
+
+    if (hardcore_sequence_go) {
+        if (hardcore_sequence()) {return;};
+    }
 
     //RENDER VERSION NUMBER
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);

@@ -103,6 +103,7 @@ const char *credits18[] = { "3SPECIAL THANKS TO", "EAD STAFF", "ALL NINTENDO PER
 const char *credits19[] = { "1PRODUCER", "SHIGERU MIYAMOTO" };
 const char *credits20[] = { "1EXECUTIVE PRODUCER", "HIROSHI YAMAUCHI" };
 
+u8 hardcore_sequence_go = FALSE;
 
 struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_CASTLE_GROUNDS, 1, 1, -128, { 0, 8000, 0 }, NULL },
@@ -746,6 +747,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                         //DELETE SAVE FILE!!!!
                         save_file_erase(gCurrSaveFileNum-1);
                         sDelayedWarpOp = WARP_OP_GAME_OVER;
+                        hardcore_sequence_go = TRUE;
                     }
                     sDelayedWarpTimer = 48;
                     sSourceWarpNodeId = WARP_NODE_DEATH;
@@ -776,7 +778,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                         //what the fuck is this bruhhhh
                         //fuck sm64 hp
                         //i have no idea if changing the 8 to a 5 will work, hope it does!
-                        resp_cond = (gMarioState->health > (dmg_amount * 5 * ((f32)(gMarioState->numMaxHP)/3.0f)));
+                        resp_cond = (gMarioState->health > 0x100+(dmg_amount * 4 * ((f32)(gMarioState->numMaxHP)/3.0f)));
                         if (save_file_get_badge_equip() & (1<<BADGE_BOTTOMLESS)) {
                             resp_cond = (gMarioState->numBadgePoints > 0);
                         }
@@ -795,6 +797,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                                     //DELETE SAVE FILE!!!!
                                     save_file_erase(gCurrSaveFileNum-1);
                                     sDelayedWarpOp = WARP_OP_GAME_OVER;
+                                    hardcore_sequence_go = TRUE;
                                 }
                             }
                         play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);

@@ -53,4 +53,10 @@ extern const LevelScript level_main_menu_entry_act_select[];
 
 #include "levels/menu/rovert_logo/header.h"
 
+#include "levels/menu/evilbadge_gameover/header.h"
+
+#include "levels/menu/fh1/header.h"
+
+#include "levels/menu/fh2/header.h"
+
 #endif

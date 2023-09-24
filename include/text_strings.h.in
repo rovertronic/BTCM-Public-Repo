@@ -3,8 +3,8 @@
 
 #include "text_menu_strings.h"
 
+#define TEXT_VERSION _("ALPHA 1.3.0")
 //#define TEXT_VERSION _("RELEASE 1.3.0")
-#define TEXT_VERSION _("NEW GAME PLUS PATREON DEMO 1.1")
 
 // pain
 #define NC_CAMX 				_("Camera X Sensitivity")
