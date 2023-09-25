@@ -21,6 +21,7 @@
 #include "puppycamold.h"
 #include "game/rovent.h"
 #include "mtwister.h"
+#include "randomizer.h"
 
 #define ALIGN4(val) (((val) + 0x3) & ~0x3)
 
@@ -625,6 +626,10 @@ s32 save_file_get_total_metal_star_count(s32 fileIndex, s32 minCourse, s32 maxCo
     return count;
 }
 
+s32 save_file_get_seed(s32 fileIndex) {
+    return gSaveBuffer.files[fileIndex][0].SavedSeed;
+};
+
 void save_file_set_flags(u32 flags) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= (flags | SAVE_FLAG_FILE_EXISTS);
     gSaveFileModified = TRUE;
@@ -866,6 +871,8 @@ void save_file_get_stats() {
         gMarioState->numMaxFP = UPGRADE_TABLE[gMarioState->Level][2];
         gMarioState->numMaxBP = UPGRADE_TABLE[gMarioState->Level][3] + get_evil_badge_bonus();
         gMarioState->Options = saveFile->OptionFlags;
+
+        randomizer_global_seed = saveFile->SavedSeed;
     }else{
         //FIRST TRY STATS
         gMarioState->numMaxGlobalCoins = 100;
@@ -878,6 +885,8 @@ void save_file_get_stats() {
         gMarioState->numEquippedBadges = 0;
         gMarioState->Options = 0xFD;
         //save_file_set_costume_unlock( (1<<0) );
+        saveFile->SavedSeed = randomizer_global_seed;
+
         save_file_set_stats();
     }
 }

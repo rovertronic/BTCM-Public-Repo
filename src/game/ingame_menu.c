@@ -2394,7 +2394,10 @@ void build_tabs(void) {
     }
 
     add_tab(3);
-    add_tab(6);
+
+    if (randomizer_global_seed > 0) {
+        add_tab(6);
+    }
 }
 
 #define total_spells 3

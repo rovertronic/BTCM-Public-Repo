@@ -25,6 +25,7 @@
 #include "actors/group0.h"
 #include "game/ingame_menu.h"
 #include "game/level_update.h"
+#include "game/randomizer.h"
 
 #include "eu_translation.h"
 #if MULTILANG
@@ -183,6 +184,12 @@ unsigned char textOpts[] = { TEXT_FILE_OPTIONS };
 unsigned char textHTR[] = {TEXT_HOLD_TO_ERASE};
 
 unsigned char textVERSION[] = {TEXT_VERSION};
+
+unsigned char textNewOpts[] = {TEXT_FILE_NEW_OPT};
+
+unsigned char textSeed[] = {TEXT_FILE_SEED};
+
+unsigned char textNGPstat[] = {TEXT_FILE_NGP_STAT};
 
 /**
  * Yellow Background Menu Initial Action
@@ -1793,6 +1800,15 @@ void new_file_select() {
                     }
                 }
 
+                if ( (fs_ms == 0) && (save_file_get_seed(i) > 0) ) {
+                    //show ng+ stats
+                    gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
+                    if (save_file_get_seed(i) == 255) {
+                        gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
+                    }
+                    int_to_str(save_file_get_seed(i),&textNGPstat[3]);
+                    print_generic_string(45+flsex[i], 160-(i*60), textNGPstat);
+                }
 
             gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
@@ -1812,11 +1828,40 @@ void new_file_select() {
 
 
         } else {
+            //textNewOpts
+            
             //print "NEW"
             gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
             gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
                 print_hud_lut_string(HUD_LUT_GLOBAL, 45+flsex[i], 40+(i*60), textNew);
             gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+
+            if (iamselected == TRUE) {
+                switch(fs_ms) {
+                    case 3:
+                        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+                        print_generic_string(45+flsex[i], 160-(i*60), textNewOpts);
+
+                        //print seed num
+                        if (fshi == 1) {
+                            gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
+                            switch (randomizer_global_seed) {
+                                case 0:
+                                    gDPSetEnvColor(gDisplayListHead++, 100, 100, 100, 255);
+                                break;
+                                case 255:
+                                    gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
+                                break;
+                            }
+
+                            int_to_str(randomizer_global_seed, &textSeed[6]);
+                            print_generic_string(180+flsex[i], 160-(i*60), textSeed);
+                        }
+
+                        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+                    break;
+                }
+            }
         }
     }
 
@@ -1834,35 +1879,38 @@ void new_file_select() {
 
     switch(fs_ms) {
         case 0:
-        if ((gPlayer1Controller->rawStickY > 60)&&(fs_letgo == FALSE)) {
-            play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
-            fsi --;
-            fsi = (fsi+3)%3;
-            fs_letgo = TRUE;
+            if ((gPlayer1Controller->rawStickY > 60)&&(fs_letgo == FALSE)) {
+                play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
+                fsi --;
+                fsi = (fsi+3)%3;
+                fs_letgo = TRUE;
             }
-        if ((gPlayer1Controller->rawStickY < -60)&&(fs_letgo == FALSE)) {
-            play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
-            fsi ++;
-            fsi = (fsi+3)%3;
-            fs_letgo = TRUE;
+            if ((gPlayer1Controller->rawStickY < -60)&&(fs_letgo == FALSE)) {
+                play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
+                fsi ++;
+                fsi = (fsi+3)%3;
+                fs_letgo = TRUE;
             }
-        if ((gPlayer1Controller->rawStickX > -60)&&(gPlayer1Controller->rawStickX < 60)&&(gPlayer1Controller->rawStickY > -60)&&(gPlayer1Controller->rawStickY < 60)) {
-            fs_letgo = FALSE;
+            if ((gPlayer1Controller->rawStickX > -60)&&(gPlayer1Controller->rawStickX < 60)&&(gPlayer1Controller->rawStickY > -60)&&(gPlayer1Controller->rawStickY < 60)) {
+                fs_letgo = FALSE;
             }
-        if ((gPlayer3Controller->buttonPressed & (A_BUTTON|START_BUTTON))) {
-            if (save_file_exists(fsi)) {
-                //Continue?
-                fs_ms=1;
-                fshi = 0;
-                fs_letgo = 0;
-                play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
-            } else {
-                //New file...
-                play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
-                sSelectedFileNum = fsi+1;
-                fs_ms=9;//START
+            if ((gPlayer3Controller->buttonPressed & (A_BUTTON|START_BUTTON))) {
+                if (save_file_exists(fsi)) {
+                    //Continue?
+                    fs_ms=1;
+                    fshi = 0;
+                    fs_letgo = 0;
+                    play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+                } else {
+                    //New file...
+                    play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+                    fs_ms=3;
+                    fshi = 0;
+                    fs_letgo = 0;
+                    //sSelectedFileNum = fsi+1;
+                    //fs_ms=9;//START
+                }
             }
-        }
         break;
         case 1:
             if ((gPlayer1Controller->rawStickX < -60)||(gPlayer1Controller->rawStickX > 60)) {
@@ -1897,6 +1945,7 @@ void new_file_select() {
             if (gPlayer3Controller->buttonPressed & (B_BUTTON)) {
                 fs_ms=1;
                 play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+                return;
             }
             if (gPlayer3Controller->buttonDown & (A_BUTTON)) {
                 fs_letgo ++;
@@ -1922,6 +1971,50 @@ void new_file_select() {
                 }
             } else {
                 fs_letgo = 0;
+            }
+        break;
+        case 3://Newgame or plus
+            if (gPlayer3Controller->buttonPressed & (B_BUTTON)) {
+                fs_ms=0;
+                play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+                cursor_y = 170-(fsi*60);
+                return;
+            }
+
+            //hor select
+            if ( ((gPlayer1Controller->rawStickX < -60)||(gPlayer1Controller->rawStickX > 60)) && (fs_letgo == FALSE) ) {
+                fs_letgo = TRUE;
+                fshi ++;
+                fshi = fshi % 2;
+                play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
+            }
+
+            //v select
+            if (fshi == 1) {
+                if ((gPlayer1Controller->rawStickY > 60)&&(fs_letgo == FALSE)) {
+                    play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
+                    randomizer_global_seed ++;
+                    fs_letgo = TRUE;
+                }
+                if ((gPlayer1Controller->rawStickY < -60)&&(fs_letgo == FALSE)) {
+                    play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
+                    randomizer_global_seed --;
+                    fs_letgo = TRUE;
+                }
+            }
+
+            if ((gPlayer1Controller->rawStickX > -60)&&(gPlayer1Controller->rawStickX < 60)&&(gPlayer1Controller->rawStickY > -60)&&(gPlayer1Controller->rawStickY < 60)) {
+                fs_letgo = FALSE;
+            }
+
+            if ((gPlayer3Controller->buttonPressed & (A_BUTTON|START_BUTTON))) {
+                if (fshi == 0) {
+                    randomizer_global_seed = 0;
+                }
+                randomizer_is_newgame = TRUE;
+                play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+                sSelectedFileNum = fsi+1;
+                fs_ms=9;//NORMAL
             }
         break;
     }

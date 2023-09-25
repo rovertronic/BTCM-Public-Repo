@@ -5,6 +5,9 @@
 #include "level_update.h"
 #include "ingame_menu.h"
 
+u8 randomizer_global_seed = 0;
+u8 randomizer_is_newgame = FALSE;
+
 /* RANDOMIZER TABLES (ALL S16) */
 
 u16 randomizer_costume_table[15];
@@ -15,6 +18,11 @@ u16 randomizer_positive_rules[2];
 
 s32 rule_check(u16 rule, u8 positive) {
     u8 rule_flagged = FALSE;
+
+    if (randomizer_global_seed == 0) {
+        //no rule mods in base game
+        return FALSE;
+    }
 
     if (positive) {
         for (u8 i=0;i<2;i++){
@@ -123,24 +131,28 @@ u8 shop_ids_to_randomize[] = {0,2,3,4,5,6,7,9,10,11};
 void randomize_game(u32 seed, u8 is_newgame) {
     randomizer_seed = seedRand(seed);
     reset_randomizer_factory();
-    //randomize costumes
-    shuffleArray(&randomizer_costume_table,15);
-    if (is_newgame) {
-        save_file_set_costume_unlock((1<<randomizer_costume_table[0]));
-        gMarioState->CostumeID = randomizer_costume_table[0];
-    }
-    //randomize levels
-    shuffleArray(&randomizer_levels,8);
 
-    //randomize badge shops
-    shuffleArray(&randomizer_badges,30);
-    for (u8 i=0; i<10; i++) {
-        shoptable[shop_ids_to_randomize[i]][0] = randomizer_badges[(i*3)+0];
-        shoptable[shop_ids_to_randomize[i]][2] = randomizer_badges[(i*3)+1];
-        shoptable[shop_ids_to_randomize[i]][4] = randomizer_badges[(i*3)+2];
-    }
+    if (seed > 0) { //seed 0 = No NG+
+        //randomize costumes
+        shuffleArray(&randomizer_costume_table,15);
+        if (is_newgame) {
+            save_file_set_costume_unlock((1<<randomizer_costume_table[0]));
+            gMarioState->CostumeID = randomizer_costume_table[0];
+            randomizer_is_newgame = FALSE;
+        }
+        //randomize levels
+        shuffleArray(&randomizer_levels,8);
 
-    //randomize rules
-    shuffleArray(&randomizer_negative_rules,4);
-    shuffleArray(&randomizer_positive_rules,2);
+        //randomize badge shops
+        shuffleArray(&randomizer_badges,30);
+        for (u8 i=0; i<10; i++) {
+            shoptable[shop_ids_to_randomize[i]][0] = randomizer_badges[(i*3)+0];
+            shoptable[shop_ids_to_randomize[i]][2] = randomizer_badges[(i*3)+1];
+            shoptable[shop_ids_to_randomize[i]][4] = randomizer_badges[(i*3)+2];
+        }
+
+        //randomize rules
+        shuffleArray(&randomizer_negative_rules,4);
+        shuffleArray(&randomizer_positive_rules,2);
+    }
 }

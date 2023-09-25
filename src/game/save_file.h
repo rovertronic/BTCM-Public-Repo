@@ -256,6 +256,8 @@ u8 get_evil_badge_bonus(void);
 
 void save_file_do_save_force(s32 fileIndex);
 
+s32 save_file_get_seed(s32 fileIndex);
+
 #if MULTILANG
 enum EuLanguages {
     LANGUAGE_ENGLISH,

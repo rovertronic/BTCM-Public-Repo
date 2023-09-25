@@ -411,6 +411,9 @@
 
 #define TEXT_FILE_OPTIONS _("BEGIN       ERASE")
 #define TEXT_HOLD_TO_ERASE _("HOLD A TO ERASE")
+#define TEXT_FILE_NEW_OPT _("START       NG+")
+#define TEXT_FILE_SEED _("Seed: 000")
+#define TEXT_FILE_NGP_STAT _("NG+000")
 
 // Menu Options
 #define TEXT_SCORE _("SCORE")

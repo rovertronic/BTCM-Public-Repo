@@ -1,5 +1,8 @@
 #pragma once
 
+extern u8 randomizer_global_seed;
+extern u8 randomizer_is_newgame;
+
 extern u16 randomizer_costume_table[15];
 extern u16 randomizer_levels[8];
 extern u16 randomizer_negative_rules[];

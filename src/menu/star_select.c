@@ -163,7 +163,7 @@ void bhv_act_selector_init(void) {
 
     //wallet
     if (wallet_id_table[gCurrCourseNum] != NO_WALLET) {
-        wallet = spawn_object(gCurrentObject,0xE3,bhvWalletAct);
+        wallet = spawn_object(gCurrentObject,MODEL_NONE,bhvWalletAct);
         wallet->oBehParams2ndByte = wallet_id_table[gCurrCourseNum];
         wallet->oPosY -= 50.0f;
         wallet->oPosX -= 380.0f;
