@@ -305,7 +305,9 @@ void level_cmd_fileselect_condition(void) {
     }
 
     //new game plus will instantly pop you into the castle
-    sRegister = LEVEL_CASTLE;
+    if (randomizer_global_seed > 0) {
+        sRegister = LEVEL_CASTLE;
+    }
     if (save_file_get_progression() == PROG_ON_AGAMEMNON) {
         sRegister = LEVEL_BITS;
     }

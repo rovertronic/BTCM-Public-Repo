@@ -296,7 +296,9 @@ void bhv_bobomb_buddy_init(void) {
     //advice after showrunner first ecounter
     if ((o->oBehParams2ndByte==169)&&(!(save_file_get_flags() & SAVE_FLAG_TALKED_TO_TOAD))) {
         save_file_set_progression(PROG_TRUE_START);
-        //run_event(EVENT_TOAD_MEET);
+        if (randomizer_global_seed == 0) {
+            run_event(EVENT_TOAD_MEET);
+        }
         save_file_set_wallet_unlock( (1<<10) );
         save_file_set_flags(SAVE_FLAG_TALKED_TO_TOAD);
     }
