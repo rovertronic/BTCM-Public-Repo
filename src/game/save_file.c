@@ -614,6 +614,7 @@ s32 save_file_get_total_golden_star_count(s32 fileIndex, s32 minCourse, s32 maxC
     }
 
     // Add castle secret star count.
+    //return 999;
     return save_file_get_course_star_count(fileIndex, -1) + count;
 }
 
@@ -691,6 +692,7 @@ u32 save_file_get_flags(void) {
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;
     }
+    //return 0xFFFFFFFF;
     return gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags;
 #endif
 }

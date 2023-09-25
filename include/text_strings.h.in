@@ -748,7 +748,7 @@
 #endif // VERSION_EU
 
 #define PRE_CREDITS_1 _("Created By:")
-#define PRE_CREDITS_2 _("Rovert")
+#define PRE_CREDITS_2 _("Rovertronic")
 
 #define PRE_CREDITS_3 _("Written By:")
 #define PRE_CREDITS_4 _("RationaLess")
