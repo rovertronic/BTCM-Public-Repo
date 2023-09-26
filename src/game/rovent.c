@@ -232,6 +232,10 @@ void minigame_transition_func(void) {
 
 void render_minigame_menu(void) {
     u8 i;
+    u8 minscore_denom = 1;
+    if (rule_check(5,TRUE)) {
+        minscore_denom = 2;
+    }
 
     if ((gPlayer1Controller->rawStickY > 60)&&(letgo2 == FALSE)) {
         play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
@@ -275,7 +279,7 @@ void render_minigame_menu(void) {
             if (save_file_check_minigame(i)) {
                 //own minigame, display highscore
                 int_to_str(save_file_get_hiscore(i),&buf1);
-                int_to_str(mg_minscores[i],&starbuf[1]);
+                int_to_str( (mg_minscores[i]/minscore_denom) ,&starbuf[1]);
 
                 gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
                 print_generic_string(34,199-(i*16), buf1);

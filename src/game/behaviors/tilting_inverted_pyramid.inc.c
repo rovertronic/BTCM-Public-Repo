@@ -3008,6 +3008,11 @@ void bhv_mgb(void) {
     u8 i;
     s8 star_to_spawn = -1;
     u8 event = EVENT_MINIGAME;
+    u8 minscore_denom = 1;
+    if (rule_check(5,TRUE)) {
+        minscore_denom = 2;
+    }
+
     // struct Object *star; // unused
 
     switch (o->oBehParams2ndByte) {
@@ -3032,7 +3037,7 @@ void bhv_mgb(void) {
                         
                         for (i=0;i<8;i++) {
                             if (!(((save_file_get_flags()) >> (24+i))&1)) {
-                                if (save_file_get_hiscore(i) >= mg_minscores[i]) {
+                                if (save_file_get_hiscore(i) >= (mg_minscores[i]/minscore_denom)  ) {
                                     star_to_spawn = i;
                                 }
                             }

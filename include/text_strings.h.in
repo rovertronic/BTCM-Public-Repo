@@ -101,7 +101,7 @@
 #define TEXT_RANDOMIZER_PRULE_3 _("★ 5[$] gravity reduction")//DONE
 #define TEXT_RANDOMIZER_PRULE_4 _("★ Quicksand drains HP instead of instant death")//DONE
 #define TEXT_RANDOMIZER_PRULE_5 _("★ Coins heal by value instead of 1 HP")//DONE
-#define TEXT_RANDOMIZER_PRULE_6 _("★ Minigame score requirements are halved")
+#define TEXT_RANDOMIZER_PRULE_6 _("★ Minigame score requirements are halved")//DONE
 
 //MUSIC AUTHORS
 #define TEXT_THORNDUST _("Thorndust")
