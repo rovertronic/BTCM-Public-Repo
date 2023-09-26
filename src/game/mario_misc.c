@@ -173,7 +173,9 @@ void bhv_loop_wallet(void) {
                 rtext_insert_pointer[0] = &wallet_text_buffer2;
 
                 gMarioState->numMaxGlobalCoins+= 50;
-                gMarioState->gGlobalCoinGain+=50;
+                if (!rule_check(7,FALSE)) {
+                    gMarioState->gGlobalCoinGain+=50;
+                }
 
                 //gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
                 gCurrentObject->oAction = 2;
@@ -181,8 +183,13 @@ void bhv_loop_wallet(void) {
 
                 int_to_str(gMarioState->numMaxGlobalCoins,wallet_text_buffer);
                 rtext_insert_pointer[1] = &wallet_text_buffer;
-                run_event(EVENT_WALLET);
+
+                if (!rule_check(7,FALSE)) {
+                    run_event(EVENT_WALLET);
+                } else {
+                    run_event(EVENT_WALLET_EVIL);
                 }
+            }
         break;
 
         case 2:

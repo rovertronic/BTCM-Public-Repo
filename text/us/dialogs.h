@@ -3725,6 +3725,15 @@ If you collect all 12\n\
 wallet upgrades, you\n\
 also get a double income\n\
 boost.\n\
+The act select screen\n\
+will tell you if you're\n\
+still missing a wallet.\n\
+\n\
 Combined with the greed\n\
 badge, your net income\n\
 will be quadrupled."))
+
+DEFINE_DIALOG(DIALOG_WALLET_EVIL, 1, 3, 30, 200, _("\
+You've found a wallet. The maximum coins you\n\
+can hold has gone from [%] to [%]!\n\
+It also came with... nothing :("))

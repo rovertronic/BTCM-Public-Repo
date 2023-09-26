@@ -624,6 +624,7 @@ s32 save_file_get_total_metal_star_count(s32 fileIndex, s32 minCourse, s32 maxCo
     for (; minCourse <= maxCourse; minCourse++) {
        count += save_file_get_course_star_count_metal(fileIndex, minCourse);
     }
+    //return 999;
     return count;
 }
 

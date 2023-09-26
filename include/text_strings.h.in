@@ -85,14 +85,23 @@
 
 #define TEXT_WARNING _("Next fall will kill.")
 //RANDOMIZER RULES
-#define TEXT_RANDOMIZER_RULE_1 _("- Goombas and rexes are big")
-#define TEXT_RANDOMIZER_RULE_2 _("- Lose 10 coins on death instead of 5")
-#define TEXT_RANDOMIZER_RULE_3 _("- 120 coin stars")
-#define TEXT_RANDOMIZER_RULE_4 _("- Burning surfaces are extra hot")
-#define TEXT_RANDOMIZER_RULE_5 _("- Pokeys are extra tall")
+#define TEXT_RANDOMIZER_RULE_1  _("☆ Goombas and rexes are big")//DONE
+#define TEXT_RANDOMIZER_RULE_2  _("☆ Lose 10 coins on death instead of 5")//DONE
+#define TEXT_RANDOMIZER_RULE_3  _("☆ 120 coin stars")//DONE
+#define TEXT_RANDOMIZER_RULE_4  _("☆ Burning surfaces are extra hot")//DONE
+#define TEXT_RANDOMIZER_RULE_5  _("☆ Some enemies have +1 HP")//DONE
+#define TEXT_RANDOMIZER_RULE_6  _("☆ Some enemies are hyper")//DONE
+#define TEXT_RANDOMIZER_RULE_7  _("☆ Yellow coins do not heal")//DONE
+#define TEXT_RANDOMIZER_RULE_8  _("☆ Wallets come empty")//DONE
+#define TEXT_RANDOMIZER_RULE_9  _("☆ Some bosses are slightly buffed")
+#define TEXT_RANDOMIZER_RULE_10 _("☆ Chance to lose a random star on death")
 
-#define TEXT_RANDOMIZER_PRULE_1 _("+ 6 red coin stars")
-#define TEXT_RANDOMIZER_PRULE_2 _("+ 1 ups restore max mana")
+#define TEXT_RANDOMIZER_PRULE_1 _("★ 6 red coin stars")//DONE
+#define TEXT_RANDOMIZER_PRULE_2 _("★ 1-ups restore max mana")//DONE
+#define TEXT_RANDOMIZER_PRULE_3 _("★ 5[$] gravity reduction")//DONE
+#define TEXT_RANDOMIZER_PRULE_4 _("★ Quicksand drains HP instead of instant death")//DONE
+#define TEXT_RANDOMIZER_PRULE_5 _("★ Coins heal by value instead of 1 HP")//DONE
+#define TEXT_RANDOMIZER_PRULE_6 _("★ Minigame score requirements are halved")
 
 //MUSIC AUTHORS
 #define TEXT_THORNDUST _("Thorndust")

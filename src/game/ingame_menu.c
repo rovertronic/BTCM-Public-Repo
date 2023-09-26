@@ -2417,14 +2417,24 @@ u8 trr1[] = {TEXT_RANDOMIZER_RULE_1};
 u8 trr2[] = {TEXT_RANDOMIZER_RULE_2};
 u8 trr3[] = {TEXT_RANDOMIZER_RULE_3};
 u8 trr4[] = {TEXT_RANDOMIZER_RULE_4};
+u8 trr5[] = {TEXT_RANDOMIZER_RULE_5};
+u8 trr6[] = {TEXT_RANDOMIZER_RULE_6};
+u8 trr7[] = {TEXT_RANDOMIZER_RULE_7};
+u8 trr8[] = {TEXT_RANDOMIZER_RULE_8};
+u8 trr9[] = {TEXT_RANDOMIZER_RULE_9};
+u8 trr10[] = {TEXT_RANDOMIZER_RULE_10};
 u8 * text_randomizer_rules[] = {
-    &trr1,&trr2,&trr3,&trr4,
+    &trr1,&trr2,&trr3,&trr4,&trr5,&trr6,&trr7,&trr8,&trr9,&trr10
 };
 
 u8 trpr1[] = {TEXT_RANDOMIZER_PRULE_1};
 u8 trpr2[] = {TEXT_RANDOMIZER_PRULE_2};
+u8 trpr3[] = {TEXT_RANDOMIZER_PRULE_3};
+u8 trpr4[] = {TEXT_RANDOMIZER_PRULE_4};
+u8 trpr5[] = {TEXT_RANDOMIZER_PRULE_5};
+u8 trpr6[] = {TEXT_RANDOMIZER_PRULE_6};
 u8 * text_randomizer_prules[] = {
-    &trpr1,&trpr2,
+    &trpr1,&trpr2,&trpr3,&trpr4,&trpr5,&trpr6,
 };
 
 s32 render_pause_courses_and_castle(void) {

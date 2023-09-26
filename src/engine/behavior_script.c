@@ -17,6 +17,7 @@
 #include "game/puppylights.h"
 #include "game/level_update.h"
 #include "game/rovent.h"
+#include "game/randomizer.h"
 
 // Macros for retrieving arguments from behavior scripts.
 #define BHV_CMD_GET_1ST_U8(index)  (u8)((gCurBhvCommand[index] >> 24) & 0xFF) // unused
@@ -321,6 +322,11 @@ static s32 bhv_cmd_call_native(void) {
     NativeBhvFunc behaviorFunc = BHV_CMD_GET_VPTR(1);
 
     behaviorFunc();
+
+    if ((rule_check(5,FALSE))&&(o->oFlags & OBJ_FLAG_CAN_BE_HYPER)&&(o->activeFlags != ACTIVE_FLAG_DEACTIVATED)) {
+        o->oTimer++;
+        behaviorFunc();
+    }
 
     gCurBhvCommand += 2;
     return BHV_PROC_CONTINUE;

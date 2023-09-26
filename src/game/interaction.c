@@ -747,8 +747,19 @@ u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *
         } else {
             m->healCounter += 4 * ((f32)(gMarioState->numMaxHP)/2.0f); //green coins heal half hp
         }
-    } else {//every other coin
-        m->healCounter += 4; //every other coin gives 1 hp back
+    } else if (obj->oDamageOrCoinValue == 1) { //yellow coin
+        if (!rule_check(6,FALSE)) { 
+            //heal by 1 (which is the yellow coin value anyways)
+            m->healCounter += 4;
+        }
+    } else { //all other coins
+        if (rule_check(4,TRUE)) {
+            //heal by value
+            m->healCounter += 4 * obj->oDamageOrCoinValue;
+        } else {
+            //heal by 1
+            m->healCounter += 4;
+        }
     }
 
     //give double if using double badge

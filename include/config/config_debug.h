@@ -21,7 +21,7 @@
 //#define TEST_LEVEL LEVEL_TTC
 //#define TEST_LEVEL LEVEL_BOB
 //#define TEST_LEVEL LEVEL_RR
-//#define TEST_LEVEL LEVEL_JRB
+//#define TEST_LEVEL LEVEL_TTM
 
 // Enables debug level select. Hold L while the game boots to turn it on.
 //#define DEBUG_LEVEL_SELECT

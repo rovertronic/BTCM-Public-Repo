@@ -120,6 +120,10 @@ void bhv_goomba_init(void) {
 
     obj_set_hitbox(o, &sGoombaHitbox);
 
+    if (rule_check(4,FALSE)) {
+        o->oHealth++;
+    }
+
     o->oDrawingDistance = sGoombaProperties[o->oGoombaSize].drawDistance;
     o->oDamageOrCoinValue = sGoombaProperties[o->oGoombaSize].damage;
 

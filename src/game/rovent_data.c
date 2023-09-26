@@ -138,6 +138,16 @@ s32 event_wallet[] = {
     E_END,
 };
 
+s32 event_wallet_evil[] = {
+    E_MARIO_LOCK,
+    E_ZOUND, SOUND_MARIO_MAMA_MIA,
+    E_PUZZLE_JINGLE,
+    E_DIALOG, DIALOG_WALLET_EVIL,
+    E_DIALOG_WAIT_PRESSA,
+    E_SAVEGAME,
+    E_END,
+};
+
 s32 event_costume[] = {
     E_MARIO_LOCK,
 
@@ -1453,6 +1463,7 @@ s32 *event_list[] = {
     &event_ship_intro,
     &event_costume_select_ag,
     &event_lvup,
+    &event_wallet_evil,
 };
 
 f32 *spline_list[] = {

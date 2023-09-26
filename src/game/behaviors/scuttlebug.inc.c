@@ -663,6 +663,10 @@ void bhv_spork_loop(void) {
             o->oNumLootCoins = 6;
             o->oFlags |= OBJ_FLAG_HITBOX_WAS_SET;
             cur_obj_become_tangible();
+
+            if (rule_check(4,FALSE)) {
+                o->oHealth++;
+            }
         break;
 
         case 1://ATTACKING

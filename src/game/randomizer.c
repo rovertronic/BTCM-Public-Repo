@@ -10,18 +10,26 @@ u8 randomizer_is_newgame = FALSE;
 
 /* RANDOMIZER TABLES (ALL S16) */
 
+#define NEGATIVE_RULE_COUNT 10
+#define POSITIVE_RULE_COUNT 6
+
 u16 randomizer_costume_table[15];
 u16 randomizer_levels[8];
 u16 randomizer_badges[30];
-u16 randomizer_negative_rules[4];
-u16 randomizer_positive_rules[2];
+u16 randomizer_negative_rules[NEGATIVE_RULE_COUNT];
+u16 randomizer_positive_rules[POSITIVE_RULE_COUNT];
 
 s32 rule_check(u16 rule, u8 positive) {
     u8 rule_flagged = FALSE;
 
+    return TRUE;
+
     if (randomizer_global_seed == 0) {
         //no rule mods in base game
         return FALSE;
+    }
+    if (randomizer_global_seed == 255) {
+        return TRUE;
     }
 
     if (positive) {
@@ -47,11 +55,11 @@ void reset_randomizer_factory() {
         randomizer_costume_table[i] = i;
     }
 
-    for (u8 i=0; i<4; i++) {
+    for (u8 i=0; i<NEGATIVE_RULE_COUNT; i++) {
         randomizer_negative_rules[i] = i;
     }
 
-    for (u8 i=0; i<2; i++) {
+    for (u8 i=0; i<POSITIVE_RULE_COUNT; i++) {
         randomizer_positive_rules[i] = i;
     }
 
@@ -133,6 +141,7 @@ void randomize_game(u32 seed, u8 is_newgame) {
     reset_randomizer_factory();
 
     if (seed > 0) { //seed 0 = No NG+
+        //ng+
         //randomize costumes
         shuffleArray(&randomizer_costume_table,15);
         if (is_newgame) {
@@ -152,7 +161,14 @@ void randomize_game(u32 seed, u8 is_newgame) {
         }
 
         //randomize rules
-        shuffleArray(&randomizer_negative_rules,4);
-        shuffleArray(&randomizer_positive_rules,2);
+        shuffleArray(&randomizer_negative_rules,NEGATIVE_RULE_COUNT);
+        shuffleArray(&randomizer_positive_rules,POSITIVE_RULE_COUNT);
+    } else {
+        //normal game
+        if (is_newgame) {
+            save_file_set_costume_unlock((1<<randomizer_costume_table[0]));
+            gMarioState->CostumeID = randomizer_costume_table[0];
+            randomizer_is_newgame = FALSE;
+        }
     }
 }

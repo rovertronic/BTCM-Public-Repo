@@ -1779,6 +1779,16 @@ void obj_set_hitbox(struct Object *obj, struct ObjectHitbox *hitbox) {
         obj->oHealth = hitbox->health;
         obj->oNumLootCoins = hitbox->numLootCoins;
 
+        if (rule_check(4,FALSE)) {
+            if (
+            (obj->behavior == segmented_to_virtual(bhvSlob))||(obj->behavior == segmented_to_virtual(bhvHammerBro))||
+            (obj->behavior == segmented_to_virtual(bhvScuttlebug))||(obj->behavior == segmented_to_virtual(bhvFlyGuy))||
+            (obj->behavior == segmented_to_virtual(bhvChicken)) ||(obj->behavior == segmented_to_virtual(bhvEvilCobie))
+            ) {
+                obj->oHealth++;
+            }
+        }
+
         cur_obj_become_tangible();
     }
 
@@ -1984,7 +1994,7 @@ s32 cur_obj_set_hitbox_and_die_if_attacked(struct ObjectHitbox *hitbox, s32 deat
 
     if (hitbox != NULL) {
         obj_set_hitbox(o, hitbox);
-        }
+    }
 
     if (noLootCoins) {
         o->oNumLootCoins = 0;

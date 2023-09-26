@@ -162,6 +162,7 @@ enum revent_events {
     EVENT_SHIP_INTRO,
     EVENT_COSTUME_SELECT_AG,
     EVENT_LVUP,
+    EVENT_WALLET_EVIL,
 };
 
 enum revent_spline_list {

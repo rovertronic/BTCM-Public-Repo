@@ -84,6 +84,9 @@ void bhv_cosmic_phantasm(void) {
                 o->oHealth = 2;
                 o->oNumLootCoins = 0;
             }
+            if (rule_check(4,FALSE)) {
+                o->oHealth++;
+            }
 
             o->oAction = 1;
             o->oTimer = random_u16()%60;

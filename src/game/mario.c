@@ -1942,11 +1942,16 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
     gMarioState->gravMult = 1.0f;
     //badge gravity
     if (save_file_get_badge_equip() & (1<<BADGE_WEIGHT)) {
-        gMarioState->gravMult *= 1.3f;
+        gMarioState->gravMult += .3f;
     }
     if (save_file_get_badge_equip() & (1<<BADGE_FEATHER)) {
-        gMarioState->gravMult *= 0.9f;
+        gMarioState->gravMult -= 0.1f;
     }
+    //positive rule 3
+    if (rule_check(2,TRUE)) {
+        gMarioState->gravMult -= 0.05f;
+    }
+
     //flappy bird is pretty light
     if ((gCurrLevelNum == LEVEL_CASTLE_COURTYARD)&&(gCurrAreaIndex == 4)) {
         gMarioState->gravMult *= 0.4f;
