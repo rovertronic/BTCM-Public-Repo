@@ -3134,7 +3134,7 @@ Here's to an even brighter time on the firmament.\n\
 ...See you there."))
 
 DEFINE_DIALOG(DIALOG_CREDITS_1, 1, 6, 95, 180, _("\
-- Rovert -\n\
+- Rovertronic -\n\
 Main Developer"))
 
 DEFINE_DIALOG(DIALOG_CREDITS_2, 1, 6, 95, 180, _("\

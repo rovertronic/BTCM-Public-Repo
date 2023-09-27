@@ -22,14 +22,12 @@ u16 randomizer_positive_rules[POSITIVE_RULE_COUNT];
 s32 rule_check(u16 rule, u8 positive) {
     u8 rule_flagged = FALSE;
 
-    return TRUE;
-
     if (randomizer_global_seed == 0) {
         //no rule mods in base game
         return FALSE;
     }
     if (randomizer_global_seed == 255) {
-        return TRUE;
+        return !positive;
     }
 
     if (positive) {

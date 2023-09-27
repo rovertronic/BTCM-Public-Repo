@@ -1295,6 +1295,22 @@ s32 act_exit_land_save_dialog(struct MarioState *m) {
     return FALSE;
 }
 
+s32 lose_star_on_death(struct MarioState *m) {
+    if (rule_check(9,FALSE)) { //lose a STAR on death >:(
+        u16 old_stars = m->numStars;
+        u16 old_seeds = m->numMetalStars;
+        save_file_unset_random_star_flag();
+        m->numStars = save_file_get_total_golden_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+        m->numMetalStars = save_file_get_total_metal_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+
+        if ((old_stars != m->numStars) || (old_seeds != m->numMetalStars)) {
+            spawn_object(gMarioObject, MODEL_STAR, bhvSingleCoinGetsSpawned);
+            play_sound(SOUND_GENERAL_GRAND_STAR_JUMP, m->marioObj->header.gfx.cameraToObject);
+        }
+    }
+}
+
+
 s32 act_death_exit(struct MarioState *m) {
     if (15 < m->actionTimer++
         && launch_mario_until_land(m, ACT_DEATH_EXIT_LAND, MARIO_ANIM_GENERAL_FALL, -32.0f)) {
@@ -1307,6 +1323,8 @@ s32 act_death_exit(struct MarioState *m) {
         if (rule_check(1,FALSE)) {
             m->gGlobalCoinGain -= 5;
         }
+        lose_star_on_death(m);
+
         // restore 7.75 units of health
         m->healCounter = 99;
         m->numBadgePoints = m->numMaxFP;
@@ -1327,6 +1345,7 @@ s32 act_unused_death_exit(struct MarioState *m) {
         if (rule_check(1,FALSE)) {
             m->gGlobalCoinGain -= 5;
         }
+        lose_star_on_death(m);
         // restore 7.75 units of health
         m->healCounter = 99;
         m->numBadgePoints = m->numMaxFP;
@@ -1349,6 +1368,7 @@ s32 act_falling_death_exit(struct MarioState *m) {
         m->gGlobalCoinGain -= 5;
         if (rule_check(1,FALSE)) {
             m->gGlobalCoinGain -= 5;
+            lose_star_on_death(m);
         }
         // restore 7.75 units of health
         m->healCounter = 100;
@@ -1408,6 +1428,7 @@ s32 act_special_death_exit(struct MarioState *m) {
         m->gGlobalCoinGain -= 5;
         if (rule_check(1,FALSE)) {
             m->gGlobalCoinGain -= 5;
+            lose_star_on_death(m);
         }
         m->healCounter = 99;
         m->numBadgePoints = m->numMaxFP;

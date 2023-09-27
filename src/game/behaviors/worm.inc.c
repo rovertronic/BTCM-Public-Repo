@@ -106,8 +106,12 @@ void worm_loop(void) {
 
             if (WormTargetDistance < 1000.0f) {
                 o->oAction = 2;
-                gMarioState->BossHealth = 4;
+                
                 gMarioState->BossHealthMax = 4;
+                if (rule_check(8,FALSE)) {
+                    gMarioState->BossHealthMax++;
+                }
+                gMarioState->BossHealth = gMarioState->BossHealthMax;
             }
         break;
         case 2:

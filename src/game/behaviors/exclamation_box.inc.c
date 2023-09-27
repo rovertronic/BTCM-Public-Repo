@@ -205,8 +205,12 @@ void exclamation_box_spawn_contents(struct ExclamationBoxContents *contentsList,
                 contentsObj->oBehParams = 0x06000000;
                 //stop_background_music(SEQUENCE_ARGS(4, SEQ_EVENT_BOSS));
                 play_music(SEQ_PLAYER_LEVEL, SEQUENCE_ARGS(4, SEQ_EVENT_BOSS), 0);
-                gMarioState->BossHealth = 30;
+
                 gMarioState->BossHealthMax = 30;
+                if (rule_check(8,FALSE)) {
+                    gMarioState->BossHealthMax += 10;
+                }
+                gMarioState->BossHealth = gMarioState->BossHealthMax;
             break;
             case LEVEL_WF: //metal hog warp
                 contentsObj = spawn_object(o, MODEL_NONE, bhvInstantWarp);

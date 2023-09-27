@@ -3,7 +3,7 @@
 
 #include "text_menu_strings.h"
 
-#define TEXT_VERSION _("ALPHA 1.3.0")
+#define TEXT_VERSION _("1.3.0 CANDIDATE 1")
 //#define TEXT_VERSION _("RELEASE 1.3.0")
 
 // pain
@@ -93,8 +93,8 @@
 #define TEXT_RANDOMIZER_RULE_6  _("☆ Some enemies are hyper")//DONE
 #define TEXT_RANDOMIZER_RULE_7  _("☆ Yellow coins do not heal")//DONE
 #define TEXT_RANDOMIZER_RULE_8  _("☆ Wallets come empty")//DONE
-#define TEXT_RANDOMIZER_RULE_9  _("☆ Some bosses are slightly buffed")
-#define TEXT_RANDOMIZER_RULE_10 _("☆ Chance to lose a random star on death")
+#define TEXT_RANDOMIZER_RULE_9  _("☆ Some bosses are slightly buffed")//DONE
+#define TEXT_RANDOMIZER_RULE_10 _("☆ Chance to lose a random star on death")//DONE
 
 #define TEXT_RANDOMIZER_PRULE_1 _("★ 6 red coin stars")//DONE
 #define TEXT_RANDOMIZER_PRULE_2 _("★ 1-ups restore max mana")//DONE
@@ -102,6 +102,8 @@
 #define TEXT_RANDOMIZER_PRULE_4 _("★ Quicksand drains HP instead of instant death")//DONE
 #define TEXT_RANDOMIZER_PRULE_5 _("★ Coins heal by value instead of 1 HP")//DONE
 #define TEXT_RANDOMIZER_PRULE_6 _("★ Minigame score requirements are halved")//DONE
+
+#define TEXT_GOODLUCK _("GOOD LUCK.")
 
 //MUSIC AUTHORS
 #define TEXT_THORNDUST _("Thorndust")

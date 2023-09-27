@@ -1448,23 +1448,23 @@ void bhv_evil_ship_loop(void) {
     o->oInteractStatus = 0;
     switch(o->oAction) {
         case 0:
-        o->oAction++;
-        o->oVelX = 0;
-        shipmove();
-        o->oHomeY = o->oPosY;
-        o->oHomeX = 0.0f;
-        o->oHomeZ = 0.0f;
-        o->oPosY -= 5000.0f;
-        o->oVelY = 140.0f;
+            o->oAction++;
+            o->oVelX = 0;
+            shipmove();
+            o->oHomeY = o->oPosY;
+            o->oHomeX = 0.0f;
+            o->oHomeZ = 0.0f;
+            o->oPosY -= 5000.0f;
+            o->oVelY = 140.0f;
         break;
         case 1:
-        o->oPosY += o->oVelY;
-        o->oVelY -= 2.0f;
-        if (o->oVelY < 0) {
-            o->oAction++;
-            o->oHomeY = o->oPosY;
-            }
-        o->oFaceAngleYaw = o->oMoveAngleYaw+0x4000;
+            o->oPosY += o->oVelY;
+            o->oVelY -= 2.0f;
+            if (o->oVelY < 0) {
+                o->oAction++;
+                o->oHomeY = o->oPosY;
+                }
+            o->oFaceAngleYaw = o->oMoveAngleYaw+0x4000;
         break;
         case 2:
             shipmove();
@@ -1528,16 +1528,20 @@ void bhv_puddle_loop(void) {
                 obj_mark_for_deletion(o);
                 }
             if (o->oPosY < o->oHomeY+20.0f) {
-                /*
-                o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_BBH_HAUNTED_DOOR];
-                spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-                o->oFaceAnglePitch = 0;
-                o->oFaceAngleRoll = 0;
-                o->oAction++;
-                */
-                spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-                obj_mark_for_deletion(o);
+                
+                if (rule_check(8,FALSE)) {
+                    o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_BBH_HAUNTED_DOOR];
+                    spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+                    o->oFaceAnglePitch = 0;
+                    o->oFaceAngleRoll = 0;
+                    o->oAction++;
+                } else {
+                    spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+                    obj_mark_for_deletion(o);
+                }
+                
                 //quicksand puddles are not a fun mechanic
+                //quicksand puddles in new game +!
                 }
         break;
         case 1:
@@ -1725,8 +1729,12 @@ void bhv_evil_pig(void) {
     switch(o->oAction) {
         case 0://init
             o->oAction = 1;
-            gMarioState->BossHealth = 7;
             gMarioStates->BossHealthMax = 7;
+            if (rule_check(8,FALSE)) {
+                gMarioStates->BossHealthMax++;
+            }
+
+            gMarioState->BossHealth = gMarioStates->BossHealthMax;
         break;
         case 1://face
             o->oForwardVel = 0.0f;
@@ -2874,8 +2882,12 @@ void bhv_thwomp_queen(void) {
                 o->oAction = 4;
                 o->oAnimState = 1;
                 queen_hitbox = spawn_object(o,MODEL_NONE,bhvQueenHitbox);
-                gMarioState->BossHealth = 3;
+                
                 gMarioState->BossHealthMax = 3;
+                if (rule_check(8,FALSE)) {
+                    gMarioState->BossHealthMax++;
+                }
+                gMarioState->BossHealth = gMarioState->BossHealthMax;
             }
         break;
         case 4: //attack mario!

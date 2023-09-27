@@ -258,6 +258,8 @@ void save_file_do_save_force(s32 fileIndex);
 
 s32 save_file_get_seed(s32 fileIndex);
 
+void save_file_unset_random_star_flag(void);
+
 #if MULTILANG
 enum EuLanguages {
     LANGUAGE_ENGLISH,

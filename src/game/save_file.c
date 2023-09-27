@@ -783,6 +783,16 @@ void save_file_set_star_flags(s32 fileIndex, s32 courseIndex, u32 starFlags) {
     gSaveFileModified = TRUE;
 }
 
+void save_file_unset_random_star_flag() {
+    s16 courseIndex = 1+random_u16()%15;
+    u16 bitindex = random_u16()%7;
+
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[courseIndex] &= ~(1<<bitindex);
+
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
 #ifdef COMPLETE_SAVE_FILE
 s32 save_file_get_course_coin_score(UNUSED s32 fileIndex, UNUSED s32 courseIndex) {
     return MAX_NUM_COINS;

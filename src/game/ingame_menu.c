@@ -172,6 +172,9 @@ u8 upgradetext[] = {TEXT_UPGRADE};
 u8 upgradeyes[] = {TEXT_UPGRADE_YES};
 u8 upgradeno[] = {TEXT_UPGRADE_NO};
 
+
+u8 textGoodLuck[] = {TEXT_GOODLUCK};
+
 u8 badgecolors[24][3] = {
     {255,0x00,0x00},
     {0x9C,0x43,0x22},
@@ -2965,21 +2968,35 @@ s32 render_pause_courses_and_castle(void) {
         case 6://new game +
             shade_screen();
             gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-            //negative rules
-            for (u8 i=0;i<4;i++){
+
+            if (randomizer_global_seed == 255) {
+                //evil mode
+                for (u8 i=0;i<10;i++){
+                    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+                    print_generic_string(24,175-(i*16), text_randomizer_rules[randomizer_negative_rules[i]]);
+                    gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
+                    print_generic_string(25,176-(i*16), text_randomizer_rules[randomizer_negative_rules[i]]);
+                }
+
                 gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
-                print_generic_string(24,165-(i*16), text_randomizer_rules[randomizer_negative_rules[i]]);
+                print_generic_string(24,9, textGoodLuck);
                 gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
-                print_generic_string(25,166-(i*16), text_randomizer_rules[randomizer_negative_rules[i]]);
-
-            }
-            //positive rules
-            for (u8 i=0;i<2;i++){
-                gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
-                print_generic_string(24,94-(i*16), text_randomizer_prules[randomizer_positive_rules[i]]);
-                gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
-                print_generic_string(25,95-(i*16), text_randomizer_prules[randomizer_positive_rules[i]]);
-
+                print_generic_string(25,10, textGoodLuck);
+            } else {
+                //negative rules
+                for (u8 i=0;i<4;i++){
+                    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+                    print_generic_string(24,165-(i*16), text_randomizer_rules[randomizer_negative_rules[i]]);
+                    gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
+                    print_generic_string(25,166-(i*16), text_randomizer_rules[randomizer_negative_rules[i]]);
+                }
+                //positive rules
+                for (u8 i=0;i<2;i++){
+                    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+                    print_generic_string(24,94-(i*16), text_randomizer_prules[randomizer_positive_rules[i]]);
+                    gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
+                    print_generic_string(25,95-(i*16), text_randomizer_prules[randomizer_positive_rules[i]]);
+                }
             }
             gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
         break;

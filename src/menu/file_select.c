@@ -1800,7 +1800,7 @@ void new_file_select() {
                     }
                 }
 
-                if ( (fs_ms == 0) && (save_file_get_seed(i) > 0) ) {
+                if ( ((fs_ms == 0)||(!iamselected)) && (save_file_get_seed(i) > 0) ) {
                     //show ng+ stats
                     gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
                     if (save_file_get_seed(i) == 255) {

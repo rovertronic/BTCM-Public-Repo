@@ -689,7 +689,7 @@ void bhv_sr_spike(void) {
 }
 
 u8 tennis_turns[] = {
-    0,15,8,4,
+    0,12,6,3,
 };//table for how much vollying until showrunner gives in. also reverse order
 
 #include "actors/group0.h"
