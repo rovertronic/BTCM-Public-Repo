@@ -130,12 +130,12 @@ void render_100_coin_star(u8 stars) {
 
 u8 wallet_id_table[] = {
     NO_WALLET,
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
+    0,//BOB
+    1,//WF
+    2,//JRB
+    4,//CCM (course 5)
+    3,//BBH (course 4)
+    5,//
     6,
     7,
     8,

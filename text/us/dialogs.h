@@ -3249,7 +3249,7 @@ Chillyn', RationaLess, SimpleFlips"))
 //it also needs to be more tasteful
 
 DEFINE_DIALOG(DIALOG_CREDITS_26, 1, 6, 95, 180, _("\
-Patreons as of 9-2-23:\n\
+Patreons as of 9-27-23:\n\
 Henry Kumpel, ZT, Pizza Brian, tydaze"))
 
 DEFINE_DIALOG(DIALOG_PALAMEDES_1, 1, 6, 95, 180, _("\

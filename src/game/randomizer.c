@@ -5,7 +5,7 @@
 #include "level_update.h"
 #include "ingame_menu.h"
 
-u8 randomizer_global_seed = 0;
+u8 randomizer_global_seed = 1;
 u8 randomizer_is_newgame = FALSE;
 
 /* RANDOMIZER TABLES (ALL S16) */
