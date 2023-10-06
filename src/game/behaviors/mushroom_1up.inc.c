@@ -492,6 +492,8 @@ void bhv_item_bubble_loop() {
             BubDist = lateral_dist_between_objects(o,bubble);
             }
 
+    o->oVelX = 1.0f; //bubble scale. stupid, i know. don't want to make a new object field for something that's supposed to be a 1 minute fix.
+
     switch (o->oAction) {
         case 0:
             o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
@@ -510,13 +512,16 @@ void bhv_item_bubble_loop() {
                     break;
                     case 3:
                     o->prevObj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+                    if (rule_check(0,FALSE)) {
+                        o->oVelX = 2.0f;
+                    }
                     break;
                     case 4:
-                    o->prevObj = spawn_object(o, MODEL_THWOMP, bhvThwomp);
+                    o->prevObj = spawn_object(o, MODEL_THWOMP, bhvThwomp); //rovert: what?
                     break;
                     }
                 }
-
+                cur_obj_scale(o->oVelX*6.0f);
         break;
         case 1:
             //set object
@@ -562,7 +567,7 @@ void bhv_item_bubble_loop() {
                 }
 
             //collision
-            if ((o->oDistanceToMario < 200)||(BubDist < 200)) {
+            if ((o->oDistanceToMario < 200.0f*o->oVelX)||(BubDist < 200)) {
                 cur_obj_play_sound_2(SOUND_OBJ2_PIRANHA_PLANT_BITE);
                 spawn_object(o,MODEL_BUBBLE,bhvKoopaShellFlame);
                 spawn_object(o,MODEL_BUBBLE,bhvKoopaShellFlame);
