@@ -548,6 +548,10 @@ void bhv_item_bubble_loop() {
                     o->prevObj->oPosY = o->oPosY+70;
                     }
 
+                if ((rule_check(0,FALSE))&&(o->oBehParams2ndByte==3)) {
+                    o->prevObj->oPosY = o->oPosY+300;
+                }
+
                 //Move
                 o->oPosY = o->oHomeY + (55.0f * sins(o->oTimer*500));
 
@@ -562,7 +566,7 @@ void bhv_item_bubble_loop() {
                         }
 
                     cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
-                    cur_obj_move_using_vel_and_gravity();
+                    //cur_obj_move_using_vel_and_gravity();
                     }
                 }
 
