@@ -73,30 +73,39 @@ void reset_randomizer_factory() {
     randomizer_badges[0] = BADGE_FALL;
     randomizer_badges[1] = BADGE_DEFENSE;
     randomizer_badges[2] = BADGE_MAGNET;
+
     randomizer_badges[3] = BADGE_MANA;
     randomizer_badges[4] = BADGE_FALL;
     randomizer_badges[5] = BADGE_DEFENSE;
+
     randomizer_badges[6] = BADGE_LAVA;
     randomizer_badges[7] = BADGE_FALL;
     randomizer_badges[8] = BADGE_BURN;
+
     randomizer_badges[9] = BADGE_FINS;
     randomizer_badges[10] = BADGE_GILLS;
     randomizer_badges[11] = BADGE_STAR;
+
     randomizer_badges[12] = BADGE_DAMAGE;
     randomizer_badges[13] = BADGE_MANA;
     randomizer_badges[14] = BADGE_BURN;
+
     randomizer_badges[15] = BADGE_HP;
     randomizer_badges[16] = BADGE_GREED;
     randomizer_badges[17] = BADGE_TIME;
+
     randomizer_badges[18] = BADGE_FEET;
     randomizer_badges[19] = BADGE_STICKY;
     randomizer_badges[20] = BADGE_FEATHER;
+
     randomizer_badges[21] = BADGE_SQUISH;
     randomizer_badges[22] = BADGE_WEIGHT;
     randomizer_badges[23] = BADGE_BURN;
+
     randomizer_badges[24] = BADGE_BRITTLE;
     randomizer_badges[25] = BADGE_WITHER;
     randomizer_badges[26] = BADGE_HARDCORE;
+    
     randomizer_badges[27] = BADGE_HEAL;
     randomizer_badges[28] = BADGE_BOTTOMLESS;
     randomizer_badges[29] = BADGE_SLAYER;
@@ -152,11 +161,6 @@ void randomize_game(u32 seed, u8 is_newgame) {
 
         //randomize badge shops
         shuffleArray(&randomizer_badges,30);
-        for (u8 i=0; i<10; i++) {
-            shoptable[shop_ids_to_randomize[i]][0] = randomizer_badges[(i*3)+0];
-            shoptable[shop_ids_to_randomize[i]][2] = randomizer_badges[(i*3)+1];
-            shoptable[shop_ids_to_randomize[i]][4] = randomizer_badges[(i*3)+2];
-        }
 
         //randomize rules
         shuffleArray(&randomizer_negative_rules,NEGATIVE_RULE_COUNT);
@@ -169,4 +173,11 @@ void randomize_game(u32 seed, u8 is_newgame) {
             randomizer_is_newgame = FALSE;
         }
     }
+
+    for (u8 i=0; i<10; i++) {
+        shoptable[shop_ids_to_randomize[i]][0] = randomizer_badges[(i*3)+0];
+        shoptable[shop_ids_to_randomize[i]][2] = randomizer_badges[(i*3)+1];
+        shoptable[shop_ids_to_randomize[i]][4] = randomizer_badges[(i*3)+2];
+    }
+
 }
