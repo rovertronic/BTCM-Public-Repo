@@ -1134,12 +1134,16 @@ u8 cmm_mm_keyboard_input_index = 0;
 s8 cmm_mm_keyboard_index = 0;
 
 char cmm_mm_warning[] = \
-"WARNING!\n\
-SD card emulation not detected.\n\
-You will still be able to use\n\
-the level editor, but you will\n\
-not be able to save levels or\n\
-download levels from other people.";
+"Mario Builder 64\n\
+Patreon Demo 2-1-24\n\
+\n\
+This is a stripped down version\n\
+of Mario Builder 64 to let you\n\
+try out the level creation tools!\n\
+\n\
+You cannot save levels in this\n\
+version, so don't get attached\n\
+to anything you make.";
 
 char *cmm_mm_btns[] = {
     "Build",
@@ -1167,7 +1171,6 @@ char *cmm_mm_make_btns[] = {
 };
 
 char *cmm_mm_help_btns[] = {
-    "SD Card Setup",
     "Editor Controls",
     "Version Info",
 };
@@ -1654,7 +1657,7 @@ s32 cmm_main_menu(void) {
         case MM_HELP_MODE:
             cmm_menu_index_max = 3;
             cmm_mm_anim_in(3);
-            render_cmm_mm_menu(cmm_mm_help_btns,"Help",3);
+            render_cmm_mm_menu(cmm_mm_help_btns,"Help",2);
             if (cmm_mm_generic_anim_out(3, TRUE)) {
                 cmm_menu_start_timer = 0;
                 if (cmm_menu_going_back == -1) {
@@ -1664,10 +1667,10 @@ s32 cmm_main_menu(void) {
                     cmm_mm_state = MM_HELP;
                     switch(cmm_menu_index) {
                         case 0:
-                            cmm_mm_help_ptr = cmm_mm_help_page1;
+                            cmm_mm_help_ptr = cmm_mm_help_page2;
                         break;
                         case 1:
-                            cmm_mm_help_ptr = cmm_mm_help_page2;
+                            cmm_mm_help_ptr = cmm_mm_help_page3;
                         break;
                         case 2:
                             cmm_mm_help_ptr = cmm_mm_help_page3;

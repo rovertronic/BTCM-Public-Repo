@@ -2967,6 +2967,7 @@ void sb_loop(void) {
                         play_sound(SOUND_MENU_STAR_SOUND_LETS_A_GO, gGlobalSoundSource);
                         break;
                     case 8: // options
+                        /*
                         switch (cmm_param_selection) {
                             case 0: // settings menu
                                 cmm_newsize = cmm_lopt_size;
@@ -2987,6 +2988,9 @@ void sb_loop(void) {
                                 }
                                 break;
                         }
+                        */
+                        play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                        cmm_show_error_message("Not available in this demo.");
                         break;
                     default: //everything else places
                         place_thing_action();

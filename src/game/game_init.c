@@ -1134,7 +1134,8 @@ void thread5_game_loop(UNUSED void *arg) {
     }
     //init cmm file structure
     cart_init();
-    mount_success = f_mount(&fs, "", 1);
+    mount_success = 1;
+    //mount_success = f_mount(&fs, "", 1);
     if (mount_success == FR_OK) {
         //mount is successful
 
